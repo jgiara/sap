@@ -1,0 +1,166 @@
+body {
+    width: 100%;
+    height: 100%;
+    font-family: 'Cabin', sans-serif;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+}
+h4 {
+  text-align: left;
+  line-height: 150%;
+}
+
+
+
+h1 {
+  text-align: center;
+}
+
+.page-scroll {
+  font-size: 105%;
+}
+
+#brand {
+  font-size: 200%
+}
+
+.home {
+  width: 150%;
+  height: auto;
+}
+
+#seal {
+  width: 15%;
+  height: auto;
+}
+
+#council {
+  width: 40%;
+  height: auto;
+}
+
+.programs li {
+    margin: 0; 
+    padding: 0;
+    text-align: left;
+}
+
+.img-thumbnail {
+  width: 60%;
+  height: auto;
+}
+
+.coords {
+  text-align: left;
+}
+
+.coords>h5 {
+  display: inline;
+}
+
+.social {
+  font-size: 250%;
+  color: maroon;
+}
+
+#social_header {
+  text-align: center;
+}
+
+.intro-section {
+    height: 100%;
+    padding-top: 150px;
+    text-align: center;
+    background: #fff;
+    background-image: url("../../img/gasson.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    
+    
+}
+
+#acctButton {
+  font-size: 250%;
+}
+
+
+.overview-section {
+    min-height: 125%;
+    padding-top: 50px;
+    text-align: center;
+    background: #eee;
+}
+
+.coordinators-section {
+    min-height: 400%;
+    padding-top: 50px;
+    text-align: center;
+    background: #fff;
+}
+
+.contact-section {
+    min-height: 100%;
+    padding-top: 50px;
+    text-align: center;
+    background: #eee;
+}
+/* large button css */
+.btn-sq-lg {
+  width: 150px !important;
+  height: 150px !important;
+  margin: 5px;
+  padding-top:30px;
+}
+
+.btn-sq {
+  width: 100px !important;
+  height: 100px !important;
+  font-size: 10px;
+}
+
+.btn-sq-sm {
+  width: 50px !important;
+  height: 50px !important;
+  font-size: 10px;
+}
+
+.btn-sq-xs {
+  width: 25px !important;
+  height: 25px !important;
+  padding:2px;
+}
+
+.navbar {
+  background-color: maroon;
+}
+.navbar-default .navbar-nav>li>a {
+  color:#ffd24d;
+  text-shadow: 1px 1px black;
+  font-weight: 600;
+  }
+.navbar-default .navbar-brand {
+  color:#ffd24d;
+  text-shadow: 2px 2px 1px black;
+}
+.btn-success {
+    background-color: maroon;
+    border-color: maroon;
+}
+.btn-success:hover {
+  background-color:#cc0000;
+  border-color: #cc0000;
+}
+.navbar-default .navbar-text {
+  color: #ffd24d;
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    color: maroon;
+    background-color: #ffd24d;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-header > a:hover, .navbar-default .navbar-header > a:focus{
+    background-color: maroon;
+    color: white;
+}
