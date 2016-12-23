@@ -38,14 +38,14 @@ echo "<input type='hidden' id='userid' value='$eagleid'/>";
     <!-- MetisMenu CSS -->
     <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
-    <!-- Timeline CSS -->
-    <link href="../dist/css/timeline.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
-
-    <!-- Morris Charts CSS -->
-    <link href="../bower_components/morrisjs/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -107,7 +107,7 @@ echo "<input type='hidden' id='userid' value='$eagleid'/>";
                                 <input type="text" class="form-control" placeholder="Search...">
                                 <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
+                                     <i class="fa fa-search"></i>&nbsp
                                 </button>
                             </span>
                             </div>
@@ -170,8 +170,8 @@ echo "<input type='hidden' id='userid' value='$eagleid'/>";
                                         <a href='./summer.php'>Summer</a>
                                     </li>
                                     <li>
-                                        <a href='#'>Administration<span class='fa arrow'></span></a>
-                                        <ul class='nav nav-second-level'>
+                                        <a href='#' data-toggle='collapse' data-target='#submenu'>Administration<span class='fa arrow'></span></a>
+                                        <ul class='nav nav-second-level collapse' id='submenu'>
                                             <li>
                                                 <a href='./weeks.php'>Weeks</a>
                                             </li>

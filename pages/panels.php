@@ -55,7 +55,7 @@ date_default_timezone_set('EST');
 
     <!-- Custom Override Bootstrap -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap-override.css" rel="stylesheet">
-
+    <link href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -110,7 +110,7 @@ date_default_timezone_set('EST');
                                 <input type="text" class="form-control" placeholder="Search...">
                                 <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
+                                    <i class="fa fa-search"></i>&nbsp
                                 </button>
                             </span>
                             </div>
@@ -374,8 +374,6 @@ date_default_timezone_set('EST');
     <script src="../dist/js/sb-admin-2.js"></script>
 
 
-
-    
     <script>
     $(document).ready(function() {
         var s = document.getElementById("table-semester");
@@ -408,13 +406,17 @@ date_default_timezone_set('EST');
         var tableVols = $('#table-volunteers').DataTable({
             responsive: true,
             orderCellsTop: true,
-            "columnDefs": [
+            pageLength: 50,
+            columnDefs: [
             {
-                "targets": [7],
-                "visible": false,
-                "orderable": false
+                targets: [7],
+                visible: false,
+                orderable: false
                 
-            }]
+            }],
+            buttons: [
+                'excel'
+            ]
         });
         var s = document.getElementById("table-semester");
         var selectedSemester = s.options[s.selectedIndex].value;

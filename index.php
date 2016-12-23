@@ -150,10 +150,10 @@ if (isset ( $_POST ['signin'] )) {
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 style="color:white; text-shadow:0.5px 0.5px 5px #CB8E51;">Boston College Student Admission Program</h1>
+                    <h1 style="color:white; text-shadow:1px 1px 7px #CB8E51;">Boston College Student Admission Program</h1>
                     <br/>
 
-                    <button type="button" class="btn btn-md btn-success" data-toggle="modal" data-target="#registerModal">Register Your Account</button>
+                    <!--<button type="button" class="btn btn-md btn-success" data-toggle="modal" data-target="#registerModal">Register Your Account</button>-->
 
                 </div>
             </div>
