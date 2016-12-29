@@ -267,7 +267,7 @@ date_default_timezone_set('EST');
                                 </div>
                                 <button class="btn btn-primary" id="semester-submit">Go</button>
                                 <!--<button class="btn btn-success" id="newAttendance" style="margin-left: 10px;">Populate Sheet</button>-->
-
+    
                             <ul id="tabs-list" class="nav nav-tabs" style="margin-top: 10px;">
                                 <li id="volunteers-tab" class="active"><a href="#volunteers" data-toggle="tab">Volunteers</a>
                                 </li>
@@ -280,7 +280,11 @@ date_default_timezone_set('EST');
 
                             <!-- Tab panes -->
                             <div class="tab-content">
-                                <div class="tab-pane fade in active" id="volunteers">
+                                    <div class="tab-pane fade in active" id="volunteers">
+                                        <button class="btn btn-primary btn-xs" id="export-excel">Excel</button>
+                                        <button class="btn btn-primary btn-xs" id="export-csv">CSV</button>
+                                        <button class="btn btn-primary btn-xs" id="export-pdf">PDF</button>
+                                    </br>
                                         <table class="table table-striped table-bordered table-hover" id="table-volunteers" style="font-size: 13px; width: 100%;">
                                             <thead>
                                                 <tr>
@@ -368,10 +372,21 @@ date_default_timezone_set('EST');
     <!-- DataTables JavaScript -->
     <script src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+    <!-- Table Export Plugin -->
+    <script type="text/javascript" src="../js/FileSaver.min.js"></script>
+    <script type="text/javascript" src="../js/xlsx.core.min.js"></script>
+    <script type="text/javascript" src="../js/jspdf.min.js"></script>
+    <script type="text/javascript" src="../js/jspdf.plugin.autotable.js"></script>
+    <script type="text/javascript" src="../js/tableExport.js"></script>
+
     
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
+
+    
+
 
 
     <script>
@@ -807,6 +822,32 @@ date_default_timezone_set('EST');
                 callback(tableVols);
               });
     }
+    $('#export-excel').on("click", function(e) {
+        var s = document.getElementById("table-semester");
+        var selectedSemester = s.options[s.selectedIndex].value;
+        var y = document.getElementById("table-year");
+        var selectedYear = y.options[y.selectedIndex].value;
+        $('#table-volunteers').tableExport({type:'xlsx', fileName: 'Panels_' + selectedSemester + selectedYear});
+    });
+    $('#export-csv').on("click", function(e) {
+        var s = document.getElementById("table-semester");
+        var selectedSemester = s.options[s.selectedIndex].value;
+        var y = document.getElementById("table-year");
+        var selectedYear = y.options[y.selectedIndex].value;
+        $('#table-volunteers').tableExport({type:'csv', fileName: 'Panels_' + selectedSemester + selectedYear});
+    });
+    $('#export-pdf').on("click", function(e) {
+        var s = document.getElementById("table-semester");
+        var selectedSemester = s.options[s.selectedIndex].value;
+        var y = document.getElementById("table-year");
+        var selectedYear = y.options[y.selectedIndex].value;
+        $('#table-volunteers').tableExport({
+                        type: 'pdf',
+                        jspdf: {margins: {left:20, right:10, top:20, bottom:20},
+                                autotable: {styles: {overflow: 'linebreak'},
+                                            tableWidth: 'wrap'}},
+                        fileName: 'Panels_' + selectedSemester + selectedYear});
+    });
     </script>
 
 </body>
