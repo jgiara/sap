@@ -238,7 +238,7 @@ date_default_timezone_set('EST');
                                             $yearHolder = $currYear;
                                             echo "<option value='".$yearHolder."' selected='selected'>".$yearHolder."</option>";
                                             $yearHolder--;
-                                            while($yearHolder >= 2015) {
+                                            while($yearHolder >= 2016) {
                                                 echo "<option value='".$yearHolder."'>".$yearHolder."</option>";
                                                 $yearHolder--;
                                             }
@@ -254,6 +254,7 @@ date_default_timezone_set('EST');
                                 </div>
                                 <div class="col-xs-2">
                                     <select name="table-day" class="form-control form-control-xs" id="table-day" style="text-align: right;">
+                                        <option value ="day">All</option>
                                         <option value="Sunday" <?php $day = date("w"); if($day == 0){ echo "selected='selected'";}?> >Sunday</option>
                                         <option value="Monday" <?php $day = date("w"); if($day == 1) {echo "selected='selected'";}?> >Monday</option>
                                         <option value="Tuesday" <?php $day = date("w"); if($day == 2) {echo "selected='selected'";}?> >Tuesday</option>
@@ -281,9 +282,9 @@ date_default_timezone_set('EST');
                             <!-- Tab panes -->
                             <div class="tab-content">
                                     <div class="tab-pane fade in active" id="volunteers">
-                                        <button class="btn btn-primary btn-xs" id="export-excel">Excel</button>
-                                        <button class="btn btn-primary btn-xs" id="export-csv">CSV</button>
-                                        <button class="btn btn-primary btn-xs" id="export-pdf">PDF</button>
+                                        <button class="btn btn-primary btn-xs" id="export-excel-volunteers">Excel</button>
+                                        <button class="btn btn-primary btn-xs" id="export-csv-volunteers">CSV</button>
+                                        <button class="btn btn-primary btn-xs" id="export-pdf-volunteers">PDF</button>
                                     </br>
                                         <table class="table table-striped table-bordered table-hover" id="table-volunteers" style="font-size: 13px; width: 100%;">
                                             <thead>
@@ -316,7 +317,11 @@ date_default_timezone_set('EST');
                                     
                                 </div>
                                 <div class="tab-pane fade" id="attendance">
-                                    <table class="table table-striped table-bordered table-hover" id="table-attendance" style="font-size: 13px; width: 100%;">
+                                        <button class="btn btn-primary btn-xs" id="export-excel-attendance">Excel</button>
+                                        <button class="btn btn-primary btn-xs" id="export-csv-attendance">CSV</button>
+                                        <button class="btn btn-primary btn-xs" id="export-pdf-attendance">PDF</button>
+                                    </br>
+                                        <table class="table table-striped table-bordered table-hover" id="table-attendance" style="font-size: 13px; width: 100%;">
                                             <thead>
                                                 <tr>
                                                     <th>First Name</th>
@@ -395,19 +400,9 @@ date_default_timezone_set('EST');
         var selectedSemester = s.options[s.selectedIndex].value;
         var y = document.getElementById("table-year");
         var selectedYear = y.options[y.selectedIndex].value;
-        $.getJSON("../include/getWeek.php", 
-            {
-                semester: selectedSemester,
-                year: selectedYear
-            }, function(data) {
-                $.each(data, function(i, item) {
-                        document.getElementById("table-week").innerHTML += "<option value ='" + item.week_id + "'>Week " + item.week_number + ": " + item.sunday_date.substring(5) + " - " + item.saturday_date.substring(5) + "</option>"; 
-                });
-
-            })
-            .fail(function() {
-                console.log("getJSON error");
-            });
+        getWeekData(function() {
+                  ;
+            }, selectedSemester, selectedYear);
         hideSelects();
     // Setup - add a text input to each footer cell
         $('#table-volunteers thead td').each( function () {
@@ -421,48 +416,18 @@ date_default_timezone_set('EST');
         var tableVols = $('#table-volunteers').DataTable({
             responsive: true,
             orderCellsTop: true,
-            pageLength: 50,
-            columnDefs: [
+            "columnDefs": [
             {
-                targets: [7],
-                visible: false,
-                orderable: false
+                "targets": [7],
+                "visible": false,
+                "orderable": false
                 
-            }],
-            buttons: [
-                'excel'
-            ]
+            }]
         });
-        var s = document.getElementById("table-semester");
-        var selectedSemester = s.options[s.selectedIndex].value;
-        var y = document.getElementById("table-year");
-        var selectedYear = y.options[y.selectedIndex].value;
-        $.getJSON("../include/getProgramVolunteers.php", 
-            {
-                program: "Panels",
-                semester: selectedSemester,
-                year: selectedYear
-            }, function(data) {
-                $.each(data, function(i, item) {
-                    tableVols.row.add([
-                        item.first_name,
-                        item.last_name,
-                        item.class,
-                        item.school,
-                        item.shift_day,
-                        item.shift_time,
-                        item.requirements_status,
-                        item.eagle_id
-                    ]);
-                });
-            })
-            .fail(function() {
-                console.log("getJSON error");
-            });
-
-            setTimeout(function() {
-            tableVols.draw();
-        }, 500);
+        
+        getVolunteerData(function(newTable) {
+                  newTable.draw();
+            }, selectedSemester, selectedYear, tableVols);
      
         // Apply the search
         tableVols.columns().every(function (index) {
@@ -493,42 +458,13 @@ date_default_timezone_set('EST');
             }]
         });
         setTimeout(function() {
-        var s = document.getElementById("table-semester");
-        var selectedSemester = s.options[s.selectedIndex].value;
-        var y = document.getElementById("table-year");
-        var selectedYear = y.options[y.selectedIndex].value;
-        var w = document.getElementById("table-week");
-        var selectedWeek = w.options[w.selectedIndex].value; //sometimes has an undefined value
-        var d = document.getElementById("table-day");
-        var selectedDay = d.options[d.selectedIndex].value;
-        $.getJSON("../include/getProgramAttendance.php", 
-            {
-                program: "Panels",
-                semester: selectedSemester,
-                year: selectedYear,
-                week: selectedWeek,
-                day: selectedDay
-            }, function(data) {
-                $.each(data, function(i, item) {
-                    tableAttn.row.add([
-                        item.first_name,
-                        item.last_name,
-                        item.shift_day,
-                        item.shift_time,
-                        item.present,
-                        item.note,
-                        item.eagle_id,
-                        item.attendance_id
-                    ]);
-                });
-            })
-            .fail(function() {
-                console.log("getJSON error");
-            });
-
-            setTimeout(function() {
-            tableAttn.draw();
-        }, 500);
+            var w = document.getElementById("table-week");
+            var selectedWeek = w.options[w.selectedIndex].value; //sometimes has an undefined value
+            var d = document.getElementById("table-day");
+            var selectedDay = d.options[d.selectedIndex].value;
+            getAttendanceData(function(newTable) {
+                    newTable.draw();
+            }, selectedSemester, selectedYear, selectedWeek, selectedDay, tableAttn);
         }, 400);
      
         // Apply the search
@@ -556,106 +492,18 @@ date_default_timezone_set('EST');
             tableAttn.clear();
 
             document.getElementById("table-week").innerHTML = "";
-            $.getJSON("../include/getWeek.php", 
-            {
-                semester: selectedSemester,
-                year: selectedYear
-            }, function(data) {
-                $.each(data, function(i, item) {
-                         document.getElementById("table-week").innerHTML += "<option value ='" + item.week_id + "'>Week " + item.week_number + ": " + item.sunday_date.substring(5) + " - " + item.saturday_date.substring(5) + "</option>"; 
-                });
 
-            })
-            .fail(function() {
-                console.log("getJSON error");
-            });
+            getWeekData(function() {
+                  ;
+            }, selectedSemester, selectedYear);
 
-           
-
-            //document.getElementById("panels-header").innerHTML = "HELLO";
-
-            getData(function(newTable) {
+            getVolunteerData(function(newTable) {
                   newTable.draw();
             }, selectedSemester, selectedYear, tableVols);
-            
-            /*$.getJSON("../include/getProgramVolunteers.php",  {
-                program: "Panels",
-                semester: selectedSemester,
-                year: selectedYear
-              })
-                .then(function( data ) {
-                  $.each( data.items, function( i, item ) {
-                    tableVols.row.add([
-                        item.first_name,
-                        item.last_name,
-                        item.class,
-                        item.school,
-                        item.shift_day,
-                        item.shift_time,
-                        item.requirements_status,
-                        item.eagle_id
-                    ]);
-                   
-                  }); 
-                  tableVols.draw();
-                });*/
-            
-            /*$.getJSON("../include/getProgramVolunteers.php", 
-            {
-                program: "Panels",
-                semester: selectedSemester,
-                year: selectedYear
-            }, function(data) {
-                $.each(data, function(i, item) {
-                    tableVols.row.add([
-                        item.first_name,
-                        item.last_name,
-                        item.class,
-                        item.school,
-                        item.shift_day,
-                        item.shift_time,
-                        item.requirements_status,
-                        item.eagle_id
-                    ]);
-                });
-            })
-            .fail(function() {
-                console.log("getJSON error");
-            });
 
-            setTimeout(function() {
-            tableVols.draw();
-        }, 500);*/
-
-            $.getJSON("../include/getProgramAttendance.php", 
-            {
-                program: "Panels",
-                semester: selectedSemester,
-                year: selectedYear, 
-                week: selectedWeek,
-                day: selectedDay
-            }, function(data) {
-                $.each(data, function(i, item) {
-                    tableAttn.row.add([
-                        item.first_name,
-                        item.last_name,
-                        item.shift_day,
-                        item.shift_time,
-                        item.present,
-                        item.note,
-                        item.eagle_id,
-                        item.attendance_id
-                    ]);
-                });
-            })
-            .fail(function() {
-                console.log("getJSON error");
-            });
-
-            setTimeout(function() {
-            tableAttn.draw();
-        }, 500);
-
+            getAttendanceData(function(newTable) {
+                  newTable.draw();
+            }, selectedSemester, selectedYear, selectedWeek, selectedDay, tableAttn);
         
         $('#table-volunteers tbody').on('dblclick', 'td', function(e) {
             var currentEle = $(this);
@@ -675,33 +523,20 @@ date_default_timezone_set('EST');
                
                 data[column] =  document.getElementById("newvalue").value.trim();
                 tableVols.row(row).remove();
-                $.post("../include/inlineUpdateTable.php",
-                {
-                    id : data[7],
-                    field : updateField[column],
-                    table : 'Program_Members',
-                    newValue : data[column],
-                    whereField : 'user'
-                },
-              function(data){
-                if(data) {
-                  
-                }
-                });
+                inLineUpdatePostData(function() {
+                    tableVols.row.add([
+                        data[0],
+                        data[1],
+                        data[2],
+                        data[3],
+                        data[4],
+                        data[5],
+                        data[6],
+                        data[7]
+                    ]).draw()
+                }, data[7], updateField[column], 'Program_Members', data[column], 'user');
 
-                setTimeout( function(){
-                tableVols.row.add([
-                    data[0],
-                    data[1],
-                    data[2],
-                    data[3],
-                    data[4],
-                    data[5],
-                    data[6],
-                    data[7]
-
-                ]).draw()
-            }, 200);
+                
             }
         });
         },150);
@@ -731,33 +566,18 @@ date_default_timezone_set('EST');
                
                 data[column] =  document.getElementById("newvalue").value.trim();
                 tableAttn.row(row).remove();
-                $.post("../include/inlineUpdateTable.php",
-                {
-                    id : data[7],
-                    field : updateField[column],
-                    table : 'Attendance',
-                    newValue : data[column],
-                    whereField : 'attendance_id'
-                },
-              function(data){
-                if(data) {
-                  
-                }
-                });
-
-                setTimeout( function(){
-                tableAttn.row.add([
-                    data[0],
-                    data[1],
-                    data[2],
-                    data[3],
-                    data[4],
-                    data[5],
-                    data[6],
-                    data[7]
-
-                ]).draw();
-            }, 200);
+                inLineUpdatePostData(function() {
+                    tableAttn.row.add([
+                        data[0],
+                        data[1],
+                        data[2],
+                        data[3],
+                        data[4],
+                        data[5],
+                        data[6],
+                        data[7]
+                    ]).draw()
+                }, data[7], updateField[column], 'Attendance', data[column], 'attendance_id');
             }
         });
         },150);
@@ -780,26 +600,18 @@ date_default_timezone_set('EST');
     function hideSelects(){
         var weekSelect = document.getElementById("table-week");
         var daySelect = document.getElementById("table-day");
-        //var newAttnButton = document.getElementById("newAttendance");
-        //weekSelect.style.visibility = 'hidden';
-        //daySelect.style.visibility = 'hidden';
         $('#table-week').attr('disabled', true);
         $('#table-day').attr('disabled', true);
-        //newAttendance.style.visibility = 'hidden';
     }
 
     function showSelects(){
         var weekSelect = document.getElementById("table-week");
         var daySelect = document.getElementById("table-day");
-        //var newAttnButton = document.getElementById("newAttendance");
-        //weekSelect.style.visibility = 'visible';
-        //daySelect.style.visibility = 'visible';
         $('#table-week').attr('disabled', false);
         $('#table-day').attr('disabled', false);
-        //newAttendance.style.visibility = 'visible';
     }
 
-    function getData(callback, selectedSemester, selectedYear, tableVols) {
+    function getVolunteerData(callback, selectedSemester, selectedYear, tableVols) {
         $.getJSON("../include/getProgramVolunteers.php",  {
                 program: "Panels",
                 semester: selectedSemester,
@@ -822,21 +634,74 @@ date_default_timezone_set('EST');
                 callback(tableVols);
               });
     }
-    $('#export-excel').on("click", function(e) {
+
+    function getAttendanceData(callback, selectedSemester, selectedYear, selectedWeek, selectedDay, tableAttn) {
+        $.getJSON("../include/getProgramAttendance.php", 
+            {
+                program: "Panels",
+                semester: selectedSemester,
+                year: selectedYear, 
+                week: selectedWeek,
+                day: selectedDay
+            }, function(data) {
+                $.each(data, function(i, item) {
+                    tableAttn.row.add([
+                        item.first_name,
+                        item.last_name,
+                        item.shift_day,
+                        item.shift_time,
+                        item.present,
+                        item.note,
+                        item.eagle_id,
+                        item.attendance_id
+                    ]);
+                });
+                callback(tableAttn);
+            });
+    }
+
+    function getWeekData(callback, selectedSemester, selectedYear) {
+        $.getJSON("../include/getWeek.php", 
+            {
+                semester: selectedSemester,
+                year: selectedYear
+            }, function(data) {
+                $.each(data, function(i, item) {
+                         document.getElementById("table-week").innerHTML += "<option value ='" + item.week_id + "'>Week " + item.week_number + ": " + item.sunday_date.substring(5) + " - " + item.saturday_date.substring(5) + "</option>"; 
+                });
+                callback();
+            });
+    }
+
+    function inLineUpdatePostData(callback, uid, ufield, utable, unewValue, uwhereField) {
+        $.post("../include/inlineUpdateTable.php",
+                {
+                    id : uid,
+                    field : ufield,
+                    table : utable,
+                    newValue : unewValue,
+                    whereField : uwhereField
+                },
+              function(){
+                callback();
+            });
+    }
+
+    $('#export-excel-volunteers').on("click", function(e) {
         var s = document.getElementById("table-semester");
         var selectedSemester = s.options[s.selectedIndex].value;
         var y = document.getElementById("table-year");
         var selectedYear = y.options[y.selectedIndex].value;
-        $('#table-volunteers').tableExport({type:'xlsx', fileName: 'Panels_' + selectedSemester + selectedYear});
+        $('#table-volunteers').tableExport({type:'xlsx', fileName: 'Panels Volunteers_' + selectedSemester + selectedYear});
     });
-    $('#export-csv').on("click", function(e) {
+    $('#export-csv-volunteers').on("click", function(e) {
         var s = document.getElementById("table-semester");
         var selectedSemester = s.options[s.selectedIndex].value;
         var y = document.getElementById("table-year");
         var selectedYear = y.options[y.selectedIndex].value;
-        $('#table-volunteers').tableExport({type:'csv', fileName: 'Panels_' + selectedSemester + selectedYear});
+        $('#table-volunteers').tableExport({type:'csv', fileName: 'Panels Volunteers_' + selectedSemester + selectedYear});
     });
-    $('#export-pdf').on("click", function(e) {
+    $('#export-pdf-volunteers').on("click", function(e) {
         var s = document.getElementById("table-semester");
         var selectedSemester = s.options[s.selectedIndex].value;
         var y = document.getElementById("table-year");
@@ -846,7 +711,63 @@ date_default_timezone_set('EST');
                         jspdf: {margins: {left:20, right:10, top:20, bottom:20},
                                 autotable: {styles: {overflow: 'linebreak'},
                                             tableWidth: 'wrap'}},
-                        fileName: 'Panels_' + selectedSemester + selectedYear});
+                        fileName: 'Panels Volunteers_' + selectedSemester + selectedYear});
+    });
+    $('#export-excel-attendance').on("click", function(e) {
+        var s = document.getElementById("table-semester");
+        var selectedSemester = s.options[s.selectedIndex].value;
+        var y = document.getElementById("table-year");
+        var selectedYear = y.options[y.selectedIndex].value;
+        var w = document.getElementById("table-week");
+        var selectedWeek = w.options[w.selectedIndex].value; //sometimes has an undefined value
+        var d = document.getElementById("table-day");
+        var selectedDay = d.options[d.selectedIndex].value;
+        if(selectedDay == 'day') {
+            selectedDay = '';
+        }
+        else {
+            selectedDay = '_' + selectedDay;
+        }
+        $('#table-attendance').tableExport({type:'xlsx', fileName: 'Panels Attendance_' + selectedSemester + selectedYear + '_Week' + selectedWeek + selectedDay});
+    });
+    $('#export-csv-attendance').on("click", function(e) {
+        var s = document.getElementById("table-semester");
+        var selectedSemester = s.options[s.selectedIndex].value;
+        var y = document.getElementById("table-year");
+        var selectedYear = y.options[y.selectedIndex].value;
+        var w = document.getElementById("table-week");
+        var selectedWeek = w.options[w.selectedIndex].value; //sometimes has an undefined value
+        var d = document.getElementById("table-day");
+        var selectedDay = d.options[d.selectedIndex].value;
+        if(selectedDay == 'day') {
+            selectedDay = '';
+        }
+        else {
+            selectedDay = '_' + selectedDay;
+        }
+        $('#table-attendance').tableExport({type:'csv', fileName: 'Panels Attendance_' + selectedSemester + selectedYear + '_Week' + selectedWeek + selectedDay});
+    });
+    $('#export-pdf-attendance').on("click", function(e) {
+        var s = document.getElementById("table-semester");
+        var selectedSemester = s.options[s.selectedIndex].value;
+        var y = document.getElementById("table-year");
+        var selectedYear = y.options[y.selectedIndex].value;
+        var w = document.getElementById("table-week");
+        var selectedWeek = w.options[w.selectedIndex].value; //sometimes has an undefined value
+        var d = document.getElementById("table-day");
+        var selectedDay = d.options[d.selectedIndex].value;
+        if(selectedDay == 'day') {
+            selectedDay = '';
+        }
+        else {
+            selectedDay = '_' + selectedDay;
+        }
+        $('#table-attendance').tableExport({
+                        type: 'pdf',
+                        jspdf: {margins: {left:20, right:10, top:20, bottom:20},
+                                autotable: {styles: {overflow: 'linebreak'},
+                                            tableWidth: 'wrap'}},
+                        fileName: 'Panels Attendance_' + selectedSemester + selectedYear + '_Week' + selectedWeek + selectedDay});
     });
     </script>
 
