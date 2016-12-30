@@ -44,9 +44,6 @@ date_default_timezone_set('EST');
     <!-- DataTables CSS -->
     <link href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
 
-    <!-- DataTables Responsive CSS -->
-    <link href="../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
-
     <!-- Custom CSS -->
     <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
 
@@ -400,9 +397,7 @@ date_default_timezone_set('EST');
         var selectedSemester = s.options[s.selectedIndex].value;
         var y = document.getElementById("table-year");
         var selectedYear = y.options[y.selectedIndex].value;
-        getWeekData(function() {
-                  ;
-            }, selectedSemester, selectedYear);
+        
         hideSelects();
     // Setup - add a text input to each footer cell
         $('#table-volunteers thead td').each( function () {
@@ -416,13 +411,15 @@ date_default_timezone_set('EST');
         var tableVols = $('#table-volunteers').DataTable({
             responsive: true,
             orderCellsTop: true,
-            "columnDefs": [
+            columnDefs: [
             {
-                "targets": [7],
-                "visible": false,
-                "orderable": false
+                targets: [7],
+                visible: false,
+                orderable: false
+
                 
-            }]
+            }],
+            order: [[1, "asc"]]
         });
         
         getVolunteerData(function(newTable) {
@@ -449,23 +446,28 @@ date_default_timezone_set('EST');
         var tableAttn = $('#table-attendance').DataTable({
             responsive: true,
             orderCellsTop: true,
-            "columnDefs": [
+            columnDefs: [
             {
-                "targets": [6,7],
-                "visible": false,
-                "orderable": false
+                targets: [6,7],
+                visible: false,
+                orderable: false
                 
-            }]
+            }],
+            order: [[3, "asc"]]
         });
-        setTimeout(function() {
-            var w = document.getElementById("table-week");
-            var selectedWeek = w.options[w.selectedIndex].value; //sometimes has an undefined value
-            var d = document.getElementById("table-day");
-            var selectedDay = d.options[d.selectedIndex].value;
+        var w;
+        var selectedWeek;
+        var d;
+        var selectedDay;
+        getWeekData(function() {
+            w = document.getElementById("table-week");
+            selectedWeek = w.options[w.selectedIndex].value; //sometimes has an undefined value
+            d = document.getElementById("table-day");
+            selectedDay = d.options[d.selectedIndex].value;
             getAttendanceData(function(newTable) {
-                    newTable.draw();
+                newTable.draw();
             }, selectedSemester, selectedYear, selectedWeek, selectedDay, tableAttn);
-        }, 400);
+        }, selectedSemester, selectedYear);
      
         // Apply the search
         tableAttn.columns().every(function (index) {
@@ -519,7 +521,7 @@ date_default_timezone_set('EST');
             $(currentEle).html('<input id="newvalue" class="thVal" type="text" value="' + valueT + '" />');
             $(".thVal").focus();
             $(".thVal").keyup(function (event) {
-            if (event.keyCode == 13) {
+            if (event.keyCode == 13 && verifyData(updateField[column], document.getElementById("newvalue").value.trim())) {
                
                 data[column] =  document.getElementById("newvalue").value.trim();
                 tableVols.row(row).remove();
@@ -685,6 +687,21 @@ date_default_timezone_set('EST');
               function(){
                 callback();
             });
+    }
+
+    function verifyData(field, value) {
+        switch(field) {
+            case 'shift_day': {
+                if(["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].indexOf(value) == -1) {
+                    alert("Please enter a valid day of the week");
+                    return false;
+                }
+                else {
+                    return true;
+                }
+                break;
+            }
+        }
     }
 
     $('#export-excel-volunteers').on("click", function(e) {
