@@ -567,7 +567,7 @@ echo "<input type='hidden' id='userid' value='$eagleid'/>";
                     year : formYear,
                     semester : formSemester,
                     sun : formSun,
-                    mon : formMon,
+                    mon : formSun+1,
                     tues : formTues,
                     wed : formWed,
                     thurs : formThurs,

@@ -4,42 +4,7 @@ session_start();
 
 require './include/init.php';
 $general->logged_in_protect();
-/*//Register
-if (isset ( $_POST ['submit'] )) {
-    if (empty ( $_POST ['Password'] ) || empty ( $_POST ['Email'] )) {
-        
-        $errors [] = 'All fields are required.';
-    } else {
-        if (strlen ( $_POST ['Password'] ) < 6) {
-            $errors [] = 'Your password must be atleast 6 characters';
-        } else if (strlen ( $_POST ['Password'] ) > 18) {
-            $errors [] = 'Your password cannot be more than 18 characters long';
-        }
-        if (filter_var ( $_POST ['Email'], FILTER_VALIDATE_EMAIL ) === false) {
-            $errors [] = 'Please enter a valid email address';
-        } else if ($users->email_exists ( $_POST ['Email'] ) === true) {
-            $errors [] = 'That email already exists.';
-        }
-    }
-    if (empty ( $errors ) == true) {
-        
-        $Password = $_POST ['Password'];
-        $Email = htmlentities ( $_POST ['Email'] );
-        $First_Name = htmlentities ( $_POST ['First_Name'] );
-        $Last_Name = htmlentities ( $_POST ['Last_Name'] );
-        $Eagle_Id = htmlentities($_POST ['Eagle_Id']);
-        $Address = htmlentities($_POST ['Address']);
-        $Phone = htmlentities($_POST ['Phone']);
-        $Type = htmlentities($_POST ['Type']);
 
-        
-        $users->register ( $Password, $Email, $First_Name, $Last_Name, $Eagle_Id, $Address, $Phone, $Type);
-    
-        
-        header ( 'Location: ./user/userHome.php' );
-        exit ();
-    }
-}*/
 //Login
 if (isset ( $_POST ['signin'] )) {
  
@@ -134,8 +99,6 @@ if (isset ( $_POST ['signin'] )) {
                     </div>
                     <button type="submit" name="signin"class="btn btn-default">Login</button>
                     <!--<div class="navbar-form navbar-right">
-                    <button type="submit" name="signin" class="btn btn-default">Log In</button>
-                    <button type="submit" name="register" class="btn btn-default">Register</button>
                 </div>-->
                 </form>
 

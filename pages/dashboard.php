@@ -6,6 +6,8 @@ $general->logged_out_protect();
 
 $user     = $users->userdata($_SESSION['Eagle_Id']);
 $eagleid  = $user['eagle_id'];
+$fn = $user['first_name'];
+$ln = $user['last_name'];
 
 $groups = $users->get_roles($eagleid);
 
@@ -16,7 +18,10 @@ foreach($groups as $group) {
 }
 
 echo "<input type='hidden' id='userid' value='$eagleid'/>";
+echo "<input type='hidden' id='fn' value='$fn'/>";
+echo "<input type='hidden' id='ln' value='$ln'/>";
 
+date_default_timezone_set('EST');
 ?>
 
 <!DOCTYPE html>
@@ -75,14 +80,14 @@ echo "<input type='hidden' id='userid' value='$eagleid'/>";
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Student Admission Program</a>
+                <a class="navbar-brand" href="../index.php">Student Admission Program</a>
             </div>
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $fn." ".$ln?>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -192,10 +197,9 @@ echo "<input type='hidden' id='userid' value='$eagleid'/>";
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h3 style="margin-top: 60px; margin-bottom: 0;"class="page-header">Dashboard</h3>
+                    <h3 style="margin-top: 60px; margin-bottom: 0;">Hello, <?php echo $fn."!"?></h3>
                 </div>
                 <!-- /.col-lg-12 -->
-                <div id="here"></div>
             </div>
             <!-- /.row -->
         </div>
