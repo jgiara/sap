@@ -4,16 +4,16 @@ session_start();
 require '../include/init.php';
 $general->logged_out_protect();
 
-$user     = $users->userdata($_SESSION['Eagle_Id']);
-$eagleid  = $user['eagle_id'];
+$user     = $users->userdata($_SESSION['Email']);
+$email  = $user['email'];
 
-$groups = $users->get_roles($eagleid);
+$groups = $users->get_roles($email);
 $roles = [];
 foreach($groups as $group) {
     array_push($roles, $group['group_name']);
 }
 
-echo "<input type='hidden' id='userid' value='$eagleid'/>";
+echo "<input type='hidden' id='userid' value='$email'/>";
 date_default_timezone_set('EST');
 
 ?>

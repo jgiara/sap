@@ -4,10 +4,10 @@ session_start();
 require '../include/init.php';
 $general->logged_out_protect();
 
-$user     = $users->userdata($_SESSION['Eagle_Id']);
-$eagleid  = $user['eagle_id'];
+$user     = $users->userdata($_SESSION['Email']);
+$email  = $user['email'];
 
-$groups = $users->get_roles($eagleid);
+$groups = $users->get_roles($email);
 
 
 $roles = [];
@@ -20,7 +20,7 @@ if(!(in_array('Council', $roles)) && !(in_array('Staff', $roles)) && !(in_array(
     exit();
 }
 
-echo "<input type='hidden' id='userid' value='$eagleid'/>";
+echo "<input type='hidden' id='userid' value='$email'/>";
 
 ?>
 

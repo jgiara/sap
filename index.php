@@ -19,10 +19,8 @@ if (isset ( $_POST ['signin'] )) {
     if ($login === false) {
       $errors_s[] = 'Incorrect login information. <a href="forgotPassword.php">Reset password?</a>';
     } else {
-      // username/password is correct and the login method of the $users object returns the user id, which is stored in $login.
  
-      $_SESSION['Eagle_Id'] =  $login; // The user's id is now set into the user's session  in the form of $_SESSION['id'] see general.php for use 
-        #Redirect the correct to home page
+      $_SESSION['Email'] =  $login; 
         header('Location: ./pages/dashboard.php');
         
         exit();

@@ -4,10 +4,10 @@ session_start();
 require '../include/init.php';
 $general->logged_out_protect();
 
-$user     = $users->userdata($_SESSION['Eagle_Id']);
-$eagleid  = $user['eagle_id'];
+$user     = $users->userdata($_SESSION['Email']);
+$email  = $user['email'];
 
-$groups = $users->get_roles($eagleid);
+$groups = $users->get_roles($email);
 
 
 $roles = [];
@@ -20,7 +20,7 @@ if(!(in_array('Council', $roles)) && !(in_array('Staff', $roles)) && !(in_array(
     exit();
 }
 
-echo "<input type='hidden' id='userid' value='$eagleid'/>";
+echo "<input type='hidden' id='userid' value='$email'/>";
 date_default_timezone_set('EST');
 
 ?>
@@ -211,8 +211,8 @@ date_default_timezone_set('EST');
                             <!-- Nav tabs -->
                                 <div class="col-xs-2">
                                     <select name="table-active" class="form-control form-control-xs" id="table-active" style="text-align: right;">
-                                        <option value='Yes'>Active</option>
-                                        <option value='No'>Inactive</option>
+                                        <option value='Active'>Active</option>
+                                        <option value='Inactive'>Inactive</option>
                                         <option value="Abroad">Abroad</option>
                                         <option value='Prac/Clinical'>Prac/Clinical</option>
                                         <option value="Graduated">Graduated</option>
@@ -318,7 +318,7 @@ date_default_timezone_set('EST');
         });
         $.getJSON("../include/getAllUsers.php", 
             {
-                active: "Yes"
+                active: "Active"
             }, function(data) {
                 $.each(data, function(i, item) {
                     tableVols.row.add([

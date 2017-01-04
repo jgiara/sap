@@ -63,7 +63,7 @@ public function register( $Password, $Email, $First_Name, $Last_Name, $Eagle_Id,
 
 	public function login($Email, $Password) {
 
-		$query = $this->db->prepare("SELECT `password`, `eagle_id` FROM `Users` WHERE `email` = ?");
+		$query = $this->db->prepare("SELECT `password` FROM `Users` WHERE `email` = ?");
 		$query->bindValue(1, $Email);
 		
 		try{
@@ -71,12 +71,11 @@ public function register( $Password, $Email, $First_Name, $Last_Name, $Eagle_Id,
 			$query->execute();
 			$data = $query->fetch();
 			$stored_password = $data['password'];
-			$Id = $data['eagle_id'];
-	
 
 			
 			if($stored_password === sha1($Password)){
-				return $Id;
+				//updateLastLogin($Email);
+				return $Email;
 			}else{
 				return false;	
 			}
@@ -87,10 +86,10 @@ public function register( $Password, $Email, $First_Name, $Last_Name, $Eagle_Id,
 	
 	} 
 
-	public function get_roles($Eagle_Id) { //UPDATE: get roles/group membersships
+	public function get_roles($Email) { 
 
 		$query = $this->db->prepare("SELECT group_name FROM Groups inner join Group_Members on Groups.group_id = Group_Members.group_id WHERE user = ?");
-		$query->bindValue(1, $Eagle_Id);
+		$query->bindValue(1, $Email);
 		
 		try{
 			
@@ -103,10 +102,10 @@ public function register( $Password, $Email, $First_Name, $Last_Name, $Eagle_Id,
 	
 	} 
 
-	public function userdata($Eagle_Id) {
+	public function userdata($Email) {
 
-		$query = $this->db->prepare("SELECT * FROM `Users` WHERE `eagle_id`= ?");
-		$query->bindValue(1, $Eagle_Id);
+		$query = $this->db->prepare("SELECT * FROM `Users` WHERE `email`= ?");
+		$query->bindValue(1, $Email);
 
 		try{
 

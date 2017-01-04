@@ -2,7 +2,7 @@
 class General{
 
 	public function logged_in () {
-		return(isset($_SESSION['Eagle_Id'])) ? true : false;
+		return(isset($_SESSION['Email'])) ? true : false;
 	}
 
 	public function logged_in_protect() {
@@ -20,7 +20,7 @@ class General{
 	}
 
 	public function page_access_protect() {
-		if($_SESSION['Access'] != 'Council' && $_SESSION['Access'] != 'Staff') {
+		if($_SESSION['Access'] != 'Council' && $_SESSION['Access'] != 'Staff' && $_SESSION['Access'] != 'Admin') {
 			header('Location: ./dashboard.php');
 			exit();
 		}
