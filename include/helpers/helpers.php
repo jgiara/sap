@@ -91,28 +91,30 @@
                 </li>
                 <li>
                     <a href='./reports.php'>Reports</a>
-                </li>
-                <li>
-                    <a href='#' data-toggle='collapse' data-target='#submenu'>Administration<span class='fa arrow'></span></a>
-                    <ul class='nav nav-second-level collapse' id='submenu'>
-                        <li>
-                            <a href='./weeks.php'>Weeks</a>
-                        </li>
-                        <li>
-                            <a href='./roles.php'>Roles</a>
-                        </li>
-                        <li>
-                            <a href='./passwordReset.php'>Reset User Password</a>
-                        </li>
-                        <li>
-                            <a href='./programs.php'>Programs</a>
-                        </li>
-                        <li>
-                            <a href='./programs.php'>Change Class Status</a>
-                        </li>
+                </li>";
+                if((in_array('Council', $roles)) || (in_array('Admin', $roles))) {
+                  echo  "<li>
+                        <a href='#' data-toggle='collapse' data-target='#submenu'>Administration<span class='fa arrow'></span></a>
+                        <ul class='nav nav-second-level collapse' id='submenu'>
+                            <li>
+                                <a href='./weeks.php'>Weeks</a>
+                            </li>
+                            <li>
+                                <a href='./roles.php'>Roles</a>
+                            </li>
+                            <li>
+                                <a href='./passwordReset.php'>Reset User Password</a>
+                            </li>
+                            <li>
+                                <a href='./programs.php'>Programs</a>
+                            </li>
+                            <li>
+                                <a href='./programs.php'>Change Class Status</a>
+                            </li>
 
-                    </ul>
-                </li>";         
+                        </ul>
+                    </li>";     
+                }    
         }
 	}
 ?>

@@ -1,21 +1,10 @@
 <?php 
 ob_start();
 session_start();
-require '../include/init.php';
+require_once '../include/init.php';
 $general->logged_out_protect();
-
-$user     = $users->userdata($_SESSION['Email']);
-$email  = $user['email'];
-
-$groups = $users->get_roles($email);
-$roles = [];
-foreach($groups as $group) {
-    array_push($roles, $group['group_name']);
-}
-
-echo "<input type='hidden' id='userid' value='$email'/>";
-date_default_timezone_set('EST');
-
+require '../include/helpers/userInfo.php';
+require '../include/helpers/helpers.php';
 ?>
 
 <!DOCTYPE html>
@@ -74,113 +63,23 @@ date_default_timezone_set('EST');
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Student Admission Program</a>
+                <a class="navbar-brand" href="../index.php">Student Admission Program</a>
             </div>
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="../logout.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <!-- /.dropdown -->
+                <?php 
+                    displayDropdownNav($fn, $ln);
+                ?>
             </ul>
             <!-- /.navbar-top-links -->
 
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav side-scroll" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
-                        <li>
-                            <a href="./dashboard.php">Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="./involvement.php">My Involvement</a>
-                        </li>
-                        <li>
-                            <a href="./profile.php">My Profile</a>
-                        </li>
-                        <li>
-                            <a href="./applications.php">Applications</a>
-                        </li>
                         <?php 
-                            if(in_array('Council', $roles) || in_array('Staff', $roles) || in_array('Admin', $roles)) {
-                                echo "<li>
-                                        <a href='./users.php'>All Users</a>
-                                    </li>
-                                    <li>
-                                        <a href='./panels.php'>Panels</a>
-                                    </li>
-                                    <li>
-                                        <a href='./tours.php'>Tours</a>
-                                    </li>
-                                    <li>
-                                        <a href='./greeting.php'>Greeting</a>
-                                    </li>
-                                    <li>
-                                        <a href='./om.php'>Office Management</a>
-                                    </li>
-                                    <li>
-                                        <a href='./efad.php'>Eagle for a Day</a>
-                                    </li>
-                                    <li>
-                                        <a href='./aed.php'>Admitted Eagle Day</a>
-                                    </li>
-                                    <li>
-                                        <a href='./outreach.php'>Outreach</a>
-                                    </li>
-                                    <li>
-                                        <a href='./hsvisits.php'>High School Visits</a>
-                                    </li>
-                                    <li>
-                                        <a href='./ahana.php'>AHANA Outreach</a>
-                                    </li>
-                                    <li>
-                                        <a href='./io.php'>International Outreach</a>
-                                    </li>
-                                    <li>
-                                        <a href='./transfer.php'>Transfer Outreach</a>
-                                    </li>
-                                    <li>
-                                        <a href='./media.php'>Media</a>
-                                    </li>
-                                    <li>
-                                        <a href='./summer.php'>Summer</a>
-                                    </li>
-                                    <li>
-                                        <a href='#'>Administration<span class='fa arrow'></span></a>
-                                        <ul class='nav nav-second-level'>
-                                            <li>
-                                                <a href='./weeks.php'>Weeks</a>
-                                            </li>
-                                            <li>
-                                                <a href='./reports.php'>Reports</a>
-                                            </li>
-                                        </ul>
-                                    </li>";
-                            }
-                            ?>
+                            displayModules($roles);
+                        ?>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
