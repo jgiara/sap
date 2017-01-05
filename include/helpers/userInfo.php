@@ -1,4 +1,4 @@
-<? php
+<?php
     $user = $users->userdata($_SESSION['Email']);
     $email = $user['email'];
     $fn = $user['first_name'];

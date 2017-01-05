@@ -7,3 +7,5 @@ $users = new Users($db);
 $general = new General();
 
 $errors = array();
+
+?>

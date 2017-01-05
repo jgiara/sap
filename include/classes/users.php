@@ -161,6 +161,7 @@ public function recover($Email) {
 		}	
 	}
 } //close class
+?>
 
 
 
