@@ -451,6 +451,7 @@ require '../include/helpers/pageProtect.php';
             setTimeout(function() {
             $(currentEle).html('<input id="newvalue" class="thVal" type="text" value="' + valueT + '" />');
             $(".thVal").focus();
+            document.getElementById("newvalue").value = document.getElementById("newvalue").value;
             $(".thVal").keyup(function (event) {
             if (event.keyCode == 13 && verifyData(updateField[column], document.getElementById("newvalue").value.trim())) {
                

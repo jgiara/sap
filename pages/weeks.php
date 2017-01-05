@@ -110,7 +110,7 @@ require '../include/helpers/higherPageProtect.php'
                                         <?php
                                             $currMonth = date("n");
                                             $currSemester = "Fall";
-                                            if($currMonth < 6) {
+                                            if($currMonth < 8) {
                                                 $currSemester = "Spring";
                                             }
                                             echo "<option value='Fall'";
@@ -137,7 +137,7 @@ require '../include/helpers/higherPageProtect.php'
                                             $yearHolder = $currYear;
                                             echo "<option value='".$yearHolder."' selected='selected'>".$yearHolder."</option>";
                                             $yearHolder--;
-                                            while($yearHolder >= 2015) {
+                                            while($yearHolder >= 2016) {
                                                 echo "<option value='".$yearHolder."'>".$yearHolder."</option>";
                                                 $yearHolder--;
                                             }
