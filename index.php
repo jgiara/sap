@@ -8,8 +8,8 @@ $general->logged_in_protect();
 //Login
 if (isset ( $_POST ['signin'] )) {
  
-  $Email_s = trim($_POST['Email_s']);
-  $Password_s = trim($_POST['Password_s']);
+  $Email_s = strip_tags(trim($_POST['Email_s']));
+  $Password_s = strip_tags(trim($_POST['Password_s']));
  
   if ($users->email_exists($Email_s) === false) {
     $errors_s[] = 'Sorry that email does not exist.';

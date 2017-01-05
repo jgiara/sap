@@ -8,7 +8,7 @@ require './include/init.php';
 <?php
 if (empty($_POST) === false) {
  
-  $Email = trim($_POST['Email']);
+  $Email = strip_tags(trim($_POST['Email']));
 
   if ($users->email_exists($Email) === false) {
     $errors[] = 'Sorry that email doesn\'t exist.';
@@ -83,7 +83,7 @@ if (empty($_POST) === false) {
                       <div class="well-body row">
                           <form class="form col-md-12 center-block" action="forgotPassword.php" method="post">
                             <div class="form-group">
-                              <input type="text" name="Email" class="form-control input-md" placeholder="Email " value="" required>
+                              <input type="email" name="Email" class="form-control input-md" placeholder="Email " value="" required>
                             </div>
                             <div class="form-group">
                            
