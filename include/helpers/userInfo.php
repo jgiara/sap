@@ -4,12 +4,12 @@
     $fn = $user['first_name'];
     $ln = $user['last_name'];
 
-    $groups = $users->get_roles($email);
+    $roles = $users->get_roles($email);
 
-    $roles = [];
+    /*$roles = [];
     foreach($groups as $group) {
         array_push($roles, $group['group_name']);
-    }
+    }*/
 
     echo "<input type='hidden' id='userid' value='$email'/>";
     echo "<input type='hidden' id='fn' value='$fn'/>";
