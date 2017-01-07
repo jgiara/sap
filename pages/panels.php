@@ -172,6 +172,7 @@ require '../include/helpers/pageProtect.php';
                                         <button class="btn btn-primary btn-xs" id="export-excel-volunteers">Excel</button>
                                         <button class="btn btn-primary btn-xs" id="export-csv-volunteers">CSV</button>
                                         <button class="btn btn-primary btn-xs" id="export-pdf-volunteers">PDF</button>
+                                        <button class="btn btn-primary btn-xs" id="openModalButton" data-toggle="modal" data-target="#toggleVolsColumnsModal">Toggle Columns</button>
                                     </br>
                                     Toggle column: 
                                     <a href='#' class='toggle-vis-vols' id='volsCol0'>First Name</a>
@@ -284,6 +285,53 @@ require '../include/helpers/pageProtect.php';
 
     </div>
     <!-- /#wrapper -->
+
+    <div id="toggleVolsColumnsModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Toggle Columns</h4>
+                </div>
+                <div class="modal-body" style='text-align:center;vertical-align:middle;'>
+                    <table>
+                        <tr>
+                            <td>
+                                <b>Displayed:</b><br/>
+                               <select multiple="multiple" id='lstBox1'>
+                                  <option value="ajax">Ajax</option>
+                                  <option value="jquery">jQuery</option>
+                                  <option value="javascript">JavaScriptsdfdsfsdfsd</option>
+                                  <option value="mootool">MooTools</option>
+                                  <option value="prototype">Prototype</option>
+                                  <option value="dojo">Dojo</option>
+                            </select>
+                        </td>
+                        <td style='text-align:center;vertical-align:middle;'>
+                            <button class="btn btn-primary btn-xs" id='btnRight' value='right'>></button>
+                            <br/><button class="btn btn-primary btn-xs" style='margin:5px;' id='btnLeft' value='left'><</button> 
+                        </td>
+                        <td>
+                            <b>Not Displayed: </b><br/>
+                            <select multiple="multiple" id='lstBox2'>
+                              <option value="asp">ASP.NET</option>
+                              <option value="c#">C#</option>
+                              <option value="vb">VB.NET</option>
+                              <option value="java">Java</option>
+                              <option value="php">PHP</option>
+                              <option value="python">Python</option>  
+                            </select>
+                        </td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- jQuery -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
