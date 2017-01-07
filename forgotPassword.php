@@ -2,7 +2,7 @@
 ob_start();
 session_start();
 
-require './include/init.php'; 
+require '../resources/init.php';
 ?>
 
 <?php

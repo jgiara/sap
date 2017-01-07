@@ -79,7 +79,7 @@ create table Program_Members (
 	shift_day varchar(10), 
 	shift_time varchar(10),
 	credit_status varchar(10) not null check(credit_staus in('Complete', 'Pending', 'Incomplete')),
-	requirements_status varchar(10),
+	requirements_status text,
 	comments text
 );
 

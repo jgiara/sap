@@ -19,6 +19,7 @@ function getVolunteerData(callback, selectedSemester, selectedYear, tableVols) {
             year: selectedYear
           }, 
           function(data) {
+            //var programID = data[0].programID;
             $.each( data, function( i, item ) {
                 tableVols.row.add([
                     "<a id='test' href='./dashboard.php'>"+ item.first_name + "</a>",
@@ -26,7 +27,7 @@ function getVolunteerData(callback, selectedSemester, selectedYear, tableVols) {
                     item.class,
                     item.school,
                     item.shift_day,
-                    item.shift_time,
+                    0,
                     item.requirements_status,
                     item.eagle_id
                 ]);

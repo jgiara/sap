@@ -1,7 +1,7 @@
 <?php 
 ob_start();
 session_start();
-require_once '../include/init.php';
+require_once '../../resources/init.php';
 $general->logged_out_protect();
 require '../include/helpers/userInfo.php';
 require '../include/helpers/helpers.php';

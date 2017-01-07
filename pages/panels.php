@@ -1,7 +1,7 @@
 <?php 
 ob_start();
 session_start();
-require_once '../include/init.php';
+require_once '../../resources/init.php';
 $general->logged_out_protect();
 require '../include/helpers/userInfo.php';
 require '../include/helpers/helpers.php';
@@ -154,6 +154,7 @@ require '../include/helpers/pageProtect.php';
 
                                 </div>
                                 <button class="btn btn-primary" id="semester-submit">Go</button>
+                                <input type="hidden" id="programID" value=""/>
                                 <!--<button class="btn btn-success" id="newAttendance" style="margin-left: 10px;">Populate Sheet</button>-->
     
                             <ul id="tabs-list" class="nav nav-tabs" style="margin-top: 10px;">
@@ -335,6 +336,7 @@ require '../include/helpers/pageProtect.php';
         });
         
         getVolunteerData(function(newTable) {
+                  //document.getElementById("programID").value = programID;
                   newTable.draw();
             }, selectedSemester, selectedYear, tableVols);
      
@@ -437,6 +439,7 @@ require '../include/helpers/pageProtect.php';
             getAttendanceData(function(newTable) {
                   newTable.draw();
             }, selectedSemester, selectedYear, selectedWeek, selectedDay, tableAttn);
+        });
         
         $('#table-volunteers tbody').on('dblclick', 'td', function(e) {
             var currentEle = $(this);
@@ -522,7 +525,6 @@ require '../include/helpers/pageProtect.php';
             $(currentEle).on("dblclick", function() {
                 $(currentEle).html(value);
             });  
-        });
         });
         $("#attendance-tab").on("click", function() {
             showSelects();
