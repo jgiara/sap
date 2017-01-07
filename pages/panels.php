@@ -154,7 +154,6 @@ require '../include/helpers/pageProtect.php';
 
                                 </div>
                                 <button class="btn btn-primary" id="semester-submit">Go</button>
-                                <input type="hidden" id="programID" value=""/>
                                 <!--<button class="btn btn-success" id="newAttendance" style="margin-left: 10px;">Populate Sheet</button>-->
     
                             <ul id="tabs-list" class="nav nav-tabs" style="margin-top: 10px;">
@@ -174,27 +173,60 @@ require '../include/helpers/pageProtect.php';
                                         <button class="btn btn-primary btn-xs" id="export-csv-volunteers">CSV</button>
                                         <button class="btn btn-primary btn-xs" id="export-pdf-volunteers">PDF</button>
                                     </br>
+                                    Toggle column: 
+                                    <a href='#' class='toggle-vis-vols' id='volsCol0'>First Name</a>
+                                    <a href='#' class='toggle-vis-vols' id='volsCol1'>Last Name</a>
+                                    <a href='#' class='toggle-vis-vols' id='volsCol2'>Email</a>
+                                    <a href='#' class='toggle-vis-vols' id='volsCol3'>Class</a>
+                                    <a href='#' class='toggle-vis-vols' id='volsCol4'>School</a>
+                                    <a href='#' class='toggle-vis-vols' id='volsCol5'>Major</a>
+                                    <a href='#' class='toggle-vis-vols' id='volsCol6'>Hometown</a>
+                                    <a href='#' class='toggle-vis-vols' id='volsCol7'>State</a>
+                                    <a href='#' class='toggle-vis-vols' id='volsCol8'>AHANA</a>
+                                    <a href='#' class='toggle-vis-vols' id='volsCol9'>Transfer</a>
+                                    <a href='#' class='toggle-vis-vols' id='volsCol10'>Shift Day</a>
+                                    <a href='#' class='toggle-vis-vols' id='volsCol11'>Shift Time</a>
+                                    <a href='#' class='toggle-vis-vols' id='volsCol12'>Requirements</a>
+                                    <a href='#' class='toggle-vis-vols' id='volsCol13'>Credit Status</a>
+                                    <a href='#' class='toggle-vis-vols' id='volsCol14'>Comments</a>
+                                    <a href='#' class='toggle-vis-vols' id='volsCol15'>Eagle ID</a>
                                         <table class="table table-striped table-bordered table-hover" id="table-volunteers" style="font-size: 13px; width: 100%;">
                                             <thead>
                                                 <tr>
                                                     <th>First Name</th>
                                                     <th>Last Name</th>
+                                                    <th>Email</th>
                                                     <th>Class</th>
                                                     <th>School</th>
+                                                    <th>Major</th>
+                                                    <th>Hometown</th>
+                                                    <th>State</th>
+                                                    <th>AHANA</th>
+                                                    <th>Transfer</th>
                                                     <th>Shift Day</th>
                                                     <th>Shift Time</th>
                                                     <th>Requirements</th>
-                                                    <th>Eagle Id</th>
+                                                    <th>Credit</th>
+                                                    <th>Comments</th>
+                                                    <th>Eagle ID</th>
                                                 </tr>
                                                 <tr>
                                                     <td>First Name</td>
                                                     <td>Last Name</td>
+                                                    <td>Email</td>
                                                     <td>Class</td>
                                                     <td>School</td>
+                                                    <td>Major</td>
+                                                    <td>Hometown</td>
+                                                    <td>State</td>
+                                                    <td>AHANA</td>
+                                                    <td>Transfer</td>
                                                     <td>Shift Day</td>
                                                     <td>Shift Time</td>
                                                     <td>Requirements</td>
-                                                    <td>Eagle Id</td>
+                                                    <td>Credit</td>
+                                                    <td>Comments</td>
+                                                    <td>Eagle ID</td>
                                                 </tr>
                                             </thead>
                                             
@@ -287,6 +319,7 @@ require '../include/helpers/pageProtect.php';
 
     <script>
     $(document).ready(function() {
+        var programName = 'Panels';
         var s = document.getElementById("table-semester");
         var selectedSemester = s.options[s.selectedIndex].value;
         var y = document.getElementById("table-year");
@@ -307,11 +340,8 @@ require '../include/helpers/pageProtect.php';
             orderCellsTop: true,
             columnDefs: [
             {
-                targets: [7],
+                targets: [2,5,6,7,8,9,13,14,15],
                 visible: false,
-                orderable: false
-
-                
             },
             {
                 targets: [4],
@@ -334,11 +364,18 @@ require '../include/helpers/pageProtect.php';
             order: [[1, "asc"]],
             paging: false,
         });
+
+        $('a.toggle-vis-vols').on( 'click', function (e) {
+            e.preventDefault();
+            var index = this.id;
+            index = index.substring(7);
+            var column = tableVols.column(index);
+            column.visible(!column.visible());
+        });
         
         getVolunteerData(function(newTable) {
-                  //document.getElementById("programID").value = programID;
                   newTable.draw();
-            }, selectedSemester, selectedYear, tableVols);
+            }, programName, selectedSemester, selectedYear, tableVols);
      
         // Apply the search
         tableVols.columns().every(function (index) {
@@ -399,7 +436,7 @@ require '../include/helpers/pageProtect.php';
             selectedDay = d.options[d.selectedIndex].value;
             getAttendanceData(function(newTable) {
                 newTable.draw();
-            }, selectedSemester, selectedYear, selectedWeek, selectedDay, tableAttn);
+            }, programName, selectedSemester, selectedYear, selectedWeek, selectedDay, tableAttn);
         }, selectedSemester, selectedYear);
      
         // Apply the search
@@ -415,9 +452,9 @@ require '../include/helpers/pageProtect.php';
         $('#semester-submit').on("click", function() {
             
             var s = document.getElementById("table-semester");
-            var selectedSemester = s.options[s.selectedIndex].value;
+            var nselectedSemester = s.options[s.selectedIndex].value;
             var y = document.getElementById("table-year");
-            var selectedYear = y.options[y.selectedIndex].value;
+            var nselectedYear = y.options[y.selectedIndex].value;
             var w = document.getElementById("table-week");
             var selectedWeek = w.options[w.selectedIndex].value;
             var d = document.getElementById("table-day");
@@ -426,19 +463,22 @@ require '../include/helpers/pageProtect.php';
             tableVols.clear();
             tableAttn.clear();
 
-            document.getElementById("table-week").innerHTML = "";
-
-            getWeekData(function() {
-                  ;
-            }, selectedSemester, selectedYear);
+            if(nselectedSemester != selectedSemester || nselectedYear != selectedYear) {
+                document.getElementById("table-week").innerHTML = "";
+                    getWeekData(function() {
+                      ;
+                }, nselectedSemester, nselectedYear);
+                    selectedSemester = nselectedSemester;
+                    selectedYear = nselectedYear;
+            }
 
             getVolunteerData(function(newTable) {
                   newTable.draw();
-            }, selectedSemester, selectedYear, tableVols);
+            }, programName, selectedSemester, selectedYear, tableVols);
 
             getAttendanceData(function(newTable) {
                   newTable.draw();
-            }, selectedSemester, selectedYear, selectedWeek, selectedDay, tableAttn);
+            }, programName, selectedSemester, selectedYear, selectedWeek, selectedDay, tableAttn);
         });
         
         $('#table-volunteers tbody').on('dblclick', 'td', function(e) {

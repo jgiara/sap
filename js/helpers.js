@@ -12,23 +12,30 @@ function showSelects(){
     $('#table-day').attr('disabled', false);
 }
 
-function getVolunteerData(callback, selectedSemester, selectedYear, tableVols) {
+function getVolunteerData(callback, programName, selectedSemester, selectedYear, tableVols) {
     $.getJSON("../include/getProgramVolunteers.php",  {
-            program: "Panels",
+            program: programName,
             semester: selectedSemester,
             year: selectedYear
           }, 
           function(data) {
-            //var programID = data[0].programID;
             $.each( data, function( i, item ) {
                 tableVols.row.add([
                     "<a id='test' href='./dashboard.php'>"+ item.first_name + "</a>",
                     item.last_name,
+                    item.email,
                     item.class,
                     item.school,
+                    item.major,
+                    item.hometown,
+                    item.state_country,
+                    item.ahana,
+                    item.transfer,
                     item.shift_day,
-                    0,
+                    item.shift_time,
                     item.requirements_status,
+                    item.credit_status,
+                    item.comments,
                     item.eagle_id
                 ]);
                
@@ -37,10 +44,10 @@ function getVolunteerData(callback, selectedSemester, selectedYear, tableVols) {
           });
 }
 
-function getAttendanceData(callback, selectedSemester, selectedYear, selectedWeek, selectedDay, tableAttn) {
+function getAttendanceData(callback, programName, selectedSemester, selectedYear, selectedWeek, selectedDay, tableAttn) {
     $.getJSON("../include/getProgramAttendance.php", 
         {
-            program: "Panels",
+            program: programName,
             semester: selectedSemester,
             year: selectedYear, 
             week: selectedWeek,
@@ -55,8 +62,7 @@ function getAttendanceData(callback, selectedSemester, selectedYear, selectedWee
                     item.present,
                     item.note,
                     item.eagle_id,
-                    item.attendance_id,
-                    "<input type=checkbox/>"
+                    item.attendance_id
                 ]);
             });
             callback(tableAttn);
@@ -70,7 +76,12 @@ function getWeekData(callback, selectedSemester, selectedYear) {
             year: selectedYear
         }, function(data) {
             $.each(data, function(i, item) {
-                     document.getElementById("table-week").innerHTML += "<option value ='" + item.week_id + "'>Week " + item.week_number + ": " + item.sunday_date.substring(5) + " - " + item.saturday_date.substring(5) + "</option>"; 
+                if(item.current_week == 'Yes') {
+                     document.getElementById("table-week").innerHTML += "<option value ='" + item.week_id + "' selected='selected'>Week " + item.week_number + ": " + item.sunday_date.substring(5) + " - " + item.saturday_date.substring(5) + "</option>"; 
+                 }
+                 else {
+                    document.getElementById("table-week").innerHTML += "<option value ='" + item.week_id + "'>Week " + item.week_number + ": " + item.sunday_date.substring(5) + " - " + item.saturday_date.substring(5) + "</option>"; 
+                 }
             });
             callback();
         });

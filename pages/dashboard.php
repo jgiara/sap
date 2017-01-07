@@ -5,6 +5,10 @@ require_once '../../resources/init.php';
 $general->logged_out_protect();
 require_once '../include/helpers/userInfo.php';
 require_once '../include/helpers/helpers.php';
+if($_SESSION['New_Session']) {
+    $users->updateLastLogin($email);
+    $_SESSION['New_Session'] = false;
+}
 ?>
 
 <!DOCTYPE html>

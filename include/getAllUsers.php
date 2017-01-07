@@ -1,17 +1,12 @@
 <?php
 
-	$active = $_GET['active'];
+	require_once '../../resources/initTableFunctions.php';
 
-	$dbc = @mysqli_connect("localhost", "root", "root", "SAP")
-	    or die("Could not open SAP db, " . mysqli_connect_error());
-	$query = "select * from Users where status='$active'";			
-	$result = mysqli_query($dbc, $query) or die ("Error in Select" . mysqli_error($dbc));
+	$active = $_GET['active'];
 		
-	$items = array();	// put the rows as objects in an array
-	while ( $row = mysqli_fetch_assoc( $result ) ) {
-		$items[] = $row;
-	}
+	$items = $fns->getAllUsers($active);
+	
 	echo json_encode($items);
-	mysqli_close($dbc);
+	$db = null;
 
 ?>
