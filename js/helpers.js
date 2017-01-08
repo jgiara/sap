@@ -102,8 +102,8 @@ function inLineUpdatePostData(callback, uid, ufield, utable, unewValue, uwhereFi
         });
 }
 
-function toggleVolsColumns(tableVols, index) {
-    var column = tableVols.column(index);
+function toggleColumns(table, index) {
+    var column = table.column(index);
     column.visible(!column.visible());
 }
 

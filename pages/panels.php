@@ -409,7 +409,7 @@ require '../include/helpers/pageProtect.php';
             }
             else {
                 for(var i=0; i < selectedOpts.length; i++) {
-                    toggleVolsColumns(tableVols, selectedOpts[i].value);
+                    toggleColumns(tableVols, selectedOpts[i].value);
                 }
                 $('#volslstBox2').append($(selectedOpts).clone());
                 $(selectedOpts).remove();
@@ -428,7 +428,7 @@ require '../include/helpers/pageProtect.php';
             }
             else {
                 for(var i=0; i < selectedOpts.length; i++) {
-                    toggleVolsColumns(tableVols, selectedOpts[i].value);
+                    toggleColumns(tableVols, selectedOpts[i].value);
                 }
                 $('#volslstBox1').append($(selectedOpts).clone());
                 $(selectedOpts).remove();
