@@ -130,18 +130,7 @@ function verifyData(field, value) {
             else {
                 return true;
             }
-        }
-        break;
-        case 'credit': {
-            if(value != 'Pending' && value != 'Complete' != 'Incomplete') {
-                alert("Please enter either Pending, Complete, or Incomplete");
-                return false;
-            }
-            else {
-                return true;
-            }
-        }
-        break;
+        } break;
         default: return true;
     }
 }

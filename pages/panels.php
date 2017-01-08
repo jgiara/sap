@@ -173,6 +173,7 @@ require '../include/helpers/pageProtect.php';
                                         <button class="btn btn-primary btn-xs" id="export-csv-volunteers">CSV</button>
                                         <button class="btn btn-primary btn-xs" id="export-pdf-volunteers">PDF</button>
                                         <button class="btn btn-success btn-xs" id="openModalButton" data-toggle="modal" data-target="#toggleVolsColumnsModal">Toggle Columns</button>
+                                        <button class="btn btn-warning btn-xs" id="add-new-member">Add New Member</button>
                                     </br>
                                         <table class="table table-striped table-bordered table-hover" id="table-volunteers" style="font-size: 13px; width: 100%;">
                                             <thead>
@@ -229,6 +230,9 @@ require '../include/helpers/pageProtect.php';
                                         <button class="btn btn-primary btn-xs" id="export-csv-attendance">CSV</button>
                                         <button class="btn btn-primary btn-xs" id="export-pdf-attendance">PDF</button>
                                         <button class="btn btn-success btn-xs" id="openModalButton2" data-toggle="modal" data-target="#toggleAttnColumnsModal">Toggle Columns</button>
+                                        <button class="btn btn-warning btn-xs" id="add-new-members">Add New Members</button>
+                                        <button class="btn btn-danger btn-xs" id="create-attendance">Create Attendance Sheet</button>
+                                        <button class="btn btn-danger btn-xs" id="create-new-attendance">Bulk Data Update</button>
                                     </br>
                                         <table class="table table-striped table-bordered table-hover" id="table-attendance" style="font-size: 13px; width: 100%;">
                                             <thead>
@@ -666,13 +670,23 @@ require '../include/helpers/pageProtect.php';
         });
         
         $('#table-volunteers tbody').on('dblclick', 'td', function(e) {
+            if(!<?php 
+                if((in_array('Admin', $roles)) || (in_array('Council', $roles)) || (in_array('Advisor', $roles))) {
+                    echo "true";
+                }
+                else {
+                    echo "false";
+                } 
+                ?>) {
+                return;
+            }
             var currentEle = $(this);
             var valueT = $(this).html();
             var row = tableVols.cell($(this)).index().row;
             var column = tableVols.cell($(this)).index().column;
             var alterable = [11,12,13,14,15];
             var selectable = [11,14];
-            if(alterable.indexOf(column) == -1) { //can't update User table
+            if(alterable.indexOf(column) == -1) { //can't the other columns
                 return;
             }
             var data = tableVols.row(row).data();
@@ -752,13 +766,23 @@ require '../include/helpers/pageProtect.php';
             });  
         });
         $('#table-attendance tbody').on('dblclick', 'td', function(e) {
+            if(!<?php 
+                if((in_array('Admin', $roles)) || (in_array('Council', $roles)) || (in_array('Advisor', $roles))) {
+                    echo "true";
+                }
+                else {
+                    echo "false";
+                } 
+                ?>) {
+                return;
+            }
             var currentEle = $(this);
             var valueT = $(this).html();
             var row = tableAttn.cell($(this)).index().row;
             var column = tableAttn.cell($(this)).index().column;
             var alterable = [11,12,13,14,15,16];
             var selectable = [11,13,14,15];
-            if(alterable.indexOf(column) == -1) { //can't update User table
+            if(alterable.indexOf(column) == -1) { //can't update the other columns
                 return;
             }
             var data = tableAttn.row(row).data();
