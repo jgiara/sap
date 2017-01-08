@@ -174,23 +174,6 @@ require '../include/helpers/pageProtect.php';
                                         <button class="btn btn-primary btn-xs" id="export-pdf-volunteers">PDF</button>
                                         <button class="btn btn-primary btn-xs" id="openModalButton" data-toggle="modal" data-target="#toggleVolsColumnsModal">Toggle Columns</button>
                                     </br>
-                                    Toggle column: 
-                                    <a href='#' class='toggle-vis-vols' id='volsCol0'>First Name</a>
-                                    <a href='#' class='toggle-vis-vols' id='volsCol1'>Last Name</a>
-                                    <a href='#' class='toggle-vis-vols' id='volsCol2'>Email</a>
-                                    <a href='#' class='toggle-vis-vols' id='volsCol3'>Class</a>
-                                    <a href='#' class='toggle-vis-vols' id='volsCol4'>School</a>
-                                    <a href='#' class='toggle-vis-vols' id='volsCol5'>Major</a>
-                                    <a href='#' class='toggle-vis-vols' id='volsCol6'>Hometown</a>
-                                    <a href='#' class='toggle-vis-vols' id='volsCol7'>State</a>
-                                    <a href='#' class='toggle-vis-vols' id='volsCol8'>AHANA</a>
-                                    <a href='#' class='toggle-vis-vols' id='volsCol9'>Transfer</a>
-                                    <a href='#' class='toggle-vis-vols' id='volsCol10'>Shift Day</a>
-                                    <a href='#' class='toggle-vis-vols' id='volsCol11'>Shift Time</a>
-                                    <a href='#' class='toggle-vis-vols' id='volsCol12'>Requirements</a>
-                                    <a href='#' class='toggle-vis-vols' id='volsCol13'>Credit Status</a>
-                                    <a href='#' class='toggle-vis-vols' id='volsCol14'>Comments</a>
-                                    <a href='#' class='toggle-vis-vols' id='volsCol15'>Eagle ID</a>
                                         <table class="table table-striped table-bordered table-hover" id="table-volunteers" style="font-size: 13px; width: 100%;">
                                             <thead>
                                                 <tr>
@@ -200,6 +183,7 @@ require '../include/helpers/pageProtect.php';
                                                     <th>Class</th>
                                                     <th>School</th>
                                                     <th>Major</th>
+                                                    <th>Minor</th>
                                                     <th>Hometown</th>
                                                     <th>State</th>
                                                     <th>AHANA</th>
@@ -218,6 +202,7 @@ require '../include/helpers/pageProtect.php';
                                                     <td>Class</td>
                                                     <td>School</td>
                                                     <td>Major</td>
+                                                    <td>Minor</td>
                                                     <td>Hometown</td>
                                                     <td>State</td>
                                                     <td>AHANA</td>
@@ -293,33 +278,38 @@ require '../include/helpers/pageProtect.php';
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Toggle Columns</h4>
                 </div>
-                <div class="modal-body" style='text-align:center;vertical-align:middle;'>
-                    <table>
+                <div class="modal-body">
+                    <table style='margin-left:150px;'>
                         <tr>
                             <td>
                                 <b>Displayed:</b><br/>
-                               <select multiple="multiple" id='lstBox1'>
-                                  <option value="ajax">Ajax</option>
-                                  <option value="jquery">jQuery</option>
-                                  <option value="javascript">JavaScriptsdfdsfsdfsd</option>
-                                  <option value="mootool">MooTools</option>
-                                  <option value="prototype">Prototype</option>
-                                  <option value="dojo">Dojo</option>
+                               <select multiple="multiple" size='7' id='volslstBox1'>
+                                  <option value="0">First Name</option>
+                                  <option value="1">Last Name</option>
+                                  <option value="3">Class</option>
+                                  <option value="4">School</option>
+                                  <option value="11">Shift Day</option>
+                                  <option value="12">Shift Time</option>
+                                  <option value="13">Requirements</option>
                             </select>
                         </td>
                         <td style='text-align:center;vertical-align:middle;'>
-                            <button class="btn btn-primary btn-xs" id='btnRight' value='right'>></button>
-                            <br/><button class="btn btn-primary btn-xs" style='margin:5px;' id='btnLeft' value='left'><</button> 
+                            <button class="btn btn-primary btn-xs" id='btnRightVols' value='right'>></button>
+                            <br/><button class="btn btn-primary btn-xs" style='margin:5px;' id='btnLeftVols' value='left'><</button> 
                         </td>
                         <td>
                             <b>Not Displayed: </b><br/>
-                            <select multiple="multiple" id='lstBox2'>
-                              <option value="asp">ASP.NET</option>
-                              <option value="c#">C#</option>
-                              <option value="vb">VB.NET</option>
-                              <option value="java">Java</option>
-                              <option value="php">PHP</option>
-                              <option value="python">Python</option>  
+                            <select multiple="multiple" size='7' id='volslstBox2'> 
+                                <option value="2">Email</option>
+                                <option value="5">Major</option>
+                                <option value="6">Minor</option>
+                                <option value="7">Hometown</option>
+                                <option value="8">State</option>
+                                <option value="9">AHANA</option>
+                                <option value="10">Transfer</option>
+                                <option value="14">Credit</option>
+                                <option value="15">Comments</option>
+                                <option value="16">Eagle ID</option>
                             </select>
                         </td>
                     </tr>
@@ -388,7 +378,7 @@ require '../include/helpers/pageProtect.php';
             orderCellsTop: true,
             columnDefs: [
             {
-                targets: [2,5,6,7,8,9,13,14,15],
+                targets: [2,5,6,7,8,9,10,14,15,16],
                 visible: false,
             },
             {
@@ -413,12 +403,42 @@ require '../include/helpers/pageProtect.php';
             paging: false,
         });
 
-        $('a.toggle-vis-vols').on( 'click', function (e) {
-            e.preventDefault();
-            var index = this.id;
-            index = index.substring(7);
-            var column = tableVols.column(index);
-            column.visible(!column.visible());
+        $('#btnRightVols').on("click", function() {
+            var selectedOpts = $('#volslstBox1 option:selected');
+            if (selectedOpts.length == 0) {
+            }
+            else {
+                for(var i=0; i < selectedOpts.length; i++) {
+                    toggleVolsColumns(tableVols, selectedOpts[i].value);
+                }
+                $('#volslstBox2').append($(selectedOpts).clone());
+                $(selectedOpts).remove();
+                var my_options = $("#volslstBox2 option");
+
+                my_options.sort(function(a,b) {
+                    return a.value - b.value;
+                });
+                $("#volslstBox2").empty().append(my_options);
+            }
+        });
+
+        $('#btnLeftVols').on("click", function() {
+            var selectedOpts = $('#volslstBox2 option:selected');
+            if (selectedOpts.length == 0) {
+            }
+            else {
+                for(var i=0; i < selectedOpts.length; i++) {
+                    toggleVolsColumns(tableVols, selectedOpts[i].value);
+                }
+                $('#volslstBox1').append($(selectedOpts).clone());
+                $(selectedOpts).remove();
+                var my_options = $("#volslstBox1 option");
+
+                my_options.sort(function(a,b) {
+                    return a.value - b.value;
+                });
+                $("#volslstBox1").empty().append(my_options);
+            }
         });
         
         getVolunteerData(function(newTable) {

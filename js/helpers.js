@@ -27,6 +27,7 @@ function getVolunteerData(callback, programName, selectedSemester, selectedYear,
                     item.class,
                     item.school,
                     item.major,
+                    item.minor,
                     item.hometown,
                     item.state_country,
                     item.ahana,
@@ -99,6 +100,11 @@ function inLineUpdatePostData(callback, uid, ufield, utable, unewValue, uwhereFi
           function(){
             callback();
         });
+}
+
+function toggleVolsColumns(tableVols, index) {
+    var column = tableVols.column(index);
+    column.visible(!column.visible());
 }
 
 function verifyData(field, value) {
