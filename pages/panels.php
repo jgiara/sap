@@ -671,7 +671,7 @@ require '../include/helpers/pageProtect.php';
             var row = tableVols.cell($(this)).index().row;
             var column = tableVols.cell($(this)).index().column;
             var alterable = [11,12,13,14,15];
-            var selectable = [11,14]
+            var selectable = [11,14];
             if(alterable.indexOf(column) == -1) { //can't update User table
                 return;
             }
@@ -753,43 +753,103 @@ require '../include/helpers/pageProtect.php';
         });
         $('#table-attendance tbody').on('dblclick', 'td', function(e) {
             var currentEle = $(this);
-            var value = $(this).html();
+            var valueT = $(this).html();
             var row = tableAttn.cell($(this)).index().row;
             var column = tableAttn.cell($(this)).index().column;
-            if(column != 2 && column != 3 && column != 4 && column != 5) { //can't update User table
+            var alterable = [11,12,13,14,15,16];
+            var selectable = [11,13,14,15];
+            if(alterable.indexOf(column) == -1) { //can't update User table
                 return;
             }
             var data = tableAttn.row(row).data();
-            var updateField = ['first_name', 'last_name', 'shift_day', 'shift_time', 'present', 'note'];
-            setTimeout(function(){
-            $(currentEle).html('<input id="newvalue" class="thVal" type="text" value="' + value + '" />');
-            $(".thVal").focus();
-            $(".thVal").keyup(function (event) {
-            if (event.keyCode == 13 && verifyData(updateField[column], document.getElementById("newvalue").value.trim())) {
-               
-                data[column] =  document.getElementById("newvalue").value.trim();
-                tableAttn.row(row).remove();
-                inLineUpdatePostData(function() {
-                    tableAttn.row.add([
-                        data[0],
-                        data[1],
-                        data[2],
-                        data[3],
-                        data[4],
-                        data[5],
-                        data[6],
-                        data[7]
-                    ]).draw()
-                }, data[7], updateField[column], 'Attendance', data[column], 'attendance_id');
-            }
-        });
-        },150);
+            var updateField = ['first_name','last_name','email','class','school','major','minor','hometown','state_country','ahana','transfer','shift_day','shift_time','alternate_number','present','gave_panel_tour','note','eagle_id','attendance_id'];
+            setTimeout(function() {
+                if(column == 11) {
+                    $(currentEle).html('<select id="newvalue" class="thVal">' +
+                                            '<option value="Sunday"' + (valueT == "Sunday" ? 'selected = selected' : '') + '>Sunday</option>' +
+                                            '<option value="Monday"' + (valueT == "Monday" ? 'selected = selected' : '') + '>Monday</option>' +
+                                            '<option value="Tuesday"' + (valueT == "Tuesday" ? 'selected = selected' : '') + '>Tuesday</option>' +
+                                            '<option value="Wednesday"' + (valueT == "Wednesday" ? 'selected = selected' : '') + '>Wednesday</option>' +
+                                            '<option value="Thursday"' + (valueT == "Thursday" ? 'selected = selected' : '') + '>Thursday</option>' +
+                                            '<option value="Friday"' + (valueT == "Friday" ? 'selected = selected' : '') + '>Friday</option>' +
+                                            '<option value="Saturday"' + (valueT == "Saturday" ? 'selected = selected' : '') + '>Saturday</option>' +
+                                        '</select>');
+                }
+                else if(column == 13) {
+                    $(currentEle).html('<select id="newvalue" class="thVal">' +
+                                            '<option value=""' + (valueT == "" ? 'selected = selected' : '') + '>(Blank)</option>' +
+                                            '<option value="Alternate"' + (valueT == "Alternate" ? 'selected = selected' : '') + '>Alternate</option>' +
+                                        '</select>');
+                }
+                else if(column == 14) {
+                    $(currentEle).html('<select id="newvalue" class="thVal">' +
+                                            '<option value=""' + (valueT == "" ? 'selected = selected' : '') + '>(Blank)</option>' +
+                                            '<option value="Present"' + (valueT == "Present" ? 'selected = selected' : '') + '>Present</option>' +
+                                            '<option value="Excused"' + (valueT == "Excused" ? 'selected = selected' : '') + '>Excused</option>' +
+                                            '<option value="No Show"' + (valueT == "No Show" ? 'selected = selected' : '') + '>No Show</option>' +
+                                        '</select>');
+                }
+                else if(column == 15) {
+                    $(currentEle).html('<select id="newvalue" class="thVal">' +
+                                            '<option value=""' + (valueT == "" ? 'selected = selected' : '') + '>(Blank)</option>' +
+                                            '<option value="Yes"' + (valueT == "Yes" ? 'selected = selected' : '') + '>Yes</option>' +
+                                            '<option value="No"' + (valueT == "No" ? 'selected = selected' : '') + '>No</option>' +
+                                        '</select>');
+                }
+                else {
+                    $(currentEle).html('<input id="newvalue" class="thVal" type="text" value="' + valueT + '" />');
+                }
+                $(".thVal").focus();
+                if(selectable.indexOf(column) == -1) {
+                    document.getElementById("newvalue").value = document.getElementById("newvalue").value;
+                    $(".thVal").focus();
+                }
+                $(".thVal").keyup(function (event) {
+                    if (event.keyCode == 13) {
+                        if(selectable.indexOf(column) == -1) {
+                            if(verifyData(updateField[column], document.getElementById("newvalue").value.trim())) {
+                                data[column] =  document.getElementById("newvalue").value.trim();
+                            }
+                            else {
+                                return;
+                            }
+                        }
+                        else {
+                            data[column] =  $('#newvalue option:selected').val().trim();
+                        }     
+                        tableAttn.row(row).remove();
+                        inLineUpdatePostData(function() {
+                            tableAttn.row.add([
+                                data[0],
+                                data[1],
+                                data[2],
+                                data[3],
+                                data[4],
+                                data[5],
+                                data[6],
+                                data[7],
+                                data[8],
+                                data[9],
+                                data[10],
+                                data[11],
+                                data[12],
+                                data[13],
+                                data[14],
+                                data[15],
+                                data[16],
+                                data[17],
+                                data[18]
+                            ]).draw()
+                        }, data[18], updateField[column], 'Attendance', data[column], 'attendance_id');
+                    }
+                });
+            },150);
             $('tbody td').not(currentEle).on('click', function() {
 
-                $(currentEle).html(value);
+                $(currentEle).html(valueT);
             });
             $(currentEle).on("dblclick", function() {
-                $(currentEle).html(value);
+                $(currentEle).html(valueT);
             });  
         });
         $("#attendance-tab").on("click", function() {
