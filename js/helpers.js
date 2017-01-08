@@ -37,7 +37,8 @@ function getVolunteerData(callback, programName, selectedSemester, selectedYear,
                     item.requirements_status,
                     item.credit_status,
                     item.comments,
-                    item.eagle_id
+                    item.eagle_id,
+                    item.member_id
                 ]);
                
               }); 
@@ -56,11 +57,22 @@ function getAttendanceData(callback, programName, selectedSemester, selectedYear
         }, function(data) {
             $.each(data, function(i, item) {
                 tableAttn.row.add([
-                    item.first_name,
+                    "<a id='test' href='./dashboard.php'>"+ item.first_name + "</a>",
                     item.last_name,
+                    item.email,
+                    item.class,
+                    item.school,
+                    item.major,
+                    item.minor,
+                    item.hometown,
+                    item.state_country,
+                    item.ahana,
+                    item.transfer,
                     item.shift_day,
                     item.shift_time,
+                    item.alternate_number,
                     item.present,
+                    item.gave_panel_tour,
                     item.note,
                     item.eagle_id,
                     item.attendance_id
@@ -109,16 +121,6 @@ function toggleColumns(table, index) {
 
 function verifyData(field, value) {
     switch(field) {
-        case 'shift_day': {
-            if(["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].indexOf(value) == -1) {
-                alert("Please enter a valid day of the week");
-                return false;
-            }
-            else {
-                return true;
-            }
-        }
-        break;
         case 'shift_time': {
             var patt = /\b[1-9][0-2]?:[0-5][0-9] AM|\b[1-9][0-2]?:[0-5][0-9] PM/;
             if(!patt.test(value)) {

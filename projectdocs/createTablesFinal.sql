@@ -113,9 +113,11 @@ create table Attendance (
 	program int(10) not null references Programs(program_id),
 	present varchar(10) check(present in('Present', 'Excused', 'No Show')),
 	week int(10) not null references Programming_Weeks(week_id),
-	note varchar(50), 
+	note varchar(100), 
 	shift_day varchar(10) not null,
-	shift_time varchar(10) not null
+	shift_time varchar(10) not null,
+	alternate_number varchar(10),
+	gave_panel_tour varchar(3) check(gave_panel_tour in('Yes', 'No'))
 );
 
 create table Audit (
@@ -127,3 +129,5 @@ create table Audit (
 	updated datetime not null,
 	updated_by varchar(30) not null references Users(email)
 );
+
+$(currentEle).html('<select id="newvalue" class="thVal"><option value="MCAS"' + (valueT == "MCAS" ? 'selected = selected' : '') + '>MCAS</option><option value="CSOM"' + (valueT == "CSOM" ? 'selected = selected' : '') + '>CSOM</option><option value="CSON"' + (valueT == "CSON" ? 'selected = selected' : '') + '>CSON</option><option value="LSOE"' + (valueT == "LSOE" ? 'selected = selected' : '') + '>LSOE</option></select>');

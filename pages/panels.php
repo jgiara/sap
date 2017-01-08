@@ -172,7 +172,7 @@ require '../include/helpers/pageProtect.php';
                                         <button class="btn btn-primary btn-xs" id="export-excel-volunteers">Excel</button>
                                         <button class="btn btn-primary btn-xs" id="export-csv-volunteers">CSV</button>
                                         <button class="btn btn-primary btn-xs" id="export-pdf-volunteers">PDF</button>
-                                        <button class="btn btn-primary btn-xs" id="openModalButton" data-toggle="modal" data-target="#toggleVolsColumnsModal">Toggle Columns</button>
+                                        <button class="btn btn-success btn-xs" id="openModalButton" data-toggle="modal" data-target="#toggleVolsColumnsModal">Toggle Columns</button>
                                     </br>
                                         <table class="table table-striped table-bordered table-hover" id="table-volunteers" style="font-size: 13px; width: 100%;">
                                             <thead>
@@ -194,6 +194,7 @@ require '../include/helpers/pageProtect.php';
                                                     <th>Credit</th>
                                                     <th>Comments</th>
                                                     <th>Eagle ID</th>
+                                                    <th>Member ID</th>
                                                 </tr>
                                                 <tr>
                                                     <td>First Name</td>
@@ -213,6 +214,7 @@ require '../include/helpers/pageProtect.php';
                                                     <td>Credit</td>
                                                     <td>Comments</td>
                                                     <td>Eagle ID</td>
+                                                    <td>Member ID</td>
                                                 </tr>
                                             </thead>
                                             
@@ -226,15 +228,27 @@ require '../include/helpers/pageProtect.php';
                                         <button class="btn btn-primary btn-xs" id="export-excel-attendance">Excel</button>
                                         <button class="btn btn-primary btn-xs" id="export-csv-attendance">CSV</button>
                                         <button class="btn btn-primary btn-xs" id="export-pdf-attendance">PDF</button>
+                                        <button class="btn btn-success btn-xs" id="openModalButton2" data-toggle="modal" data-target="#toggleAttnColumnsModal">Toggle Columns</button>
                                     </br>
                                         <table class="table table-striped table-bordered table-hover" id="table-attendance" style="font-size: 13px; width: 100%;">
                                             <thead>
                                                 <tr>
                                                     <th>First Name</th>
                                                     <th>Last Name</th>
+                                                    <th>Email</th>
+                                                    <th>Class</th>
+                                                    <th>School</th>
+                                                    <th>Major</th>
+                                                    <th>Minor</th>
+                                                    <th>Hometown</th>
+                                                    <th>State</th>
+                                                    <th>AHANA</th>
+                                                    <th>Transfer</th>
                                                     <th>Shift Day</th>
                                                     <th>Shift Time</th>
+                                                    <th>Alternate</th>
                                                     <th>Present</th>
+                                                    <th>Gave Panel</th>
                                                     <th>Notes</th>
                                                     <th>Eagle Id</th>
                                                     <th>Attendance Id</th>
@@ -242,9 +256,20 @@ require '../include/helpers/pageProtect.php';
                                                 <tr>
                                                     <td>First Name</td>
                                                     <td>Last Name</td>
+                                                    <td>Email</td>
+                                                    <td>Class</td>
+                                                    <td>School</td>
+                                                    <td>Major</td>
+                                                    <td>Minor</td>
+                                                    <td>Hometown</td>
+                                                    <td>State</td>
+                                                    <td>AHANA</td>
+                                                    <td>Transfer</td>
                                                     <td>Shift Day</td>
                                                     <td>Shift Time</td>
+                                                    <td>Alternate</td>
                                                     <td>Present</td>
+                                                    <td>Gave Panel</td>
                                                     <td>Notes</td>
                                                     <td>Eagle Id</td>
                                                     <td>Attendance Id</td>
@@ -310,6 +335,59 @@ require '../include/helpers/pageProtect.php';
                                 <option value="14">Credit</option>
                                 <option value="15">Comments</option>
                                 <option value="16">Eagle ID</option>
+                                <option value="17">Member ID</option>
+                            </select>
+                        </td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="toggleAttnColumnsModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Toggle Columns</h4>
+                </div>
+                <div class="modal-body">
+                    <table style='margin-left:150px;'>
+                        <tr>
+                            <td>
+                                <b>Displayed:</b><br/>
+                               <select multiple="multiple" size='7' id='attnlstBox1'>
+                                  <option value="0">First Name</option>
+                                  <option value="1">Last Name</option>
+                                  <option value="11">Shift Day</option>
+                                  <option value="12">Shift Time</option>
+                                  <option value="13">Alternate</option>
+                                  <option value="14">Present</option>
+                                  <option value="15">Gave Panel</option>
+                                  <option value="16">Notes</option> 
+                            </select>
+                        </td>
+                        <td style='text-align:center;vertical-align:middle;'>
+                            <button class="btn btn-primary btn-xs" id='btnRightAttn' value='right'>></button>
+                            <br/><button class="btn btn-primary btn-xs" style='margin:5px;' id='btnLeftAttn' value='left'><</button> 
+                        </td>
+                        <td>
+                            <b>Not Displayed: </b><br/>
+                            <select multiple="multiple" size='7' id='attnlstBox2'> 
+                                <option value="2">Email</option>
+                                <option value="3">Class</option>
+                                <option value="4">School</option>
+                                <option value="5">Major</option>
+                                <option value="6">Minor</option>
+                                <option value="7">Hometown</option>
+                                <option value="8">State</option>
+                                <option value="9">AHANA</option>
+                                <option value="10">Transfer</option>
+                                <option value="17">Eagle ID</option>
+                                <option value="18">Attendance ID</option>
                             </select>
                         </td>
                     </tr>
@@ -378,11 +456,11 @@ require '../include/helpers/pageProtect.php';
             orderCellsTop: true,
             columnDefs: [
             {
-                targets: [2,5,6,7,8,9,10,14,15,16],
+                targets: [2,5,6,7,8,9,10,14,15,16, 17],
                 visible: false,
             },
             {
-                targets: [4],
+                targets: [11],
                 render: function(data, type, row) {
                     if(type === 'sort') {
                         switch(data) {
@@ -467,13 +545,13 @@ require '../include/helpers/pageProtect.php';
             orderCellsTop: true,
             columnDefs: [
             {
-                targets: [6,7],
+                targets: [2,3,4,5,6,7,8,9,10,17,18],
                 visible: false,
                 orderable: false
                 
             },
             {
-                targets: [2],
+                targets: [12],
                 render: function(data, type, row) {
                     if(type === 'sort') {
                         switch(data) {
@@ -490,7 +568,7 @@ require '../include/helpers/pageProtect.php';
                     return data;
                 }
             }],
-            order: [[2, "asc"], [3, "asc"], [1, "asc"]],
+            order: [[11, "asc"], [12, "asc"], [1, "asc"]],
             paging: false
         });
         var w;
@@ -515,6 +593,44 @@ require '../include/helpers/pageProtect.php';
                 .draw();
             } );
         } );
+
+        $('#btnRightAttn').on("click", function() {
+            var selectedOpts = $('#attnlstBox1 option:selected');
+            if (selectedOpts.length == 0) {
+            }
+            else {
+                for(var i=0; i < selectedOpts.length; i++) {
+                    toggleColumns(tableAttn, selectedOpts[i].value);
+                }
+                $('#attnlstBox2').append($(selectedOpts).clone());
+                $(selectedOpts).remove();
+                var my_options = $("#attnlstBox2 option");
+
+                my_options.sort(function(a,b) {
+                    return a.value - b.value;
+                });
+                $("#attnlstBox2").empty().append(my_options);
+            }
+        });
+
+        $('#btnLeftAttn').on("click", function() {
+            var selectedOpts = $('#attnlstBox2 option:selected');
+            if (selectedOpts.length == 0) {
+            }
+            else {
+                for(var i=0; i < selectedOpts.length; i++) {
+                    toggleColumns(tableAttn, selectedOpts[i].value);
+                }
+                $('#attnlstBox1').append($(selectedOpts).clone());
+                $(selectedOpts).remove();
+                var my_options = $("#attnlstBox1 option");
+
+                my_options.sort(function(a,b) {
+                    return a.value - b.value;
+                });
+                $("#attnlstBox1").empty().append(my_options);
+            }
+        });
 
 
         $('#semester-submit').on("click", function() {
@@ -554,37 +670,79 @@ require '../include/helpers/pageProtect.php';
             var valueT = $(this).html();
             var row = tableVols.cell($(this)).index().row;
             var column = tableVols.cell($(this)).index().column;
-            if(column != 4 && column != 5 && column != 6) { //can't update User table
+            var alterable = [11,12,13,14,15];
+            var selectable = [11,14]
+            if(alterable.indexOf(column) == -1) { //can't update User table
                 return;
             }
             var data = tableVols.row(row).data();
-            var updateField = ['first_name', 'last_name', 'class', 'school', 'shift_day', 'shift_time', 'requirements_status'];
+            var updateField = ['first_name','last_name','email','class','school','major','minor','hometown','state_country','ahana','transfer','shift_day','shift_time','requirements_status','credit_status','comments','eagle_id', 'program_id'];
             setTimeout(function() {
-            $(currentEle).html('<input id="newvalue" class="thVal" type="text" value="' + valueT + '" />');
-            $(".thVal").focus();
-            document.getElementById("newvalue").value = document.getElementById("newvalue").value;
-            $(".thVal").keyup(function (event) {
-            if (event.keyCode == 13 && verifyData(updateField[column], document.getElementById("newvalue").value.trim())) {
-               
-                data[column] =  document.getElementById("newvalue").value.trim();
-                tableVols.row(row).remove();
-                inLineUpdatePostData(function() {
-                    tableVols.row.add([
-                        data[0],
-                        data[1],
-                        data[2],
-                        data[3],
-                        data[4],
-                        data[5],
-                        data[6],
-                        data[7]
-                    ]).draw()
-                }, data[7], updateField[column], 'Program_Members', data[column], 'user');
-
-                
-            }
-        });
-        },150);
+                if(column == 11) {
+                    $(currentEle).html('<select id="newvalue" class="thVal">' +
+                                            '<option value="Sunday"' + (valueT == "Sunday" ? 'selected = selected' : '') + '>Sunday</option>' +
+                                            '<option value="Monday"' + (valueT == "Monday" ? 'selected = selected' : '') + '>Monday</option>' +
+                                            '<option value="Tuesday"' + (valueT == "Tuesday" ? 'selected = selected' : '') + '>Tuesday</option>' +
+                                            '<option value="Wednesday"' + (valueT == "Wednesday" ? 'selected = selected' : '') + '>Wednesday</option>' +
+                                            '<option value="Thursday"' + (valueT == "Thursday" ? 'selected = selected' : '') + '>Thursday</option>' +
+                                            '<option value="Friday"' + (valueT == "Friday" ? 'selected = selected' : '') + '>Friday</option>' +
+                                            '<option value="Saturday"' + (valueT == "Saturday" ? 'selected = selected' : '') + '>Saturday</option>' +
+                                        '</select>');
+                }
+                else if(column == 14) {
+                    $(currentEle).html('<select id="newvalue" class="thVal">' +
+                                            '<option value="Pending"' + (valueT == "Pending" ? 'selected = selected' : '') + '>Pending</option>' +
+                                            '<option value="Complete"' + (valueT == "Complete" ? 'selected = selected' : '') + '>Complete</option>' +
+                                            '<option value="Incomplete"' + (valueT == "Incomplete" ? 'selected = selected' : '') + '>Incomplete</option>' +
+                                        '</select>');
+                }
+                else {
+                    $(currentEle).html('<input id="newvalue" class="thVal" type="text" value="' + valueT + '" />');
+                }
+                $(".thVal").focus();
+                if(selectable.indexOf(column) == -1) {
+                    document.getElementById("newvalue").value = document.getElementById("newvalue").value;
+                    $(".thVal").focus();
+                }
+                $(".thVal").keyup(function (event) {
+                    if (event.keyCode == 13) {
+                        if(selectable.indexOf(column) == -1) {
+                            if(verifyData(updateField[column], document.getElementById("newvalue").value.trim())) {
+                                data[column] =  document.getElementById("newvalue").value.trim();
+                            }
+                            else {
+                                return;
+                            }
+                        }
+                        else {
+                            data[column] =  $('#newvalue option:selected').val().trim();
+                        }     
+                        tableVols.row(row).remove();
+                        inLineUpdatePostData(function() {
+                            tableVols.row.add([
+                                data[0],
+                                data[1],
+                                data[2],
+                                data[3],
+                                data[4],
+                                data[5],
+                                data[6],
+                                data[7],
+                                data[8],
+                                data[9],
+                                data[10],
+                                data[11],
+                                data[12],
+                                data[13],
+                                data[14],
+                                data[15],
+                                data[16],
+                                data[17]
+                            ]).draw()
+                        }, data[17], updateField[column], 'Program_Members', data[column], 'member_id');
+                    }
+                });
+            },150);
             $('tbody td').not(currentEle).on('click', function() {
 
                 $(currentEle).html(valueT);

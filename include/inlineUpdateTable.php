@@ -1,6 +1,6 @@
 <?php
 
-		$eagleid = $_POST['id'];
+		$id = $_POST['id'];
 		$field = $_POST['field'];
 		$table = $_POST['table'];
 		$newValue = $_POST['newValue'];
@@ -9,7 +9,7 @@
 
 		$dbc = @mysqli_connect("localhost", "root", "root", "SAP")
 	       or die("Could not open db SAP, " . mysqli_connect_error());
-		$query = "Update $table set $field = '$newValue' where $whereField = '$eagleid'";				
+		$query = "Update $table set $field = '$newValue' where $whereField = '$id'";				
 		
 		
 		if(mysqli_query($dbc, $query)) {
