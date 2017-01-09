@@ -122,9 +122,9 @@ function toggleColumns(table, index) {
 function verifyData(field, value) {
     switch(field) {
         case 'shift_time': {
-            var patt = /\b[1-9][0-2]?:[0-5][0-9] AM|\b[1-9][0-2]?:[0-5][0-9] PM/;
+            var patt = /\b[1-9][0-2]?:[0-5][0-9] AM\b|\b[1-9][0-2]?:[0-5][0-9] PM\b/;
             if(!patt.test(value)) {
-                alert("Please enter a valid time in the correct format\ni.e. 10:30 AM\n" + value);
+                alert("Please enter a valid time in the correct format\ni.e. 10:30 AM");
                 return false;
             }
             else {
