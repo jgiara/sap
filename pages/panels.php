@@ -173,7 +173,8 @@ require '../include/helpers/pageProtect.php';
                                         <button class="btn btn-primary btn-xs" id="export-csv-volunteers">CSV</button>
                                         <button class="btn btn-primary btn-xs" id="export-pdf-volunteers">PDF</button>
                                         <button class="btn btn-success btn-xs" id="openModalButton" data-toggle="modal" data-target="#toggleVolsColumnsModal">Toggle Columns</button>
-                                        <button class="btn btn-warning btn-xs" id="add-new-member">Add New Member</button>
+                                        <button class="btn btn-warning btn-xs" id="edit-members-modal-button">Edit Members</button>
+                                        <button class="btn btn-danger btn-xs" id="new-members-modal-button" data-toggle="modal" data-target="#newMembersModal">New Members</button>
                                     </br>
                                         <table class="table table-striped table-bordered table-hover" id="table-volunteers" style="font-size: 13px; width: 100%;">
                                             <thead>
@@ -229,10 +230,9 @@ require '../include/helpers/pageProtect.php';
                                         <button class="btn btn-primary btn-xs" id="export-excel-attendance">Excel</button>
                                         <button class="btn btn-primary btn-xs" id="export-csv-attendance">CSV</button>
                                         <button class="btn btn-primary btn-xs" id="export-pdf-attendance">PDF</button>
-                                        <button class="btn btn-success btn-xs" id="openModalButton2" data-toggle="modal" data-target="#toggleAttnColumnsModal">Toggle Columns</button>
-                                        <button class="btn btn-warning btn-xs" id="add-new-members">Add New Members</button>
-                                        <button class="btn btn-danger btn-xs" id="create-attendance">Create Attendance Sheet</button>
-                                        <button class="btn btn-danger btn-xs" id="create-new-attendance">Bulk Data Update</button>
+                                        <button class="btn btn-success btn-xs" id="openModalButton" data-toggle="modal" data-target="#toggleAttnColumnsModal">Toggle Columns</button>
+                                        <button class="btn btn-warning btn-xs" id="edit-shifts-modal-button">Edit Shifts</button>
+                                        <button class="btn btn-danger btn-xs" id="new-attendance-modal-button">New Attendance Sheet</button>
                                     </br>
                                         <table class="table table-striped table-bordered table-hover" id="table-attendance" style="font-size: 13px; width: 100%;">
                                             <thead>
@@ -399,6 +399,77 @@ require '../include/helpers/pageProtect.php';
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="newMembersModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add New Members</h4>
+                </div>
+                <div class="modal-body">
+                    <h5>Members must already be a part of this database in order to add them to this program</h5>
+                    File upload or manual entry?
+                    <button class="btn btn-primary btn-xs" id="fileMethodButton">File Upload</button>
+                    <button class="btn btn-primary btn-xs" id="manualMethodButton">Manual Entry</button>
+                    <div id="fileMethod">
+                        <form method="post" id="addMembersForm" name="addMembersForm" enctype="multipart/form-data" action="../include/insertProgramMembersFile.php">
+                            <div class="form-group">
+                                <label for="program-form-members-file">Program:</label>
+                                <input type="text" name="program-form-members-file" class="form-control" id="program-form-members-file" value="Panels" readonly required>
+                            </div>   
+                            <div class="form-group">
+                                <label for="semester-form-members-file">Semester:</label>
+                                <input type="text" name="semester-form-members-file" class="form-control" id="semester-form-members-file" readonly required>
+                            </div>    
+                            <div class="form-group">
+                                <label for="year-form-members-file">Year:</label>
+                                <input type="text" name="year-form-members-file" class="form-control" id="year-form-members-file" readonly required>
+                            </div>    
+                            <div class="form-group">
+                                <strong>Upload file (only .csv):</strong>
+                                <input type="file" name="file-form" id="file-form" accept=".csv">
+                                </br><Strong>Note: </strong>File must have the following column format with the header included:
+                                </br>Email - Shift Day - Shift Time (XX:XX AM/PM; i.e. "10:00 AM" or "2:30 PM")
+                            </div>
+                            <div>
+                                <p>&nbsp</p>
+                            </div> 
+                            <input type="submit" name="addMembersFormSubmitFile" id="addMembersFormSubmitFile" value="Add Members" class="btn btn-danger"></input>
+                        </form>  
+                    </div>
+                    <div id="manualMethod">
+                        <form method="POST" id="addMembersForm" name="addMembersForm" enctype="multipart/form-data" action="../include/insertProgramMembers.php">
+                            <div class="form-group">
+                                <label for="program-form-members">Program:</label>
+                                <input type="text" name="program-form-members" class="form-control" id="program-form-members" value="Panels" readonly required>
+                            </div>   
+                            <div class="form-group">
+                                <label for="semester-form-members">Semester:</label>
+                                <input type="text" name="semester-form-members" class="form-control" id="semester-form-members" readonly required>
+                            </div>    
+                            <div class="form-group">
+                                <label for="year-form-members">Year:</label>
+                                <input type="text" name="year-form-members" class="form-control" id="year-form-members" readonly required>
+                            </div>    
+                            <div class="form-group">
+                                <label for="test-form">Year:</label>
+                                <input type="text" name="test-form" class="form-control" id="test-form">
+                            </div>     
+                             <div>
+                                <p>&nbsp</p>
+                             </div> 
+                            <input type="submit" name="addMembersFormSubmit" id="addMembersFormSubmit" value="Add Members" class="btn btn-danger"></input>
+                        </form>
+                    </div>
+                </div>
+                </br>
+                <div class="modal-footer">
+                    <button type="button" id="closeNewMembers" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -635,6 +706,11 @@ require '../include/helpers/pageProtect.php';
                 $("#attnlstBox1").empty().append(my_options);
             }
         });
+
+        $("#fileMethod").hide();
+        $("#manualMethod").hide();
+        $("#file-form").prop('required', true);
+        $("#test-form").prop('required', true);
 
 
         $('#semester-submit').on("click", function() {
@@ -876,11 +952,38 @@ require '../include/helpers/pageProtect.php';
                 $(currentEle).html(valueT);
             });  
         });
+
         $("#attendance-tab").on("click", function() {
             showSelects();
         });
+
         $("#volunteers-tab").on("click", function() {
             hideSelects();
+        });
+
+        $("#new-members-modal-button").on("click", function() {
+            var s = document.getElementById("table-semester");
+            var selectedSemester = s.options[s.selectedIndex].value;
+            var y = document.getElementById("table-year");
+            var selectedYear = y.options[y.selectedIndex].value;
+            document.getElementById("year-form-members").value = selectedYear;
+            document.getElementById("semester-form-members").value = selectedSemester;
+            document.getElementById("year-form-members-file").value = selectedYear;
+            document.getElementById("semester-form-members-file").value = selectedSemester;
+        });
+
+        $("#fileMethodButton").on("click", function() {
+            $("#fileMethod").show();
+            $("#manualMethod").hide();
+            $("#file-form").prop('required', true);
+            $("#test-form").prop('required', false);
+        });
+
+        $("#manualMethodButton").on("click", function() {
+            $("#manualMethod").show();
+            $("#fileMethod").hide();
+            $("#test-form").prop('required', true);
+            $("#file-form").prop('required', false);
         });
     });
     </script>

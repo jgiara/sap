@@ -75,7 +75,6 @@ create table Program_Members (
 	member_id int(10) not null auto_increment primary key,
 	user varchar(30) not null references Users(email),
 	program int(10) not null references Programs(program_id),
-	title varchar(20),
 	shift_day varchar(10), 
 	shift_time varchar(10),
 	credit_status varchar(10) not null check(credit_staus in('Complete', 'Pending', 'Incomplete')),
