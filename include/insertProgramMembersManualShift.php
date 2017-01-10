@@ -13,14 +13,5 @@
 		$fns->insertProgramMemberShift($email, $program, $semester, $year, $day, $time);
 	}
 	
-
-	switch($program) {
-		case 'Panels' : { 
-			echo "<script type='text/javascript'>window.location.assign('../pages/panels.php');</script>";
-		} break;
-		default :  {
-			echo "<script type='text/javascript'>window.location.assign('../pages/dashboard.php');</script>";
-		}
-	}
 	$db = null;
 ?>

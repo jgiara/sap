@@ -173,6 +173,20 @@ function insertProgramMembersManualShift(emails, program, semester, year, day, t
             });
 }
 
+function editProgramMembers(emails, programName, semester, year, field, newValue) {
+    $.post("../include/editProgramMembers.php",
+            {
+                emails: emails,
+                program: programName,
+                semester: semester, 
+                year: year,
+                field: field,
+                newValue: newValue
+            }, function() {
+                return;
+            });
+}
+
 function verifyData(field, value) {
     switch(field) {
         case 'shift_time': {

@@ -1353,6 +1353,72 @@ require '../include/helpers/pageProtect.php';
             $("#editConfirmation").show();
             document.getElementById("#editChoice").value = "delete";
         });
+
+        $("#editMembersSubmit").on("click", function() {
+            var edits = document.getElementById("editChoice").value;
+            var program = document.getElementById("program-edit-members").value;
+            var semester = document.getElementById("semester-edit-members").value;
+            var year = document.getElementById("year-edit-members").value;
+            var emails = [];
+            var selectedOpts = $('#toeditmemberlstBox option');
+            if (selectedOpts.length == 0) {
+                alert("You must choose at least one person to add");
+                return ;
+            }
+            for(var i=0; i < selectedOpts.length; i++) {
+                emails[i] = selectedOpts[i].value;
+            }
+            var field;
+            var newValue;
+            switch(edits) {
+                case "day" : {
+                    newValue = document.getElementById("day-edit-members").value;
+                    field = "shift_day";
+                } break;
+
+                case "time" : {
+                    newValue = document.getElementById("time-edit-members").value;
+                    field = "shift_time";
+                    if(!(verifyData(field, newValue))) {
+                        return;
+                    }
+                } break;
+
+                case "credit" : {
+                    newValue = document.getElementById("credit-edit-members").value;
+                    field = "credit_status";
+                } break;
+
+                case "requirements" : {
+                    if (document.getElementById('confirmation-no-edit-members').checked) {
+                        return ;
+                    }
+                    newValue = document.getElementById("requirements-edit-members").value;
+                    field = "requirements_status";
+                } break;
+
+                case "comments" : {
+                    if (document.getElementById('confirmation-no-edit-members').checked) {
+                        return ;
+                    }
+                    newValue = document.getElementById("comments-edit-members").value;
+                    field = "comments";
+                } break;
+
+                case "delete" : {
+                    if (document.getElementById('confirmation-no-edit-members').checked) {
+                        return ;
+                    }
+                    field = "delete"
+                } break;
+
+                default : {
+                    return ;
+                }
+
+            }
+            editProgramMembers(emails, programName, semester, year, field, newValue);
+        });
     });
     </script>
 
