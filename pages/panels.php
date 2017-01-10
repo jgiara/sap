@@ -578,7 +578,7 @@ require '../include/helpers/pageProtect.php';
                                  <div class="form-group">
                                     <label for="credit-edit-members">Credit Status:</label>
                                     <select name="credit-edit-members" class="form-control" id="credit-edit-members" required>
-                                        <option disabled selected value> -- Select an Option -- </option>
+                                        <option disabled selected value="none"> -- Select an Option -- </option>
                                         <option value="Pending">Pending</option>
                                         <option value="Complete">Complete</option>
                                         <option value="Incomplete">Incomplete</option>
@@ -613,7 +613,7 @@ require '../include/helpers/pageProtect.php';
                                 <label for="confirmation-no-edit-members">No</label>
                             </div>
                         </br>
-                            <input type="hidden" id="editChoice">
+                            <input type="hidden" id="editChoice" value="">
                             <input type="button" name="editMembersSubmit" id="editMembersSubmit" value="Make Changes" class="btn btn-danger"></input>
                 </div>
                 </br>
@@ -1195,6 +1195,7 @@ require '../include/helpers/pageProtect.php';
                 var nonmembers = a;
                 var userSelect = document.getElementById("userlstBox");
                 $("#userlstBox").empty();
+                $("#memberlstBox").empty();
                 for(var i = 0; i < nonmembers[0].length; i++) {
                     var opt = document.createElement('option');
                     opt.value = nonmembers[0][i];
@@ -1247,6 +1248,7 @@ require '../include/helpers/pageProtect.php';
                 var members = b;
                 var memberSelect = document.getElementById("editmemberlstBox");
                 $("#editmemberlstBox").empty();
+                $("#toeditmemberlstBox").empty();
                 for(var i = 0; i < members[0].length; i++) {
                     var opt = document.createElement('option');
                     opt.value = members[0][i];
@@ -1296,7 +1298,7 @@ require '../include/helpers/pageProtect.php';
             $("#editComments").hide();
             $("#editDelete").hide();
             $("#editConfirmation").hide();
-            document.getElementById("#editChoice").value = "day";
+            document.getElementById("editChoice").value = "day";
         });
 
         $("#editTimeButton").on("click", function() {
@@ -1307,7 +1309,7 @@ require '../include/helpers/pageProtect.php';
             $("#editComments").hide();
             $("#editDelete").hide();
             $("#editConfirmation").hide();
-            document.getElementById("#editChoice").value = "time";
+            document.getElementById("editChoice").value = "time";
         });
 
         $("#editCreditButton").on("click", function() {
@@ -1318,7 +1320,7 @@ require '../include/helpers/pageProtect.php';
             $("#editComments").hide();
             $("#editDelete").hide();
             $("#editConfirmation").hide();
-            document.getElementById("#editChoice").value = "credit";
+            document.getElementById("editChoice").value = "credit";
         });
 
         $("#editRequirementsButton").on("click", function() {
@@ -1329,7 +1331,7 @@ require '../include/helpers/pageProtect.php';
             $("#editComments").hide();
             $("#editDelete").hide();
             $("#editConfirmation").show();
-            document.getElementById("#editChoice").value = "requirements";
+            document.getElementById("editChoice").value = "requirements";
         });
 
         $("#editCommentsButton").on("click", function() {
@@ -1340,7 +1342,7 @@ require '../include/helpers/pageProtect.php';
             $("#editComments").show();
             $("#editDelete").hide();
             $("#editConfirmation").show();
-            document.getElementById("#editChoice").value = "comments";
+            document.getElementById("editChoice").value = "comments";
         });
 
         $("#editDeleteButton").on("click", function() {
@@ -1351,7 +1353,7 @@ require '../include/helpers/pageProtect.php';
             $("#editComments").hide();
             $("#editDelete").show();
             $("#editConfirmation").show();
-            document.getElementById("#editChoice").value = "delete";
+            document.getElementById("editChoice").value = "delete";
         });
 
         $("#editMembersSubmit").on("click", function() {
@@ -1386,6 +1388,9 @@ require '../include/helpers/pageProtect.php';
 
                 case "credit" : {
                     newValue = document.getElementById("credit-edit-members").value;
+                    if(newValue == "none") {
+                        return ;
+                    }
                     field = "credit_status";
                 } break;
 
@@ -1418,6 +1423,7 @@ require '../include/helpers/pageProtect.php';
 
             }
             editProgramMembers(emails, programName, semester, year, field, newValue);
+            location.reload();
         });
     });
     </script>
