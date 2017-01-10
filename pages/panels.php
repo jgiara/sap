@@ -417,7 +417,7 @@ require '../include/helpers/pageProtect.php';
                     <button class="btn btn-primary btn-xs" id="fileMethodButton">File Upload</button>
                     <button class="btn btn-primary btn-xs" id="manualMethodButton">Manual Entry</button>
                     <div id="fileMethod">
-                        <form method="post" id="addMembersFormFile" name="addMembersFormFile" enctype="multipart/form-data" action="../include/insertProgramMembersFile.php">
+                        <form method="post" id="addMembersFormFile" name="addMembersFormFile" enctype="multipart/form-data" action="../include/insertProgramMembersShiftFile.php">
                             <div class="form-group">
                                 <label for="program-form-members-file">Program:</label>
                                 <input type="text" name="program-form-members-file" class="form-control" id="program-form-members-file" value="Panels" readonly required>
@@ -461,8 +461,6 @@ require '../include/helpers/pageProtect.php';
                                     <td>
                                         <b>SAP Users:</b><br/>
                                         <select multiple="multiple" size='10' id='userlstBoxMain' hidden>
-                                          <option id="sims" value="test@bc.edu">Sims, Zack (test@bc.edu)</option>
-                                          <option id="reardon" value="readonk@bc.edu">Reardon, Kevin (reardonk@bc.edu)</option>
                                         </select>
                                        <select multiple="multiple" size='10' id='userlstBox'>
                                         </select>
@@ -484,9 +482,24 @@ require '../include/helpers/pageProtect.php';
                             </td>
                             </tr>
                             </table>   
-                             <div>
-                                <p>&nbsp</p>
-                             </div> 
+                        </br>
+                             <div class="form-group">
+                                <label for="semester-form-members">Shift Day:</label>
+                                <select name="day-form-members" class="form-control" id="day-form-members" required>
+                                    <option disabled selected value> -- Select a day -- </option>
+                                    <option value="Sunday">Sunday</option>
+                                    <option value="Monday">Monday</option>
+                                    <option value="Tuesday">Tuesday</option>
+                                    <option value="Wednesday">Wednesday</option>
+                                    <option value="Thursday">Thursday</option>
+                                    <option value="Friday">Friday</option>
+                                    <option value="Saturday">Saturday</option>
+                                </select>
+                            </div>    
+                            <div class="form-group">
+                                <label for="semester-form-members">Shift Time: (XX:XX AM/PM; i.e. "10:00 AM" or "2:30 PM")</label>
+                                <input type="text" name="time-form-members" class="form-control" id="time-form-members" required>
+                            </div>    
                             <input type="submit" name="addMembersFormSubmit" id="addMembersFormSubmit" value="Add Members" class="btn btn-danger"></input>
                         </form>
                     </div>
@@ -1043,9 +1056,38 @@ require '../include/helpers/pageProtect.php';
                 });
                 $("#userlstBox").empty().append(my_options);
             }, programName, selectedSemester, selectedYear);
+        });
+
+        $("#addMembersFormManual").on("submit", function(e) {
+            if(verifyData('shift_time', document.getElementById("time-form-members").value)) {
+                var selectedOpts = $('#memberlstBox option');
+                if (selectedOpts.length == 0) {
+                    alert("You must choose at least one person to add");
+                    e.preventDefault();
+                }
+                else {
+                    var emails = [];
+                    for(var i=0; i < selectedOpts.length; i++) {
+                        emails[i] = selectedOpts[i].value;
+                    }
+                    var program = document.getElementById("program-form-members").value;
+                    var semester = document.getElementById("semester-form-members").value;
+                    var year = document.getElementById("year-form-members").value;
+                    var day = document.getElementById("day-form-members").value;
+                    var time = document.getElementById("time-form-members").value;
+                    insertProgramMembersManualShift(emails, program, semester, year, day, time);
+                }
+            }
+            else {
+                e.preventDefault();
+            }
+        });
+
+        $("#").on("click", function() {
             getUsersInProgram(function(b) {
                 var members = b;
                 var memberSelect = document.getElementById("memberlstBox");
+                $("#memberlstBox").empty();
                 for(var i = 0; i < members[0].length; i++) {
                     var opt = document.createElement('option');
                     opt.value = members[0][i];
@@ -1059,8 +1101,6 @@ require '../include/helpers/pageProtect.php';
                 });
                 $("#memberlstBox").empty().append(my_options);
             }, programName, selectedSemester, selectedYear);
-            
-
         });
 
         $("#fileMethodButton").on("click", function() {

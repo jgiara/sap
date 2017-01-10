@@ -44,7 +44,7 @@
 					array_push($errors['time'], $a[0]);
 				}
 				else {
-					$fns->insertProgramMemberFile($email, $program, $semester, $year, $a[1], $a[2]);
+					$fns->insertProgramMemberShift($email, $program, $semester, $year, $a[1], $a[2]);
 				}
 			}
 			fclose($file);
@@ -87,7 +87,7 @@
 			echo "<script type='text/javascript'>window.location.assign('../pages/panels.php');</script>";
 		} break;
 		default :  {
-			echo "<script type='text/javascript'>window.location.assign('../pages/panels.php');</script>";
+			echo "<script type='text/javascript'>window.location.assign('../pages/dashboard.php');</script>";
 		}
 	}
 	$db = null;

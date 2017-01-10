@@ -159,6 +159,20 @@ function getUsersInProgram(callback, programName, selectedSemester, selectedYear
         });
 }
 
+function insertProgramMembersManualShift(emails, program, semester, year, day, time) {
+    $.post("../include/insertProgramMembersManualShift.php",
+            {
+                emails: emails,
+                program: program,
+                semester: semester, 
+                year: year,
+                day: day,
+                time: time
+            }, function() {
+                return;
+            });
+}
+
 function verifyData(field, value) {
     switch(field) {
         case 'shift_time': {

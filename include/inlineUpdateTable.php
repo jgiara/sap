@@ -7,7 +7,6 @@
 	$newValue = $_POST['newValue'];
 	$whereField = $_POST['whereField'];
 
-
 	$items = $fns->inlineUpdate($id, $field, $table, $newValue, $whereField);
 
 	echo json_encode($items);
