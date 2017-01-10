@@ -589,23 +589,27 @@ require '../include/helpers/pageProtect.php';
                                 <div class="form-group">
                                     <label for="requirements-edit-members">Requirements Status:</label>
                                     <input type="text" name="requirements-edit-members" class="form-control" id="requirements-edit-members" required>
+                                </br>
+                                    <strong>Are you sure you want to make these changes? Any previous data for this will be deleted.</strong>
                                 </div>    
                             </div>
                             <div id="editComments">
                                 <div class="form-group">
                                     <label for="comments-edit-members">Comments</label>
                                     <input type="text" name="comments-edit-members" class="form-control" id="comments-edit-members" required>
+                                </br>
+                                    <strong>Are you sure you want to make these changes? Any previous data for this will be deleted.</strong>
                                 </div>    
                             </div>
                             <div id="editDelete">
                                 <div class="form-group">
-                                    Hi
+                                    <strong>Are you sure you want to remove the selected members from this program?</strong>
                                 </div>    
                             </div>
                             <div id="editConfirmation">
                                 <input type="radio" name="confirmation-edit-members" value="yes" id="confirmation-yes-edit-members">
                                 <label for="confirmation-yes-edit-members">Yes</label>
-                                <input type="radio" name="confirmation-edit-members" value="no" selected = "selected" id="confirmation-no-edit-members">
+                                <input type="radio" name="confirmation-edit-members" value="no" checked = "checked" id="confirmation-no-edit-members">
                                 <label for="confirmation-no-edit-members">No</label>
                             </div>
                         </br>
