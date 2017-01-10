@@ -12,7 +12,7 @@
 	$target_file = $target_dir . basename($_FILES["file-form"]["name"]);
 	$uploadOk = 1;
 	$fileType = pathinfo($target_file,PATHINFO_EXTENSION);
-	$errors = ['email' => [], 'day' => [], 'time' => []];
+	$errors = ['email' => [], 'day' => [], 'time' => [], 'exist' => []];
 	$timePattern = '/\b[1-9][0-2]?:[0-5][0-9] AM\b|\b[1-9][0-2]?:[0-5][0-9] PM\b/';
 	$days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 	
@@ -30,12 +30,20 @@
 	    	$file = fopen("../../resources/uploads/dataFile.csv","r");
 	    	$headers = fgetcsv($file);
 	    	$emails = $fns->getAllEmails();
+	    	$members = $fns->getUsersInProgram($program, $semester, $year);
+	    	$currentMembers = [];
+	    	foreach($members as $member) {
+	    		array_push($currentMembers, $member[0]);
+	    	}
 			while(!($end = feof($file))) {
 				$a = fgetcsv($file);
 				$email = (string) $a[0];
 				$email = strtolower($email);
 				if(!in_array($email, $emails)) {
 					array_push($errors['email'], $a[0]);
+				}
+				else if(in_array($email, $currentMembers)) {
+					array_push($errors['exist'], $email);
 				}
 				else if(!in_array($a[1], $days)) {
 					array_push($errors['day'], $a[0]);
@@ -54,8 +62,9 @@
 	    }
 	}
 
-	if(sizeof($errors['email']) + sizeof($errors['day']) + sizeof($errors['time']) > 0) {
+	if(sizeof($errors['email']) + sizeof($errors['exist']) + sizeof($errors['day']) + sizeof($errors['time']) > 0) {
 		$strEmail = '';
+		$strExist = '';
 		$strDay = '';
 		$strTime = '';
 		if(sizeof($errors['email']) > 0) {
@@ -64,6 +73,13 @@
 	 		}
 	 		$strEmail = '\n' . $strEmail;
 	 		$strEmail = '\nThese users do not exist in the database:' . $strEmail . '\n';
+		}
+		if(sizeof($errors['exist']) > 0) {
+			foreach($errors['exist'] as $er) {
+	 			$strExist = $strExist . $er . '\n';
+	 		}
+	 		$strExist = '\n' . $strExist;
+	 		$strExist = '\nThese users are already program members:' . $strExist . '\n';
 		}
 		if(sizeof($errors['day']) > 0) {
 			foreach($errors['day'] as $er) {
@@ -79,7 +95,7 @@
 	 		$strTime = '\n' . $strTime;
 	 		$strTime = '\nIncorrect time format:' . $strTime;
 		}
-		echo "<script type='text/javascript'>alert('The following were not added for the following reasons:" . '\n' . "$strEmail $strDay $strTime');</script>";
+		echo "<script type='text/javascript'>alert('The following were not added for the following reasons:" . '\n' . "$strEmail $strExist $strDay $strTime');</script>";
 	}
 
 	switch($program) {
