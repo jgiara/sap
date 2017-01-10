@@ -602,6 +602,13 @@ require '../include/helpers/pageProtect.php';
                                     Hi
                                 </div>    
                             </div>
+                            <div id="editConfirmation">
+                                <input type="radio" name="confirmation-edit-members" value="yes" id="confirmation-yes-edit-members">
+                                <label for="confirmation-yes-edit-members">Yes</label>
+                                <input type="radio" name="confirmation-edit-members" value="no" selected = "selected" id="confirmation-no-edit-members">
+                                <label for="confirmation-no-edit-members">No</label>
+                            </div>
+                        </br>
                             <input type="hidden" id="editChoice">
                             <input type="button" name="editMembersSubmit" id="editMembersSubmit" value="Make Changes" class="btn btn-danger"></input>
                 </div>
@@ -918,6 +925,7 @@ require '../include/helpers/pageProtect.php';
         $("#editRequirements").hide();
         $("#editComments").hide();
         $("#editDelete").hide();
+        $("#editConfirmation").hide();
 
 
         $('#semester-submit').on("click", function() {
@@ -1283,6 +1291,7 @@ require '../include/helpers/pageProtect.php';
             $("#editRequirements").hide();
             $("#editComments").hide();
             $("#editDelete").hide();
+            $("#editConfirmation").hide();
             document.getElementById("#editChoice").value = "day";
         });
 
@@ -1293,6 +1302,7 @@ require '../include/helpers/pageProtect.php';
             $("#editRequirements").hide();
             $("#editComments").hide();
             $("#editDelete").hide();
+            $("#editConfirmation").hide();
             document.getElementById("#editChoice").value = "time";
         });
 
@@ -1303,6 +1313,7 @@ require '../include/helpers/pageProtect.php';
             $("#editRequirements").hide();
             $("#editComments").hide();
             $("#editDelete").hide();
+            $("#editConfirmation").hide();
             document.getElementById("#editChoice").value = "credit";
         });
 
@@ -1313,6 +1324,7 @@ require '../include/helpers/pageProtect.php';
             $("#editRequirements").show();
             $("#editComments").hide();
             $("#editDelete").hide();
+            $("#editConfirmation").show();
             document.getElementById("#editChoice").value = "requirements";
         });
 
@@ -1323,6 +1335,7 @@ require '../include/helpers/pageProtect.php';
             $("#editRequirements").hide();
             $("#editComments").show();
             $("#editDelete").hide();
+            $("#editConfirmation").show();
             document.getElementById("#editChoice").value = "comments";
         });
 
@@ -1333,6 +1346,7 @@ require '../include/helpers/pageProtect.php';
             $("#editRequirements").hide();
             $("#editComments").hide();
             $("#editDelete").show();
+            $("#editConfirmation").show();
             document.getElementById("#editChoice").value = "delete";
         });
     });
