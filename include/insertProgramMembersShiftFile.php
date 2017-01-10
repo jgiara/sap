@@ -32,6 +32,8 @@
 	    	$emails = $fns->getAllEmails();
 	    	$members = $fns->getUsersInProgram($program, $semester, $year);
 	    	$currentMembers = [];
+	    	$added = [];
+	    	$index = 0;
 	    	foreach($members as $member) {
 	    		array_push($currentMembers, $member[0]);
 	    	}
@@ -42,7 +44,7 @@
 				if(!in_array($email, $emails)) {
 					array_push($errors['email'], $a[0]);
 				}
-				else if(in_array($email, $currentMembers)) {
+				else if(in_array($email, $currentMembers) || in_array($email, $added)) {
 					array_push($errors['exist'], $email);
 				}
 				else if(!in_array($a[1], $days)) {
@@ -53,6 +55,8 @@
 				}
 				else {
 					$fns->insertProgramMemberShift($email, $program, $semester, $year, $a[1], $a[2]);
+					$added[$index] = $email;
+					$index++;
 				}
 			}
 			fclose($file);

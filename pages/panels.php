@@ -1228,7 +1228,10 @@ require '../include/helpers/pageProtect.php';
                     var year = document.getElementById("year-form-members").value;
                     var day = document.getElementById("day-form-members").value;
                     var time = document.getElementById("time-form-members").value;
-                    insertProgramMembersManualShift(emails, program, semester, year, day, time);
+                    insertProgramMembersManualShift(function() {
+                        location.reload();
+                    }, emails, program, semester, year, day, time);
+                    e.preventDefault();
                 }
             }
             else {
@@ -1422,8 +1425,9 @@ require '../include/helpers/pageProtect.php';
                 }
 
             }
-            editProgramMembers(emails, programName, semester, year, field, newValue);
-            location.reload();
+            editProgramMembers(function() {
+                location.reload();
+            }, emails, programName, semester, year, field, newValue);
         });
     });
     </script>

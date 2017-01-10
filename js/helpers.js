@@ -159,7 +159,7 @@ function getUsersInProgram(callback, programName, selectedSemester, selectedYear
         });
 }
 
-function insertProgramMembersManualShift(emails, program, semester, year, day, time) {
+function insertProgramMembersManualShift(callback, emails, program, semester, year, day, time) {
     $.post("../include/insertProgramMembersManualShift.php",
             {
                 emails: emails,
@@ -169,11 +169,11 @@ function insertProgramMembersManualShift(emails, program, semester, year, day, t
                 day: day,
                 time: time
             }, function() {
-                return;
+                callback();
             });
 }
 
-function editProgramMembers(emails, programName, semester, year, field, newValue) {
+function editProgramMembers(callback, emails, programName, semester, year, field, newValue) {
     $.post("../include/editProgramMembers.php",
             {
                 emails: emails,
@@ -183,7 +183,7 @@ function editProgramMembers(emails, programName, semester, year, field, newValue
                 field: field,
                 newValue: newValue
             }, function() {
-                return;
+                callback();
             });
 }
 
