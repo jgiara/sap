@@ -20,6 +20,22 @@ function getVolunteerData(callback, programName, selectedSemester, selectedYear,
           }, 
           function(data) {
             $.each( data, function( i, item ) {
+                var req = item.requirements_status;
+                if(req != null) {
+                    for (var i = 0; i < req.length; i++) {
+                        if(req.charAt(i) == '\n') {
+                            req = req.substr(0, i).concat('<br>', req.substr(i+1));
+                        }
+                    }
+                }
+                var com = item.comments;
+                if(com != null) {
+                    for (var i = 0; i < com.length; i++) {
+                        if(com.charAt(i) == '\n') {
+                            com = com.substr(0, i).concat('<br>', com.substr(i+1));
+                        }
+                    }
+                }
                 tableVols.row.add([
                     "<a id='test' href='./dashboard.php'>"+ item.first_name + "</a>",
                     item.last_name,
@@ -34,9 +50,9 @@ function getVolunteerData(callback, programName, selectedSemester, selectedYear,
                     item.transfer,
                     item.shift_day,
                     item.shift_time,
-                    item.requirements_status,
+                    req,
                     item.credit_status,
-                    item.comments,
+                    com,
                     item.eagle_id,
                     item.member_id
                 ]);

@@ -588,7 +588,7 @@ require '../include/helpers/pageProtect.php';
                             <div id="editRequirements">
                                 <div class="form-group">
                                     <label for="requirements-edit-members">Requirements Status:</label>
-                                    <input type="text" name="requirements-edit-members" class="form-control" id="requirements-edit-members" required>
+                                    <textarea name="requirements-edit-members" class="form-control" id="requirements-edit-members" required></textarea>
                                 </br>
                                     <strong>Are you sure you want to make these changes? Any previous data for this will be deleted.</strong>
                                 </div>    
@@ -596,7 +596,7 @@ require '../include/helpers/pageProtect.php';
                             <div id="editComments">
                                 <div class="form-group">
                                     <label for="comments-edit-members">Comments</label>
-                                    <input type="text" name="comments-edit-members" class="form-control" id="comments-edit-members" required>
+                                    <textarea name="comments-edit-members" class="form-control" id="comments-edit-members" required></textarea>
                                 </br>
                                     <strong>Are you sure you want to make these changes? Any previous data for this will be deleted.</strong>
                                 </div>    
@@ -981,6 +981,7 @@ require '../include/helpers/pageProtect.php';
             var column = tableVols.cell($(this)).index().column;
             var alterable = [11,12,13,14,15];
             var selectable = [11,14];
+            var textAreaCols = [13,15];
             if(alterable.indexOf(column) == -1) { //can't the other columns
                 return;
             }
@@ -1005,6 +1006,10 @@ require '../include/helpers/pageProtect.php';
                                             '<option value="Incomplete"' + (valueT == "Incomplete" ? 'selected = selected' : '') + '>Incomplete</option>' +
                                         '</select>');
                 }
+                else if(textAreaCols.indexOf(column) != -1) {
+                    var valueTT = valueT.replace(/<br>/g, '\n');
+                    $(currentEle).html('<textarea rows="5" id="newvalue" class="thVal">' + valueTT + '</textarea>');
+                }
                 else {
                     $(currentEle).html('<input id="newvalue" class="thVal" type="text" value="' + valueT + '" />');
                 }
@@ -1013,9 +1018,9 @@ require '../include/helpers/pageProtect.php';
                     document.getElementById("newvalue").value = document.getElementById("newvalue").value;
                     $(".thVal").focus();
                 }
-                $(".thVal").keyup(function (event) {
-                    if (event.keyCode == 13) {
-                        if(selectable.indexOf(column) == -1) {
+                $(".thVal").keydown(function (event) {
+                    if (event.keyCode == 13 && !event.shiftKey) {
+                        if(selectable.indexOf(column) == -1 && textAreaCols.indexOf(column) == -1) {
                             if(verifyData(updateField[column], document.getElementById("newvalue").value.trim())) {
                                 data[column] =  document.getElementById("newvalue").value.trim();
                             }
@@ -1023,11 +1028,18 @@ require '../include/helpers/pageProtect.php';
                                 return;
                             }
                         }
+                        else if(textAreaCols.indexOf(column) != -1) {
+                            event.preventDefault();
+                            data[column] =  document.getElementById("newvalue").value.trim();
+                        }
                         else {
                             data[column] =  $('#newvalue option:selected').val().trim();
                         }     
                         tableVols.row(row).remove();
                         inLineUpdatePostData(function() {
+                            if(textAreaCols.indexOf(column) != -1) {
+                                data[column] = document.getElementById("newvalue").value.trim().replace(/\n/g, '<br>');
+                            }
                             tableVols.row.add([
                                 data[0],
                                 data[1],
@@ -1123,7 +1135,7 @@ require '../include/helpers/pageProtect.php';
                     document.getElementById("newvalue").value = document.getElementById("newvalue").value;
                     $(".thVal").focus();
                 }
-                $(".thVal").keyup(function (event) {
+                $(".thVal").keydown(function (event) {
                     if (event.keyCode == 13) {
                         if(selectable.indexOf(column) == -1) {
                             if(verifyData(updateField[column], document.getElementById("newvalue").value.trim())) {
