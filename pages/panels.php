@@ -432,7 +432,7 @@ require '../include/helpers/pageProtect.php';
                             </div>    
                             <div class="form-group">
                                 <strong>Upload file (only .csv):</strong>
-                                <input type="file" name="file-form" id="file-form" accept=".csv">
+                                <input type="file" name="file-form" id="file-form" accept=".csv" required>
                                 </br><Strong>Note: </strong>File must have the following column format with the header included:
                                 </br>Email - Shift Day - Shift Time (XX:XX AM/PM; i.e. "10:00 AM" or "2:30 PM")
                             </div>
@@ -513,7 +513,7 @@ require '../include/helpers/pageProtect.php';
                     <h4 class="modal-title">Edit Members</h4>
                 </div>
                 <div class="modal-body">
-                    <div id="manualMethod">
+                    
                             <div class="form-group">
                                 <label for="program-edit-members">Program:</label>
                                 <input type="text" name="program-edit-members" class="form-control" id="program-edit-members" readonly required>
@@ -545,12 +545,13 @@ require '../include/helpers/pageProtect.php';
                                 </td>
                             </tr>
                             </table>
-                            <strong>What do you wish to do?</strong> </br>
-                            <button class="btn btn-primary btn-xs" id="editDayButton">Edit Shift Day</button>
-                            <button class="btn btn-primary btn-xs" id="editTimeButton">Edit Shift Time</button>
-                            <button class="btn btn-primary btn-xs" id="editCreditButton">Edit Credit</button>
-                            <button class="btn btn-primary btn-xs" id="editRequirementsButton">Edit Requirements Status</button>
-                            <button class="btn btn-primary btn-xs" id="editCommentsButton">Delete Members</button>   
+                            <strong>What do you wish to edit?</strong> </br>
+                            <button class="btn btn-primary btn-xs" id="editDayButton">Shift Day</button>
+                            <button class="btn btn-primary btn-xs" id="editTimeButton">Shift Time</button>
+                            <button class="btn btn-primary btn-xs" id="editCreditButton">Credit</button>
+                            <button class="btn btn-primary btn-xs" id="editRequirementsButton">Requirements Status</button>
+                            <button class="btn btn-primary btn-xs" id="editCommentsButton">Comments</button> 
+                            <button class="btn btn-primary btn-xs" id="editDeleteButton">Delete Members</button>   
                         </br></br>
                             <div id="editDay">
                                  <div class="form-group">
@@ -569,17 +570,44 @@ require '../include/helpers/pageProtect.php';
                             </div>
                             <div id="editTime">
                                 <div class="form-group">
-                                    <label for="semester-time-members">Shift Time: (XX:XX AM/PM; i.e. "10:00 AM" or "2:30 PM")</label>
+                                    <label for="time-edit-members">Shift Time: (XX:XX AM/PM; i.e. "10:00 AM" or "2:30 PM")</label>
                                     <input type="text" name="time-edit-members" class="form-control" id="time-edit-members" required>
                                 </div>    
                             </div>
+                            <div id="editCredit">
+                                 <div class="form-group">
+                                    <label for="credit-edit-members">Credit Status:</label>
+                                    <select name="credit-edit-members" class="form-control" id="credit-edit-members" required>
+                                        <option disabled selected value> -- Select an Option -- </option>
+                                        <option value="Pending">Pending</option>
+                                        <option value="Complete">Complete</option>
+                                        <option value="Incomplete">Incomplete</option>
+                                    </select>
+                                </div>    
+                            </div>
+                            <div id="editRequirements">
+                                <div class="form-group">
+                                    <label for="requirements-edit-members">Requirements Status:</label>
+                                    <input type="text" name="requirements-edit-members" class="form-control" id="requirements-edit-members" required>
+                                </div>    
+                            </div>
+                            <div id="editComments">
+                                <div class="form-group">
+                                    <label for="comments-edit-members">Comments</label>
+                                    <input type="text" name="comments-edit-members" class="form-control" id="comments-edit-members" required>
+                                </div>    
+                            </div>
+                            <div id="editDelete">
+                                <div class="form-group">
+                                    Hi
+                                </div>    
+                            </div>
+                            <input type="hidden" id="editChoice">
                             <input type="button" name="editMembersSubmit" id="editMembersSubmit" value="Make Changes" class="btn btn-danger"></input>
-                        
-                    </div>
                 </div>
                 </br>
                 <div class="modal-footer">
-                    <button type="button" id="closeNewMembers" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" id="closEditMembers" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -883,8 +911,13 @@ require '../include/helpers/pageProtect.php';
 
         $("#fileMethod").hide();
         $("#manualMethod").hide();
-        $("#file-form").prop('required', true);
-        $("#test-form").prop('required', true);
+
+        $("#editDay").hide();
+        $("#editTime").hide();
+        $("#editCredit").hide();
+        $("#editRequirements").hide();
+        $("#editComments").hide();
+        $("#editDelete").hide();
 
 
         $('#semester-submit').on("click", function() {
@@ -1241,6 +1274,66 @@ require '../include/helpers/pageProtect.php';
                 var name = $(this).text().toLowerCase();
                 var email = $(this).val().toLowerCase();
             });
+        });
+
+        $("#editDayButton").on("click", function() {
+            $("#editDay").show();
+            $("#editTime").hide()
+            $("#editCredit").hide();
+            $("#editRequirements").hide();
+            $("#editComments").hide();
+            $("#editDelete").hide();
+            document.getElementById("#editChoice").value = "day";
+        });
+
+        $("#editTimeButton").on("click", function() {
+            $("#editDay").hide();
+            $("#editTime").show()
+            $("#editCredit").hide();
+            $("#editRequirements").hide();
+            $("#editComments").hide();
+            $("#editDelete").hide();
+            document.getElementById("#editChoice").value = "time";
+        });
+
+        $("#editCreditButton").on("click", function() {
+            $("#editDay").hide();
+            $("#editTime").hide()
+            $("#editCredit").show();
+            $("#editRequirements").hide();
+            $("#editComments").hide();
+            $("#editDelete").hide();
+            document.getElementById("#editChoice").value = "credit";
+        });
+
+        $("#editRequirementsButton").on("click", function() {
+            $("#editDay").hide();
+            $("#editTime").hide()
+            $("#editCredit").hide();
+            $("#editRequirements").show();
+            $("#editComments").hide();
+            $("#editDelete").hide();
+            document.getElementById("#editChoice").value = "requirements";
+        });
+
+        $("#editCommentsButton").on("click", function() {
+            $("#editDay").hide();
+            $("#editTime").hide()
+            $("#editCredit").hide();
+            $("#editRequirements").hide();
+            $("#editComments").show();
+            $("#editDelete").hide();
+            document.getElementById("#editChoice").value = "comments";
+        });
+
+        $("#editDeleteButton").on("click", function() {
+            $("#editDay").hide();
+            $("#editTime").hide()
+            $("#editCredit").hide();
+            $("#editRequirements").hide();
+            $("#editComments").hide();
+            $("#editDelete").show();
+            document.getElementById("#editChoice").value = "delete";
         });
     });
     </script>
