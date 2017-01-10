@@ -173,7 +173,7 @@ require '../include/helpers/pageProtect.php';
                                         <button class="btn btn-primary btn-xs" id="export-csv-volunteers">CSV</button>
                                         <button class="btn btn-primary btn-xs" id="export-pdf-volunteers">PDF</button>
                                         <button class="btn btn-success btn-xs" id="openModalButton" data-toggle="modal" data-target="#toggleVolsColumnsModal">Toggle Columns</button>
-                                        <button class="btn btn-warning btn-xs" id="edit-members-modal-button">Edit Members</button>
+                                        <button class="btn btn-warning btn-xs" id="edit-members-modal-button" data-toggle="modal" data-target="#editMembersModal">Edit Members</button>
                                         <button class="btn btn-danger btn-xs" id="new-members-modal-button" data-toggle="modal" data-target="#newMembersModal">New Members</button>
                                     </br>
                                         <table class="table table-striped table-bordered table-hover" id="table-volunteers" style="font-size: 13px; width: 100%;">
@@ -420,7 +420,7 @@ require '../include/helpers/pageProtect.php';
                         <form method="post" id="addMembersFormFile" name="addMembersFormFile" enctype="multipart/form-data" action="../include/insertProgramMembersShiftFile.php">
                             <div class="form-group">
                                 <label for="program-form-members-file">Program:</label>
-                                <input type="text" name="program-form-members-file" class="form-control" id="program-form-members-file" value="Panels" readonly required>
+                                <input type="text" name="program-form-members-file" class="form-control" id="program-form-members-file" readonly required>
                             </div>   
                             <div class="form-group">
                                 <label for="semester-form-members-file">Semester:</label>
@@ -446,7 +446,7 @@ require '../include/helpers/pageProtect.php';
                         <form method="POST" id="addMembersFormManual" name="addMembersFormManual">
                             <div class="form-group">
                                 <label for="program-form-members">Program:</label>
-                                <input type="text" name="program-form-members" class="form-control" id="program-form-members" value="Panels" readonly required>
+                                <input type="text" name="program-form-members" class="form-control" id="program-form-members" readonly required>
                             </div>   
                             <div class="form-group">
                                 <label for="semester-form-members">Semester:</label>
@@ -456,12 +456,10 @@ require '../include/helpers/pageProtect.php';
                                 <label for="year-form-members">Year:</label>
                                 <input type="text" name="year-form-members" class="form-control" id="year-form-members" readonly required>
                             </div>    
-                            <table>
+                            <table style='margin-left:150px;'>
                                 <tr>
                                     <td>
                                         <b>SAP Users:</b><br/>
-                                        <select multiple="multiple" size='10' id='userlstBoxMain' hidden>
-                                        </select>
                                        <select multiple="multiple" size='10' id='userlstBox'>
                                         </select>
                                         
@@ -475,11 +473,6 @@ require '../include/helpers/pageProtect.php';
                                     <select multiple="multiple" size='10' id='memberlstBox'> 
                                     </select>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                <input type="text" placeholder="Search..." id="selectSearch">
-                            </td>
                             </tr>
                             </table>   
                         </br>
@@ -497,11 +490,91 @@ require '../include/helpers/pageProtect.php';
                                 </select>
                             </div>    
                             <div class="form-group">
-                                <label for="semester-form-members">Shift Time: (XX:XX AM/PM; i.e. "10:00 AM" or "2:30 PM")</label>
+                                <label for="time-form-members">Shift Time: (XX:XX AM/PM; i.e. "10:00 AM" or "2:30 PM")</label>
                                 <input type="text" name="time-form-members" class="form-control" id="time-form-members" required>
                             </div>    
                             <input type="submit" name="addMembersFormSubmit" id="addMembersFormSubmit" value="Add Members" class="btn btn-danger"></input>
                         </form>
+                    </div>
+                </div>
+                </br>
+                <div class="modal-footer">
+                    <button type="button" id="closeNewMembers" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="editMembersModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit Members</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="manualMethod">
+                            <div class="form-group">
+                                <label for="program-edit-members">Program:</label>
+                                <input type="text" name="program-edit-members" class="form-control" id="program-edit-members" readonly required>
+                            </div>   
+                            <div class="form-group">
+                                <label for="semester-edit-members">Semester:</label>
+                                <input type="text" name="semester-edit-members" class="form-control" id="semester-edit-members" readonly required>
+                            </div>    
+                            <div class="form-group">
+                                <label for="year-edit-members">Year:</label>
+                                <input type="text" name="year-edit-members" class="form-control" id="year-edit-members" readonly required>
+                            </div>    
+                            <table style='margin-left:150px;'>
+                                <tr>
+                                    <td>
+                                        <b>Program Members:</b><br/>
+                                       <select multiple="multiple" size='10' id='editmemberlstBox'>
+                                        </select>
+                                        
+                                </td>
+                                <td style='text-align:center;vertical-align:middle;'>
+                                    <button class="btn btn-primary btn-xs lstButton" id='btnRightMemberEdit' value='right'>></button>
+                                    <br/><button class="btn btn-primary btn-xs lstButton" style='margin:5px;' id='btnLeftMemberEdit' value='left'><</button> 
+                                </td>
+                                <td>
+                                    <b>Members to Edit:</b><br/>
+                                    <select multiple="multiple" size='10' id='toeditmemberlstBox'> 
+                                    </select>
+                                </td>
+                            </tr>
+                            </table>
+                            <strong>What do you wish to do?</strong> </br>
+                            <button class="btn btn-primary btn-xs" id="editDayButton">Edit Shift Day</button>
+                            <button class="btn btn-primary btn-xs" id="editTimeButton">Edit Shift Time</button>
+                            <button class="btn btn-primary btn-xs" id="editCreditButton">Edit Credit</button>
+                            <button class="btn btn-primary btn-xs" id="editRequirementsButton">Edit Requirements Status</button>
+                            <button class="btn btn-primary btn-xs" id="editCommentsButton">Delete Members</button>   
+                        </br></br>
+                            <div id="editDay">
+                                 <div class="form-group">
+                                    <label for="semester-edit-members">Shift Day:</label>
+                                    <select name="day-edit-members" class="form-control" id="day-edit-members" required>
+                                        <option disabled selected value> -- Select a day -- </option>
+                                        <option value="Sunday">Sunday</option>
+                                        <option value="Monday">Monday</option>
+                                        <option value="Tuesday">Tuesday</option>
+                                        <option value="Wednesday">Wednesday</option>
+                                        <option value="Thursday">Thursday</option>
+                                        <option value="Friday">Friday</option>
+                                        <option value="Saturday">Saturday</option>
+                                    </select>
+                                </div>    
+                            </div>
+                            <div id="editTime">
+                                <div class="form-group">
+                                    <label for="semester-time-members">Shift Time: (XX:XX AM/PM; i.e. "10:00 AM" or "2:30 PM")</label>
+                                    <input type="text" name="time-edit-members" class="form-control" id="time-edit-members" required>
+                                </div>    
+                            </div>
+                            <input type="button" name="editMembersSubmit" id="editMembersSubmit" value="Make Changes" class="btn btn-danger"></input>
+                        
                     </div>
                 </div>
                 </br>
@@ -776,6 +849,38 @@ require '../include/helpers/pageProtect.php';
             }
         });
 
+        $('#btnRightMemberEdit').on("click", function() {
+            var selectedOpts = $('#editmemberlstBox option:selected');
+            if (selectedOpts.length == 0) {
+            }
+            else {
+                $('#toeditmemberlstBox').append($(selectedOpts).clone());
+                $(selectedOpts).remove();
+                var my_options = $("#toeditmemberlstBox option");
+
+                my_options.sort(function(a,b) {
+                    return a.id > b.id;
+                });
+                $("#toeditmemberlstBox").empty().append(my_options);
+            }
+        });
+
+        $('#btnLeftMemberEdit').on("click", function() {
+            var selectedOpts = $('#toeditmemberlstBox option:selected');
+            if (selectedOpts.length == 0) {
+            }
+            else {
+                $('#editmemberlstBox').append($(selectedOpts).clone());
+                $(selectedOpts).remove();
+                var my_options = $("#editmemberlstBox option");
+
+                my_options.sort(function(a,b) {
+                    return a.id > b.id;
+                });
+                $("#editmemberlstBox").empty().append(my_options);
+            }
+        });
+
         $("#fileMethod").hide();
         $("#manualMethod").hide();
         $("#file-form").prop('required', true);
@@ -1035,8 +1140,10 @@ require '../include/helpers/pageProtect.php';
             var selectedSemester = s.options[s.selectedIndex].value;
             var y = document.getElementById("table-year");
             var selectedYear = y.options[y.selectedIndex].value;
+            document.getElementById("program-form-members").value = programName;
             document.getElementById("year-form-members").value = selectedYear;
             document.getElementById("semester-form-members").value = selectedSemester;
+            document.getElementById("program-form-members-file").value = programName;
             document.getElementById("year-form-members-file").value = selectedYear;
             document.getElementById("semester-form-members-file").value = selectedSemester;
             getUsersNotInProgram(function(a) {
@@ -1083,11 +1190,18 @@ require '../include/helpers/pageProtect.php';
             }
         });
 
-        $("#").on("click", function() {
+        $("#edit-members-modal-button").on("click", function() {
+            var s = document.getElementById("table-semester");
+            var selectedSemester = s.options[s.selectedIndex].value;
+            var y = document.getElementById("table-year");
+            var selectedYear = y.options[y.selectedIndex].value;
+            document.getElementById("program-edit-members").value = programName;
+            document.getElementById("year-edit-members").value = selectedYear;
+            document.getElementById("semester-edit-members").value = selectedSemester;
             getUsersInProgram(function(b) {
                 var members = b;
-                var memberSelect = document.getElementById("memberlstBox");
-                $("#memberlstBox").empty();
+                var memberSelect = document.getElementById("editmemberlstBox");
+                $("#editmemberlstBox").empty();
                 for(var i = 0; i < members[0].length; i++) {
                     var opt = document.createElement('option');
                     opt.value = members[0][i];
@@ -1095,11 +1209,11 @@ require '../include/helpers/pageProtect.php';
                     opt.innerHTML = members[2][i] + ", " + members[1][i];
                     memberSelect.appendChild(opt);
                 }
-                var my_options = $("#memberlstBox option");
+                var my_options = $("#editmemberlstBox option");
                 my_options.sort(function(a,b) {
                     return a.id > b.id;
                 });
-                $("#memberlstBox").empty().append(my_options);
+                $("#editmemberlstBox").empty().append(my_options);
             }, programName, selectedSemester, selectedYear);
         });
 
