@@ -417,7 +417,7 @@ require '../include/helpers/pageProtect.php';
                     <button class="btn btn-primary btn-xs" id="fileMethodButton">File Upload</button>
                     <button class="btn btn-primary btn-xs" id="manualMethodButton">Manual Entry</button>
                     <div id="fileMethod">
-                        <form method="post" id="addMembersForm" name="addMembersForm" enctype="multipart/form-data" action="../include/insertProgramMembersFile.php">
+                        <form method="post" id="addMembersFormFile" name="addMembersFormFile" enctype="multipart/form-data" action="../include/insertProgramMembersFile.php">
                             <div class="form-group">
                                 <label for="program-form-members-file">Program:</label>
                                 <input type="text" name="program-form-members-file" class="form-control" id="program-form-members-file" value="Panels" readonly required>
@@ -443,7 +443,7 @@ require '../include/helpers/pageProtect.php';
                         </form>  
                     </div>
                     <div id="manualMethod">
-                        <form method="POST" id="addMembersForm" name="addMembersForm" enctype="multipart/form-data" action="../include/insertProgramMembers.php">
+                        <form method="POST" id="addMembersFormManual" name="addMembersFormManual">
                             <div class="form-group">
                                 <label for="program-form-members">Program:</label>
                                 <input type="text" name="program-form-members" class="form-control" id="program-form-members" value="Panels" readonly required>
@@ -456,10 +456,34 @@ require '../include/helpers/pageProtect.php';
                                 <label for="year-form-members">Year:</label>
                                 <input type="text" name="year-form-members" class="form-control" id="year-form-members" readonly required>
                             </div>    
-                            <div class="form-group">
-                                <label for="test-form">Year:</label>
-                                <input type="text" name="test-form" class="form-control" id="test-form">
-                            </div>     
+                            <table>
+                                <tr>
+                                    <td>
+                                        <b>SAP Users:</b><br/>
+                                        <select multiple="multiple" size='10' id='userlstBoxMain' hidden>
+                                          <option id="sims" value="test@bc.edu">Sims, Zack (test@bc.edu)</option>
+                                          <option id="reardon" value="readonk@bc.edu">Reardon, Kevin (reardonk@bc.edu)</option>
+                                        </select>
+                                       <select multiple="multiple" size='10' id='userlstBox'>
+                                        </select>
+                                        
+                                </td>
+                                <td style='text-align:center;vertical-align:middle;'>
+                                    <button class="btn btn-primary btn-xs lstButton" id='btnRightMember' value='right'>></button>
+                                    <br/><button class="btn btn-primary btn-xs lstButton" style='margin:5px;' id='btnLeftMember' value='left'><</button> 
+                                </td>
+                                <td>
+                                    <b>Members to Add:</b><br/>
+                                    <select multiple="multiple" size='10' id='memberlstBox'> 
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                <input type="text" placeholder="Search..." id="selectSearch">
+                            </td>
+                            </tr>
+                            </table>   
                              <div>
                                 <p>&nbsp</p>
                              </div> 
@@ -704,6 +728,38 @@ require '../include/helpers/pageProtect.php';
                     return a.value - b.value;
                 });
                 $("#attnlstBox1").empty().append(my_options);
+            }
+        });
+
+        $('#btnRightMember').on("click", function() {
+            var selectedOpts = $('#userlstBox option:selected');
+            if (selectedOpts.length == 0) {
+            }
+            else {
+                $('#memberlstBox').append($(selectedOpts).clone());
+                $(selectedOpts).remove();
+                var my_options = $("#memberlstBox option");
+
+                my_options.sort(function(a,b) {
+                    return a.id > b.id;
+                });
+                $("#memberlstBox").empty().append(my_options);
+            }
+        });
+
+        $('#btnLeftMember').on("click", function() {
+            var selectedOpts = $('#memberlstBox option:selected');
+            if (selectedOpts.length == 0) {
+            }
+            else {
+                $('#userlstBox').append($(selectedOpts).clone());
+                $(selectedOpts).remove();
+                var my_options = $("#userlstBox option");
+
+                my_options.sort(function(a,b) {
+                    return a.id > b.id;
+                });
+                $("#userlstBox").empty().append(my_options);
             }
         });
 
@@ -970,6 +1026,41 @@ require '../include/helpers/pageProtect.php';
             document.getElementById("semester-form-members").value = selectedSemester;
             document.getElementById("year-form-members-file").value = selectedYear;
             document.getElementById("semester-form-members-file").value = selectedSemester;
+            getUsersNotInProgram(function(a) {
+                var nonmembers = a;
+                var userSelect = document.getElementById("userlstBox");
+                $("#userlstBox").empty();
+                for(var i = 0; i < nonmembers[0].length; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = nonmembers[0][i];
+                    opt.id = nonmembers[2][i];
+                    opt.innerHTML = nonmembers[2][i] + ", " + nonmembers[1][i];
+                    userSelect.appendChild(opt);
+                    }
+                var my_options = $("#userlstBox option");
+                my_options.sort(function(a,b) {
+                    return a.id > b.id;
+                });
+                $("#userlstBox").empty().append(my_options);
+            }, programName, selectedSemester, selectedYear);
+            getUsersInProgram(function(b) {
+                var members = b;
+                var memberSelect = document.getElementById("memberlstBox");
+                for(var i = 0; i < members[0].length; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = members[0][i];
+                    opt.id = members[2][i];
+                    opt.innerHTML = members[2][i] + ", " + members[1][i];
+                    memberSelect.appendChild(opt);
+                }
+                var my_options = $("#memberlstBox option");
+                my_options.sort(function(a,b) {
+                    return a.id > b.id;
+                });
+                $("#memberlstBox").empty().append(my_options);
+            }, programName, selectedSemester, selectedYear);
+            
+
         });
 
         $("#fileMethodButton").on("click", function() {
@@ -984,6 +1075,18 @@ require '../include/helpers/pageProtect.php';
             $("#fileMethod").hide();
             $("#test-form").prop('required', true);
             $("#file-form").prop('required', false);
+        });
+
+        $(".lstButton").on("click", function(e) {
+            e.preventDefault();
+        });
+
+        $("#selectSearch").keyup(function() {
+            var seachText = $(this).val().toLowerCase();
+            $("#userlstBox option").each(function() {
+                var name = $(this).text().toLowerCase();
+                var email = $(this).val().toLowerCase();
+            });
         });
     });
     </script>

@@ -119,6 +119,46 @@ function toggleColumns(table, index) {
     column.visible(!column.visible());
 }
 
+function getUsersNotInProgram(callback, programName, selectedSemester, selectedYear) {
+    $.getJSON("../include/getUsersNotInProgram.php", 
+        {
+            program: programName,
+            semester: selectedSemester,
+            year: selectedYear
+        }, function(data) {
+            var vols = []
+            vols[0] = [];
+            vols[1] = [];
+            vols[2] = [];
+            $.each(data, function(i, item) {
+                vols[0][i] = item.email;
+                vols[1][i] = item.first_name;
+                vols[2][i] = item.last_name;
+            });
+            callback(vols);
+        });
+}
+
+function getUsersInProgram(callback, programName, selectedSemester, selectedYear) {
+    $.getJSON("../include/getUsersInProgram.php", 
+        {
+            program: programName,
+            semester: selectedSemester,
+            year: selectedYear
+        }, function(data) {
+            var vols = []
+            vols[0] = [];
+            vols[1] = [];
+            vols[2] = [];
+            $.each(data, function(i, item) {
+                vols[0][i] = item.email;
+                vols[1][i] = item.first_name;
+                vols[2][i] = item.last_name;
+            });
+            callback(vols);
+        });
+}
+
 function verifyData(field, value) {
     switch(field) {
         case 'shift_time': {
