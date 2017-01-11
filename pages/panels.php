@@ -232,7 +232,7 @@ require '../include/helpers/pageProtect.php';
                                         <button class="btn btn-primary btn-xs" id="export-pdf-attendance">PDF</button>
                                         <button class="btn btn-success btn-xs" id="openModalButton" data-toggle="modal" data-target="#toggleAttnColumnsModal">Toggle Columns</button>
                                         <button class="btn btn-warning btn-xs" id="edit-shifts-modal-button" data-toggle="modal" data-target="#editShiftsModal">Edit Shifts</button>
-                                        <button class="btn btn-danger btn-xs" id="new-attendance-modal-button" data-toggle="modal" data-target="#newAttendanceModal">New Attendance Sheet</button>
+                                        <button class="btn btn-danger btn-xs" id="new-shifts-modal-button" data-toggle="modal" data-target="#newShiftsModal">New Shifts</button>
                                     </br>
                                         <table class="table table-striped table-bordered table-hover" id="table-attendance" style="font-size: 13px; width: 100%;">
                                             <thead>
@@ -624,6 +624,107 @@ require '../include/helpers/pageProtect.php';
         </div>
     </div>
 
+    <div id="newShiftsModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add New Shifts</h4>
+                </div>
+                <div class="modal-body">
+                    Create shifts from members' assigned shifts or manually enter shifts? </br>
+                    <button class="btn btn-primary btn-xs" id="autoShiftsEntryButton">Auto Entry</button>
+                    <button class="btn btn-primary btn-xs" id="manualShiftsEntryButton">Manual Entry</button>
+                    <div id="autoShiftsEntry">
+                        <h5>If any shifts already exist for this week, they will be deleted by using this method</h5>
+                        <form method="post" id="newShiftsAutoForm" name="addShiftsAutoForm">
+                            <div class="form-group">
+                                <label for="program-form-members-file">Program:</label>
+                                <input type="text" name="program-form-members-file" class="form-control" id="program-form-members-file" readonly required>
+                            </div>   
+                            <div class="form-group">
+                                <label for="semester-form-members-file">Semester:</label>
+                                <input type="text" name="semester-form-members-file" class="form-control" id="semester-form-members-file" readonly required>
+                            </div>    
+                            <div class="form-group">
+                                <label for="year-form-members-file">Year:</label>
+                                <input type="text" name="year-form-members-file" class="form-control" id="year-form-members-file" readonly required>
+                            </div>    
+                            <div class="form-group">
+                                <strong>Upload file (only .csv):</strong>
+                                <input type="file" name="file-form" id="file-form" accept=".csv" required>
+                                </br><Strong>Note: </strong>File must have the following column format with the header included:
+                                </br>Email - Shift Day - Shift Time (XX:XX AM/PM; i.e. "10:00 AM" or "2:30 PM")
+                            </div>
+                            <div>
+                                <p>&nbsp</p>
+                            </div> 
+                            <input type="submit" name="addMembersFormSubmitFile" id="addMembersFormSubmitFile" value="Add Members" class="btn btn-danger"></input>
+                        </form>  
+                    </div>
+                    <div id="manualShiftsEntry">
+                        <form method="POST" id="newShiftsManualForm" name="newShiftsManualForm">
+                            <div class="form-group">
+                                <label for="program-form-members">Program:</label>
+                                <input type="text" name="program-form-members" class="form-control" id="program-form-members" readonly required>
+                            </div>   
+                            <div class="form-group">
+                                <label for="semester-form-members">Semester:</label>
+                                <input type="text" name="semester-form-members" class="form-control" id="semester-form-members" readonly required>
+                            </div>    
+                            <div class="form-group">
+                                <label for="year-form-members">Year:</label>
+                                <input type="text" name="year-form-members" class="form-control" id="year-form-members" readonly required>
+                            </div>    
+                            <table style='margin-left:150px;'>
+                                <tr>
+                                    <td>
+                                        <b>SAP Users:</b><br/>
+                                       <select multiple="multiple" size='10' id='userlstBox'>
+                                        </select>
+                                        
+                                </td>
+                                <td style='text-align:center;vertical-align:middle;'>
+                                    <button class="btn btn-primary btn-xs lstButton" id='btnRightMember' value='right'>></button>
+                                    <br/><button class="btn btn-primary btn-xs lstButton" style='margin:5px;' id='btnLeftMember' value='left'><</button> 
+                                </td>
+                                <td>
+                                    <b>Members to Add:</b><br/>
+                                    <select multiple="multiple" size='10' id='memberlstBox'> 
+                                    </select>
+                                </td>
+                            </tr>
+                            </table>   
+                        </br>
+                             <div class="form-group">
+                                <label for="semester-form-members">Shift Day:</label>
+                                <select name="day-form-members" class="form-control" id="day-form-members" required>
+                                    <option disabled selected value> -- Select a day -- </option>
+                                    <option value="Sunday">Sunday</option>
+                                    <option value="Monday">Monday</option>
+                                    <option value="Tuesday">Tuesday</option>
+                                    <option value="Wednesday">Wednesday</option>
+                                    <option value="Thursday">Thursday</option>
+                                    <option value="Friday">Friday</option>
+                                    <option value="Saturday">Saturday</option>
+                                </select>
+                            </div>    
+                            <div class="form-group">
+                                <label for="time-form-members">Shift Time: (XX:XX AM/PM; i.e. "10:00 AM" or "2:30 PM")</label>
+                                <input type="text" name="time-form-members" class="form-control" id="time-form-members" required>
+                            </div>    
+                            <input type="submit" name="addMembersFormSubmit" id="addMembersFormSubmit" value="Add Members" class="btn btn-danger"></input>
+                        </form>
+                    </div>
+                </div>
+                </br>
+                <div class="modal-footer">
+                    <button type="button" id="closeNewMembers" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="editShiftsModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -652,7 +753,8 @@ require '../include/helpers/pageProtect.php';
                             <div class="form-group">
                                 <label for="day-edit-shifts">Day:</label>
                                 <input type="text" name="day-edit-shifts" class="form-control" id="day-edit-shifts" readonly required>
-                            </div>     
+                            </div>    
+                            <h5>Members' Attendance ID's for the given week are also shown to help you choose the right shift</h5>
                             <table style='margin-left:150px;'>
                                 <tr>
                                     <td>
@@ -1105,6 +1207,9 @@ require '../include/helpers/pageProtect.php';
         $("#editDelete").hide();
         $("#editConfirmation").hide();
 
+        $("#autoShiftsEntry").hide();
+        $("#manualShiftsEntry").hide();
+
         $("#editDayShifts").hide();
         $("#editTimeShifts").hide();
         $("#editAlternateNumberShifts").hide();
@@ -1316,8 +1421,9 @@ require '../include/helpers/pageProtect.php';
                 }
                 $(".thVal").focus();
                 if(selectable.indexOf(column) == -1) {
-                    document.getElementById("newvalue").value = document.getElementById("newvalue").value;
-                    $(".thVal").focus();
+                    var tmp = document.getElementById("newvalue").value;
+                    document.getElementById("newvalue").value = '';
+                    document.getElementById("newvalue").value = tmp;
                 }
                 $(".thVal").keydown(function (event) {
                     if (event.keyCode == 13) {
@@ -1654,6 +1760,20 @@ require '../include/helpers/pageProtect.php';
             editProgramMembers(function() {
                 location.reload();
             }, emails, programName, semester, year, field, newValue);
+        });
+
+        $("#autoShiftsEntryButton").on("click", function() {
+            $("#autoShiftsEntry").show();
+            $("#manualShiftsEntry").hide();
+            //$("#file-form").prop('required', true);
+            //$("#test-form").prop('required', false);
+        });
+
+        $("#manualShiftsEntryButton").on("click", function() {
+            $("#manualShiftsEntry").show();
+            $("#autoShiftsEntry").hide();
+            //$("#test-form").prop('required', true);
+            //$("#file-form").prop('required', false);
         });
 
         $("#editDayShiftsButton").on("click", function() {
