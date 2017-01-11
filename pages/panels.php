@@ -231,8 +231,8 @@ require '../include/helpers/pageProtect.php';
                                         <button class="btn btn-primary btn-xs" id="export-csv-attendance">CSV</button>
                                         <button class="btn btn-primary btn-xs" id="export-pdf-attendance">PDF</button>
                                         <button class="btn btn-success btn-xs" id="openModalButton" data-toggle="modal" data-target="#toggleAttnColumnsModal">Toggle Columns</button>
-                                        <button class="btn btn-warning btn-xs" id="edit-shifts-modal-button">Edit Shifts</button>
-                                        <button class="btn btn-danger btn-xs" id="new-attendance-modal-button">New Attendance Sheet</button>
+                                        <button class="btn btn-warning btn-xs" id="edit-shifts-modal-button" data-toggle="modal" data-target="#editShiftsModal">Edit Shifts</button>
+                                        <button class="btn btn-danger btn-xs" id="new-attendance-modal-button" data-toggle="modal" data-target="#newAttendanceModal">New Attendance Sheet</button>
                                     </br>
                                         <table class="table table-striped table-bordered table-hover" id="table-attendance" style="font-size: 13px; width: 100%;">
                                             <thead>
@@ -555,7 +555,7 @@ require '../include/helpers/pageProtect.php';
                         </br></br>
                             <div id="editDay">
                                  <div class="form-group">
-                                    <label for="semester-edit-members">Shift Day:</label>
+                                    <label for="day-edit-members">Shift Day:</label>
                                     <select name="day-edit-members" class="form-control" id="day-edit-members" required>
                                         <option disabled selected value> -- Select a day -- </option>
                                         <option value="Sunday">Sunday</option>
@@ -619,6 +619,146 @@ require '../include/helpers/pageProtect.php';
                 </br>
                 <div class="modal-footer">
                     <button type="button" id="closEditMembers" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="editShiftsModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit Shifts</h4>
+                </div>
+                <div class="modal-body">
+                    
+                            <div class="form-group">
+                                <label for="program-edit-shifts">Program:</label>
+                                <input type="text" name="program-edit-shifts" class="form-control" id="program-edit-shifts" readonly required>
+                            </div>   
+                            <div class="form-group">
+                                <label for="semester-edit-shifts">Semester:</label>
+                                <input type="text" name="semester-edit-shifts" class="form-control" id="semester-edit-shifts" readonly required>
+                            </div>    
+                            <div class="form-group">
+                                <label for="year-edit-shifts">Year:</label>
+                                <input type="text" name="year-edit-shifts" class="form-control" id="year-edit-shifts" readonly required>
+                            </div>
+                            <div class="form-group">
+                                <label for="week-edit-shifts">Week:</label>
+                                <input type="text" name="week-edit-shifts" class="form-control" id="week-edit-shifts" readonly required>
+                            </div>
+                            <div class="form-group">
+                                <label for="day-edit-shifts">Day:</label>
+                                <input type="text" name="day-edit-shifts" class="form-control" id="day-edit-shifts" readonly required>
+                            </div>     
+                            <table style='margin-left:150px;'>
+                                <tr>
+                                    <td>
+                                        <b>Shifts:</b><br/>
+                                       <select multiple="multiple" size='10' id='editshiftslstBox'>
+                                        </select>
+                                        
+                                </td>
+                                <td style='text-align:center;vertical-align:middle;'>
+                                    <button class="btn btn-primary btn-xs lstButton" id='btnRightShiftsEdit' value='right'>></button>
+                                    <br/><button class="btn btn-primary btn-xs lstButton" style='margin:5px;' id='btnLeftShiftsEdit' value='left'><</button> 
+                                </td>
+                                <td>
+                                    <b>Shifts to Edit:</b><br/>
+                                    <select multiple="multiple" size='10' id='toeditshiftslstBox'> 
+                                    </select>
+                                </td>
+                            </tr>
+                            </table>
+                            <strong>What do you wish to edit?</strong> </br>
+                            <button class="btn btn-primary btn-xs" id="editDayShiftsButton">Shift Day</button>
+                            <button class="btn btn-primary btn-xs" id="editTimeShiftsButton">Shift Time</button>
+                            <button class="btn btn-primary btn-xs" id="editAlternateNumberShiftsButton">Alternate</button>
+                            <button class="btn btn-primary btn-xs" id="editPresentShiftsButton">Present</button>
+                            <button class="btn btn-primary btn-xs" id="editGaveShiftsButton">Gave Panel</button> 
+                            <button class="btn btn-primary btn-xs" id="editNoteShiftsButton">Notes</button> 
+                            <button class="btn btn-primary btn-xs" id="editDeleteShiftsButton">Delete Shifts</button>   
+                        </br></br>
+                            <div id="editDayShifts">
+                                 <div class="form-group">
+                                    <label for="day-edit-shifts-input">Shift Day:</label>
+                                    <select name="day-edit-shifts-input" class="form-control" id="day-edit-shifts-input" required>
+                                        <option disabled selected value> -- Select a day -- </option>
+                                        <option value="Sunday">Sunday</option>
+                                        <option value="Monday">Monday</option>
+                                        <option value="Tuesday">Tuesday</option>
+                                        <option value="Wednesday">Wednesday</option>
+                                        <option value="Thursday">Thursday</option>
+                                        <option value="Friday">Friday</option>
+                                        <option value="Saturday">Saturday</option>
+                                    </select>
+                                </div>    
+                            </div>
+                            <div id="editTimeShifts">
+                                <div class="form-group">
+                                    <label for="time-edit-shifts">Shift Time: (XX:XX AM/PM; i.e. "10:00 AM" or "2:30 PM")</label>
+                                    <input type="text" name="time-edit-shifts" class="form-control" id="time-edit-shifts" required>
+                                </div>    
+                            </div>
+                            <div id="editAlternateNumberShifts">
+                                 <div class="form-group">
+                                    <label for="alternateNumber-edit-shifts">Alternate:</label>
+                                    <select name="alternateNumber-edit-shifts" class="form-control" id="alternateNumber-edit-shifts" required>
+                                        <option disabled selected value="none"> -- Select an Option -- </option>
+                                        <option value="Alternate">Yes</option>
+                                        <option value="">No</option>
+                                    </select>
+                                </div>    
+                            </div>
+                            <div id="editPresentShifts">
+                                 <div class="form-group">
+                                    <label for="present-edit-shifts">Present:</label>
+                                    <select name="present-edit-shifts" class="form-control" id="present-edit-shifts" required>
+                                        <option disabled selected value="none"> -- Select an Option -- </option>
+                                        <option value="Present">Present</option>
+                                        <option value="Excused">Excused</option>
+                                        <option value="No Show">No Show</option>
+                                    </select>
+                                </div>    
+                            </div>
+                            <div id="editGaveShifts">
+                                <div class="form-group">
+                                    <label for="gaveShifts-edit-shifts">Gave Panel:</label>
+                                    <select name="gaveShifts-edit-shifts" class="form-control" id="gaveShifts-edit-shifts" required>
+                                        <option disabled selected value="none"> -- Select an Option -- </option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>    
+                            </div>
+                            <div id="editNoteShifts">
+                                <div class="form-group">
+                                    <label for="noteShifts-edit-shifts">Notes</label>
+                                    <input type="text" name="noteShifts-edit-shifts" class="form-control" id="noteShifts-edit-shifts" required>
+                                </br>
+                                    <strong>Are you sure you want to make these changes? Any previous data for this will be deleted.</strong>
+                                </div>    
+                            </div>
+                            <div id="editDeleteShifts">
+                                <div class="form-group">
+                                    <strong>Are you sure you want to remove the selected shifts from their shifts for this week?</strong>
+                                </div>    
+                            </div>
+                            <div id="editConfirmationShifts">
+                                <input type="radio" name="confirmation-edit-shifts" value="yes" id="confirmation-yes-edit-shifts">
+                                <label for="confirmation-yes-edit-shifts">Yes</label>
+                                <input type="radio" name="confirmation-edit-shifts" value="no" checked = "checked" id="confirmation-no-edit-shifts">
+                                <label for="confirmation-no-edit-shifts">No</label>
+                            </div>
+                        </br>
+                            <input type="hidden" id="editChoiceShifts" value="">
+                            <input type="button" name="editShiftsSubmit" id="editShiftsSubmit" value="Make Changes" class="btn btn-danger"></input>
+                </div>
+                </br>
+                <div class="modal-footer">
+                    <button type="button" id="closEditShifts" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -920,6 +1060,40 @@ require '../include/helpers/pageProtect.php';
             }
         });
 
+        $('#btnRightShiftsEdit').on("click", function() {
+            var selectedOpts = $('#editshiftslstBox option:selected');
+            if (selectedOpts.length == 0) {
+            }
+            else {
+                $('#toeditshiftslstBox').append($(selectedOpts).clone());
+                $(selectedOpts).remove();
+                var my_options = $("#toeditshiftslstBox option");
+
+                my_options.sort(function(a,b) {
+                    return a.id > b.id;
+                });
+                $("#toeditshiftslstBox").empty().append(my_options);
+            }
+        });
+
+        $('#btnLeftShiftsEdit').on("click", function() {
+            var selectedOpts = $('#toeditshiftslstBox option:selected');
+            if (selectedOpts.length == 0) {
+            }
+            else {
+                $('#editshiftslstBox').append($(selectedOpts).clone());
+                $(selectedOpts).remove();
+                var my_options = $("#editshiftslstBox option");
+
+                my_options.sort(function(a,b) {
+                    return a.id > b.id;
+                });
+                $("#editshiftslstBox").empty().append(my_options);
+            }
+        });
+
+
+
         $("#fileMethod").hide();
         $("#manualMethod").hide();
 
@@ -930,6 +1104,15 @@ require '../include/helpers/pageProtect.php';
         $("#editComments").hide();
         $("#editDelete").hide();
         $("#editConfirmation").hide();
+
+        $("#editDayShifts").hide();
+        $("#editTimeShifts").hide();
+        $("#editAlternateNumberShifts").hide();
+        $("#editPresentShifts").hide();
+        $("#editGaveShifts").hide();
+        $("#editNoteShifts").hide();
+        $("#editDeleteShifts").hide();
+        $("#editConfirmationShifts").hide();
 
 
         $('#semester-submit').on("click", function() {
@@ -1015,8 +1198,9 @@ require '../include/helpers/pageProtect.php';
                 }
                 $(".thVal").focus();
                 if(selectable.indexOf(column) == -1) {
-                    document.getElementById("newvalue").value = document.getElementById("newvalue").value;
-                    $(".thVal").focus();
+                    var tmp = document.getElementById("newvalue").value;
+                    document.getElementById("newvalue").value = '';
+                    document.getElementById("newvalue").value = tmp;
                 }
                 $(".thVal").keydown(function (event) {
                     if (event.keyCode == 13 && !event.shiftKey) {
@@ -1278,6 +1462,44 @@ require '../include/helpers/pageProtect.php';
                 $("#editmemberlstBox").empty().append(my_options);
             }, programName, selectedSemester, selectedYear);
         });
+        
+        $("#edit-shifts-modal-button").on("click", function() {
+            var s = document.getElementById("table-semester");
+            var selectedSemester = s.options[s.selectedIndex].value;
+            var y = document.getElementById("table-year");
+            var selectedYear = y.options[y.selectedIndex].value;
+            var w = document.getElementById("table-week");
+            var selectedWeek = w.options[w.selectedIndex].text;
+            var selectedWeekValue = w.options[w.selectedIndex].value;
+            var d = document.getElementById("table-day");
+            var selectedDay = d.options[d.selectedIndex].text;
+            var selectedDayValue = d.options[d.selectedIndex].value;
+            document.getElementById("program-edit-shifts").value = programName;
+            document.getElementById("year-edit-shifts").value = selectedYear;
+            document.getElementById("semester-edit-shifts").value = selectedSemester;
+            document.getElementById("week-edit-shifts").value = selectedWeek;
+            document.getElementById("day-edit-shifts").value = selectedDay;
+
+            getShiftsForWeek(function(b) {
+                var shifts = b;
+                var shiftselect = document.getElementById("editshiftslstBox");
+                $("#editshiftslstBox").empty();
+                $("#toeditshiftslstBox").empty();
+                for(var i = 0; i < shifts[0].length; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = shifts[0][i];
+                    opt.id = shifts[2][i];
+                    opt.innerHTML = shifts[2][i] + ", " + shifts[1][i] + " (" + shifts[0][i] + ")";
+                    shiftselect.appendChild(opt);
+                }
+                var my_options = $("#editshiftslstBox option");
+                my_options.sort(function(a,b) {
+                    return a.id > b.id;
+                });
+                $("#editshiftslstBox").empty().append(my_options);
+            }, programName, selectedSemester, selectedYear, selectedWeekValue, selectedDayValue);
+            
+        });
 
         $("#fileMethodButton").on("click", function() {
             $("#fileMethod").show();
@@ -1295,14 +1517,6 @@ require '../include/helpers/pageProtect.php';
 
         $(".lstButton").on("click", function(e) {
             e.preventDefault();
-        });
-
-        $("#selectSearch").keyup(function() {
-            var seachText = $(this).val().toLowerCase();
-            $("#userlstBox option").each(function() {
-                var name = $(this).text().toLowerCase();
-                var email = $(this).val().toLowerCase();
-            });
         });
 
         $("#editDayButton").on("click", function() {
@@ -1379,7 +1593,7 @@ require '../include/helpers/pageProtect.php';
             var emails = [];
             var selectedOpts = $('#toeditmemberlstBox option');
             if (selectedOpts.length == 0) {
-                alert("You must choose at least one person to add");
+                alert("You must choose at least one member");
                 return ;
             }
             for(var i=0; i < selectedOpts.length; i++) {
@@ -1440,6 +1654,160 @@ require '../include/helpers/pageProtect.php';
             editProgramMembers(function() {
                 location.reload();
             }, emails, programName, semester, year, field, newValue);
+        });
+
+        $("#editDayShiftsButton").on("click", function() {
+            $("#editDayShifts").show();
+            $("#editTimeShifts").hide()
+            $("#editAlternateNumberShifts").hide();
+            $("#editPresentShifts").hide();
+            $("#editGaveShifts").hide();
+            $("#editNoteShifts").hide();
+            $("#editDeleteShifts").hide();
+            $("#editConfirmationShifts").hide();
+            document.getElementById("editChoiceShifts").value = "day";
+        });
+
+        $("#editTimeShiftsButton").on("click", function() {
+            $("#editDayShifts").hide();
+            $("#editTimeShifts").show()
+            $("#editAlternateNumberShifts").hide();
+            $("#editPresentShifts").hide();
+            $("#editGaveShifts").hide();
+            $("#editNoteShifts").hide();
+            $("#editDeleteShifts").hide();
+            $("#editConfirmationShifts").hide();
+            document.getElementById("editChoiceShifts").value = "time";
+        });
+
+        $("#editAlternateNumberShiftsButton").on("click", function() {
+            $("#editDayShifts").hide();
+            $("#editTimeShifts").hide()
+            $("#editAlternateNumberShifts").show();
+            $("#editPresentShifts").hide();
+            $("#editGaveShifts").hide();
+            $("#editNoteShifts").hide();
+            $("#editDeleteShifts").hide();
+            $("#editConfirmationShifts").hide();
+            document.getElementById("editChoiceShifts").value = "alternateNumber";
+        });
+
+        $("#editPresentShiftsButton").on("click", function() {
+            $("#editDayShifts").hide();
+            $("#editTimeShifts").hide()
+            $("#editAlternateNumberShifts").hide();
+            $("#editPresentShifts").show();
+            $("#editGaveShifts").hide();
+            $("#editNoteShifts").hide();
+            $("#editDeleteShifts").hide();
+            $("#editConfirmationShifts").hide();
+            document.getElementById("editChoiceShifts").value = "present";
+        });
+
+        $("#editGaveShiftsButton").on("click", function() {
+            $("#editDayShifts").hide();
+            $("#editTimeShifts").hide()
+            $("#editAlternateNumberShifts").hide();
+            $("#editPresentShifts").hide();
+            $("#editGaveShifts").show();
+            $("#editNoteShifts").hide();
+            $("#editDeleteShifts").hide();
+            $("#editConfirmationShifts").hide();
+            document.getElementById("editChoiceShifts").value = "gaveShifts";
+        });
+
+        $("#editNoteShiftsButton").on("click", function() {
+            $("#editDayShifts").hide();
+            $("#editTimeShifts").hide()
+            $("#editAlternateNumberShifts").hide();
+            $("#editPresentShifts").hide();
+            $("#editGaveShifts").hide();
+            $("#editNoteShifts").show();
+            $("#editDeleteShifts").hide();
+            $("#editConfirmationShifts").show();
+            document.getElementById("editChoiceShifts").value = "notes";
+        });
+
+        $("#editDeleteShiftsButton").on("click", function() {
+            $("#editDayShifts").hide();
+            $("#editTimeShifts").hide()
+            $("#editAlternateNumberShifts").hide();
+            $("#editPresentShifts").hide();
+            $("#editGaveShifts").hide();
+            $("#editNoteShifts").hide();
+            $("#editDeleteShifts").show();
+            $("#editConfirmationShifts").show();
+            document.getElementById("editChoiceShifts").value = "delete";
+        });
+
+        $("#editShiftsSubmit").on("click", function() {
+            var edits = document.getElementById("editChoiceShifts").value;
+            var ids = [];
+            var selectedOpts = $('#toeditshiftslstBox option');
+            if (selectedOpts.length == 0) {
+                alert("You must choose at least one shift");
+                return ;
+            }
+            for(var i=0; i < selectedOpts.length; i++) {
+                ids[i] = selectedOpts[i].value;
+            }
+            var field;
+            var newValue;
+            switch(edits) {
+                case "day" : {
+                    newValue = document.getElementById("day-edit-shifts-input").value;
+                    field = "shift_day";
+                } break;
+
+                case "time" : {
+                    newValue = document.getElementById("time-edit-shifts").value;
+                    field = "shift_time";
+                    if(!(verifyData(field, newValue))) {
+                        return;
+                    }
+                } break;
+
+                case "alternateNumber" : {
+                    newValue = document.getElementById("alternateNumber-edit-shifts").value;
+                    if(newValue == "none") {
+                        return ;
+                    }
+                    field = "alternate_number";
+                } break;
+
+                case "present" : {
+                    newValue = document.getElementById("present-edit-shifts").value;
+                    field = "present";
+                } break;
+
+                case "gaveShifts" : {
+                    newValue = document.getElementById("gaveShifts-edit-shifts").value;
+                    field = "gave_panel_tour";
+                } break;
+
+                case "notes" : {
+                    if (document.getElementById('confirmation-no-edit-shifts').checked) {
+                        return ;
+                    }
+                    newValue = document.getElementById("noteShifts-edit-shifts").value;
+                    field = "note";
+                } break;
+
+                case "delete" : {
+                    if (document.getElementById('confirmation-no-edit-shifts').checked) {
+                        return ;
+                    }
+                    field = "delete"
+                } break;
+
+                default : {
+                    return ;
+                }
+
+            }
+            editShifts(function() {
+                location.reload();
+            }, ids, field, newValue);
         });
     });
     </script>

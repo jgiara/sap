@@ -175,6 +175,28 @@ function getUsersInProgram(callback, programName, selectedSemester, selectedYear
         });
 }
 
+function getShiftsForWeek(callback, programName, selectedSemester, selectedYear, selectedWeek, selectedDay) {
+    $.getJSON("../include/getShiftsForWeek.php", 
+        {
+            program: programName,
+            semester: selectedSemester,
+            year: selectedYear,
+            week: selectedWeek, 
+            day: selectedDay
+        }, function(data) {
+            var shifts = []
+            shifts[0] = [];
+            shifts[1] = [];
+            shifts[2] = [];
+            $.each(data, function(i, item) {
+                shifts[0][i] = item.attendance_id;
+                shifts[1][i] = item.first_name;
+                shifts[2][i] = item.last_name;
+            });
+            callback(shifts);
+        });
+}
+
 function insertProgramMembersManualShift(callback, emails, program, semester, year, day, time) {
     $.post("../include/insertProgramMembersManualShift.php",
             {
@@ -196,6 +218,17 @@ function editProgramMembers(callback, emails, programName, semester, year, field
                 program: programName,
                 semester: semester, 
                 year: year,
+                field: field,
+                newValue: newValue
+            }, function() {
+                callback();
+            });
+}
+
+function editShifts(callback, ids, field, newValue) {
+    $.post("../include/editShifts.php",
+            {
+                ids: ids,
                 field: field,
                 newValue: newValue
             }, function() {
