@@ -477,7 +477,7 @@ require '../include/helpers/pageProtect.php';
                             </table>   
                         </br>
                              <div class="form-group">
-                                <label for="semester-form-members">Shift Day:</label>
+                                <label for="day-form-members">Shift Day:</label>
                                 <select name="day-form-members" class="form-control" id="day-form-members" required>
                                     <option disabled selected value> -- Select a day -- </option>
                                     <option value="Sunday">Sunday</option>
@@ -637,68 +637,77 @@ require '../include/helpers/pageProtect.php';
                     <button class="btn btn-primary btn-xs" id="manualShiftsEntryButton">Manual Entry</button>
                     <div id="autoShiftsEntry">
                         <h5>If any shifts already exist for this week, they will be deleted by using this method</h5>
-                        <form method="post" id="newShiftsAutoForm" name="addShiftsAutoForm">
+                        <form method="post" id="newShiftsAutoForm" name="newShiftsAutoFormm">
                             <div class="form-group">
-                                <label for="program-form-members-file">Program:</label>
-                                <input type="text" name="program-form-members-file" class="form-control" id="program-form-members-file" readonly required>
+                                <label for="program-form-shifts-auto">Program:</label>
+                                <input type="text" name="program-form-shifts-auto" class="form-control" id="program-form-shifts-auto" readonly required>
                             </div>   
                             <div class="form-group">
-                                <label for="semester-form-members-file">Semester:</label>
-                                <input type="text" name="semester-form-members-file" class="form-control" id="semester-form-members-file" readonly required>
+                                <label for="semester-form-shifts-auto">Semester:</label>
+                                <input type="text" name="semester-form-shifts-auto" class="form-control" id="semester-form-shifts-auto" readonly required>
                             </div>    
                             <div class="form-group">
-                                <label for="year-form-members-file">Year:</label>
-                                <input type="text" name="year-form-members-file" class="form-control" id="year-form-members-file" readonly required>
-                            </div>    
-                            <div class="form-group">
-                                <strong>Upload file (only .csv):</strong>
-                                <input type="file" name="file-form" id="file-form" accept=".csv" required>
-                                </br><Strong>Note: </strong>File must have the following column format with the header included:
-                                </br>Email - Shift Day - Shift Time (XX:XX AM/PM; i.e. "10:00 AM" or "2:30 PM")
+                                <label for="year-form-shifts-auto">Year:</label>
+                                <input type="text" name="year-form-shifts-auto" class="form-control" id="year-form-shifts-auto" readonly required>
                             </div>
+                            <div class="form-group">
+                                <label for="week-form-shifts-auto">Week:</label>
+                                <input type="text" name="week-form-shifts-auto" class="form-control" id="week-form-shifts-auto" readonly required>
+                            </div> 
+                            <div id="editConfirmationAutoShifts">
+                                <strong>Are you sure you want to proceed? If any shifts already exist for this week, they will be deleted.</strong> </br>
+                                <input type="radio" name="confirmation-shifts-auto" value="yes" id="confirmation-yes-shifts-auto">
+                                <label for="confirmation-yes-shifts-auto">Yes</label>
+                                <input type="radio" name="confirmation-shifts-auto" value="no" checked = "checked" id="confirmation-no-shifts-auto">
+                                <label for="confirmation-no-shifts-auto">No</label>
+                            </div> 
                             <div>
                                 <p>&nbsp</p>
                             </div> 
-                            <input type="submit" name="addMembersFormSubmitFile" id="addMembersFormSubmitFile" value="Add Members" class="btn btn-danger"></input>
+                            <input type="submit" name="newShiftsAutoFormSubmit" id="newShiftsAutoFormSubmit" value="Add Shifts" class="btn btn-danger"></input>
                         </form>  
                     </div>
                     <div id="manualShiftsEntry">
                         <form method="POST" id="newShiftsManualForm" name="newShiftsManualForm">
                             <div class="form-group">
-                                <label for="program-form-members">Program:</label>
-                                <input type="text" name="program-form-members" class="form-control" id="program-form-members" readonly required>
+                                <label for="program-form-shifts-manual">Program:</label>
+                                <input type="text" name="program-form-shifts-manual" class="form-control" id="program-form-shifts-manual" readonly required>
                             </div>   
                             <div class="form-group">
-                                <label for="semester-form-members">Semester:</label>
-                                <input type="text" name="semester-form-members" class="form-control" id="semester-form-members" readonly required>
+                                <label for="semester-form-shifts-manual">Semester:</label>
+                                <input type="text" name="semester-form-shifts-manual" class="form-control" id="semester-form-shifts-manual" readonly required>
                             </div>    
                             <div class="form-group">
-                                <label for="year-form-members">Year:</label>
-                                <input type="text" name="year-form-members" class="form-control" id="year-form-members" readonly required>
-                            </div>    
+                                <label for="year-form-shifts-manual">Year:</label>
+                                <input type="text" name="year-form-shifts-manual" class="form-control" id="year-form-shifts-manual" readonly required>
+                            </div>
+                            <div class="form-group">
+                                <label for="week-form-shifts-manual">Week:</label>
+                                <input type="text" name="week-form-shifts-manual" class="form-control" id="week-form-shifts-manual" readonly required>
+                            </div> 
                             <table style='margin-left:150px;'>
                                 <tr>
                                     <td>
-                                        <b>SAP Users:</b><br/>
-                                       <select multiple="multiple" size='10' id='userlstBox'>
+                                        <b>Program Members:</b><br/>
+                                       <select multiple="multiple" size='10' id='manualshiftlstBox'>
                                         </select>
                                         
                                 </td>
                                 <td style='text-align:center;vertical-align:middle;'>
-                                    <button class="btn btn-primary btn-xs lstButton" id='btnRightMember' value='right'>></button>
-                                    <br/><button class="btn btn-primary btn-xs lstButton" style='margin:5px;' id='btnLeftMember' value='left'><</button> 
+                                    <button class="btn btn-primary btn-xs lstButton" id='btnRightManualShift' value='right'>></button>
+                                    <br/><button class="btn btn-primary btn-xs lstButton" style='margin:5px;' id='btnLeftManualShift' value='left'><</button> 
                                 </td>
                                 <td>
-                                    <b>Members to Add:</b><br/>
-                                    <select multiple="multiple" size='10' id='memberlstBox'> 
+                                    <b>Shifts to Add:</b><br/>
+                                    <select multiple="multiple" size='10' id='tomanualshitslstBox'> 
                                     </select>
                                 </td>
                             </tr>
                             </table>   
                         </br>
                              <div class="form-group">
-                                <label for="semester-form-members">Shift Day:</label>
-                                <select name="day-form-members" class="form-control" id="day-form-members" required>
+                                <label for="day-form-shifts-manual">Shift Day:</label>
+                                <select name="day-form-shifts-manual" class="form-control" id="day-form-shifts-auto" required>
                                     <option disabled selected value> -- Select a day -- </option>
                                     <option value="Sunday">Sunday</option>
                                     <option value="Monday">Monday</option>
@@ -710,10 +719,14 @@ require '../include/helpers/pageProtect.php';
                                 </select>
                             </div>    
                             <div class="form-group">
-                                <label for="time-form-members">Shift Time: (XX:XX AM/PM; i.e. "10:00 AM" or "2:30 PM")</label>
-                                <input type="text" name="time-form-members" class="form-control" id="time-form-members" required>
+                                <label for="time-form-shifts-manual">Shift Time: (XX:XX AM/PM; i.e. "10:00 AM" or "2:30 PM")</label>
+                                <input type="text" name="time-form-shifts-manual" class="form-control" id="time-form-shifts-manual" required>
+                            </div> 
+                            <div class="form-group">
+                                <label for="notes-form-shifts-manual">Notes: **Optional** (Extra, Group, etc.)</label>
+                                <input type="text" name="notes-form-shifts-manual" class="form-control" id="notes-form-shifts-manual" required>
                             </div>    
-                            <input type="submit" name="addMembersFormSubmit" id="addMembersFormSubmit" value="Add Members" class="btn btn-danger"></input>
+                            <input type="submit" name="newShiftsManualFormSubmit" id="newShiftsManualFormSubmit" value="Add Shifts" class="btn btn-danger"></input>
                         </form>
                     </div>
                 </div>
