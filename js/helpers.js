@@ -247,6 +247,18 @@ function insertManualShifts(callback, emails, program, semester, year, week, day
             });
 }
 
+function insertAutoShifts(callback, program, semester, year, week) {
+    $.post("../include/insertAutoShifts.php",
+            {
+                program: program,
+                semester: semester, 
+                year: year,
+                week: week
+            }, function() {
+                callback();
+            });
+}
+
 function editProgramMembers(callback, ids, field, newValue) {
     $.post("../include/editProgramMembers.php",
             {

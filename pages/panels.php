@@ -637,7 +637,7 @@ require '../include/helpers/pageProtect.php';
                     <button class="btn btn-primary btn-xs" id="manualShiftsEntryButton">Manual Entry</button>
                     <div id="autoShiftsEntry">
                         <h5>If any shifts already exist for this week, they will be deleted by using this method</h5>
-                        <form method="post" id="newShiftsAutoForm" name="newShiftsAutoFormm">
+                        <form method="post" id="newShiftsAutoForm" name="newShiftsAutoForm">
                             <div class="form-group">
                                 <label for="program-form-shifts-auto">Program:</label>
                                 <input type="text" name="program-form-shifts-auto" class="form-control" id="program-form-shifts-auto" readonly required>
@@ -942,7 +942,6 @@ require '../include/helpers/pageProtect.php';
                 targets: [11],
                 render: function(data, type, row) {
                     if(type === 'sort') {
-                        alert(data);
                         switch(data) {
                             case "Sunday": return 0; break;
                             case "Monday": return 1; break;
@@ -1688,6 +1687,25 @@ require '../include/helpers/pageProtect.php';
                 $("#manualshiftslstBox").empty().append(my_options);
             }, programName, selectedSemester, selectedYear);
             
+        });
+
+        $("#newShiftsAutoForm").on("submit", function(e) {
+            if (document.getElementById('confirmation-no-shifts-auto').checked) {
+                e.preventDefault();
+                return ;
+            }
+                
+            var w = document.getElementById("table-week");
+            var selectedWeek = w.options[w.selectedIndex].value;
+        
+            var program = document.getElementById("program-form-shifts-manual").value;
+            var semester = document.getElementById("semester-form-shifts-manual").value;
+            var year = document.getElementById("year-form-shifts-manual").value;
+            var week = selectedWeek;
+            insertAutoShifts(function() {
+                location.reload();
+            }, program, semester, year, week);
+            e.preventDefault();
         });
 
         $("#newShiftsManualForm").on("submit", function(e) {
