@@ -92,7 +92,7 @@
                 <li>
                     <a href='./reports.php'>Reports</a>
                 </li>";
-                if((in_array('Council', $roles)) || (in_array('Admin', $roles))) {
+                if((in_array('Advisor', $roles)) || (in_array('Council', $roles)) || (in_array('Admin', $roles))) {
                   echo  "<li>
                         <a href='#' data-toggle='collapse' data-target='#submenu'>Administration<span class='fa arrow'></span></a>
                         <ul class='nav nav-second-level collapse' id='submenu'>

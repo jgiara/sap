@@ -21,7 +21,6 @@ require '../include/helpers/higherPageProtect.php'
 
     <title>Week Administration - Student Admission Program - Boston College</title>
 
-    <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
@@ -29,9 +28,6 @@ require '../include/helpers/higherPageProtect.php'
 
     <!-- DataTables CSS -->
     <link href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
-
-    <!-- DataTables Responsive CSS -->
-    <link href="../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
@@ -41,13 +37,7 @@ require '../include/helpers/higherPageProtect.php'
 
     <!-- Custom Override Bootstrap -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap-override.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    
 
 </head>
 
@@ -155,6 +145,7 @@ require '../include/helpers/higherPageProtect.php'
                                             <thead>
                                                 <tr>
                                                     <th>Week</th>
+                                                    <th>Current Week</th>
                                                     <th>Sunday</th>
                                                     <th>Monday</th>
                                                     <th>Tuesday</th>
@@ -162,9 +153,11 @@ require '../include/helpers/higherPageProtect.php'
                                                     <th>Thursday</th>
                                                     <th>Friday</th>
                                                     <th>Saturday</th>
+                                                    <th>Week ID</th>
                                                 </tr>
                                                 <tr>
                                                     <td>Week</td>
+                                                    <td>Current Week</td>
                                                     <td>Sunday</td>
                                                     <td>Monday</td>
                                                     <td>Tuesday</td>
@@ -172,6 +165,7 @@ require '../include/helpers/higherPageProtect.php'
                                                     <td>Thursday</td>
                                                     <td>Friday</td>
                                                     <td>Saturday</td>
+                                                    <td>Week ID</td>
                                                 </tr>
                                             </thead>
                                             
@@ -221,30 +215,6 @@ require '../include/helpers/higherPageProtect.php'
                         <label for="sunday">Sunday Date:</label>
                         <input type="date" name="sunday-date" class="form-control" id="sunday-date" placeholder="Sunday Date" required>
                     </div>
-                    <div class="form-group">
-                        <label for="moday-date">Monday Date:</label>
-                        <input type="date" name="monday-date" class="form-control" id="monday-date" placeholder="Monday Date" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="tuesday-date">Tuesday Date:</label>
-                        <input type="date" name="tuesday-date" class="form-control" id="tuesday-date" placeholder="Tuesday Date" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="wednesday-date">Wednesday Date:</label>
-                        <input type="date" name="wednesday-date" class="form-control" id="wednesday-date" placeholder="Wednesday Date" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="thursday-date">Thursday Date:</label>
-                        <input type="date" name="thursday-date" class="form-control" id="thursday-date" placeholder="Thursday Date" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="friday-date">Friday Date:</label>
-                        <input type="date" name="friday-date" class="form-control" id="friday-date" placeholder="Friday Date" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="saturday-date">Saturday Date:</label>
-                        <input type="date" name="saturday-date" class="form-control" id="saturday-date" placeholder="Saturday Date" required>
-                    </div>
                     <input type="submit" name="submit" id="modalFormSubmit" value="Add Week" class="btn btn-default"></input>
                     </form>
                   </div>
@@ -269,6 +239,8 @@ require '../include/helpers/higherPageProtect.php'
     <script src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
     
+    <!-- Custom helper functions -->
+    <script type="text/javascript" src="../js/helpers.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
@@ -292,43 +264,23 @@ require '../include/helpers/higherPageProtect.php'
             orderCellsTop: true,
             "columnDefs": [
             {
-                "targets": [8],
+                "targets": [9],
                 "visible": false,
                 "orderable": false
                 
-            }]
+            }], 
+            order: [[0, "asc"]]
             
         });
         var s = document.getElementById("table-semester");
         var selectedSemester = s.options[s.selectedIndex].value;
         var y = document.getElementById("table-year");
         var selectedYear = y.options[y.selectedIndex].value;
-        $.getJSON("../include/getWeek.php", 
-            {
-                semester: selectedSemester,
-                year: selectedYear
-            }, function(data) {
-                $.each(data, function(i, item) {
-                    tableWeek.row.add([
-                        item.week_number,
-                        item.sunday_date,
-                        item.monday_date,
-                        item.tuesday_date,
-                        item.wednesday_date,
-                        item.thursday_date,
-                        item.friday_date,
-                        item.saturday_date,
-                        item.week_id
-                    ]);
-                });
-            })
-            .fail(function() {
-                console.log("getJSON error");
-            });
+        tableWeek.clear();
 
-            setTimeout(function() {
-            tableWeek.draw();
-        }, 300);
+        getWeeks(function(newTable) {
+            newTable.draw();
+        }, selectedSemester, selectedYear, tableWeek);
      
         // Apply the search
         tableWeek.columns().every(function (index) {
@@ -347,91 +299,71 @@ require '../include/helpers/higherPageProtect.php'
             var selectedYear = y.options[y.selectedIndex].value;
             tableWeek.clear();
 
-           
-
-            //document.getElementById("panels-header").innerHTML = "HELLO";
-            
-            
-            $.getJSON("../include/getWeek.php", 
-            {
-                semester: selectedSemester,
-                year: selectedYear
-            }, function(data) {
-                $.each(data, function(i, item) {
-                    tableWeek.row.add([
-                        item.week_number,
-                        item.sunday_date,
-                        item.monday_date,
-                        item.tuesday_date,
-                        item.wednesday_date,
-                        item.thursday_date,
-                        item.friday_date,
-                        item.saturday_date,
-                        item.week_id
-                    ]);
-                });
-            })
-            .fail(function() {
-                console.log("getJSON error");
-            });
-
-            setTimeout(function() {
-            tableWeek.draw();
-        }, 300);
-            
-            
+            getWeeks(function(newTable) {
+                newTable.draw();
+            }, selectedSemester, selectedYear, tableWeek);            
         });
         
         $('#table-weeks tbody').on('dblclick', 'td', function(e) {
             var currentEle = $(this);
-            var value = $(this).html();
+            var valueT = $(this).html();
             var row = tableWeek.cell($(this)).index().row;
             var column = tableWeek.cell($(this)).index().column;
-            
-            var data = tableWeek.row(row).data();
-            var updateField = ['week_number', 'sunday_date', 'monday_date', 'tuesday_date', 'wednesday_date', 'thursday_date', 'friday_date', 'saturday_date'];
-            
-            $(currentEle).html('<input id="newvalue" class="thVal" type="text" value="' + value + '" />');
-            $(".thVal").focus();
-            $(".thVal").keyup(function (event) {
-            if (event.keyCode == 13) {
-               
-                data[column] =  document.getElementById("newvalue").value.trim();
-                tableWeek.row(row).remove();
-                $.post("../include/inlineUpdateWeek.php",
-                {
-                    id : data[8],
-                    field : updateField[column],
-                    newValue : data[column]
-                },
-              function(data){
-                if(data) {
-                  
-                }
-                });
-
-                setTimeout( function(){
-                tableWeek.row.add([
-                    data[0],
-                    data[1],
-                    data[2],
-                    data[3],
-                    data[4],
-                    data[5],
-                    data[6],
-                    data[7],
-                    data[8]
-
-                ]).draw();
-            }, 100);
+            var alterable = [0,1,2,3,4,5,6,7,8];
+            var selectable = [1];
+            if(alterable.indexOf(column) == -1) { //can't the other columns
+                return;
             }
-        });
+            var data = tableWeek.row(row).data();
+            var updateField = ['week_number', 'current_week', 'sunday_date', 'monday_date', 'tuesday_date', 'wednesday_date', 'thursday_date', 'friday_date', 'saturday_date', 'week_id'];
+            setTimeout(function() {
+                if(column == 1) {
+                    $(currentEle).html('<select id="newvalue" class="thVal">' +
+                                            '<option value="Yes"' + (valueT == "Yes" ? 'selected = selected' : '') + '>Yes</option>' +
+                                            '<option value="No"' + (valueT == "No" ? 'selected = selected' : '') + '>No</option>' +
+                                        '</select>');
+                }
+                else {
+                    $(currentEle).html('<input id="newvalue" class="thVal" type="text" value="' + valueT + '" />');
+                }
+                $(".thVal").focus();
+                if(selectable.indexOf(column) == -1) {
+                    var tmp = document.getElementById("newvalue").value;
+                    document.getElementById("newvalue").value = '';
+                    document.getElementById("newvalue").value = tmp;
+                }
+                $(".thVal").keydown(function (event) {
+                    if (event.keyCode == 13) {
+                        if(selectable.indexOf(column) == -1) {
+                            data[column] =  document.getElementById("newvalue").value.trim();
+                        }
+                        else {
+                            data[column] =  $('#newvalue option:selected').val().trim();
+                        }     
+                        tableWeek.row(row).remove();
+                        inLineUpdatePostData(function() {
+                            tableWeek.row.add([
+                                data[0],
+                                data[1],
+                                data[2],
+                                data[3],
+                                data[4],
+                                data[5],
+                                data[6],
+                                data[7],
+                                data[8],
+                                data[9],
+                            ]).draw()
+                        }, data[9], updateField[column], 'Programming_Weeks', data[column], 'week_id');
+                    }
+                });
+            },150);
             $('tbody td').not(currentEle).on('click', function() {
 
-                $(currentEle).html(value);
+                $(currentEle).html(valueT);
             });
             $(currentEle).on("dblclick", function() {
-                $(currentEle).html(value);
+                $(currentEle).html(valueT);
             });  
         });
 
@@ -449,30 +381,66 @@ require '../include/helpers/higherPageProtect.php'
             var formYear = document.getElementById("year-form").value;
             var formSemester = document.getElementById("semester-form").value;
             var formSun = document.getElementById("sunday-date").value;
-            var formMon = document.getElementById("monday-date").value;
-            var formTues = document.getElementById("tuesday-date").value;
-            var formWed = document.getElementById("wednesday-date").value;
-            var formThurs = document.getElementById("thursday-date").value;
-            var formFri = document.getElementById("friday-date").value;
-            var formSat = document.getElementById("saturday-date").value;
-            $.post("../include/insertProgrammingWeek.php",
-                {
-                    week : formWeek,
-                    year : formYear,
-                    semester : formSemester,
-                    sun : formSun,
-                    mon : formSun+1,
-                    tues : formTues,
-                    wed : formWed,
-                    thurs : formThurs,
-                    fri : formFri,
-                    sat : formSat
-                },
-              function(data){
-                if(data) {
-                  
-                }
-            });
+            var formSunYear = formSun.substring(0, 4);
+            var formSunMonth = formSun.substring(5,7);
+            var formSunDate = formSun.substring(8);
+            if(parseInt(formSunYear, 10) < 2015 || parseInt(formSunMonth, 10) > 12 || parseInt(formSunDate, 10) > 31) {
+                alert("Please input the date in the correct format: yyyy-mm-dd");
+                e.preventDefault();
+                return ;
+            }
+
+            var sunDate = new Date(formSunYear, formSunMonth-1, formSunDate);
+            var year = sunDate.getFullYear();
+            var month = sunDate.getMonth()+1;
+            var date = sunDate.getDate();
+            var tmp = sunDate;
+
+            if(isNaN(month) || isNaN(tmp) || isNaN(year)) {
+                alert("Please input the date in the correct format: yyyy-mm-dd");
+                e.preventDefault();
+                return ;
+            }
+
+            tmp.setDate(tmp.getDate() + 0);
+            month = tmp.getMonth()+1;
+            date = tmp.getDate();
+            sunDate = year + "-" + month  +"-" + date;
+
+            tmp.setDate(tmp.getDate() + 1);
+            month = tmp.getMonth()+1;
+            date = tmp.getDate();
+            var monDate = year + "-" + month  +"-" + date;
+
+            tmp.setDate(tmp.getDate() + 1);
+            month = tmp.getMonth()+1;
+            date = tmp.getDate();
+            var tuesDate = year + "-" + month  +"-" + date;
+
+            tmp.setDate(tmp.getDate() + 1);
+            month = tmp.getMonth()+1;
+            date = tmp.getDate();
+            var wedDate = year + "-" + month  +"-" + date;
+
+            tmp.setDate(tmp.getDate() + 1);
+            month = tmp.getMonth()+1;
+            date = tmp.getDate();
+            var thursDate = year + "-" + month  +"-" + date;
+
+            tmp.setDate(tmp.getDate() + 1);
+            month = tmp.getMonth()+1;
+            date = tmp.getDate();
+            var friDate = year + "-" + month  +"-" + date;
+
+            tmp.setDate(tmp.getDate() + 1);
+            month = tmp.getMonth()+1;
+            date = tmp.getDate();
+            var satDate = year + "-" + month  +"-" + date;
+            
+            insertProgrammingWeek(function() {
+                location.reload();
+            }, formWeek, formYear, formSemester, sunDate, monDate, tuesDate, wedDate, thursDate, friDate, satDate);
+            e.preventDefault();
         });
     });
     </script>

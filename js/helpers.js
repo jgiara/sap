@@ -100,7 +100,7 @@ function getAttendanceData(callback, programName, selectedSemester, selectedYear
 }
 
 function getWeekData(callback, selectedSemester, selectedYear) {
-    $.getJSON("../include/getWeek.php", 
+    $.getJSON("../include/getWeeks.php", 
         {
             semester: selectedSemester,
             year: selectedYear
@@ -116,6 +116,50 @@ function getWeekData(callback, selectedSemester, selectedYear) {
             });
             callback();
         });
+}
+
+function getWeeks(callback, selectedSemester, selectedYear, tableWeek) {
+    $.getJSON("../include/getWeeks.php", 
+    {
+        semester: selectedSemester,
+        year: selectedYear
+    }, function(data) {
+        $.each(data, function(i, item) {
+            tableWeek.row.add([
+                item.week_number,
+                item.current_week,
+                item.sunday_date,
+                item.monday_date,
+                item.tuesday_date,
+                item.wednesday_date,
+                item.thursday_date,
+                item.friday_date,
+                item.saturday_date,
+                item.week_id
+            ]);
+        });
+        callback(tableWeek);
+    });
+}
+
+function insertProgrammingWeek(callback, week, year, semester, sun, mon, tues, wed, thurs, fri, sat) {
+    $.post("../include/insertProgrammingWeek.php",
+    {
+        week : week,
+        year : year,
+        semester : semester,
+        sun : sun,
+        mon : mon,
+        tues : tues,
+        wed : wed,
+        thurs : thurs,
+        fri : fri,
+        sat : sat
+    },
+    function() {
+        callback();
+    });
+    
 }
 
 function inLineUpdatePostData(callback, uid, ufield, utable, unewValue, uwhereField) {
@@ -278,6 +322,84 @@ function editShifts(callback, ids, field, newValue) {
                 ids: ids,
                 field: field,
                 newValue: newValue
+            }, function() {
+                callback();
+            });
+}
+
+function getAllUsersForRoles(callback) {
+    $.getJSON("../include/getAllUsersForRoles.php", 
+        {
+            
+
+        }, function(data) {
+            var users = []
+            users[0] = [];
+            users[1] = [];
+            users[2] = [];
+            $.each(data, function(i, item) {
+                users[0][i] = item.email;
+                users[1][i] = item.first_name;
+                users[2][i] = item.last_name;
+            });
+            callback(users);
+        });
+}
+
+function getRoles(callback, tableRoles) {
+    $.getJSON("../include/getRoles.php", 
+        {
+            
+
+        }, function(data) {
+            $.each(data, function(i, item) {
+                tableRoles.row.add([
+                    item.first_name, 
+                    item.last_name,
+                    item.email,
+                    item.group_name,
+                    item.group_member_id
+                ]);
+            });
+            callback(tableRoles);
+        });
+}
+
+function getAllRoles(callback) {
+    $.getJSON("../include/getAllRoles.php", 
+        { 
+            
+
+        }, function(data) {
+            var roles = []
+            roles[0] = [];
+            roles[1] = [];
+            roles[2] = [];
+            roles[3] = [];
+            $.each(data, function(i, item) {
+                roles[0][i] = item.group_member_id;
+                roles[1][i] = item.first_name;
+                roles[2][i] = item.last_name;
+                roles[3][i] = item.group_name;
+            });
+            callback(roles);
+        });
+}
+
+function insertRoles(callback, emails, role) {
+    $.post("../include/insertRoles.php",
+            {
+                emails: emails,
+                role: role
+            }, function() {
+                callback();
+            });
+}
+
+function deleteRoles(callback, ids) {
+    $.post("../include/deleteRoles.php",
+            {
+                ids: ids
             }, function() {
                 callback();
             });
