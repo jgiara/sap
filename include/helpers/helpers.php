@@ -37,7 +37,7 @@
                 <a href='./involvement.php'>My Involvement</a>
             </li>
             <li>
-                <a href='./profile.php'>My Profile</a>
+                <a href='./myProfile.php'>My Profile</a>
             </li>
             <li>
                 <a href='./applications.php'>Applications</a>

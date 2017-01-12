@@ -23,6 +23,7 @@ if (isset ( $_POST ['signin'] )) {
       $_SESSION['Email'] =  $login; 
       $_SESSION['Roles'] = $users->get_roles($login);
       $_SESSION['New_Session'] = true;
+      $_SESSION['Session_Limit'] = strtotime("+2 hours");
         header('Location: ./pages/dashboard.php');
         
         exit();

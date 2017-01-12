@@ -37,8 +37,8 @@ function getVolunteerData(callback, programName, selectedSemester, selectedYear,
                     }
                 }
                 tableVols.row.add([
-                    "<a id='test' href='./dashboard.php'>"+ item.first_name + "</a>",
-                    item.last_name,
+                    "<a id='test' href='./profile.php?userEmail=" + item.email + "'>"+ item.first_name + "</a>",
+                    "<a id='test' href='./profile.php?userEmail=" + item.email + "'>"+ item.last_name + "</a>",
                     item.email,
                     item.class,
                     item.school,
@@ -73,8 +73,8 @@ function getAttendanceData(callback, programName, selectedSemester, selectedYear
         }, function(data) {
             $.each(data, function(i, item) {
                 tableAttn.row.add([
-                    "<a id='test' href='./dashboard.php'>"+ item.first_name + "</a>",
-                    item.last_name,
+                    "<a id='test' href='./profile.php?userEmail=" + item.email + "'>"+ item.first_name + "</a>",
+                    "<a id='test' href='./profile.php?userEmail=" + item.email + "'>"+ item.last_name + "</a>",
                     item.email,
                     item.class,
                     item.school,
@@ -90,6 +90,7 @@ function getAttendanceData(callback, programName, selectedSemester, selectedYear
                     item.present,
                     item.gave_panel_tour,
                     item.note,
+                    item.week_number,
                     item.eagle_id,
                     item.attendance_id
                 ]);
@@ -104,6 +105,7 @@ function getWeekData(callback, selectedSemester, selectedYear) {
             semester: selectedSemester,
             year: selectedYear
         }, function(data) {
+            document.getElementById("table-week").innerHTML += "<option value='all'>All Weeks</option>";
             $.each(data, function(i, item) {
                 if(item.current_week == 'Yes') {
                      document.getElementById("table-week").innerHTML += "<option value ='" + item.week_id + "' selected='selected'>Week " + item.week_number + ": " + item.sunday_date.substring(5) + " - " + item.saturday_date.substring(5) + "</option>"; 
@@ -302,14 +304,14 @@ $('#export-excel-volunteers').on("click", function(e) {
     var selectedSemester = s.options[s.selectedIndex].value;
     var y = document.getElementById("table-year");
     var selectedYear = y.options[y.selectedIndex].value;
-    $('#table-volunteers').tableExport({type:'xlsx', fileName: 'Panels Volunteers_' + selectedSemester + selectedYear});
+    $('#table-volunteers').tableExport({type:'xlsx', fileName: document.getElementById("programName").value + ' Volunteers_' + selectedSemester + selectedYear});
 });
 $('#export-csv-volunteers').on("click", function(e) {
     var s = document.getElementById("table-semester");
     var selectedSemester = s.options[s.selectedIndex].value;
     var y = document.getElementById("table-year");
     var selectedYear = y.options[y.selectedIndex].value;
-    $('#table-volunteers').tableExport({type:'csv', fileName: 'Panels Volunteers_' + selectedSemester + selectedYear});
+    $('#table-volunteers').tableExport({type:'csv', fileName: document.getElementById("programName").value + ' Volunteers_' + selectedSemester + selectedYear});
 });
 $('#export-pdf-volunteers').on("click", function(e) {
     var s = document.getElementById("table-semester");
@@ -321,7 +323,7 @@ $('#export-pdf-volunteers').on("click", function(e) {
                     jspdf: {margins: {left:30, right:30, top:40, bottom:20},
                             autotable: {styles: {overflow: 'linebreak'},
                                         tableWidth: 'wrap'}},
-                    fileName: 'Panels Volunteers_' + selectedSemester + selectedYear});
+                    fileName: document.getElementById("programName").value + ' Volunteers_' + selectedSemester + selectedYear});
 });
 $('#export-excel-attendance').on("click", function(e) {
     var s = document.getElementById("table-semester");
@@ -338,7 +340,7 @@ $('#export-excel-attendance').on("click", function(e) {
     else {
         selectedDay = '_' + selectedDay;
     }
-    $('#table-attendance').tableExport({type:'xlsx', fileName: 'Panels Attendance_' + selectedSemester + selectedYear + '_Week' + selectedWeek + selectedDay});
+    $('#table-attendance').tableExport({type:'xlsx', fileName: document.getElementById("programName").value + ' Attendance_' + selectedSemester + selectedYear + '_Week' + selectedWeek + selectedDay});
 });
 $('#export-csv-attendance').on("click", function(e) {
     var s = document.getElementById("table-semester");
@@ -355,7 +357,7 @@ $('#export-csv-attendance').on("click", function(e) {
     else {
         selectedDay = '_' + selectedDay;
     }
-    $('#table-attendance').tableExport({type:'csv', fileName: 'Panels Attendance_' + selectedSemester + selectedYear + '_Week' + selectedWeek + selectedDay});
+    $('#table-attendance').tableExport({type:'csv', fileName: document.getElementById("programName").value + ' Attendance_' + selectedSemester + selectedYear + '_Week' + selectedWeek + selectedDay});
 });
 $('#export-pdf-attendance').on("click", function(e) {
     var s = document.getElementById("table-semester");
@@ -377,5 +379,5 @@ $('#export-pdf-attendance').on("click", function(e) {
                     jspdf: {margins: {left:30, right:30, top:40, bottom:20},
                             autotable: {styles: {overflow: 'linebreak'},
                                         tableWidth: 'wrap'}},
-                    fileName: 'Panels Attendance_' + selectedSemester + selectedYear + '_Week' + selectedWeek + selectedDay});
+                    fileName: document.getElementById("programName").value + ' Attendance_' + selectedSemester + selectedYear + '_Week' + selectedWeek + selectedDay});
 });

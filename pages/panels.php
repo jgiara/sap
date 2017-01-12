@@ -6,6 +6,7 @@ $general->logged_out_protect();
 require '../include/helpers/userInfo.php';
 require '../include/helpers/helpers.php';
 require '../include/helpers/pageProtect.php';
+echo '<input type="hidden" id="programName" value="Panels">';
 ?>
 
 <!DOCTYPE html>
@@ -135,7 +136,7 @@ require '../include/helpers/pageProtect.php';
                                 </div>
                                 <div class="col-xs-3">
                                     <select name="table-week" class="form-control form-control-xs" id="table-week" style="text-align: right;">
-                                      
+                                        
                                     </select>
 
                                 </div>
@@ -254,6 +255,7 @@ require '../include/helpers/pageProtect.php';
                                                     <th>Present</th>
                                                     <th>Gave Panel</th>
                                                     <th>Notes</th>
+                                                    <th>Week Number</th>
                                                     <th>Eagle ID</th>
                                                     <th>Attendance ID</th>
                                                 </tr>
@@ -275,6 +277,7 @@ require '../include/helpers/pageProtect.php';
                                                     <td>Present</td>
                                                     <td>Gave Panel</td>
                                                     <td>Notes</td>
+                                                    <td>Week Number</td>
                                                     <td>Eagle ID</td>
                                                     <td>Attendance ID</td>
                                                 </tr>
@@ -390,8 +393,9 @@ require '../include/helpers/pageProtect.php';
                                 <option value="8">State</option>
                                 <option value="9">AHANA</option>
                                 <option value="10">Transfer</option>
-                                <option value="17">Eagle ID</option>
-                                <option value="18">Attendance ID</option>
+                                <option value="17">Week Number</option>
+                                <option value="18">Eagle ID</option>
+                                <option value="19">Attendance ID</option>
                             </select>
                         </td>
                     </tr>
@@ -1024,9 +1028,8 @@ require '../include/helpers/pageProtect.php';
             orderCellsTop: true,
             columnDefs: [
             {
-                targets: [2,3,4,5,6,7,8,9,10,17,18],
-                visible: false,
-                orderable: false
+                targets: [2,3,4,5,6,7,8,9,10,17,18,19],
+                visible: false
                 
             },
             {
@@ -1425,7 +1428,7 @@ require '../include/helpers/pageProtect.php';
                 return;
             }
             var data = tableAttn.row(row).data();
-            var updateField = ['first_name','last_name','email','class','school','major','minor','hometown','state_country','ahana','transfer','shift_day','shift_time','alternate_number','present','gave_panel_tour','note','eagle_id','attendance_id'];
+            var updateField = ['first_name','last_name','email','class','school','major','minor','hometown','state_country','ahana','transfer','shift_day','shift_time','alternate_number','present','gave_panel_tour','note', 'week_number', 'eagle_id','attendance_id'];
             setTimeout(function() {
                 if(column == 11) {
                     $(currentEle).html('<select id="newvalue" class="thVal">' +
@@ -1502,9 +1505,10 @@ require '../include/helpers/pageProtect.php';
                                 data[15],
                                 data[16],
                                 data[17],
-                                data[18]
+                                data[18],
+                                data[19]
                             ]).draw()
-                        }, data[18], updateField[column], 'Attendance', data[column], 'attendance_id');
+                        }, data[19], updateField[column], 'Attendance', data[column], 'attendance_id');
                     }
                 });
             },150);
@@ -1657,6 +1661,7 @@ require '../include/helpers/pageProtect.php';
             var selectedYear = y.options[y.selectedIndex].value;
             var w = document.getElementById("table-week");
             var selectedWeek = w.options[w.selectedIndex].text;
+            var selectedWeekValue = w.options[w.selectedIndex].value;
             var d = document.getElementById("table-day");
             var selectedDay = d.options[d.selectedIndex].text;
             document.getElementById("program-form-shifts-auto").value = programName;
@@ -1690,11 +1695,17 @@ require '../include/helpers/pageProtect.php';
         });
 
         $("#newShiftsAutoForm").on("submit", function(e) {
+            var w = document.getElementById("table-week");
+            var selectedWeekValue = w.options[w.selectedIndex].value;
+            if(selectedWeekValue == 'all') {
+                alert("You can not enter shifts for the selected week 'All Weeks'");
+                e.preventDefault();
+                return ;
+            }
             if (document.getElementById('confirmation-no-shifts-auto').checked) {
                 e.preventDefault();
                 return ;
             }
-                
             var w = document.getElementById("table-week");
             var selectedWeek = w.options[w.selectedIndex].value;
         
@@ -1709,6 +1720,13 @@ require '../include/helpers/pageProtect.php';
         });
 
         $("#newShiftsManualForm").on("submit", function(e) {
+            var w = document.getElementById("table-week");
+            var selectedWeekValue = w.options[w.selectedIndex].value;
+            if(selectedWeekValue == 'all') {
+                alert("You can not enter shifts for the selected week 'All Weeks'");
+                e.preventDefault();
+                return ;
+            }
             if(verifyData('shift_time', document.getElementById("time-form-shifts-manual").value)) {
                 var selectedOpts = $('#tomanualshiftslstBox option');
                 if (selectedOpts.length == 0) {
@@ -1895,15 +1913,11 @@ require '../include/helpers/pageProtect.php';
         $("#autoShiftsEntryButton").on("click", function() {
             $("#autoShiftsEntry").show();
             $("#manualShiftsEntry").hide();
-            //$("#file-form").prop('required', true);
-            //$("#test-form").prop('required', false);
         });
 
         $("#manualShiftsEntryButton").on("click", function() {
             $("#manualShiftsEntry").show();
             $("#autoShiftsEntry").hide();
-            //$("#test-form").prop('required', true);
-            //$("#file-form").prop('required', false);
         });
 
         $("#editDayShiftsButton").on("click", function() {
@@ -1991,6 +2005,12 @@ require '../include/helpers/pageProtect.php';
         });
 
         $("#editShiftsSubmit").on("click", function() {
+            var w = document.getElementById("table-week");
+            var selectedWeekValue = w.options[w.selectedIndex].value;
+            if(selectedWeekValue == 'all') {
+                alert("You can not edit shifts for the selected week 'All Weeks'");
+                return ;
+            }
             var edits = document.getElementById("editChoiceShifts").value;
             var ids = [];
             var selectedOpts = $('#toeditshiftslstBox option');

@@ -30,7 +30,7 @@
 	    	$file = fopen("../../resources/uploads/dataFile.csv","r");
 	    	$headers = fgetcsv($file);
 	    	$emails = $fns->getAllEmails();
-	    	$members = $fns->getUsersInProgram($program, $semester, $year);
+	    	$members = $fns->getUsersInProgramForShifts($program, $semester, $year);
 	    	$currentMembers = [];
 	    	$added = [];
 	    	$index = 0;

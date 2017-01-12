@@ -5,8 +5,6 @@ require_once '../../resources/init.php';
 $general->logged_out_protect();
 require '../include/helpers/userInfo.php';
 require '../include/helpers/helpers.php';
-$userEmail = $_GET['userEmail'];
-echo "<input type='hidden' id='userEmail' value=$userEmail>";
 ?>
 
 <!DOCTYPE html>
@@ -395,7 +393,6 @@ echo "<input type='hidden' id='userEmail' value=$userEmail>";
     
     <script>
     $(document).ready(function() {
-        document.getElementById("info-fn").value = document.getElementById("userEmail").value;
         var s = document.getElementById("table-semester");
         var selectedSemester = s.options[s.selectedIndex].value;
         var y = document.getElementById("table-year");
