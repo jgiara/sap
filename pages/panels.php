@@ -2059,6 +2059,21 @@ require '../include/helpers/pageProtect.php';
                 location.reload();
             }, ids, field, newValue);
         });
+
+        //access to certain parts of page
+        if(!<?php 
+                if((in_array('Admin', $roles)) || (in_array('Council', $roles)) || (in_array('Advisor', $roles))) {
+                    echo "true";
+                }
+                else {
+                    echo "false";
+                } 
+                ?>) {
+                $("#edit-members-modal-button").hide();
+                $("#new-members-modal-button").hide();
+                $("#edit-shifts-modal-button").hide();
+                $("#new-shifts-modal-button").hide();
+            }
     });
     </script>
 
