@@ -2,22 +2,17 @@
 
 	require_once '../../resources/initTableFunctions.php';
 
-	$emails = $_POST['emails'];
-	$program = $_POST['program'];
-	$semester = $_POST['semester'];
-	$year = $_POST['year'];
+	$ids = $_POST['ids'];
 	$field = $_POST['field'];
 	$newValue = $_POST['newValue'];
 
 	if($field == 'delete') {
-		foreach($emails as $email) {
-				$id = $fns->getProgramMemberID($email, $program, $semester, $year);
+		foreach($ids as $id) {
 				$fns->deleteProgramMembers($id);
 			}
 	}
 	else {
-		foreach($emails as $email) {
-				$id = $fns->getProgramMemberID($email, $program, $semester, $year);	
+		foreach($ids as $id) {
 				$fns->editProgramMembers($id, $field, $newValue);
 			}
 	}

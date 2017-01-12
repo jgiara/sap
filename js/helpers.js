@@ -167,6 +167,26 @@ function getUsersInProgram(callback, programName, selectedSemester, selectedYear
             vols[1] = [];
             vols[2] = [];
             $.each(data, function(i, item) {
+                vols[0][i] = item.member_id;
+                vols[1][i] = item.first_name;
+                vols[2][i] = item.last_name;
+            });
+            callback(vols);
+        });
+}
+
+function getUsersInProgramForShifts(callback, programName, selectedSemester, selectedYear) {
+    $.getJSON("../include/getUsersInProgramForShifts.php", 
+        {
+            program: programName,
+            semester: selectedSemester,
+            year: selectedYear
+        }, function(data) {
+            var vols = []
+            vols[0] = [];
+            vols[1] = [];
+            vols[2] = [];
+            $.each(data, function(i, item) {
                 vols[0][i] = item.email;
                 vols[1][i] = item.first_name;
                 vols[2][i] = item.last_name;
@@ -211,13 +231,26 @@ function insertProgramMembersManualShift(callback, emails, program, semester, ye
             });
 }
 
-function editProgramMembers(callback, emails, programName, semester, year, field, newValue) {
-    $.post("../include/editProgramMembers.php",
+function insertManualShifts(callback, emails, program, semester, year, week, day, time, notes) {
+    $.post("../include/insertManualShifts.php",
             {
                 emails: emails,
-                program: programName,
+                program: program,
                 semester: semester, 
                 year: year,
+                week: week,
+                day: day,
+                time: time,
+                notes: notes
+            }, function() {
+                callback();
+            });
+}
+
+function editProgramMembers(callback, ids, field, newValue) {
+    $.post("../include/editProgramMembers.php",
+            {
+                ids: ids,
                 field: field,
                 newValue: newValue
             }, function() {

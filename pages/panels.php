@@ -254,8 +254,8 @@ require '../include/helpers/pageProtect.php';
                                                     <th>Present</th>
                                                     <th>Gave Panel</th>
                                                     <th>Notes</th>
-                                                    <th>Eagle Id</th>
-                                                    <th>Attendance Id</th>
+                                                    <th>Eagle ID</th>
+                                                    <th>Attendance ID</th>
                                                 </tr>
                                                 <tr>
                                                     <td>First Name</td>
@@ -275,8 +275,8 @@ require '../include/helpers/pageProtect.php';
                                                     <td>Present</td>
                                                     <td>Gave Panel</td>
                                                     <td>Notes</td>
-                                                    <td>Eagle Id</td>
-                                                    <td>Attendance Id</td>
+                                                    <td>Eagle ID</td>
+                                                    <td>Attendance ID</td>
                                                 </tr>
                                             </thead>
                                             
@@ -312,7 +312,7 @@ require '../include/helpers/pageProtect.php';
                         <tr>
                             <td>
                                 <b>Displayed:</b><br/>
-                               <select multiple="multiple" size='7' id='volslstBox1'>
+                               <select multiple="multiple" size='10' id='volslstBox1'>
                                   <option value="0">First Name</option>
                                   <option value="1">Last Name</option>
                                   <option value="3">Class</option>
@@ -328,7 +328,7 @@ require '../include/helpers/pageProtect.php';
                         </td>
                         <td>
                             <b>Not Displayed: </b><br/>
-                            <select multiple="multiple" size='7' id='volslstBox2'> 
+                            <select multiple="multiple" size='10' id='volslstBox2'> 
                                 <option value="2">Email</option>
                                 <option value="5">Major</option>
                                 <option value="6">Minor</option>
@@ -363,7 +363,7 @@ require '../include/helpers/pageProtect.php';
                         <tr>
                             <td>
                                 <b>Displayed:</b><br/>
-                               <select multiple="multiple" size='7' id='attnlstBox1'>
+                               <select multiple="multiple" size='10' id='attnlstBox1'>
                                   <option value="0">First Name</option>
                                   <option value="1">Last Name</option>
                                   <option value="11">Shift Day</option>
@@ -380,7 +380,7 @@ require '../include/helpers/pageProtect.php';
                         </td>
                         <td>
                             <b>Not Displayed: </b><br/>
-                            <select multiple="multiple" size='7' id='attnlstBox2'> 
+                            <select multiple="multiple" size='10' id='attnlstBox2'> 
                                 <option value="2">Email</option>
                                 <option value="3">Class</option>
                                 <option value="4">School</option>
@@ -688,8 +688,8 @@ require '../include/helpers/pageProtect.php';
                             <table style='margin-left:150px;'>
                                 <tr>
                                     <td>
-                                        <b>Program Members:</b><br/>
-                                       <select multiple="multiple" size='10' id='manualshiftlstBox'>
+                                        <b>Members:</b><br/>
+                                       <select multiple="multiple" size='10' id='manualshiftslstBox'>
                                         </select>
                                         
                                 </td>
@@ -699,7 +699,7 @@ require '../include/helpers/pageProtect.php';
                                 </td>
                                 <td>
                                     <b>Shifts to Add:</b><br/>
-                                    <select multiple="multiple" size='10' id='tomanualshitslstBox'> 
+                                    <select multiple="multiple" size='10' id='tomanualshiftslstBox'> 
                                     </select>
                                 </td>
                             </tr>
@@ -707,7 +707,7 @@ require '../include/helpers/pageProtect.php';
                         </br>
                              <div class="form-group">
                                 <label for="day-form-shifts-manual">Shift Day:</label>
-                                <select name="day-form-shifts-manual" class="form-control" id="day-form-shifts-auto" required>
+                                <select name="day-form-shifts-manual" class="form-control" id="day-form-shifts-manual" required>
                                     <option disabled selected value> -- Select a day -- </option>
                                     <option value="Sunday">Sunday</option>
                                     <option value="Monday">Monday</option>
@@ -724,7 +724,7 @@ require '../include/helpers/pageProtect.php';
                             </div> 
                             <div class="form-group">
                                 <label for="notes-form-shifts-manual">Notes: **Optional** (Extra, Group, etc.)</label>
-                                <input type="text" name="notes-form-shifts-manual" class="form-control" id="notes-form-shifts-manual" required>
+                                <input type="text" name="notes-form-shifts-manual" class="form-control" id="notes-form-shifts-manual">
                             </div>    
                             <input type="submit" name="newShiftsManualFormSubmit" id="newShiftsManualFormSubmit" value="Add Shifts" class="btn btn-danger"></input>
                         </form>
@@ -942,6 +942,7 @@ require '../include/helpers/pageProtect.php';
                 targets: [11],
                 render: function(data, type, row) {
                     if(type === 'sort') {
+                        alert(data);
                         switch(data) {
                             case "Sunday": return 0; break;
                             case "Monday": return 1; break;
@@ -1030,7 +1031,7 @@ require '../include/helpers/pageProtect.php';
                 
             },
             {
-                targets: [12],
+                targets: [11],
                 render: function(data, type, row) {
                     if(type === 'sort') {
                         switch(data) {
@@ -1207,7 +1208,37 @@ require '../include/helpers/pageProtect.php';
             }
         });
 
+        $('#btnRightManualShift').on("click", function() {
+            var selectedOpts = $('#manualshiftslstBox option:selected');
+            if (selectedOpts.length == 0) {
+            }
+            else {
+                $('#tomanualshiftslstBox').append($(selectedOpts).clone());
+                $(selectedOpts).remove();
+                var my_options = $("#tomanualshiftslstBox option");
 
+                my_options.sort(function(a,b) {
+                    return a.id > b.id;
+                });
+                $("#tomanualshiftslstBox").empty().append(my_options);
+            }
+        });
+
+        $('#btnLeftManualShift').on("click", function() {
+            var selectedOpts = $('#tomanualshiftslstBox option:selected');
+            if (selectedOpts.length == 0) {
+            }
+            else {
+                $('#manualshiftslstBox').append($(selectedOpts).clone());
+                $(selectedOpts).remove();
+                var my_options = $("#manualshiftslstBox option");
+
+                my_options.sort(function(a,b) {
+                    return a.id > b.id;
+                });
+                $("#manualshiftslstBox").empty().append(my_options);
+            }
+        });
 
         $("#fileMethod").hide();
         $("#manualMethod").hide();
@@ -1620,6 +1651,77 @@ require '../include/helpers/pageProtect.php';
             
         });
 
+        $("#new-shifts-modal-button").on("click", function() {
+            var s = document.getElementById("table-semester");
+            var selectedSemester = s.options[s.selectedIndex].value;
+            var y = document.getElementById("table-year");
+            var selectedYear = y.options[y.selectedIndex].value;
+            var w = document.getElementById("table-week");
+            var selectedWeek = w.options[w.selectedIndex].text;
+            var d = document.getElementById("table-day");
+            var selectedDay = d.options[d.selectedIndex].text;
+            document.getElementById("program-form-shifts-auto").value = programName;
+            document.getElementById("year-form-shifts-auto").value = selectedYear;
+            document.getElementById("semester-form-shifts-auto").value = selectedSemester;
+            document.getElementById("week-form-shifts-auto").value = selectedWeek;
+            document.getElementById("program-form-shifts-manual").value = programName;
+            document.getElementById("year-form-shifts-manual").value = selectedYear;
+            document.getElementById("semester-form-shifts-manual").value = selectedSemester;
+            document.getElementById("week-form-shifts-manual").value = selectedWeek;
+            
+            getUsersInProgramForShifts(function(b) {
+                var members = b;
+                var memberSelect = document.getElementById("manualshiftslstBox");
+                $("#manualshiftslstBox").empty();
+                $("#tomanualshiftslstBox").empty();
+                for(var i = 0; i < members[0].length; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = members[0][i];
+                    opt.id = members[2][i];
+                    opt.innerHTML = members[2][i] + ", " + members[1][i];
+                    memberSelect.appendChild(opt);
+                }
+                var my_options = $("#manualshiftslstBox option");
+                my_options.sort(function(a,b) {
+                    return a.id > b.id;
+                });
+                $("#manualshiftslstBox").empty().append(my_options);
+            }, programName, selectedSemester, selectedYear);
+            
+        });
+
+        $("#newShiftsManualForm").on("submit", function(e) {
+            if(verifyData('shift_time', document.getElementById("time-form-shifts-manual").value)) {
+                var selectedOpts = $('#tomanualshiftslstBox option');
+                if (selectedOpts.length == 0) {
+                    alert("You must choose at least one person to add");
+                    e.preventDefault();
+                }
+                else {
+                    var w = document.getElementById("table-week");
+                    var selectedWeek = w.options[w.selectedIndex].value;
+                    var emails = [];
+                    for(var i=0; i < selectedOpts.length; i++) {
+                        emails[i] = selectedOpts[i].value;
+                    }
+                    var program = document.getElementById("program-form-shifts-manual").value;
+                    var semester = document.getElementById("semester-form-shifts-manual").value;
+                    var year = document.getElementById("year-form-shifts-manual").value;
+                    var week = selectedWeek;
+                    var day = document.getElementById("day-form-shifts-manual").value;
+                    var time = document.getElementById("time-form-shifts-manual").value;
+                    var notes = document.getElementById("notes-form-shifts-manual").value;
+                    insertManualShifts(function() {
+                        location.reload();
+                    }, emails, program, semester, year, week, day, time, notes);
+                    e.preventDefault();
+                }
+            }
+            else {
+                e.preventDefault();
+            }
+        });
+
         $("#fileMethodButton").on("click", function() {
             $("#fileMethod").show();
             $("#manualMethod").hide();
@@ -1706,17 +1808,14 @@ require '../include/helpers/pageProtect.php';
 
         $("#editMembersSubmit").on("click", function() {
             var edits = document.getElementById("editChoice").value;
-            var program = document.getElementById("program-edit-members").value;
-            var semester = document.getElementById("semester-edit-members").value;
-            var year = document.getElementById("year-edit-members").value;
-            var emails = [];
+            var ids = [];
             var selectedOpts = $('#toeditmemberlstBox option');
             if (selectedOpts.length == 0) {
                 alert("You must choose at least one member");
                 return ;
             }
             for(var i=0; i < selectedOpts.length; i++) {
-                emails[i] = selectedOpts[i].value;
+                ids[i] = selectedOpts[i].value;
             }
             var field;
             var newValue;
@@ -1772,7 +1871,7 @@ require '../include/helpers/pageProtect.php';
             }
             editProgramMembers(function() {
                 location.reload();
-            }, emails, programName, semester, year, field, newValue);
+            }, ids, field, newValue);
         });
 
         $("#autoShiftsEntryButton").on("click", function() {
