@@ -5,7 +5,7 @@ require_once '../../resources/init.php';
 $general->logged_out_protect();
 require '../include/helpers/userInfo.php';
 require '../include/helpers/helpers.php';
-require '../include/helpers/higherPageProtect.php'
+require '../include/helpers/highestPageProtect.php'
 ?>
 
 <!DOCTYPE html>

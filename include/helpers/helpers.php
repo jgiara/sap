@@ -95,8 +95,10 @@
                 if((in_array('Advisor', $roles)) || (in_array('Council', $roles)) || (in_array('Admin', $roles))) {
                   echo  "<li>
                         <a href='#' data-toggle='collapse' data-target='#submenu'>Administration<span class='fa arrow'></span></a>
-                        <ul class='nav nav-second-level collapse' id='submenu'>
-                            <li>
+                        <ul class='nav nav-second-level collapse' id='submenu'>";
+                }
+                if((in_array('Advisor', $roles)) || in_array('Admin', $roles)) {
+                   echo    "<li>
                                 <a href='./weeks.php'>Weeks</a>
                             </li>
                             <li>
@@ -112,6 +114,13 @@
                                 <a href='./programs.php'>Change Class Status</a>
                             </li>
 
+                        </ul>
+                    </li>";     
+                }
+                else if(in_array('Council', $roles)){
+                    echo    "<li>
+                                <a href='./passwordReset.php'>Reset User Password</a>
+                            </li>
                         </ul>
                     </li>";     
                 }    

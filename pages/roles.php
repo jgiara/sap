@@ -5,7 +5,7 @@ require_once '../../resources/init.php';
 $general->logged_out_protect();
 require '../include/helpers/userInfo.php';
 require '../include/helpers/helpers.php';
-require '../include/helpers/higherPageProtect.php'
+require '../include/helpers/highestPageProtect.php'
 ?>
 
 <!DOCTYPE html>
@@ -325,15 +325,33 @@ require '../include/helpers/higherPageProtect.php'
                             data[column] =  $('#newvalue option:selected').val().trim();
                         }     
                         tableRoles.row(row).remove();
+                        var newRole = '';
+                        switch(data[column]) {
+                            case '1': {
+                                newRole = 'Volunteer';
+                            } break;
+                            case '2': {
+                                newRole = 'Staff';
+                            } break;
+                            case '3': {
+                                newRole = 'Advisor';
+                            } break;
+                            case '4': {
+                                newRole = 'Council';
+                            } break;
+                            case '5': {
+                                newRole = 'Admin';
+                            } break;
+                        }
                         inLineUpdatePostData(function() {
                             tableRoles.row.add([
                                 data[0],
                                 data[1],
                                 data[2],
-                                data[3],
+                                newRole,
                                 data[4]
                             ]).draw()
-                        }, data[9], updateField[column], 'Group_Members', data[column], 'group_member_id');
+                        }, data[4], updateField[column], 'Group_Members', data[column], 'group_member_id');
                     }
                 });
             },150);
