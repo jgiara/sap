@@ -405,6 +405,91 @@ function deleteRoles(callback, ids) {
             });
 }
 
+function changePassword(callback, emails, password) {
+    $.post("../include/changePassword.php",
+            {
+                emails: emails,
+                password: password
+            }, function() {
+                callback();
+            });
+}
+
+function getPrograms(callback, selectedSemester, selectedYear, tableProgram) {
+    $.getJSON("../include/getPrograms.php",  {
+            semester: selectedSemester,
+            year: selectedYear
+          }, 
+          function(data) {
+            $.each( data, function( i, item ) {
+                var req = item[3];
+                if(req != null) {
+                    for (var i = 0; i < req.length; i++) {
+                        if(req.charAt(i) == '\n') {
+                            req = req.substr(0, i).concat('<br>', req.substr(i+1));
+                        }
+                    }
+                }
+                tableProgram.row.add([
+                    item[0],
+                    item[1] + " " + item[2],
+                    req,
+                    item[5],
+                    item[4],
+                ]);
+               
+              }); 
+            callback(tableProgram);
+          });
+}
+
+function insertProgram(callback, programName, year, semester, coordinator) {
+    $.post("../include/insertProgram.php",
+            {
+                program: programName,
+                year: year,
+                semester,
+                coordinator
+            }, function() {
+                callback();
+            });
+}
+
+function getCoordinatorsForYear(callback, year, semester) {
+    $.getJSON("../include/getCoordinatorsForYear.php", 
+        {
+            year: year,
+            semester: semester
+
+        }, function(data) {
+            var users = []
+            users[0] = [];
+            users[1] = [];
+            users[2] = [];
+            $.each(data, function(i, item) {
+                users[0][i] = item.council_member_id;
+                users[1][i] = item.first_name;
+                users[2][i] = item.last_name;
+            });
+            callback(users);
+        });
+}
+
+function getExistingProgramsForSemester(callback, year, semester) {
+    $.getJSON("../include/getExistingProgramsForSemester.php", 
+        {
+            year: year,
+            semester: semester
+
+        }, function(data) {
+            var users = []
+            $.each(data, function(i, item) {
+                users[i] = item.program_name;
+            });
+            callback(users);
+        });
+}
+
 function verifyData(field, value) {
     switch(field) {
         case 'shift_time': {

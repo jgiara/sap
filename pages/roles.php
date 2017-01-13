@@ -176,7 +176,7 @@ require '../include/helpers/highestPageProtect.php'
                                     <option value="5">Admin</option>
                                 </select>
                             </div>      
-                            <input type="submit" name="submit" id="newRolesSubmit" value="Add Roles" class="btn btn-default"></input>
+                            <input type="submit" name="submit" id="newRolesSubmit" value="Add Roles" class="btn btn-danger"></input>
                         </form>
                   </div>
                 <div class="modal-footer">
@@ -216,7 +216,7 @@ require '../include/helpers/highestPageProtect.php'
                                 </td>
                             </tr>
                             </table>      
-                            <input type="submit" name="submit" id="deleteRolesSubmit" value="Delete Roles" class="btn btn-default"></input>
+                            <input type="submit" name="submit" id="deleteRolesSubmit" value="Delete Roles" class="btn btn-danger"></input>
                         </form>
                   </div>
                 <div class="modal-footer">

@@ -5,7 +5,7 @@ require_once '../../resources/init.php';
 $general->logged_out_protect();
 require '../include/helpers/userInfo.php';
 require '../include/helpers/helpers.php';
-require '../include/helpers/highestPageProtect.php'
+require '../include/helpers/higherPageProtect.php'
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +19,7 @@ require '../include/helpers/highestPageProtect.php'
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Week Administration - Student Admission Program - Boston College</title>
+    <title>Program Administration - Student Admission Program - Boston College</title>
 
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -81,7 +81,7 @@ require '../include/helpers/highestPageProtect.php'
         <div id="page-wrapper" style="overflow-x: auto;">
             <div class="row" style="maring-bottom: 0;">
                 <div class="col-lg-12">
-                    <h3 style="margin-top: 60px; margin-bottom: 0;" class="page-header" id="panels-header">Week Administration</h3>
+                    <h3 style="margin-top: 60px; margin-bottom: 0;" class="page-header" id="panels-header">Program Administration</h3>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -136,40 +136,30 @@ require '../include/helpers/highestPageProtect.php'
 
                                 </div>
                                 <button class="btn btn-primary" id="semester-submit">Go</button>
-                                <button class="btn btn-md btn-success" id="openModalButton" style="margin-left: 10px;" data-toggle="modal" data-target="#addWeekModal">Add New Week</button>
+                                <button class="btn btn-md btn-success" id="openModalButton" style="margin-left: 10px;" data-toggle="modal" data-target="#addProgramModal">Add New Program</button>
                             </br></br>
 
                             <!-- Tab panes -->
                             
-                                        <table class="table table-striped table-bordered table-hover" id="table-weeks" style="font-size: 13px; width: 100%;">
+                                        <table class="table table-striped table-bordered table-hover" id="table-programs" style="font-size: 13px; width: 100%;">
                                             <thead>
                                                 <tr>
-                                                    <th>Week</th>
-                                                    <th>Current Week</th>
-                                                    <th>Sunday</th>
-                                                    <th>Monday</th>
-                                                    <th>Tuesday</th>
-                                                    <th>Wednesday</th>
-                                                    <th>Thursday</th>
-                                                    <th>Friday</th>
-                                                    <th>Saturday</th>
-                                                    <th>Week ID</th>
+                                                    <th>Program</th>
+                                                    <th>Coordinator</th>
+                                                    <th>Requirements</th>
+                                                    <th>Number of Volunteers</th>
+                                                    <th>Program ID</th>
                                                 </tr>
                                                 <tr>
-                                                    <td>Week</td>
-                                                    <td>Current Week</td>
-                                                    <td>Sunday</td>
-                                                    <td>Monday</td>
-                                                    <td>Tuesday</td>
-                                                    <td>Wednesday</td>
-                                                    <td>Thursday</td>
-                                                    <td>Friday</td>
-                                                    <td>Saturday</td>
-                                                    <td>Week ID</td>
+                                                    <td>Program</td>
+                                                    <td>Coordinator</td>
+                                                    <td>Requirements</td>
+                                                    <td>Number of Volunteers</td>
+                                                    <td>Program ID</td>
                                                 </tr>
                                             </thead>
                                             
-                                            <tbody id="tablebody-weeks">
+                                            <tbody id="tablebody-programs">
                                                 
                                             </tbody>
                                         </table>
@@ -189,16 +179,16 @@ require '../include/helpers/highestPageProtect.php'
     <!-- /#wrapper -->
 
      <!-- MODAL FOR Registration -->
-        <div id="addWeekModal" class="modal fade" role="dialog">
+        <div id="addProgramModal" class="modal fade" role="dialog">
               <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Add New Week</h4>
+                    <h4 class="modal-title">Add New Program</h4>
                   </div>
                   <div class="modal-body">
-                    <form method="POST" id="addWeekForm" name="addWeekForm">
+                    <form method="POST" id="addProgramForm" name="addProgramForm">
                     <div class="form-group">
                         <label for="semester-form">Semester:</label>
                         <input type="text" name="semester-form" class="form-control" id="semester-form" readonly required>
@@ -208,18 +198,48 @@ require '../include/helpers/highestPageProtect.php'
                         <input type="text" name="year-form" class="form-control" id="year-form" readonly required>
                     </div>    
                     <div class="form-group">
-                        <label for="week-number">Week Number:</label>
-                        <input type="number" name="week-number" class="form-control" id="week-number" placeholder="Week Number" required>
-                    </div>    
-                    <div class="form-group">
-                        <label for="sunday-date">Sunday Date:</label>
-                        <input type="date" name="sunday-date" class="form-control" id="sunday-date" placeholder="yyyy-mm-dd" required>
+                        <label for="program-name">Program Name:</label>
+                        <select name="program-name" class="form-control" id="program-name" required>
+                            <option disabled selected value="none"> -- Select an Option -- </option>
+                            <option value="Panels">Panels</option>
+                            <option value="Tours">Tours</option>
+                            <option value="Greeting">Greeting</option>
+                            <option value="Office Management">Office Management</option>
+                            <option value="Eagle for a Day">Eagle for a Day</option>
+                            <option value="Admitted Eagle Day">Admitted Eagle Day</option>
+                            <option value="Outreach">Outreach</option>
+                            <option value="High School Visits">High School Visits</option>
+                            <option value="AHANA Outreach">AHANA Outreach</option>
+                            <option value="International Outreach">International Outreach</option>
+                            <option value="Transfer Outreach">Transfer Outreach</option>
+                            <option value="Media">Media</option>
+                            <option value="Summer">Summer</option>
+                        </select>
                     </div>
-                    <input type="submit" name="submit" id="modalFormSubmit" value="Add Week" class="btn btn-danger"></input>
+                    <table style='margin-left:150px;'>
+                                <tr>
+                                    <td>
+                                        <b>Coordinators:</b><br/>
+                                       <select multiple="multiple" size='10' id='councillstBox'>
+                                        </select>
+                                        
+                                </td>
+                                <td style='text-align:center;vertical-align:middle;'>
+                                    <button class="btn btn-primary btn-xs lstButton" id='btnRightCouncil' value='right'>></button>
+                                    <br/><button class="btn btn-primary btn-xs lstButton" style='margin:5px;' id='btnLeftCouncil' value='left'><</button> 
+                                </td>
+                                <td>
+                                    <b>Selected Coordinators:</b><br/>
+                                    <select multiple="multiple" size='10' id='tocouncillstBox'> 
+                                    </select>
+                                </td>
+                            </tr>
+                            </table>          
+                    <input type="submit" name="submit" id="modalFormSubmit" value="Add Program" class="btn btn-danger"></input>
                     </form>
                   </div>
                 <div class="modal-footer">
-                    <button type="button" id="submitWeek" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" id="submitProgram" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
                 </div>
               </div>
@@ -251,7 +271,7 @@ require '../include/helpers/highestPageProtect.php'
     <script>
     $(document).ready(function() {
     // Setup - add a text input to each footer cell
-        $('#table-weeks thead td').each( function () {
+        $('#table-programs thead td').each( function () {
             var title = $(this).text();
             $(this).css('text-align', 'center');
             $(this).html( '<input type="text"/>' );
@@ -259,12 +279,12 @@ require '../include/helpers/highestPageProtect.php'
         } );
      
         // DataTable
-        var tableWeek = $('#table-weeks').DataTable({
+        var tableProgram = $('#table-programs').DataTable({
             responsive: true,
             orderCellsTop: true,
             "columnDefs": [
             {
-                "targets": [9],
+                "targets": [4],
                 "visible": false,
                 "orderable": false
                 
@@ -276,20 +296,56 @@ require '../include/helpers/highestPageProtect.php'
         var selectedSemester = s.options[s.selectedIndex].value;
         var y = document.getElementById("table-year");
         var selectedYear = y.options[y.selectedIndex].value;
-        tableWeek.clear();
+        tableProgram.clear();
 
-        getWeeks(function(newTable) {
+        getPrograms(function(newTable) {
             newTable.draw();
-        }, selectedSemester, selectedYear, tableWeek);
+        }, selectedSemester, selectedYear, tableProgram);
      
         // Apply the search
-        tableWeek.columns().every(function (index) {
-        $('#table-weeks thead tr:eq(1) td:eq(' + index + ') input').on('keyup change', function () {
-            tableWeek.column($(this).parent().index() + ':visible')
+        tableProgram.columns().every(function (index) {
+        $('#table-programs thead tr:eq(1) td:eq(' + index + ') input').on('keyup change', function () {
+            tableProgram.column($(this).parent().index() + ':visible')
                 .search(this.value)
                 .draw();
             } );
         } );
+
+        $(".lstButton").on("click", function(e) {
+            e.preventDefault();
+        });
+
+        $('#btnRightCouncil').on("click", function() {
+            var selectedOpts = $('#councillstBox option:selected');
+            if (selectedOpts.length == 0) {
+            }
+            else {
+                $('#tocouncillstBox').append($(selectedOpts).clone());
+                $(selectedOpts).remove();
+                var my_options = $("#tocouncillstBox option");
+
+                my_options.sort(function(a,b) {
+                    return a.id > b.id;
+                });
+                $("#tocouncillstBox").empty().append(my_options);
+            }
+        });
+
+        $('#btnLeftCouncil').on("click", function() {
+            var selectedOpts = $('#tocouncillstBox option:selected');
+            if (selectedOpts.length == 0) {
+            }
+            else {
+                $('#councillstBox').append($(selectedOpts).clone());
+                $(selectedOpts).remove();
+                var my_options = $("#councillstBox option");
+
+                my_options.sort(function(a,b) {
+                    return a.id > b.id;
+                });
+                $("#councillstBox").empty().append(my_options);
+            }
+        });
 
         $('#semester-submit').on("click", function() {
             
@@ -297,34 +353,57 @@ require '../include/helpers/highestPageProtect.php'
             var selectedSemester = s.options[s.selectedIndex].value;
             var y = document.getElementById("table-year");
             var selectedYear = y.options[y.selectedIndex].value;
-            tableWeek.clear();
+            tableProgram.clear();
 
-            getWeeks(function(newTable) {
+            getPrograms(function(newTable) {
                 newTable.draw();
-            }, selectedSemester, selectedYear, tableWeek);            
+            }, selectedSemester, selectedYear, tableProgram);            
         });
         
-        $('#table-weeks tbody').on('dblclick', 'td', function(e) {
+        $('#table-programs tbody').on('dblclick', 'td', function(e) {
             var currentEle = $(this);
             var valueT = $(this).html();
-            var row = tableWeek.cell($(this)).index().row;
-            var column = tableWeek.cell($(this)).index().column;
-            var alterable = [0,1,2,3,4,5,6,7,8];
-            var selectable = [1];
+            var row = tableProgram.cell($(this)).index().row;
+            var column = tableProgram.cell($(this)).index().column;
+            var alterable = [0,2];
+            var selectable = [0];
+            var textAreaCols = [2];
             if(alterable.indexOf(column) == -1) { //can't the other columns
                 return;
             }
-            var data = tableWeek.row(row).data();
-            var updateField = ['week_number', 'current_week', 'sunday_date', 'monday_date', 'tuesday_date', 'wednesday_date', 'thursday_date', 'friday_date', 'saturday_date', 'week_id'];
+            var data = tableProgram.row(row).data();
+            var updateField = ['program_name', 'coordinator', 'requirements'];
             setTimeout(function() {
-                if(column == 1) {
+                if(column == 0) {
+                    if(!<?php 
+                        if((in_array('Admin', $roles)) || (in_array('Advisor', $roles))) {
+                            echo "true";
+                        }
+                        else {
+                            echo "false";
+                        } 
+                        ?>) {
+                        return ;
+                    }
                     $(currentEle).html('<select id="newvalue" class="thVal">' +
-                                            '<option value="Yes"' + (valueT == "Yes" ? 'selected = selected' : '') + '>Yes</option>' +
-                                            '<option value="No"' + (valueT == "No" ? 'selected = selected' : '') + '>No</option>' +
+                                            '<option value="Panels"' + (valueT == "Panels" ? 'selected = selected' : '') + '>Panels</option>' +
+                                            '<option value="Tours"' + (valueT == "Tours" ? 'selected = selected' : '') + '>Tours</option>' +
+                                            '<option value="Greeting"' + (valueT == "Greeting" ? 'selected = selected' : '') + '>Greeting</option>' +
+                                            '<option value="Office Management"' + (valueT == "Office Management" ? 'selected = selected' : '') + '>Office Management</option>' +
+                                            '<option value="Eagle for a Day"' + (valueT == "Eagle for a Day" ? 'selected = selected' : '') + '>Eagle for a Day</option>' +
+                                            '<option value="Admitted Eagle Day"' + (valueT == "Admitted Eagle Day" ? 'selected = selected' : '') + '>Admitted Eagle Day</option>' +
+                                            '<option value="Outreach"' + (valueT == "Outreach" ? 'selected = selected' : '') + '>Outreach</option>' +
+                                            '<option value="High School Visits"' + (valueT == "High School Visits" ? 'selected = selected' : '') + '>High School Visits</option>' +
+                                            '<option value="AHANA Outreach"' + (valueT == "AHANA Outreach" ? 'selected = selected' : '') + '>AHANA Outreach</option>' +
+                                            '<option value="International Outreach"' + (valueT == "International Outreach" ? 'selected = selected' : '') + '>International Outreach</option>' +
+                                            '<option value="Transfer Outreach"' + (valueT == "Transfer Outreach" ? 'selected = selected' : '') + '>Transfer Outreach</option>' +
+                                            '<option value="Media"' + (valueT == "Media" ? 'selected = selected' : '') + '>Media</option>' +
+                                            '<option value="Summer"' + (valueT == "Summer" ? 'selected = selected' : '') + '>Summer</option>' +
                                         '</select>');
                 }
                 else {
-                    $(currentEle).html('<input id="newvalue" class="thVal" type="text" value="' + valueT + '" />');
+                    var valueTT = valueT.replace(/<br>/g, '\n');
+                    $(currentEle).html('<textarea rows="5" cols="30" id="newvalue" class="thVal">' + valueTT + '</textarea>');
                 }
                 $(".thVal").focus();
                 if(selectable.indexOf(column) == -1) {
@@ -333,28 +412,27 @@ require '../include/helpers/highestPageProtect.php'
                     document.getElementById("newvalue").value = tmp;
                 }
                 $(".thVal").keydown(function (event) {
-                    if (event.keyCode == 13) {
-                        if(selectable.indexOf(column) == -1) {
+                    if (event.keyCode == 13 && !event.shiftKey) {
+                        if(textAreaCols.indexOf(column) != -1) {
+                            event.preventDefault();
                             data[column] =  document.getElementById("newvalue").value.trim();
                         }
                         else {
                             data[column] =  $('#newvalue option:selected').val().trim();
-                        }     
-                        tableWeek.row(row).remove();
+                        }        
+                        tableProgram.row(row).remove();
                         inLineUpdatePostData(function() {
-                            tableWeek.row.add([
+                            if(textAreaCols.indexOf(column) != -1) {
+                                data[column] = document.getElementById("newvalue").value.trim().replace(/\n/g, '<br>');
+                            }
+                            tableProgram.row.add([
                                 data[0],
                                 data[1],
                                 data[2],
                                 data[3],
                                 data[4],
-                                data[5],
-                                data[6],
-                                data[7],
-                                data[8],
-                                data[9],
                             ]).draw()
-                        }, data[9], updateField[column], 'Programming_Weeks', data[column], 'week_id');
+                        }, data[4], updateField[column], 'Programs', data[column], 'program_id');
                     }
                 });
             },150);
@@ -374,74 +452,70 @@ require '../include/helpers/highestPageProtect.php'
             var selectedYear = y.options[y.selectedIndex].value;
             document.getElementById("year-form").value = selectedYear;
             document.getElementById("semester-form").value = selectedSemester;
+            getCoordinatorsForYear(function(b) {
+                var users = b;
+                var userselect = document.getElementById("councillstBox");
+                $("#councillstBox").empty();
+                $("#tocouncillstBox").empty();
+                for(var i = 0; i < users[0].length; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = users[0][i];
+                    opt.id = users[2][i];
+                    opt.innerHTML = users[2][i] + ", " + users[1][i];
+                    userselect.appendChild(opt);
+                }
+                var my_options = $("#councillstBox option");
+                my_options.sort(function(a,b) {
+                    return a.id > b.id;
+                });
+                $("#councillstBox").empty().append(my_options);
+            }, selectedYear, selectedSemester);
+
+            getExistingProgramsForSemester(function(c) {
+                var programs = c;
+                var programOptions = $("#program-name option");
+                for(var i = 0; i < programs.length; i++) {
+                    for(var k = 0; k < programOptions.length; k++) {
+                        if(programs[i] == programOptions[k].value) {
+                            programOptions[k].disabled = true;
+                        }
+                    }
+                }
+            }, selectedYear, selectedSemester);
         });
 
-        $("#addWeekForm").on("submit", function(e) {
-            var formWeek = document.getElementById("week-number").value;
+        $("#addProgramForm").on("submit", function(e) {
+            var formProgram = document.getElementById("program-name").value;
             var formYear = document.getElementById("year-form").value;
             var formSemester = document.getElementById("semester-form").value;
-            var formSun = document.getElementById("sunday-date").value;
-            var formSunYear = formSun.substring(0, 4);
-            var formSunMonth = formSun.substring(5,7);
-            var formSunDate = formSun.substring(8);
-            if(parseInt(formSunYear, 10) < 2015 || parseInt(formSunMonth, 10) > 12 || parseInt(formSunDate, 10) > 31) {
-                alert("Please input the date in the correct format: yyyy-mm-dd");
-                e.preventDefault();
-                return ;
+
+            var selectedOpts = $('#tocouncillstBox option');
+            if (selectedOpts.length != 1) {
+                    alert("You must choose one (and only one) council member to be the coordinator of the program");
+                    e.preventDefault();
+                    return ;
+                }
+            var id;
+            for(var i=0; i < selectedOpts.length; i++) {
+                id = selectedOpts[i].value;
             }
-
-            var sunDate = new Date(formSunYear, formSunMonth-1, formSunDate);
-            var year = sunDate.getFullYear();
-            var month = sunDate.getMonth()+1;
-            var date = sunDate.getDate();
-            var tmp = sunDate;
-
-            if(isNaN(month) || isNaN(tmp) || isNaN(year)) {
-                alert("Please input the date in the correct format: yyyy-mm-dd");
-                e.preventDefault();
-                return ;
-            }
-
-            tmp.setDate(tmp.getDate() + 0);
-            month = tmp.getMonth()+1;
-            date = tmp.getDate();
-            sunDate = year + "-" + month  +"-" + date;
-
-            tmp.setDate(tmp.getDate() + 1);
-            month = tmp.getMonth()+1;
-            date = tmp.getDate();
-            var monDate = year + "-" + month  +"-" + date;
-
-            tmp.setDate(tmp.getDate() + 1);
-            month = tmp.getMonth()+1;
-            date = tmp.getDate();
-            var tuesDate = year + "-" + month  +"-" + date;
-
-            tmp.setDate(tmp.getDate() + 1);
-            month = tmp.getMonth()+1;
-            date = tmp.getDate();
-            var wedDate = year + "-" + month  +"-" + date;
-
-            tmp.setDate(tmp.getDate() + 1);
-            month = tmp.getMonth()+1;
-            date = tmp.getDate();
-            var thursDate = year + "-" + month  +"-" + date;
-
-            tmp.setDate(tmp.getDate() + 1);
-            month = tmp.getMonth()+1;
-            date = tmp.getDate();
-            var friDate = year + "-" + month  +"-" + date;
-
-            tmp.setDate(tmp.getDate() + 1);
-            month = tmp.getMonth()+1;
-            date = tmp.getDate();
-            var satDate = year + "-" + month  +"-" + date;
             
-            insertProgrammingWeek(function() {
+            insertProgram(function() {
                 location.reload();
-            }, formWeek, formYear, formSemester, sunDate, monDate, tuesDate, wedDate, thursDate, friDate, satDate);
+            }, formProgram, formYear, formSemester, id);
             e.preventDefault();
         });
+
+        if(!<?php 
+                if((in_array('Admin', $roles)) || (in_array('Advisor', $roles))) {
+                    echo "true";
+                }
+                else {
+                    echo "false";
+                } 
+                ?>) {
+                $("#openModalButton").hide();
+            }
     });
     </script>
 

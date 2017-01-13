@@ -121,6 +121,9 @@
                     echo    "<li>
                                 <a href='./passwordReset.php'>Reset User Password</a>
                             </li>
+                            <li>
+                                <a href='./programs.php'>Programs</a>
+                            </li>
                         </ul>
                     </li>";     
                 }    
