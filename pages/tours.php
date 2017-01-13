@@ -561,7 +561,7 @@ echo '<input type="hidden" id="programName" value="Tours">';
                                  <div class="form-group">
                                     <label for="day-edit-members">Shift Day:</label>
                                     <select name="day-edit-members" class="form-control" id="day-edit-members" required>
-                                        <option disabled selected value> -- Select a day -- </option>
+                                        <option disabled selected value="none"> -- Select a day -- </option>
                                         <option value="Sunday">Sunday</option>
                                         <option value="Monday">Monday</option>
                                         <option value="Tuesday">Tuesday</option>
@@ -804,7 +804,7 @@ echo '<input type="hidden" id="programName" value="Tours">';
                                  <div class="form-group">
                                     <label for="day-edit-shifts-input">Shift Day:</label>
                                     <select name="day-edit-shifts-input" class="form-control" id="day-edit-shifts-input" required>
-                                        <option disabled selected value> -- Select a day -- </option>
+                                        <option disabled selected value="none"> -- Select a day -- </option>
                                         <option value="Sunday">Sunday</option>
                                         <option value="Monday">Monday</option>
                                         <option value="Tuesday">Tuesday</option>
@@ -1848,6 +1848,9 @@ echo '<input type="hidden" id="programName" value="Tours">';
             switch(edits) {
                 case "day" : {
                     newValue = document.getElementById("day-edit-members").value;
+                    if(newValue == "none") {
+                        return ;
+                    }
                     field = "shift_day";
                 } break;
 
@@ -2016,6 +2019,9 @@ echo '<input type="hidden" id="programName" value="Tours">';
             switch(edits) {
                 case "day" : {
                     newValue = document.getElementById("day-edit-shifts-input").value;
+                    if(newValue == "none") {
+                        return ;
+                    }
                     field = "shift_day";
                 } break;
 
@@ -2029,7 +2035,7 @@ echo '<input type="hidden" id="programName" value="Tours">';
 
                 case "alternateNumber" : {
                     newValue = document.getElementById("alternateNumber-edit-shifts").value;
-                    if(newValue == "none") {
+                    if(newValue == "") {
                         return ;
                     }
                     field = "alternate_number";
@@ -2037,11 +2043,17 @@ echo '<input type="hidden" id="programName" value="Tours">';
 
                 case "present" : {
                     newValue = document.getElementById("present-edit-shifts").value;
+                    if(newValue == "none") {
+                        return ;
+                    }
                     field = "present";
                 } break;
 
                 case "gaveShifts" : {
                     newValue = document.getElementById("gaveShifts-edit-shifts").value;
+                    if(newValue == "none") {
+                        return ;
+                    }
                     field = "gave_panel_tour";
                 } break;
 

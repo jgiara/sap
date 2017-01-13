@@ -200,7 +200,7 @@ require '../include/helpers/higherPageProtect.php'
                     <div class="form-group">
                         <label for="program-name">Program Name:</label>
                         <select name="program-name" class="form-control" id="program-name" required>
-                            <option disabled selected value="none"> -- Select an Option -- </option>
+                            <option disabled selected value required> -- Select an Option -- </option>
                             <option value="Panels">Panels</option>
                             <option value="Tours">Tours</option>
                             <option value="Greeting">Greeting</option>
