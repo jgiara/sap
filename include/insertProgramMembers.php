@@ -12,9 +12,7 @@
 	$target_file = $target_dir . basename($_FILES["file-form"]["name"]);
 	$uploadOk = 1;
 	$fileType = pathinfo($target_file,PATHINFO_EXTENSION);
-	$errors = ['email' => [], 'day' => [], 'time' => [], 'exist' => []];
-	$timePattern = '/\b[1-9][0-2]?:[0-5][0-9] AM\b|\b[1-9][0-2]?:[0-5][0-9] PM\b/';
-	$days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+	$errors = ['email' => [], 'exist' => []];
 	
 	
 	if(isset($_POST["addMembersFormSubmitFile"])) {
@@ -47,14 +45,8 @@
 				else if(in_array($email, $currentMembers) || in_array($email, $added)) {
 					array_push($errors['exist'], $email);
 				}
-				else if(!in_array($a[1], $days)) {
-					array_push($errors['day'], $a[0]);
-				}
-				else if(!preg_match($timePattern, $a[2])) {
-					array_push($errors['time'], $a[0]);
-				}
 				else {
-					$fns->insertProgramMemberShift($email, $program, $semester, $year, $a[1], $a[2]);
+					$fns->insertProgramMember($email, $program, $semester, $year);
 					$fns->updateUserStatus($email, 'Active');
 					$added[$index] = $email;
 					$index++;
@@ -67,11 +59,9 @@
 	    }
 	}
 
-	if(sizeof($errors['email']) + sizeof($errors['exist']) + sizeof($errors['day']) + sizeof($errors['time']) > 0) {
+	if(sizeof($errors['email']) + sizeof($errors['exist']) > 0) {
 		$strEmail = '';
 		$strExist = '';
-		$strDay = '';
-		$strTime = '';
 		if(sizeof($errors['email']) > 0) {
 			foreach($errors['email'] as $er) {
 	 			$strEmail = $strEmail . $er . '\n';
@@ -84,37 +74,38 @@
 	 			$strExist = $strExist . $er . '\n';
 	 		}
 	 		$strExist = '\n' . $strExist;
-	 		$strExist = '\nThese users are already program members:' . $strExist . '\n';
+	 		$strExist = '\nThese users are already program members:' . $strExist;
 		}
-		if(sizeof($errors['day']) > 0) {
-			foreach($errors['day'] as $er) {
-	 			$strDay = $strDay . $er . '\n';
-	 		}
-	 		$strDay = '\n' . $strDay;
-	 		$strDay = '\nIncorrect day format:' . $strDay . '\n';
-		}
-		if(sizeof($errors['time']) > 0) {
-			foreach($errors['time'] as $er) {
-	 			$strTime = $strTime . $er . '\n';
-	 		}
-	 		$strTime = '\n' . $strTime;
-	 		$strTime = '\nIncorrect time format:' . $strTime;
-		}
-		echo "<script type='text/javascript'>alert('The following were not added for the following reasons:" . '\n' . "$strEmail $strExist $strDay $strTime');</script>";
+		echo "<script type='text/javascript'>alert('The following were not added for the following reasons:" . '\n' . "$strEmail $strExist');</script>";
 	}
 
 	switch($program) {
-		case 'Panels' : { 
-			echo "<script type='text/javascript'>window.location.assign('../pages/panels.php');</script>";
+		case 'Eagle for a Day' : { 
+			echo "<script type='text/javascript'>window.location.assign('../pages/efad.php');</script>";
 		} break;
-		case 'Tours' : { 
-			echo "<script type='text/javascript'>window.location.assign('../pages/tours.php');</script>";
+		case 'Admitted Eagle Day' : { 
+			echo "<script type='text/javascript'>window.location.assign('../pages/aed.php');</script>";
 		} break;
-		case 'Greeting' : { 
-			echo "<script type='text/javascript'>window.location.assign('../pages/greeting.php');</script>";
+		case 'Outreach' : { 
+			echo "<script type='text/javascript'>window.location.assign('../pages/outreach.php');</script>";
 		} break;
-		case 'Office Management' : { 
-			echo "<script type='text/javascript'>window.location.assign('../pages/om.php');</script>";
+		case 'High School Visits' : { 
+			echo "<script type='text/javascript'>window.location.assign('../pages/hsvisits.php');</script>";
+		} break;
+		case 'AHANA Outreach' : { 
+			echo "<script type='text/javascript'>window.location.assign('../pages/ahana.php');</script>";
+		} break;
+		case 'International Outreach' : { 
+			echo "<script type='text/javascript'>window.location.assign('../pages/io.php');</script>";
+		} break;
+		case 'Transfer Outreach' : { 
+			echo "<script type='text/javascript'>window.location.assign('../pages/transfer.php');</script>";
+		} break;
+		case 'Media' : { 
+			echo "<script type='text/javascript'>window.location.assign('../pages/media.php');</script>";
+		} break;
+		case 'Summer' : { 
+			echo "<script type='text/javascript'>window.location.assign('../pages/summer.php');</script>";
 		} break;
 		default :  {
 			echo "<script type='text/javascript'>window.location.assign('../pages/dashboard.php');</script>";

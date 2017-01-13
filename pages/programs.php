@@ -100,8 +100,11 @@ require '../include/helpers/higherPageProtect.php'
                                         <?php
                                             $currMonth = date("n");
                                             $currSemester = "Fall";
-                                            if($currMonth < 8) {
+                                            if($currMonth < 6) {
                                                 $currSemester = "Spring";
+                                            }
+                                            else if($currMonth > 7) {
+                                                $currSemester = 'Summer';
                                             }
                                             echo "<option value='Fall'";
                                             if($currSemester == "Fall") {
@@ -116,6 +119,13 @@ require '../include/helpers/higherPageProtect.php'
                                             }
                                             else {
                                                 echo ">Spring</option>";
+                                            }
+                                            echo "<option value='Summer'";
+                                            if($currSemester == "Summer") {
+                                                echo "selected='selected'>Summer</option>";
+                                            }
+                                            else {
+                                                echo ">Summer</option>";
                                             }
                                         ?>
                                     </select>
@@ -289,7 +299,8 @@ require '../include/helpers/higherPageProtect.php'
                 "orderable": false
                 
             }], 
-            order: [[0, "asc"]]
+            order: [[0, "asc"]],
+            paging: false
             
         });
         var s = document.getElementById("table-semester");
@@ -452,6 +463,21 @@ require '../include/helpers/higherPageProtect.php'
             var selectedYear = y.options[y.selectedIndex].value;
             document.getElementById("year-form").value = selectedYear;
             document.getElementById("semester-form").value = selectedSemester;
+            var programOptions = $("#program-name option");
+            if(selectedSemester == 'Summer') {
+                for(var k = 0; k < programOptions.length; k++) {
+                    if(programOptions[k].value  != 'Summer') {
+                       programOptions[k].disabled = true;
+                    }
+                }
+            }
+            else {
+                for(var k = 0; k < programOptions.length; k++) {
+                    if(programOptions[k].value == 'Summer') {
+                        programOptions[k].disabled = true;
+                    }
+                }
+            }
             getCoordinatorsForYear(function(b) {
                 var users = b;
                 var userselect = document.getElementById("councillstBox");
@@ -483,6 +509,32 @@ require '../include/helpers/higherPageProtect.php'
                 }
             }, selectedYear, selectedSemester);
         });
+
+        $('#table-semester').on('change', function() {
+            var s = document.getElementById("table-semester");
+            var selectedSemester = s.options[s.selectedIndex].value; 
+            var programOptions = $("#program-name option");
+            if(selectedSemester == 'Summer') {
+                for(var k = 0; k < programOptions.length; k++) {
+                        if(programOptions[k].value == 'Summer') {
+                            programOptions[k].disabled = false;
+                        }
+                        else {
+                            programOptions[k].disabled = true;
+                        }
+                    }
+            }
+            else {
+                for(var k = 0; k < programOptions.length; k++) {
+                    if(programOptions[k].value != 'Summer') {
+                        programOptions[k].disabled = false;
+                    }
+                     else {
+                            programOptions[k].disabled = true;
+                        }
+                }
+            }
+        })
 
         $("#addProgramForm").on("submit", function(e) {
             var formProgram = document.getElementById("program-name").value;
