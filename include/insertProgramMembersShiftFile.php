@@ -55,6 +55,7 @@
 				}
 				else {
 					$fns->insertProgramMemberShift($email, $program, $semester, $year, $a[1], $a[2]);
+					$fns->updateUserStatus($email, 'Active');
 					$added[$index] = $email;
 					$index++;
 				}

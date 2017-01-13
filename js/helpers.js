@@ -448,8 +448,8 @@ function insertProgram(callback, programName, year, semester, coordinator) {
             {
                 program: programName,
                 year: year,
-                semester,
-                coordinator
+                semester: semester,
+                coordinator: coordinator
             }, function() {
                 callback();
             });
@@ -488,6 +488,25 @@ function getExistingProgramsForSemester(callback, year, semester) {
             });
             callback(users);
         });
+}
+
+function markGraduated(callback, year) {
+    $.post("../include/markGraduated.php",
+            {
+                year: year
+            }, function() {
+                callback();
+            });
+}
+
+function markInactive(callback, year, semester) {
+    $.post("../include/markInactive.php",
+            {
+                year: year,
+                semester: semester
+            }, function() {
+                callback();
+            });
 }
 
 function verifyData(field, value) {

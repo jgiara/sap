@@ -11,6 +11,7 @@
 
 	foreach($emails as $email) {
 		$fns->insertProgramMemberShift($email, $program, $semester, $year, $day, $time);
+		$fns->updateUserStatus($email, 'Active');
 	}
 	
 	$db = null;

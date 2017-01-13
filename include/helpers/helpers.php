@@ -41,6 +41,9 @@
             </li>
             <li>
                 <a href='./applications.php'>Applications</a>
+            </li>
+            <li>
+                <a href='./council.php'>Council</a>
             </li>";
             displayHigherAccessModules($roles);
 	}
@@ -88,9 +91,6 @@
                 </li>
                 <li>
                     <a href='./summer.php'>Summer</a>
-                </li>
-                <li>
-                    <a href='./reports.php'>Reports</a>
                 </li>";
                 if((in_array('Advisor', $roles)) || (in_array('Council', $roles)) || (in_array('Admin', $roles))) {
                   echo  "<li>
@@ -111,7 +111,7 @@
                                 <a href='./programs.php'>Programs</a>
                             </li>
                             <li>
-                                <a href='./programs.php'>Change Class Status</a>
+                                <a href='./changeStatus.php'>Change User Status</a>
                             </li>
 
                         </ul>
