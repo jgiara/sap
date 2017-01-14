@@ -1993,10 +1993,6 @@ echo '<input type="hidden" id="programName" value="Greeting">';
         $("#editShiftsSubmit").on("click", function() {
             var w = document.getElementById("table-week");
             var selectedWeekValue = w.options[w.selectedIndex].value;
-            if(selectedWeekValue == 'all') {
-                alert("You can not edit shifts for the selected week 'All Weeks'");
-                return ;
-            }
             var edits = document.getElementById("editChoiceShifts").value;
             var ids = [];
             var selectedOpts = $('#toeditshiftslstBox option');
