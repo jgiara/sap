@@ -1239,7 +1239,7 @@ echo '<input type="hidden" id="programName" value="All Users">';
             var sex = a.options[a.selectedIndex].value;
             var b = document.getElementById("school-form-members");
             var school = b.options[b.selectedIndex].value;
-            var year = document.getElementById("class-form-members").value;
+            var year = document.getElementById("class-form-members").value.trim();
             var major = document.getElementById("major-form-members").value.trim();
             var minor = document.getElementById("minor-form-members").value.trim();
             var hometown = document.getElementById("hometown-form-members").value.trim();
