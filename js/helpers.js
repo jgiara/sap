@@ -118,6 +118,42 @@ function getWeekData(callback, selectedSemester, selectedYear) {
         });
 }
 
+function getAllUsers(callback, selectedStatus, tableVols) {
+    $.getJSON("../include/getAllUsers.php", 
+    {
+        status: selectedStatus
+    }, function(data) {
+        $.each(data, function(i, item) {
+            tableVols.row.add([
+                item.first_name,
+                item.last_name,
+                item.email,
+                item.phone,
+                item.sex,
+                item.class,
+                item.school,
+                item.major,
+                item.minor,
+                item.hometown,
+                item.state_country,
+                item.ahana,
+                item.international,
+                item.transfer,
+                item.local_address,
+                item.applied_tours,
+                item.applied_panels,
+                item.applied_council,
+                item.applied_summer,
+                item.status,
+                item.last_login,
+                item.eagle_id,
+                'Delete'
+            ]);
+        });
+        callback(tableVols);
+    });
+}
+
 function getWeeks(callback, selectedSemester, selectedYear, tableWeek) {
     $.getJSON("../include/getWeeks.php", 
     {
@@ -179,6 +215,24 @@ function inLineUpdatePostData(callback, uid, ufield, utable, unewValue, uwhereFi
 function toggleColumns(table, index) {
     var column = table.column(index);
     column.visible(!column.visible());
+}
+
+function getUsersStatus(callback, status) {
+    $.getJSON("../include/getUsersStatus.php", 
+        {
+            status: status
+        }, function(data) {
+            var vols = []
+            vols[0] = [];
+            vols[1] = [];
+            vols[2] = [];
+            $.each(data, function(i, item) {
+                vols[0][i] = item.email;
+                vols[1][i] = item.first_name;
+                vols[2][i] = item.last_name;
+            });
+            callback(vols);
+        });
 }
 
 function getUsersNotInProgram(callback, programName, selectedSemester, selectedYear) {
@@ -396,10 +450,42 @@ function insertRoles(callback, emails, role) {
             });
 }
 
+function insertUserManual(callback, email, id, fn, ln, sex, year, school, major, minor, hometown, state, international, ahana, transfer, phone) {
+    $.post("../include/insertUserManual.php",
+            {
+                email: email,
+                id: id,
+                fn: fn,
+                ln: ln,
+                sex: sex,
+                year: year,
+                school: school,
+                major: major,
+                minor: minor,
+                hometown: hometown,
+                state: state,
+                international: international,
+                ahana: ahana,
+                transfer: transfer,
+                phone: phone
+            }, function() {
+                callback();
+            });
+}
+
 function deleteRoles(callback, ids) {
     $.post("../include/deleteRoles.php",
             {
                 ids: ids
+            }, function() {
+                callback();
+            });
+}
+
+function deleteUser(callback, user) {
+    $.post("../include/deleteUser.php",
+            {
+                user: user
             }, function() {
                 callback();
             });
@@ -524,6 +610,26 @@ function verifyData(field, value) {
         default: return true;
     }
 }
+$('#export-excel-all').on("click", function(e) {
+    var s = document.getElementById("table-status");
+    var selectedStatus = s.options[s.selectedIndex].value;
+    $('#table-volunteers').tableExport({type:'xlsx', fileName: document.getElementById("programName").value + '_' + selectedStatus});
+});
+$('#export-csv-all').on("click", function(e) {
+    var s = document.getElementById("table-status");
+    var selectedStatus = s.options[s.selectedIndex].value;
+    $('#table-volunteers').tableExport({type:'csv', fileName: document.getElementById("programName").value + '_' + selectedStatus});
+});
+$('#export-pdf-all').on("click", function(e) {
+    var s = document.getElementById("table-status");
+    var selectedStatus = s.options[s.selectedIndex].value;
+    $('#table-volunteers').tableExport({
+                    type: 'pdf',
+                    jspdf: {margins: {left:30, right:30, top:40, bottom:20},
+                            autotable: {styles: {overflow: 'linebreak'},
+                                        tableWidth: 'wrap'}},
+                    fileName: document.getElementById("programName").value + '_' + selectedStatus});
+});
 
 $('#export-excel-volunteers').on("click", function(e) {
     var s = document.getElementById("table-semester");

@@ -982,8 +982,6 @@ echo '<input type="hidden" id="programName" value="Admitted Eagle Day">';
                 ?>) {
                 $("#edit-members-modal-button").hide();
                 $("#new-members-modal-button").hide();
-                $("#edit-shifts-modal-button").hide();
-                $("#new-shifts-modal-button").hide();
             }
     });
     </script>
