@@ -21,10 +21,11 @@
     $email = strtolower($email);
     $emails = $fns->getAllEmails();
     if(in_array($email, $emails)) {
-		;
+		echo json_encode('exists');
 	}
 	else {
 		$fns->insertUserManual($email, $id, $fn, $ln, $sex, $year, $school, $major, $minor, $hometown, $state, $international, $ahana, $transfer, $phone);
+        echo json_encode('entered');
 	}
 	
 	$db = null;

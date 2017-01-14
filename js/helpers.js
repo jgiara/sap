@@ -468,7 +468,13 @@ function insertUserManual(callback, email, id, fn, ln, sex, year, school, major,
                 ahana: ahana,
                 transfer: transfer,
                 phone: phone
-            }, function() {
+            }, function(data) {
+                if(data.includes('exists')) {
+                    alert(fn + " " + ln + " was not added becuase this user already exists in the database");
+                }
+                else {
+                    alert(fn + " " + ln + " was added to the database");
+                }
                 callback();
             });
 }

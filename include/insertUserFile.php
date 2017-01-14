@@ -52,7 +52,7 @@
 	 			$strExist = $strExist . $er . '\n';
 	 		}
 	 		$strExist = '\n' . $strExist;
-	 		$strExist = '\nThese users already exist:' . $strExist . '\n';
+	 		$strExist = '\nThese users already exist in the database:' . $strExist . '\n';
 		}
 		echo "<script type='text/javascript'>alert('The following were not added for the following reasons:" . '\n' . "$strExist');</script>";
 	}

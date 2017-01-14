@@ -1231,18 +1231,18 @@ echo '<input type="hidden" id="programName" value="All Users">';
         });
 
         $("#addMembersFormManual").on("submit", function(e) {
-            var email = document.getElementById("email-form-members").value;
-            var id = document.getElementById("id-form-members").value;
-            var fn = document.getElementById("fn-form-members").value;
-            var ln = document.getElementById("ln-form-members").value;
+            var email = document.getElementById("email-form-members").value.trim();
+            var id = document.getElementById("id-form-members").value.trim();
+            var fn = document.getElementById("fn-form-members").value.trim();
+            var ln = document.getElementById("ln-form-members").value.trim();
             var a = document.getElementById("sex-form-members");
             var sex = a.options[a.selectedIndex].value;
             var b = document.getElementById("school-form-members");
             var school = b.options[b.selectedIndex].value;
             var year = document.getElementById("class-form-members").value;
-            var major = document.getElementById("major-form-members").value;
-            var minor = document.getElementById("minor-form-members").value;
-            var hometown = document.getElementById("hometown-form-members").value;
+            var major = document.getElementById("major-form-members").value.trim();
+            var minor = document.getElementById("minor-form-members").value.trim();
+            var hometown = document.getElementById("hometown-form-members").value.trim();
             var c = document.getElementById("state-form-members");
             var state = c.options[c.selectedIndex].value;
             var international = 'Yes';
@@ -1257,7 +1257,7 @@ echo '<input type="hidden" id="programName" value="All Users">';
             if(document.getElementById("transfer-no").checked) {
                 transfer = 'No';
             }
-            var phone = document.getElementById("phone-form-members").value;
+            var phone = document.getElementById("phone-form-members").value.trim();
             insertUserManual(function() {
                 location.reload();
             }, email, id, fn, ln, sex, year, school, major, minor, hometown, state, international, ahana, transfer, phone);
