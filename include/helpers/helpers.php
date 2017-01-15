@@ -43,7 +43,7 @@
                 <a href='./applications.php'>Applications</a>
             </li>
             <li>
-                <a href='./council.php'>Council</a>
+                <a href='./council.php'>SAP Council</a>
             </li>";
             displayHigherAccessModules($roles);
 	}

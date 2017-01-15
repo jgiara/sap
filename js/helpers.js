@@ -567,6 +567,72 @@ function getCoordinatorsForYear(callback, year, semester) {
         });
 }
 
+function getAllCouncilMembers(callback, selectedYear, selectedSemester, tableVols) {
+    $.getJSON("../include/getAllCouncilMembers.php",  {
+            year: selectedYear,
+            semester: selectedSemester
+          }, 
+          function(data) {
+            $.each( data, function( i, item ) {
+                tableVols.row.add([
+                    item.position,
+                    item.first_name,
+                    item.last_name,
+                    item.email,
+                    item.class,
+                    item.school,
+                    item.major,
+                    item.minor,
+                    item.hometown,
+                    item.state_country,
+                    'Delete',
+                    item.council_member_id
+                ]);
+               
+              }); 
+            callback(tableVols);
+          });
+}
+
+function insertCouncilMember(callback, emails, selectedYear, selectedSemester, position) {
+    $.post("../include/insertCouncilMember.php",
+            {
+                emails: emails,
+                year: selectedYear,
+                semester: selectedSemester,
+                position: position
+            }, function() {
+                callback();
+            });
+}
+
+function deleteCouncilMember(callback, id) {
+    $.post("../include/deleteCouncilMember.php",
+            {
+                id: id
+            }, function() {
+                callback();
+            });
+}
+
+function getAllPossibleUsers(callback) {
+    $.getJSON("../include/getAllPossibleUsers.php", 
+        {
+
+        }, function(data) {
+            var users = []
+            users[0] = [];
+            users[1] = [];
+            users[2] = [];
+            $.each(data, function(i, item) {
+                users[0][i] = item.email;
+                users[1][i] = item.first_name;
+                users[2][i] = item.last_name;
+            });
+            callback(users);
+        });
+}
+
 function getExistingProgramsForSemester(callback, year, semester) {
     $.getJSON("../include/getExistingProgramsForSemester.php", 
         {
