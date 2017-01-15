@@ -118,6 +118,31 @@ function getWeekData(callback, selectedSemester, selectedYear) {
         });
 }
 
+function searchUsers(callback, searchVals, tableVols) {
+    $.getJSON("../include/searchUsers.php",  {
+            searchVals: searchVals
+          }, 
+          function(data) {
+            $.each( data, function( i, item ) {
+                tableVols.row.add([
+                    "<a id='test' href='./profile.php?userEmail=" + item.email + "'>"+ item.first_name + "</a>",
+                    "<a id='test' href='./profile.php?userEmail=" + item.email + "'>"+ item.last_name + "</a>",
+                    item.email,
+                    item.phone,
+                    item.class,
+                    item.school,
+                    item.major,
+                    item.minor,
+                    item.hometown,
+                    item.state_country,
+                    item.status
+                ]);
+               
+              }); 
+            callback(tableVols);
+          });
+}
+
 function getAllUsers(callback, selectedStatus, tableVols) {
     $.getJSON("../include/getAllUsers.php", 
     {

@@ -19,17 +19,21 @@
     }
 
 	function displayModules($roles) {
+        if(in_array('Council', $roles) || in_array('Staff', $roles) || in_array('Advisor', $roles) || in_array('Admin', $roles)) {
 		echo "<li class='sidebar-search'>
+            <form id='seach-form' method='GET' action='./searchUsers.php'> 
                 <div class='input-group custom-search-form'>
-                    <input type='text' class='form-control' placeholder='Search...''>
+                    <input type='text' class='form-control' name='search' id='search' placeholder='Search...'>
                     <span class='input-group-btn'>
-                    <button class='btn btn-default' type='button'>
+                    <button class='btn btn-default' type='submit'>
                          <i class='fa fa-search'></i>&nbsp
                     </button>
                 </span>
                 </div>
-                <!-- /input-group -->
-            </li>
+                </form>
+                <!-- /input-group -->";
+        }
+            echo "</li>
             <li>
              	<a href='./dashboard.php'>Dashboard</a>
             </li>
