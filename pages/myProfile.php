@@ -110,240 +110,150 @@ require '../include/helpers/helpers.php';
                             </ul>
 
                             <!-- Tab panes -->
-                            <div class="tab-content inner-scroll">
+                            <div class="tab-content">
                                 <div class="tab-pane fade in active" id="basic-info">
-                                </br>
-                                    <div class="info-left">
-                                        <label class="info-label">Eagle ID: </label>12345678
-                                    </div>
-                                    <div class="info-right">
-                                        <label class="info-label">Position: </label>Panels Coordinator
-                                    </div> </br></br>
-                                    <div class="info-left">
-                                         <label class="info-label">First Name: </label> <input type="text" id="info-fn" class="info-div-hide-box" size="30" value="Abigail"></input>
-                                    </div>
-                                    <div class="info-right">
-                                         <label class="info-label">Last Name: </label> <input type="text" id="info-ln" class="info-div-hide-box" size="30" value="Brown"></input>
-                                    </div></br></br>
-                                    <div class="info-left">
-                                        <label class="info-label">Class: </label> <input type="text" id="info-class" class="info-div-hide-box" size="30" value="2018"></input>
-                                    </div>
-                                    <div class="info-right">
-                                        <label class="info-label">School: </label> <input type="text" id="info-school" class="info-div-hide-box" size="30" value="MCAS"></input>
-                                    </div></br></br>
-                                    <div class="info-left">
-                                         <label class="info-label">Major: </label> <input type="text" id="info-major" class="info-div-hide-box" size="30" value="Applied Psychology & Human Development"></input>
-                                    </div>
-                                    <div class="info-right">
-                                        <label class="info-label">Minor: </label> <input type="text" id="info-minor" class="info-div-hide-box" size="30" value="Applied Psychology & Human Development"></input>
-                                    </div></br></br>
-                                    <div class="info-left">
-                                         <label class="info-label">Hometown: </label> <input type="text" id="info-hometown" class="info-div-hide-box" size="30" value="Iowa City, IA"></input>
-                                    </div>
-                                    <div class="info-right">
-                                       <label class="info-label">Local Address: </label> <input type="text" id="info-local-address" class="info-div-hide-box" size="30" value="2000 Comm Ave, 418"></input>
-                                    </div></br></br>
-                                    <div class="info-left">
-                                        <label class="info-label">Email: </label> <input type="text" id="info-email" class="info-div-hide-box" size="30" value="brownbba@bc.edu"></input>
-                                    </div>
-                                    <div class="info-right">
-                                       <label class="info-label">Phone: </label> <input type="text" id="info-phone" class="info-div-hide-box" size="30" value="555-555-5555"></input>   
-                                    </div></br></br>
-                                    <div class="info-left">
-                                        <label class="info-label">Sex: </label> <input type="text" id="info-sex" class="info-div-hide-box" size="30" value="Female"></input>
-                                    </div>
-                                    <div class="info-right">
-                                        <label class="info-label">AHANA: </label> <input type="text" id="info-ahana" class="info-div-hide-box" size="30" value="No"></input>
-                                    </div> </br>
-                                    </br>
-                                    <div class="info-left">
-                                        <label class="info-label">International: </label> <input type="text" id="info-international" class="info-div-hide-box" size="30" value="No"></input>
-                                    </div>
-                                    <div class="info-right">
-                                        <label class="info-label">Transfer: </label> <input type="text" id="info-transfer" class="info-div-hide-box" size="30" value="No"></input>
-                                    </div> </br></br>
+                               
+                                    <table class="table" style="font-size: 14px; width: 100%;">
+                                        <tr>
+                                            <td><strong>First Name:</strong> <span id="firstNameSpan">Jon</span></td>
+                                            <td><strong>Last Name:</strong> <span id="lastNameSpan">Giara</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Email:</strong> <span id="emailSpan">giara@bc.edu</span></td>
+                                            <td><strong>Eagle ID:</strong> <span id="eagleidSpan">16114836</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Sex:</strong> <span id="sexSpan">Male</span></td>
+                                            <td><strong>Phone Number:</strong> <span id="phoneSpan">(508) 838-7443</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Class:</strong> <span id="classSpan">2017</span></td>
+                                            <td><strong>School:</strong> <span id="schoolSpan">MCAS</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Major:</strong> <span id="majorSpan">Computer Science</span></td>
+                                            <td><strong>Minor:</strong> <span id="minorSpan"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Hometown:</strong> <span id="hometownSpan">Attleboro, MA</span></td>
+                                            <td><strong>Local Address:</strong> <span id="localAddressSpan">Ignacio A53</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>AHANA:</strong> <span id="ahanaSpan">No</span></td>
+                                            <td><strong>International:</strong> <span id="internationalSpan">No</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Transfer:</strong> <span id="transferSpan">No</span></td>
+                                            <td><strong>Local Address:</strong> <span id="localAddressSpan">Ignacio A53</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td><td></td>
+                                        </tr>
+                                    </table>
                     
                                 </div>
                                 <div class="tab-pane fade" id="involvement">
                                 
                                    Click <a href="./involvement.php">here</a> to see a more in-depth view of involvement</br></br>
-                                    <div class="info-left">
-                                        <label class="involv-label">OFFICE PROGRAMS
-                                    </div>
-                                    <div class="info-right">
-                                        <label class="involv-label">OUTREACH PROGRAMS
-                                    </div> </br>
-                                    <div class="involv-left">
-                                        <label class="involv-label">Panels</label>
-                                    </div>
-                                    <div class="involv-right">
-                                        <label class="involv-label">Outreach</label>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Completed: </label> <input type="text" id="involv-comp-panels" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Completed: </label> <input type="text" id="involv-comp-outreach" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Pending: </label> <input type="text" id="involv-pend-panels" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Pending: </label> <input type="text" id="involv-pend-outreach" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Incomplete: </label> <input type="text" id="involv-incomp-panels" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Incompleted: </label> <input type="text" id="involv-incomp-outreach" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br></br>
-
-                                    <div class="involv-left">
-                                        <label class="involv-label">Tours</label> 
-                                    </div>
-                                    <div class="involv-right">
-                                        <label class="involv-label">High School Visits</label>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Completed: </label> <input type="text" id="involv-comp-tours" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Completed: </label> <input type="text" id="involv-comp-hsvisits" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Pending: </label> <input type="text" id="involv-pend-tours" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Pending: </label> <input type="text" id="involv-pend-hsvisits" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Incomplete: </label> <input type="text" id="involv-incomp-tours" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Incompleted: </label> <input type="text" id="involv-incomp-hsvisits" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br></br>
-                                    <div class="involv-left">
-                                        <label class="involv-label">Greeting</label>
-                                    </div>
-                                    <div class="involv-right">
-                                        <label class="involv-label">AHANA Outreach</label>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Completed: </label> <input type="text" id="involv-comp-greeting" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Completed: </label> <input type="text" id="involv-comp-ahana" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Pending: </label> <input type="text" id="involv-pend-greeting" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Pending: </label> <input type="text" id="involv-pend-ahana" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Incomplete: </label> <input type="text" id="involv-incomp-greeting" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Incompleted: </label> <input type="text" id="involv-incomp-ahana" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br></br>
-                                    <div class="involv-left">
-                                        <label class="involv-label">Office Management</label> 
-                                    </div>
-                                    <div class="involv-right">
-                                        <label class="involv-label">International Outreach</label>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Completed: </label> <input type="text" id="involv-comp-om" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Completed: </label> <input type="text" id="involv-comp-io" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Pending: </label> <input type="text" id="involv-pend-om" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Pending: </label> <input type="text" id="involv-pend-io" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Incomplete: </label> <input type="text" id="involv-incomp-om" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Incompleted: </label> <input type="text" id="involv-incomp-io" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br></br>
-                                    <div class="involv-left">
-                                        <label class="involv-label">Eagle for a Day</label>
-                                    </div>
-                                    <div class="involv-right">
-                                        <label class="involv-label">Transfer Outreach</label>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Completed: </label> <input type="text" id="involv-comp-efad" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Completed: </label> <input type="text" id="involv-comp-transfer" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Pending: </label> <input type="text" id="involv-pend-efad" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Pending: </label> <input type="text" id="involv-pend-transfer" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Incomplete: </label> <input type="text" id="involv-incomp-efad" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Incompleted: </label> <input type="text" id="involv-incomp-transfer" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br></br>
-                                    <div class="involv-left">
-                                        <label class="involv-label">Admitted Eagle Day</label>
-                                    </div>
-                                    <div class="involv-right">
-                                        <label class="involv-label">Media</label>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Completed: </label> <input type="text" id="involv-comp-aed" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Completed: </label> <input type="text" id="involv-comp-media" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Pending: </label> <input type="text" id="involv-pend-aed" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Pending: </label> <input type="text" id="involv-pend-media" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Incomplete: </label> <input type="text" id="involv-incomp-aed" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Incompleted: </label> <input type="text" id="involv-incomp-media" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br></br>
-                                     <div class="involv-left">
-                                        <label class="involv-label">Summer</label>
-                                    </div>
-                                    <div class="involv-right">
-                                        
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Completed: </label> <input type="text" id="involv-comp-aed" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Pending: </label> <input type="text" id="involv-pend-aed" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                       
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Incomplete: </label> <input type="text" id="involv-incomp-aed" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        
-                                    </div> </br></br>
+                                    <h4>Office Programs</h4>
                                     
-                                </div>
+                                    <table class="table" style="font-size: 14px; width: 100%;">
+                                        <tr>
+                                            <th></th>
+                                            <th>Complete</th>
+                                            <th>Pending</th>
+                                            <th>Incomplete</th>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Panels</strong></td>
+                                            <td><span id="panelsCompleteSpan">4</span></td>
+                                            <td><span id="panelsPendingSpan">1</span></td>
+                                            <td><span id="panelsIncompleteSpan">0</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Tours</strong></td>
+                                            <td><span id="toursCompleteSpan">4</span></td>
+                                            <td><span id="toursPendingSpan">1</span></td>
+                                            <td><span id="toursIncompleteSpan">0</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Greeting</strong></td>
+                                            <td><span id="greetingCompleteSpan">4</span></td>
+                                            <td><span id="greetingPendingSpan">1</span></td>
+                                            <td><span id="greetingIncompleteSpan">0</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Office Management</strong></td>
+                                            <td><span id="omCompleteSpan">4</span></td>
+                                            <td><span id="omPendingSpan">1</span></td>
+                                            <td><span id="omIncompleteSpan">0</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Eagle for a Day</strong></td>
+                                            <td><span id="efadCompleteSpan">4</span></td>
+                                            <td><span id="efadPendingSpan">1</span></td>
+                                            <td><span id="efadIncompleteSpan">0</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Admitted Eagle Day</strong></td>
+                                            <td><span id="aedCompleteSpan">4</span></td>
+                                            <td><span id="aedPendingSpan">1</span></td>
+                                            <td><span id="aedIncompleteSpan">0</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td><td></td> <td></td><td></td>
+                                        </tr>
+                                    </table>
+                                   
+                                    <h4>Outreach Programs</h4>
+                                    <table class="table" style="font-size: 14px; width: 100%;">
+                                        <tr>
+                                            <th></th>
+                                            <th>Complete</th>
+                                            <th>Pending</th>
+                                            <th>Incomplete</th>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Outreach</strong></td>
+                                            <td><span id="outreachCompleteSpan">4</span></td>
+                                            <td><span id="outreachPendingSpan">1</span></td>
+                                            <td><span id="outreachIncompleteSpan">0</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>High School Visits</strong></td>
+                                            <td><span id="hsvisitsCompleteSpan">4</span></td>
+                                            <td><span id="hsvisitsPendingSpan">1</span></td>
+                                            <td><span id="hsvisitsIncompleteSpan">0</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>AHANA Outreach</strong></td>
+                                            <td><span id="ahanaCompleteSpan">4</span></td>
+                                            <td><span id="ahanaPendingSpan">1</span></td>
+                                            <td><span id="ahanaIncompleteSpan">0</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>International Outreach</strong></td>
+                                            <td><span id="ioCompleteSpan">4</span></td>
+                                            <td><span id="ioPendingSpan">1</span></td>
+                                            <td><span id="ioIncompleteSpan">0</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Transfer Outreach</strong></td>
+                                            <td><span id="transferCompleteSpan">4</span></td>
+                                            <td><span id="transferPendingSpan">1</span></td>
+                                            <td><span id="transferIncompleteSpan">0</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Media</strong></td>
+                                            <td><span id="mediaCompleteSpan">4</span></td>
+                                            <td><span id="mediaPendingSpan">1</span></td>
+                                            <td><span id="mediaIncompleteSpan">0</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td><td></td> <td></td><td></td>
+                                        </tr>
+                                    </table>
+                                    
                                 <div class="tab-pane fade" id="notes">
                                     <table id="notes-table">
                                         <tr class="notes-row">

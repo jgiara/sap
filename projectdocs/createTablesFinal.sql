@@ -127,5 +127,3 @@ create table Audit (
 	updated datetime not null,
 	updated_by varchar(30) not null references Users(email)
 );
-
-$(currentEle).html('<select id="newvalue" class="thVal"><option value="MCAS"' + (valueT == "MCAS" ? 'selected = selected' : '') + '>MCAS</option><option value="CSOM"' + (valueT == "CSOM" ? 'selected = selected' : '') + '>CSOM</option><option value="CSON"' + (valueT == "CSON" ? 'selected = selected' : '') + '>CSON</option><option value="LSOE"' + (valueT == "LSOE" ? 'selected = selected' : '') + '>LSOE</option></select>');
