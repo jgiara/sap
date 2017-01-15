@@ -100,6 +100,7 @@ echo '<input type="hidden" id="programName" value="All Users">';
                                     <option value='Inactive'>Inactive</option>
                                     <option value="Abroad/Prac/Clinical">Abroad/Prac/Clinical</option>
                                     <option value="Graduated">Graduated</option>
+                                    <option value="Staff">Staff</option>
                                 </select>
                             </div>
                                 <button class="btn btn-primary" id="semester-submit">Go</button>
@@ -1155,6 +1156,7 @@ echo '<input type="hidden" id="programName" value="All Users">';
                                             '<option value="Inactive"' + (valueT == "Inactive" ? 'selected = selected' : '') + '>Inactive</option>' +
                                             '<option value="Abroad/Prac/Clinical"' + (valueT == "Abroad/Prac/Clinical" ? 'selected = selected' : '') + '>Abroad/Prac/Clinical</option>' +
                                             '<option value="Graduated"' + (valueT == "Graduated" ? 'selected = selected' : '') + '>Graduated</option>' +
+                                            '<option value="Staff"' + (valueT == "Staff" ? 'selected = selected' : '') + '>Staff</option>' +
                                         '</select>');
                 }
                 else {

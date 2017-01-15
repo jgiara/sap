@@ -5,6 +5,7 @@
 	$user = $_POST['user'];
 
 	$fns->deleteUser($user);
+	$fns->deleteRolesByEmail($user);
 
 	$db = null;
 ?>

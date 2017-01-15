@@ -25,6 +25,7 @@
 	}
 	else {
 		$fns->insertUserManual($email, $id, $fn, $ln, $sex, $year, $school, $major, $minor, $hometown, $state, $international, $ahana, $transfer, $phone);
+        $fns->insertRoles($email, 1);
         echo json_encode('entered');
 	}
 	

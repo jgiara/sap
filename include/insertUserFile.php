@@ -27,7 +27,7 @@
 	    	$index = 0;
 			while(!($end = feof($file))) {
 				$a = fgetcsv($file);
-				$email = (string) $a[0];
+				$email = (string) trim($a[0]);
 				$email = strtolower($email);
 				if(in_array($email, $emails) || in_array($email, $added)) {
 					array_push($errors['exist'], $email);
@@ -36,6 +36,7 @@
 					$fns->insertUserAuto($email, $a);
 					$added[$index] = $email;
 					$index++;
+					$fns->insertRoles($email, 1);
 				}
 			}
 			fclose($file);
