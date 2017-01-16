@@ -465,6 +465,16 @@ function getAllRoles(callback) {
         });
 }
 
+function getUserData(callback, email) {
+    $.getJSON("../include/getUserData.php", 
+        { 
+            email: email
+
+        }, function(data) {
+            callback(data);
+        });
+}
+
 function insertRoles(callback, emails, role) {
     $.post("../include/insertRoles.php",
             {
