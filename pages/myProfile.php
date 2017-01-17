@@ -97,8 +97,6 @@ echo '<input type="hidden" id="programName" value="My Profile">';
                                 </li>
                                 <li><a href="#involvement" data-toggle="tab">Involvement</a>
                                 </li>
-                                <li><a href="#notes" data-toggle="tab">Notes</a>
-                                </li>
                             </ul>
 
                             <!-- Tab panes -->
@@ -249,23 +247,11 @@ echo '<input type="hidden" id="programName" value="My Profile">';
                                             <td></td><td></td> <td></td><td></td>
                                         </tr>
                                     </table>
-                                    
-                                <div class="tab-pane fade" id="notes">
-                                    <table id="notes-table">
-                                        <tr class="notes-row">
-                                            <td>10:00:02 07/20/16</br>Jon Giara - Head Coordinator</td>
-                                            <td class="notes-data">This is my first note</td>
-                                        </tr>
-                                        <tr class="notes-row">
-                                            <td>10:00:02 07/20/16</br>Jon Giara - Head Coordinator</td>
-                                            <td class="notes-data">This is my first note sdkfhsd sdfkhdaf sdafhdsaf sdafasdhfkj dsjfkhdsa fdsafihdsaf dsafhsad,mf sdjkfhdsjb</br></br>this is a test to see</br>how many</br></br>breaks llok like</td>
-                                        </tr>
-                                    </table>
-                                </div>
                             </div>
                         </div>
                         <!-- /.panel-body -->
                    
+                   </div>
                     <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-6 -->
@@ -345,8 +331,43 @@ echo '<input type="hidden" id="programName" value="My Profile">';
         }, email);
 
         getInvolvementData(function(data) {
-            
-        }, email);
+            document.getElementById("panelsCompleteSpan").value = 
+            document.getElementById("panelsPendingSpan").value = 
+            document.getElementById("panelsIncompleteSpan").value = 
+            document.getElementById("toursCompleteSpan").value = 
+            document.getElementById("toursPendingSpan").value = 
+            document.getElementById("toursIncompleteSpan").value = 
+            document.getElementById("greetingCompleteSpan").value = 
+            document.getElementById("greetingPendingSpan").value = 
+            document.getElementById("greetingIncompleteSpan").value = 
+            document.getElementById("omCompleteSpan").value = 
+            document.getElementById("omPendingSpan").value = 
+            document.getElementById("omIncompleteSpan").value = 
+            document.getElementById("efadCompleteSpan").value = 
+            document.getElementById("efadPendingSpan").value = 
+            document.getElementById("efadIncompleteSpan").value = 
+            document.getElementById("aedCompleteSpan").value = 
+            document.getElementById("aedPendingSpan").value = 
+            document.getElementById("aedIncompleteSpan").value = 
+            document.getElementById("hsvisitsCompleteSpan").value = 
+            document.getElementById("hsvisitsPendingSpan").value = 
+            document.getElementById("hsvisitsIncompleteSpan").value = 
+            document.getElementById("outreachCompleteSpan").value = 
+            document.getElementById("outreachPendingSpan").value = 
+            document.getElementById("outreachIncompleteSpan").value = 
+            document.getElementById("ahanaCompleteSpan").value = 
+            document.getElementById("ahanaPendingSpan").value = 
+            document.getElementById("ahanaIncompleteSpan").value = 
+            document.getElementById("ioCompleteSpan").value = 
+            document.getElementById("ioPendingSpan").value = 
+            document.getElementById("ioIncompleteSpan").value = 
+            document.getElementById("transferCompleteSpan").value = 
+            document.getElementById("transferPendingSpan").value = 
+            document.getElementById("transferIncompleteSpan").value = 
+            document.getElementById("mediaCompleteSpan").value = 
+            document.getElementById("mediaPendingSpan").value = 
+            document.getElementById("mediaIncompleteSpan").value = 
+        }, email, eagleid.innerHTML);
     });
     </script>
 

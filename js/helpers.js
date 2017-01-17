@@ -702,6 +702,16 @@ function markInactive(callback, year, semester) {
             });
 }
 
+function getInvolvementData(callback, user, year) {
+    $.getJSON("../include/getHistoryCreditForProgram.php", 
+    {
+        user: user,
+        year: year
+    }, function(data) {
+        callback(data);
+    });
+}
+
 function verifyData(field, value) {
     switch(field) {
         case 'shift_time': {
