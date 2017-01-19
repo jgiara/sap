@@ -1,4 +1,5 @@
 <?php
+		require_once '../resources/initTableFunctions.php';
 
 		$week_id = $_POST['id'];
 		$field = $_POST['field'];
@@ -21,5 +22,4 @@
 		$data_from_post = array('update' => $field);
 		echo json_encode($result);
 		mysqli_close($dbc);
-?>
 ?>

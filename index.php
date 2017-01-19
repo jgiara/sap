@@ -2,7 +2,7 @@
 ob_start();
 session_start();
 
-require '../resources/init.php';
+require './resources/init.php';
 $general->logged_in_protect();
 
 //Login

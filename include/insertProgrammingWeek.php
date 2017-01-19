@@ -1,6 +1,6 @@
 <?php
 	
-		require_once '../../resources/initTableFunctions.php';
+		require_once '../resources/initTableFunctions.php';
 
 		$week = $_POST['week'];
 		$year = $_POST['year'];

@@ -1,7 +1,7 @@
 <?php 
 ob_start();
 session_start();
-require_once '../../resources/init.php';
+require_once '../resources/init.php';
 $general->logged_out_protect();
 require '../include/helpers/userInfo.php';
 require '../include/helpers/helpers.php';
@@ -215,6 +215,7 @@ echo '<input type="hidden" id="programName" value="Council">';
                         <label for="position-form">Position:</label>
                         <select name="position-form" class="form-control" id="position-form" required>
                             <option disabled selected value required> -- Select a Position -- </option>
+                            <option value="Head Coordinator">Head Coordinator</option>
                             <option value="Panels Coordinator">Panels Coordinator</option>
                             <option value="Tours Coordinator">Tours Coordinator</option>
                             <option value="Greeting Coordinator">Greeting Coordinator</option>

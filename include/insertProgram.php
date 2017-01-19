@@ -1,6 +1,6 @@
 <?php
 
-	require_once '../../resources/initTableFunctions.php';
+	require_once '../resources/initTableFunctions.php';
 
 	$program = $_POST['program'];
 	$semester = $_POST['semester'];

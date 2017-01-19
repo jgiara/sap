@@ -1,6 +1,6 @@
 <?php
 	ini_set("auto_detect_line_endings", "1");
-	require_once '../../resources/initTableFunctions.php';
+	require_once '../resources/initTableFunctions.php';
 
 	$program = $_POST['program-form-members-file'];
 	$semester = $_POST['semester-form-members-file'];
@@ -8,7 +8,7 @@
 
 	//echo "<script type='text/javascript'>alert('$program');</script>"
 
-	$target_dir = "../../resources/uploads/";
+	$target_dir = "../resources/uploads/";
 	$target_file = $target_dir . basename($_FILES["file-form"]["name"]);
 	$uploadOk = 1;
 	$fileType = pathinfo($target_file,PATHINFO_EXTENSION);
@@ -27,7 +27,7 @@
 	} 
 	else {
 	    if (move_uploaded_file($_FILES["file-form"]["tmp_name"], $target_dir . 'dataFile.csv')) {
-	    	$file = fopen("../../resources/uploads/dataFile.csv","r");
+	    	$file = fopen("../resources/uploads/dataFile.csv","r");
 	    	$headers = fgetcsv($file);
 	    	$emails = $fns->getAllEmails();
 	    	$members = $fns->getUsersInProgramForShifts($program, $semester, $year);

@@ -1,6 +1,6 @@
 <?php
 
-	require_once '../../resources/initTableFunctions.php';
+	require_once '../resources/initTableFunctions.php';
 
 	$search = $_GET['searchVals'];
 	

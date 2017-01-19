@@ -7,7 +7,7 @@
             <ul class='dropdown-menu dropdown-user'>
                 <li><a href='./myProfile.php'><i class='fa fa-user fa-fw'></i> User Profile</a>
                 </li>
-                <li><a href='#'><i class='fa fa-gear fa-fw'></i> Change Password</a>
+                <li><a href='./changePassword.php'><i class='fa fa-gear fa-fw'></i> Change Password</a>
                 </li>
                 <li class='divider'></li>
                 <li><a href='../logout.php'><i class='fa fa-sign-out fa-fw'></i> Logout</a>
@@ -51,9 +51,7 @@
 
 	function displayHigherAccessModules($roles) {
 		if(in_array('Council', $roles) || in_array('Staff', $roles) || in_array('Advisor', $roles) || in_array('Admin', $roles)) {
-            echo "<li>
-                    <a href='./applications.php'>Applications</a>
-                </li>
+            echo "
                 <li>
                     <a href='./users.php'>All Users</a>
                 </li>

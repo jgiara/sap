@@ -1,6 +1,6 @@
 <?php
 	ini_set("auto_detect_line_endings", "1");
-	require_once '../../resources/initTableFunctions.php';
+	require_once '../resources/initTableFunctions.php';
 
 	$program = $_POST['program-form-members-file'];
 	$semester = $_POST['semester-form-members-file'];

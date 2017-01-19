@@ -1,7 +1,7 @@
 <?php 
 ob_start();
 session_start();
-require_once '../../resources/init.php';
+require_once '../resources/init.php';
 $general->logged_out_protect();
 require '../include/helpers/userInfo.php';
 require '../include/helpers/helpers.php';
@@ -829,6 +829,11 @@ echo '<input type="hidden" id="programName" value="All Users">';
                                             '<option value="Male"' + (valueT == "Male" ? 'selected = selected' : '') + '>Male</option>' +
                                             '<option value="Female"' + (valueT == "Female" ? 'selected = selected' : '') + '>Female</option>' +
                                         '</select>');
+                }
+                else if(column == 0 || column == 2) {
+                    valueT.replace(/<a id='[a-zA-Z]*' href='.\/profile.php?userEmail=[a-zA-Z]*@bc.edu'>/, '');
+                    valueT.replace(/<\/a>/, '');
+                    $(currentEle).html('<input id="newvalue" class="thVal" type="text" value="' + valueT + '" />');
                 }
                 else if(column == 6) {
                     $(currentEle).html('<select id="newvalue" class="thVal">' +

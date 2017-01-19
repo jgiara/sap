@@ -1,6 +1,6 @@
 <?php
 
-	require_once '../../resources/initTableFunctions.php';
+	require_once '../resources/initTableFunctions.php';
 	
 	$year = $_GET['year'];
 	$semester = $_GET['semester'];

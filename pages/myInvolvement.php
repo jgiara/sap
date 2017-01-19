@@ -1,11 +1,10 @@
 <?php 
 ob_start();
 session_start();
-require_once '../../resources/init.php';
+require_once '../resources/init.php';
 $general->logged_out_protect();
 require '../include/helpers/userInfo.php';
 require '../include/helpers/helpers.php';
-require '../include/helpers/pageProtect.php';
 echo '<input type="hidden" id="programName" value="My Involvement">';
 ?>
 
