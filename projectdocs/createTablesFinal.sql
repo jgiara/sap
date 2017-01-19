@@ -5,7 +5,6 @@ drop table Programs;
 drop table Program_Members;
 drop table Council;
 drop table Council_Members;
-drop table Notes;
 drop table Programming_Weeks;
 drop table Attendance;
 drop table Audit;
@@ -81,15 +80,6 @@ create table Program_Members (
 	comments text
 );
 
-create table Notes (
-	note_id int(10) not null auto_increment primary key,
-	user varchar(30) not null references Users(email),
-	submitted_by varchar(30) not null references Users(email),
-	submitted datetime not null,
-	program int(10) references Programs(program_id),
-	comments text not null
-);
-
 create table Programming_Weeks (
 	week_id int(10) not null auto_increment primary key, 
 	week_number int(2) not null,
@@ -126,4 +116,21 @@ create table Audit (
 	new_value varchar(70) not null,
 	updated datetime not null,
 	updated_by varchar(30) not null references Users(email)
+);
+
+create table Credit_History (
+	credit_id int(10) not null auto_increment primary key,
+	user varchar(30) not null references Users(email),
+	panels int(1) not null,
+	tours int(1) not null,
+	greeting int(1) not null,
+	om int(1) not null,
+	efad int(1) not null,
+	aed int(1) not null,
+	outreach int(1) not null,
+	hsvisits int(1) not null,
+	ahana int(1) not null,
+	io int(1) not null,
+	transfer int(1) not null,
+	media int(1) not null
 );

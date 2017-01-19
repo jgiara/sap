@@ -99,6 +99,61 @@ function getAttendanceData(callback, programName, selectedSemester, selectedYear
         });
 }
 
+function getInvolvementDataHistory(callback, email, tableInvolv) {
+    $.getJSON("../include/getInvolvementData.php",  {
+            email: email
+          }, 
+          function(data) {
+            $.each( data, function( i, item ) {
+                var req = item.requirements;
+                if(req != null) {
+                    for (var i = 0; i < req.length; i++) {
+                        if(req.charAt(i) == '\n') {
+                            req = req.substr(0, i).concat('<br>', req.substr(i+1));
+                        }
+                    }
+                }
+                var reqs = item.requirements_status;
+                if(reqs != null) {
+                    for (var i = 0; i < reqs.length; i++) {
+                        if(reqs.charAt(i) == '\n') {
+                            reqs = reqs.substr(0, i).concat('<br>', reqs.substr(i+1));
+                        }
+                    }
+                }
+                var com = item.comments;
+                if(com != null) {
+                    for (var i = 0; i < com.length; i++) {
+                        if(com.charAt(i) == '\n') {
+                            com = com.substr(0, i).concat('<br>', com.substr(i+1));
+                        }
+                    }
+                }
+                tableInvolv.row.add([
+                    item.program_name,
+                    item.semester,
+                    item.year,
+                    item.first_name + " " + item.last_name,
+                    item.credit_status,
+                    req,
+                    reqs,
+                    com
+                ]);
+               
+              }); 
+            callback(tableInvolv);
+          });
+}
+
+function getName(callback, email) {
+    $.getJSON("../include/getName.php", 
+        {
+            email: email
+        }, function(data) {
+            callback(data);
+        });
+}
+
 function getWeekData(callback, selectedSemester, selectedYear) {
     $.getJSON("../include/getWeeks.php", 
         {
@@ -150,8 +205,8 @@ function getAllUsers(callback, selectedStatus, tableVols) {
     }, function(data) {
         $.each(data, function(i, item) {
             tableVols.row.add([
-                item.first_name,
-                item.last_name,
+                "<a id='test' href='./profile.php?userEmail=" + item.email + "'>"+ item.first_name + "</a>",
+                "<a id='test' href='./profile.php?userEmail=" + item.email + "'>"+ item.last_name + "</a>",
                 item.email,
                 item.phone,
                 item.sex,
@@ -710,6 +765,57 @@ function getInvolvementData(callback, user, year) {
     }, function(data) {
         callback(data);
     });
+}
+
+function updateProfile(callback, email, fnn, lnn, eagleidn, sexn, phonen, yearn, schooln, majorn, minorn, hometownn, staten, localn, ahanan, internationaln, transfern) {
+    $.post("../include/updateProfile.php",
+            {
+                fn: fnn, 
+                ln: lnn, 
+                eagleid: eagleidn,
+                sex: sexn,
+                year: yearn,
+                school: schooln, 
+                major: majorn,
+                minor: minorn,
+                hometown: hometownn,
+                state: staten,
+                local: localn,
+                ahana: ahanan,
+                international: internationaln,
+                transfer: transfern,
+                email: email
+            }, function() {
+                callback();
+            });
+}
+
+function updateUserProfile(callback, email, fnn, lnn, eagleidn, sexn, phonen, yearn, schooln, majorn, minorn, hometownn, staten, localn, ahanan, internationaln, transfern, toursn, panelsn, counciln, summern, statusn) {
+    $.post("../include/updateUserProfile.php",
+            {
+                fn: fnn, 
+                ln: lnn, 
+                eagleid: eagleidn,
+                sex: sexn,
+                year: yearn,
+                school: schooln, 
+                major: majorn,
+                minor: minorn,
+                hometown: hometownn,
+                state: staten,
+                local: localn,
+                ahana: ahanan,
+                international: internationaln,
+                transfer: transfern,
+                tours: toursn,
+                panels: panelsn,
+                council: counciln,
+                summer: summern,
+                status: statusn,
+                email: email
+            }, function() {
+                callback();
+            });
 }
 
 function verifyData(field, value) {

@@ -8,6 +8,7 @@ require '../include/helpers/helpers.php';
 require '../include/helpers/pageProtect.php';
 $userEmail = $_GET['userEmail'];
 echo "<input type='hidden' id='userEmail' value=$userEmail>";
+echo '<input type="hidden" id="programName" value="User Profile">';
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +22,7 @@ echo "<input type='hidden' id='userEmail' value=$userEmail>";
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>My Profile - Student Admission Program - Boston College</title>
+    <title>User Profile - Student Admission Program - Boston College</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -32,9 +33,6 @@ echo "<input type='hidden' id='userEmail' value=$userEmail>";
     <!-- DataTables CSS -->
     <link href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
 
-    <!-- DataTables Responsive CSS -->
-    <link href="../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
-
     <!-- Custom CSS -->
     <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
 
@@ -43,13 +41,7 @@ echo "<input type='hidden' id='userEmail' value=$userEmail>";
 
     <!-- Custom Override Bootstrap -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap-override.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    
 
 </head>
 
@@ -93,7 +85,7 @@ echo "<input type='hidden' id='userEmail' value=$userEmail>";
         <div id="page-wrapper" style="overflow-x: auto;">
             <div class="row" style="maring-bottom: 0;">
                 <div class="col-lg-12">
-                    <h3 style="margin-top: 60px; margin-bottom: 0;" class="page-header" id="panels-header">My Profile</h3>
+                    <h3 style="margin-top: 60px; margin-bottom: 0;" class="page-header" id="panels-header">User Profile</h3>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -108,261 +100,176 @@ echo "<input type='hidden' id='userEmail' value=$userEmail>";
                                 </li>
                                 <li><a href="#involvement" data-toggle="tab">Involvement</a>
                                 </li>
-                                <li><a href="#notes" data-toggle="tab">Notes</a>
-                                </li>
                             </ul>
 
                             <!-- Tab panes -->
-                            <div class="tab-content inner-scroll">
+                            <div class="tab-content">
                                 <div class="tab-pane fade in active" id="basic-info">
-                                </br>
-                                    <div class="info-left">
-                                        <label class="info-label">Eagle ID: </label>12345678
-                                    </div>
-                                    <div class="info-right">
-                                        <label class="info-label">Position: </label>Panels Coordinator
-                                    </div> </br></br>
-                                    <div class="info-left">
-                                         <label class="info-label">First Name: </label> <input type="text" id="info-fn" class="info-div-hide-box" size="30" value="Abigail"></input>
-                                    </div>
-                                    <div class="info-right">
-                                         <label class="info-label">Last Name: </label> <input type="text" id="info-ln" class="info-div-hide-box" size="30" value="Brown"></input>
-                                    </div></br></br>
-                                    <div class="info-left">
-                                        <label class="info-label">Class: </label> <input type="text" id="info-class" class="info-div-hide-box" size="30" value="2018"></input>
-                                    </div>
-                                    <div class="info-right">
-                                        <label class="info-label">School: </label> <input type="text" id="info-school" class="info-div-hide-box" size="30" value="MCAS"></input>
-                                    </div></br></br>
-                                    <div class="info-left">
-                                         <label class="info-label">Major: </label> <input type="text" id="info-major" class="info-div-hide-box" size="30" value="Applied Psychology & Human Development"></input>
-                                    </div>
-                                    <div class="info-right">
-                                        <label class="info-label">Minor: </label> <input type="text" id="info-minor" class="info-div-hide-box" size="30" value="Applied Psychology & Human Development"></input>
-                                    </div></br></br>
-                                    <div class="info-left">
-                                         <label class="info-label">Hometown: </label> <input type="text" id="info-hometown" class="info-div-hide-box" size="30" value="Iowa City, IA"></input>
-                                    </div>
-                                    <div class="info-right">
-                                       <label class="info-label">Local Address: </label> <input type="text" id="info-local-address" class="info-div-hide-box" size="30" value="2000 Comm Ave, 418"></input>
-                                    </div></br></br>
-                                    <div class="info-left">
-                                        <label class="info-label">Email: </label> <input type="text" id="info-email" class="info-div-hide-box" size="30" value="brownbba@bc.edu"></input>
-                                    </div>
-                                    <div class="info-right">
-                                       <label class="info-label">Phone: </label> <input type="text" id="info-phone" class="info-div-hide-box" size="30" value="555-555-5555"></input>   
-                                    </div></br></br>
-                                    <div class="info-left">
-                                        <label class="info-label">Sex: </label> <input type="text" id="info-sex" class="info-div-hide-box" size="30" value="Female"></input>
-                                    </div>
-                                    <div class="info-right">
-                                        <label class="info-label">AHANA: </label> <input type="text" id="info-ahana" class="info-div-hide-box" size="30" value="No"></input>
-                                    </div> </br>
-                                    </br>
-                                    <div class="info-left">
-                                        <label class="info-label">International: </label> <input type="text" id="info-international" class="info-div-hide-box" size="30" value="No"></input>
-                                    </div>
-                                    <div class="info-right">
-                                        <label class="info-label">Transfer: </label> <input type="text" id="info-transfer" class="info-div-hide-box" size="30" value="No"></input>
-                                    </div> </br></br>
-                    
+                                    <form id='changeInfoForm'>
+                                    <table class="table" style="font-size: 14px; width: 100%;">
+                                        <tr>
+                                            <td><strong>First Name:</strong> <span id="firstNameSpan"></span></td>
+                                            <td><strong>Last Name:</strong> <span class="inputChange" id="lastNameSpan"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Email:</strong> <span class="inputChange" id="emailSpan"></span></td>
+                                            <td><strong>Eagle ID:</strong> <span class="inputChange" id="eagleidSpan"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Sex:</strong> <span class="inputChange" id="sexSpan"></span></td>
+                                            <td><strong>Phone Number:</strong> <span class="inputChange" id="phoneSpan"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Class:</strong> <span class="inputChange" id="classSpan"></span></td>
+                                            <td><strong>School:</strong> <span class="inputChange" id="schoolSpan"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Major:</strong> <span class="inputChange" id="majorSpan"></span></td>
+                                            <td><strong>Minor:</strong> <span class="inputChange" id="minorSpan"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Hometown:</strong> <span class="inputChange" id="hometownSpan"></span></td>
+                                            <td><strong>State/Country:</strong> <span class="inputChange" id="stateSpan"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Local Address:</strong> <span class="inputChange" id="localAddressSpan"></span></td>
+                                            <td><strong>AHANA:</strong> <span class="inputChange" id="ahanaSpan"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>International:</strong> <span class="inputChange" id="internationalSpan"></span></td>
+                                            <td><strong>Transfer:</strong> <span class="inputChange" id="transferSpan"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Status:</strong> <span id="statusSpan"></span></td>
+                                            <td><strong>Last Login:</strong> <span id="loginSpan"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Applied Tours:</strong> <span id="toursSpan"></span></td>
+                                            <td><strong>Applied Panels:</strong> <span id="panelsSpan"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Applied Council:</strong> <span id="councilSpan"></span></td>
+                                            <td><strong>Applied Summer:</strong> <span id="summerSpan"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td><td></td>
+                                        </tr>
+                                    </table>
+                                    <?php if(in_array('Admin', $roles) || in_array('Council', $roles) || in_array('Advisor', $roles)) {
+
+                                    echo 
+                                    '<button class="btn btn-primary btn-sm preventButton" id="updateInfoButton">Update Information</button>
+                                    <button class="btn btn-danger btn-sm preventButton" id="submitInfoButton">Submit Changes</button>
+                                    <button class="btn btn-warning btn-sm preventButton" id="cancelButton">Cancel</button>';
+                                }?>
+                                    </form>
                                 </div>
                                 <div class="tab-pane fade" id="involvement">
                                 
-                                   Click <a href="./involvement.php">here</a> to see a more in-depth view of involvement</br></br>
-                                    <div class="info-left">
-                                        <label class="involv-label">OFFICE PROGRAMS
-                                    </div>
-                                    <div class="info-right">
-                                        <label class="involv-label">OUTREACH PROGRAMS
-                                    </div> </br>
-                                    <div class="involv-left">
-                                        <label class="involv-label">Panels</label>
-                                    </div>
-                                    <div class="involv-right">
-                                        <label class="involv-label">Outreach</label>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Completed: </label> <input type="text" id="involv-comp-panels" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Completed: </label> <input type="text" id="involv-comp-outreach" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Pending: </label> <input type="text" id="involv-pend-panels" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Pending: </label> <input type="text" id="involv-pend-outreach" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Incomplete: </label> <input type="text" id="involv-incomp-panels" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Incompleted: </label> <input type="text" id="involv-incomp-outreach" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br></br>
-
-                                    <div class="involv-left">
-                                        <label class="involv-label">Tours</label> 
-                                    </div>
-                                    <div class="involv-right">
-                                        <label class="involv-label">High School Visits</label>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Completed: </label> <input type="text" id="involv-comp-tours" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Completed: </label> <input type="text" id="involv-comp-hsvisits" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Pending: </label> <input type="text" id="involv-pend-tours" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Pending: </label> <input type="text" id="involv-pend-hsvisits" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Incomplete: </label> <input type="text" id="involv-incomp-tours" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Incompleted: </label> <input type="text" id="involv-incomp-hsvisits" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br></br>
-                                    <div class="involv-left">
-                                        <label class="involv-label">Greeting</label>
-                                    </div>
-                                    <div class="involv-right">
-                                        <label class="involv-label">AHANA Outreach</label>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Completed: </label> <input type="text" id="involv-comp-greeting" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Completed: </label> <input type="text" id="involv-comp-ahana" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Pending: </label> <input type="text" id="involv-pend-greeting" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Pending: </label> <input type="text" id="involv-pend-ahana" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Incomplete: </label> <input type="text" id="involv-incomp-greeting" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Incompleted: </label> <input type="text" id="involv-incomp-ahana" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br></br>
-                                    <div class="involv-left">
-                                        <label class="involv-label">Office Management</label> 
-                                    </div>
-                                    <div class="involv-right">
-                                        <label class="involv-label">International Outreach</label>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Completed: </label> <input type="text" id="involv-comp-om" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Completed: </label> <input type="text" id="involv-comp-io" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Pending: </label> <input type="text" id="involv-pend-om" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Pending: </label> <input type="text" id="involv-pend-io" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Incomplete: </label> <input type="text" id="involv-incomp-om" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Incompleted: </label> <input type="text" id="involv-incomp-io" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br></br>
-                                    <div class="involv-left">
-                                        <label class="involv-label">Eagle for a Day</label>
-                                    </div>
-                                    <div class="involv-right">
-                                        <label class="involv-label">Transfer Outreach</label>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Completed: </label> <input type="text" id="involv-comp-efad" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Completed: </label> <input type="text" id="involv-comp-transfer" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Pending: </label> <input type="text" id="involv-pend-efad" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Pending: </label> <input type="text" id="involv-pend-transfer" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Incomplete: </label> <input type="text" id="involv-incomp-efad" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Incompleted: </label> <input type="text" id="involv-incomp-transfer" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br></br>
-                                    <div class="involv-left">
-                                        <label class="involv-label">Admitted Eagle Day</label>
-                                    </div>
-                                    <div class="involv-right">
-                                        <label class="involv-label">Media</label>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Completed: </label> <input type="text" id="involv-comp-aed" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Completed: </label> <input type="text" id="involv-comp-media" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Pending: </label> <input type="text" id="involv-pend-aed" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Pending: </label> <input type="text" id="involv-pend-media" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Incomplete: </label> <input type="text" id="involv-incomp-aed" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        <label class="involv-label-count">Incompleted: </label> <input type="text" id="involv-incomp-media" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div> </br></br>
-                                     <div class="involv-left">
-                                        <label class="involv-label">Summer</label>
-                                    </div>
-                                    <div class="involv-right">
-                                        
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Completed: </label> <input type="text" id="involv-comp-aed" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Pending: </label> <input type="text" id="involv-pend-aed" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                       
-                                    </div> </br>
-                                    <div class="involvd-left">
-                                        <label class="involv-label-count">Incomplete: </label> <input type="text" id="involv-incomp-aed" class="involv-div-hide-box" size="1" value="3"></input>
-                                    </div>
-                                    <div class="involvd-right">
-                                        
-                                    </div> </br></br>
+                                   Click <span id="involvLink"></span> to see a more in-depth view of involvement</br></br>
+                                    <h4>Office Programs</h4>
                                     
-                                </div>
-                                <div class="tab-pane fade" id="notes">
-                                    <table id="notes-table">
-                                        <tr class="notes-row">
-                                            <td>10:00:02 07/20/16</br>Jon Giara - Head Coordinator</td>
-                                            <td class="notes-data">This is my first note</td>
+                                    <table class="table" style="font-size: 14px; width: 100%;">
+                                        <tr>
+                                            <th></th>
+                                            <th>Complete</th>
+                                            <th>Pending</th>
+                                            <th>Incomplete</th>
                                         </tr>
-                                        <tr class="notes-row">
-                                            <td>10:00:02 07/20/16</br>Jon Giara - Head Coordinator</td>
-                                            <td class="notes-data">This is my first note sdkfhsd sdfkhdaf sdafhdsaf sdafasdhfkj dsjfkhdsa fdsafihdsaf dsafhsad,mf sdjkfhdsjb</br></br>this is a test to see</br>how many</br></br>breaks llok like</td>
+                                        <tr>
+                                            <td><strong>Panels</strong></td>
+                                            <td><span id="panelsCompleteSpan"></span></td>
+                                            <td><span id="panelsPendingSpan"></span></td>
+                                            <td><span id="panelsIncompleteSpan"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Tours</strong></td>
+                                            <td><span id="toursCompleteSpan"></span></td>
+                                            <td><span id="toursPendingSpan"></span></td>
+                                            <td><span id="toursIncompleteSpan"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Greeting</strong></td>
+                                            <td><span id="greetingCompleteSpan"></span></td>
+                                            <td><span id="greetingPendingSpan"></span></td>
+                                            <td><span id="greetingIncompleteSpan"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Office Management</strong></td>
+                                            <td><span id="omCompleteSpan"></span></td>
+                                            <td><span id="omPendingSpan"></span></td>
+                                            <td><span id="omIncompleteSpan"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Eagle for a Day</strong></td>
+                                            <td><span id="efadCompleteSpan"></span></td>
+                                            <td><span id="efadPendingSpan"></span></td>
+                                            <td><span id="efadIncompleteSpan"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Admitted Eagle Day</strong></td>
+                                            <td><span id="aedCompleteSpan"></span></td>
+                                            <td><span id="aedPendingSpan"></span></td>
+                                            <td><span id="aedIncompleteSpan"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td><td></td> <td></td><td></td>
                                         </tr>
                                     </table>
-                                </div>
+                                   
+                                    <h4>Outreach Programs</h4>
+                                    <table class="table" style="font-size: 14px; width: 100%;">
+                                        <tr>
+                                            <th></th>
+                                            <th>Complete</th>
+                                            <th>Pending</th>
+                                            <th>Incomplete</th>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Outreach</strong></td>
+                                            <td><span id="outreachCompleteSpan"></span></td>
+                                            <td><span id="outreachPendingSpan"></span></td>
+                                            <td><span id="outreachIncompleteSpan"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>High School Visits</strong></td>
+                                            <td><span id="hsvisitsCompleteSpan"></span></td>
+                                            <td><span id="hsvisitsPendingSpan"></span></td>
+                                            <td><span id="hsvisitsIncompleteSpan"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>AHANA Outreach</strong></td>
+                                            <td><span id="ahanaCompleteSpan"></span></td>
+                                            <td><span id="ahanaPendingSpan"></span></td>
+                                            <td><span id="ahanaIncompleteSpan"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>International Outreach</strong></td>
+                                            <td><span id="ioCompleteSpan"></span></td>
+                                            <td><span id="ioPendingSpan"></span></td>
+                                            <td><span id="ioIncompleteSpan"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Transfer Outreach</strong></td>
+                                            <td><span id="transferCompleteSpan"></span></td>
+                                            <td><span id="transferPendingSpan"></span></td>
+                                            <td><span id="transferIncompleteSpan"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Media</strong></td>
+                                            <td><span id="mediaCompleteSpan"></span></td>
+                                            <td><span id="mediaPendingSpan"></span></td>
+                                            <td><span id="mediaIncompleteSpan"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td><td></td> <td></td><td></td>
+                                        </tr>
+                                    </table>
                             </div>
                         </div>
                         <!-- /.panel-body -->
                    
+                   </div>
                     <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-6 -->
@@ -387,6 +294,8 @@ echo "<input type='hidden' id='userEmail' value=$userEmail>";
     <script src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
     
+    <!-- Custom helper functions -->
+    <script type="text/javascript" src="../js/helpers.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
@@ -396,385 +305,551 @@ echo "<input type='hidden' id='userEmail' value=$userEmail>";
     
     <script>
     $(document).ready(function() {
-        document.getElementById("info-fn").value = document.getElementById("userEmail").value;
-        var s = document.getElementById("table-semester");
-        var selectedSemester = s.options[s.selectedIndex].value;
-        var y = document.getElementById("table-year");
-        var selectedYear = y.options[y.selectedIndex].value;
-        $.getJSON("../include/getWeek.php", 
-            {
-                semester: selectedSemester,
-                year: selectedYear
-            }, function(data) {
-                $.each(data, function(i, item) {
-                        document.getElementById("table-week").innerHTML += "<option value ='" + item.week_id + "'>Week " + item.week_number + ": " + item.sunday_date.substring(5) + " - " + item.saturday_date.substring(5) + "</option>"; 
-                });
+        $('#submitInfoButton').hide();
+        $('#cancelButton').hide();
 
-            })
-            .fail(function() {
-                console.log("getJSON error");
-            });
-        hideSelects();
-    // Setup - add a text input to each footer cell
-        $('#table-volunteers thead td').each( function () {
-            var title = $(this).text();
-            $(this).css('text-align', 'center');
-            $(this).html( '<input type="text"/>' );
-            $(this).children('input').css('width', '100%');
-        } );
-     
-        // DataTable
-        var tableVols = $('#table-volunteers').DataTable({
-            responsive: true,
-            orderCellsTop: true,
-            "columnDefs": [
-            {
-                "targets": [7],
-                "visible": false,
-                "orderable": false
-                
-            }]
-        });
-        var s = document.getElementById("table-semester");
-        var selectedSemester = s.options[s.selectedIndex].value;
-        var y = document.getElementById("table-year");
-        var selectedYear = y.options[y.selectedIndex].value;
-        $.getJSON("../include/getProgramVolunteers.php", 
-            {
-                program: "Panels",
-                semester: selectedSemester,
-                year: selectedYear
-            }, function(data) {
-                $.each(data, function(i, item) {
-                    tableVols.row.add([
-                        item.first_name,
-                        item.last_name,
-                        item.class,
-                        item.school,
-                        item.shift_day,
-                        item.shift_time,
-                        item.requirements_status,
-                        item.eagle_id
-                    ]);
-                });
-            })
-            .fail(function() {
-                console.log("getJSON error");
-            });
+        var email = document.getElementById("userEmail").value;
+        document.getElementById("involvLink").innerHTML = "<a href='./involvement.php?userEmail=" + email + "'>here</a>";
 
-            setTimeout(function() {
-            tableVols.draw();
-        }, 300);
-     
-        // Apply the search
-        tableVols.columns().every(function (index) {
-        $('#table-volunteers thead tr:eq(1) td:eq(' + index + ') input').on('keyup change', function () {
-            tableVols.column($(this).parent().index() + ':visible')
-                .search(this.value)
-                .draw();
-            } );
-        } );
-    
-        $('#table-attendance thead td').each( function () {
-            var title = $(this).text();
-            $(this).css('text-align', 'center');
-            $(this).html( '<input type="text"/>' );
-            $(this).children('input').css('width', '100%');
-        } );
-     
-        // DataTable
-        var tableAttn = $('#table-attendance').DataTable({
-            responsive: true,
-            orderCellsTop: true,
-            "columnDefs": [
-            {
-                "targets": [6,7],
-                "visible": false,
-                "orderable": false
-                
-            }]
-        });
-        setTimeout(function() {
-        var s = document.getElementById("table-semester");
-        var selectedSemester = s.options[s.selectedIndex].value;
-        var y = document.getElementById("table-year");
-        var selectedYear = y.options[y.selectedIndex].value;
-        var w = document.getElementById("table-week");
-        var selectedWeek = w.options[w.selectedIndex].value; //sometimes has an undefined value
-        var d = document.getElementById("table-day");
-        var selectedDay = d.options[d.selectedIndex].value;
-        $.getJSON("../include/getProgramAttendance.php", 
-            {
-                program: "Panels",
-                semester: selectedSemester,
-                year: selectedYear,
-                week: selectedWeek,
-                day: selectedDay
-            }, function(data) {
-                $.each(data, function(i, item) {
-                    tableAttn.row.add([
-                        item.first_name,
-                        item.last_name,
-                        item.shift_day,
-                        item.shift_time,
-                        item.present,
-                        item.note,
-                        item.eagle_id,
-                        item.attendance_id
-                    ]);
-                });
-            })
-            .fail(function() {
-                console.log("getJSON error");
-            });
-
-            setTimeout(function() {
-            tableAttn.draw();
-        }, 300);
-        }, 200);
-     
-        // Apply the search
-        tableAttn.columns().every(function (index) {
-        $('#table-attendance thead tr:eq(1) td:eq(' + index + ') input').on('keyup change', function () {
-            tableAttn.column($(this).parent().index() + ':visible')
-                .search(this.value)
-                .draw();
-            } );
-        } );
-
-
-        $('#semester-submit').on("click", function() {
-            
-            var s = document.getElementById("table-semester");
-            var selectedSemester = s.options[s.selectedIndex].value;
-            var y = document.getElementById("table-year");
-            var selectedYear = y.options[y.selectedIndex].value;
-            var w = document.getElementById("table-week");
-            var selectedWeek = w.options[w.selectedIndex].value;
-            var d = document.getElementById("table-day");
-            var selectedDay = d.options[d.selectedIndex].value;
-            
-            tableVols.clear();
-            tableAttn.clear();
-
-            document.getElementById("table-week").innerHTML = "";
-            $.getJSON("../include/getWeek.php", 
-            {
-                semester: selectedSemester,
-                year: selectedYear
-            }, function(data) {
-                $.each(data, function(i, item) {
-                         document.getElementById("table-week").innerHTML += "<option value ='" + item.week_id + "'>Week " + item.week_number + ": " + item.sunday_date.substring(5) + " - " + item.saturday_date.substring(5) + "</option>"; 
-                });
-
-            })
-            .fail(function() {
-                console.log("getJSON error");
-            });
-
-           
-
-            //document.getElementById("panels-header").innerHTML = "HELLO";
-            
-            
-            $.getJSON("../include/getProgramVolunteers.php", 
-            {
-                program: "Panels",
-                semester: selectedSemester,
-                year: selectedYear
-            }, function(data) {
-                $.each(data, function(i, item) {
-                    tableVols.row.add([
-                        item.first_name,
-                        item.last_name,
-                        item.class,
-                        item.school,
-                        item.shift_day,
-                        item.shift_time,
-                        item.requirements_status,
-                        item.eagle_id
-                    ]);
-                });
-            })
-            .fail(function() {
-                console.log("getJSON error");
-            });
-
-            setTimeout(function() {
-            tableVols.draw();
-        }, 300);
-
-            $.getJSON("../include/getProgramAttendance.php", 
-            {
-                program: "Panels",
-                semester: selectedSemester,
-                year: selectedYear, 
-                week: selectedWeek,
-                day: selectedDay
-            }, function(data) {
-                $.each(data, function(i, item) {
-                    tableAttn.row.add([
-                        item.first_name,
-                        item.last_name,
-                        item.shift_day,
-                        item.shift_time,
-                        item.present,
-                        item.note,
-                        item.eagle_id,
-                        item.attendance_id
-                    ]);
-                });
-            })
-            .fail(function() {
-                console.log("getJSON error");
-            });
-
-            setTimeout(function() {
-            tableAttn.draw();
-        }, 300);
-
+        var fn = document.getElementById("firstNameSpan");
+        var ln = document.getElementById("lastNameSpan");
+        var emailS = document.getElementById("emailSpan");
+        var eagleid = document.getElementById("eagleidSpan");
+        var sex = document.getElementById("sexSpan");
+        var phone = document.getElementById("phoneSpan");
+        var year = document.getElementById("classSpan");
+        var school = document.getElementById("schoolSpan");
+        var major = document.getElementById("majorSpan");
+        var minor = document.getElementById("minorSpan");
+        var hometown = document.getElementById("hometownSpan");
+        var state = document.getElementById("stateSpan");
+        var local = document.getElementById("localAddressSpan");
+        var ahana = document.getElementById("ahanaSpan");
+        var international = document.getElementById("internationalSpan");
+        var transfer = document.getElementById("transferSpan");
+        var status = document.getElementById("statusSpan");
+        var login = document.getElementById("loginSpan");
+        var toursApp = document.getElementById("toursSpan");
+        var panelsApp = document.getElementById("panelsSpan");
+        var councilApp = document.getElementById("councilSpan");
+        var summerApp = document.getElementById("summerSpan");
         
-        $('#table-volunteers tbody').on('dblclick', 'td', function(e) {
-            var currentEle = $(this);
-            var valueT = $(this).html();
-            var row = tableVols.cell($(this)).index().row;
-            var column = tableVols.cell($(this)).index().column;
-            if(column != 4 && column != 5 && column != 6) { //can't update User table
-                return;
-            }
-            var data = tableVols.row(row).data();
-            var updateField = ['first_name', 'last_name', 'class', 'school', 'shift_day', 'shift_time', 'requirements_status'];
-            setTimeout(function() {
-            $(currentEle).html('<input id="newvalue" class="thVal" type="text" value="' + valueT + '" />');
-            $(".thVal").focus();
-            $(".thVal").keyup(function (event) {
-            if (event.keyCode == 13) {
-               
-                data[column] =  document.getElementById("newvalue").value.trim();
-                tableVols.row(row).remove();
-                $.post("../include/inlineUpdateTable.php",
-                {
-                    id : data[7],
-                    field : updateField[column],
-                    table : 'Program_Members',
-                    newValue : data[column],
-                    whereField : 'user'
-                },
-              function(data){
-                if(data) {
-                  
-                }
-                });
+        
+        getUserData(function(data) {
+            fn.innerHTML = data['first_name'];
+            ln.innerHTML = data['last_name'];
+            emailS.innerHTML = email;
+            eagleid.innerHTML = data['eagle_id'];
+            sex.innerHTML = data['sex'];
+            phone.innerHTML = data['phone'];
+            year.innerHTML = data['class'];
+            school.innerHTML = data['school'];
+            major.innerHTML = data['major'];
+            minor.innerHTML = data['minor'];
+            hometown.innerHTML = data['hometown'];
+            state.innerHTML = data['state_country'];
+            local.innerHTML = data['local_address'];
+            ahana.innerHTML = data['ahana'];
+            international.innerHTML = data['international'];
+            transfer.innerHTML = data['transfer'];
+            status.innerHTML = data['status'];
+            login.innerHTML = data['last_login'];
+            toursApp.innerHTML = data['applied_tours'];
+            panelsApp.innerHTML = data['applied_panels'];
+            councilApp.innerHTML = data['applied_council'];
+            summerApp.innerHTML = data['applied_summer'];
 
-                setTimeout( function(){
-                tableVols.row.add([
-                    data[0],
-                    data[1],
-                    data[2],
-                    data[3],
-                    data[4],
-                    data[5],
-                    data[6],
-                    data[7]
+            getInvolvementData(function(data) {
+                document.getElementById("panelsCompleteSpan").innerHTML = data[0][0];
+                document.getElementById("panelsPendingSpan").innerHTML = data[0][1];
+                document.getElementById("panelsIncompleteSpan").innerHTML = data[0][2];
+                document.getElementById("toursCompleteSpan").innerHTML = data[1][0];
+                document.getElementById("toursPendingSpan").innerHTML = data[1][1];
+                document.getElementById("toursIncompleteSpan").innerHTML = data[1][2];
+                document.getElementById("greetingCompleteSpan").innerHTML = data[2][0];
+                document.getElementById("greetingPendingSpan").innerHTML = data[2][1];
+                document.getElementById("greetingIncompleteSpan").innerHTML = data[2][2];
+                document.getElementById("omCompleteSpan").innerHTML = data[3][0];
+                document.getElementById("omPendingSpan").innerHTML = data[3][1];
+                document.getElementById("omIncompleteSpan").innerHTML = data[3][2];
+                document.getElementById("efadCompleteSpan").innerHTML = data[4][0];
+                document.getElementById("efadPendingSpan").innerHTML = data[4][1];
+                document.getElementById("efadIncompleteSpan").innerHTML = data[4][2];
+                document.getElementById("aedCompleteSpan").innerHTML = data[5][0];
+                document.getElementById("aedPendingSpan").innerHTML = data[5][1];
+                document.getElementById("aedIncompleteSpan").innerHTML = data[5][2];
+                document.getElementById("outreachCompleteSpan").innerHTML = data[6][0];
+                document.getElementById("outreachPendingSpan").innerHTML = data[6][1];
+                document.getElementById("outreachIncompleteSpan").innerHTML = data[6][2];
+                document.getElementById("hsvisitsCompleteSpan").innerHTML = data[7][0];
+                document.getElementById("hsvisitsPendingSpan").innerHTML = data[7][1];
+                document.getElementById("hsvisitsIncompleteSpan").innerHTML = data[7][2];
+                document.getElementById("ahanaCompleteSpan").innerHTML = data[8][0];
+                document.getElementById("ahanaPendingSpan").innerHTML = data[8][1];
+                document.getElementById("ahanaIncompleteSpan").innerHTML = data[8][2];
+                document.getElementById("ioCompleteSpan").innerHTML = data[9][0];
+                document.getElementById("ioPendingSpan").innerHTML = data[9][1];
+                document.getElementById("ioIncompleteSpan").innerHTML = data[9][2];
+                document.getElementById("transferCompleteSpan").innerHTML = data[10][0];
+                document.getElementById("transferPendingSpan").innerHTML = data[10][1];
+                document.getElementById("transferIncompleteSpan").innerHTML = data[10][2];
+                document.getElementById("mediaCompleteSpan").innerHTML = data[11][0];
+                document.getElementById("mediaPendingSpan").innerHTML = data[11][1];
+                document.getElementById("mediaIncompleteSpan").innerHTML = data[11][2];
+            }, email, year.innerHTML);
 
-                ]).draw();
-            }, 100);
-            }
-        });
-        },50);
-            $('tbody td').not(currentEle).on('click', function() {
+        }, email);
+        
+        $('#updateInfoButton').on('click', function(e) {
+            var valueT;
+            fn.innerHTML = '<input type="text" id="fnInput" value="' + fn.innerHTML + '">';
+            ln.innerHTML = '<input type="text" id="lnInput" value="' + ln.innerHTML + '">';
+            eagleid.innerHTML = '<input type="text" id="eagleidInput" value="' + eagleid.innerHTML + '">';
+            valueT = sex.innerHTML;
+            sex.innerHTML = '<select id="sexInput" class="thVal">' +
+                                            '<option value="Male"' + (valueT == "Male" ? 'selected = selected' : '') + '>Male</option>' +
+                                            '<option value="Female"' + (valueT == "Female" ? 'selected = selected' : '') + '>Female</option>' +
+                                        '</select>';
+            phone.innerHTML = '<input type="text" id="phoneInput" value="' + phone.innerHTML + '">';
+            year.innerHTML = '<input type="text" id="yearInput" value="' + year.innerHTML + '">';
+            valueT = school.innerHTML;
+            school.innerHTML = '<select id="schoolInput" class="thVal">' +
+                                            '<option value="MCAS"' + (valueT == "MCAS" ? 'selected = selected' : '') + '>MCAS</option>' +
+                                            '<option value="CSOM"' + (valueT == "CSOM" ? 'selected = selected' : '') + '>CSOM</option>' +
+                                            '<option value="LSOE"' + (valueT == "LSOE" ? 'selected = selected' : '') + '>LSOE</option>' +
+                                            '<option value="CSON"' + (valueT == "CSON" ? 'selected = selected' : '') + '>CSON</option>' +
+                                        '</select>';
+            major.innerHTML = '<input type="text" id="majorInput" value="' + major.innerHTML + '">';
+            minor.innerHTML = '<input type="text" id="minorInput" value="' + minor.innerHTML + '">';
+            hometown.innerHTML = '<input type="text" id="hometownInput" value="' + hometown.innerHTML + '">';
+            valueT = state.innerHTML;
+            state.innerHTML = '<select id="stateInput" class="thVal" name="state" class="stateSelect">' +
+                                            '<option value="AL"' + (valueT == "AL" ? 'selected = selected' : '') + '>AL</option>' +
+                                            '<option value="AK"' + (valueT == "AK" ? 'selected = selected' : '') + '>AK</option>' +
+                                            '<option value="AZ"' + (valueT == "AZ" ? 'selected = selected' : '') + '>AZ</option>' +
+                                            '<option value="AR"' + (valueT == "AR" ? 'selected = selected' : '') + '>AR</option>' +
+                                            '<option value="CA"' + (valueT == "CA" ? 'selected = selected' : '') + '>CA</option>' +
+                                            '<option value="CO"' + (valueT == "CO" ? 'selected = selected' : '') + '>CO</option>' +
+                                            '<option value="CT"' + (valueT == "CT" ? 'selected = selected' : '') + '>CT</option>' +
+                                            '<option value="DE"' + (valueT == "DE" ? 'selected = selected' : '') + '>DE</option>' +
+                                            '<option value="DC"' + (valueT == "DC" ? 'selected = selected' : '') + '>DC</option>' +
+                                            '<option value="FL"' + (valueT == "FL" ? 'selected = selected' : '') + '>FL</option>' +
+                                            '<option value="GA"' + (valueT == "GA" ? 'selected = selected' : '') + '>GA</option>' +
+                                            '<option value="HI"' + (valueT == "HI" ? 'selected = selected' : '') + '>HI</option>' +
+                                            '<option value="ID"' + (valueT == "ID" ? 'selected = selected' : '') + '>ID</option>' +
+                                            '<option value="IL"' + (valueT == "IL" ? 'selected = selected' : '') + '>IL</option>' +
+                                            '<option value="IN"' + (valueT == "IN" ? 'selected = selected' : '') + '>IN</option>' +
+                                            '<option value="IA"' + (valueT == "IA" ? 'selected = selected' : '') + '>IA</option>' +
+                                            '<option value="KS"' + (valueT == "KS" ? 'selected = selected' : '') + '>KS</option>' +
+                                            '<option value="KY"' + (valueT == "KY" ? 'selected = selected' : '') + '>KY</option>' +
+                                            '<option value="LA"' + (valueT == "LA" ? 'selected = selected' : '') + '>LA</option>' +
+                                            '<option value="ME"' + (valueT == "ME" ? 'selected = selected' : '') + '>ME</option>' +
+                                            '<option value="MD"' + (valueT == "MD" ? 'selected = selected' : '') + '>MD</option>' +
+                                            '<option value="MA"' + (valueT == "MA" ? 'selected = selected' : '') + '>MA</option>' +
+                                            '<option value="MI"' + (valueT == "MI" ? 'selected = selected' : '') + '>MI</option>' +
+                                            '<option value="MN"' + (valueT == "MN" ? 'selected = selected' : '') + '>MN</option>' +
+                                            '<option value="MS"' + (valueT == "MS" ? 'selected = selected' : '') + '>MS</option>' +
+                                            '<option value="MO"' + (valueT == "MO" ? 'selected = selected' : '') + '>MO</option>' +
+                                            '<option value="MT"' + (valueT == "MT" ? 'selected = selected' : '') + '>MT</option>' +
+                                            '<option value="NE"' + (valueT == "NE" ? 'selected = selected' : '') + '>NE</option>' +
+                                            '<option value="NV"' + (valueT == "NV" ? 'selected = selected' : '') + '>NV</option>' +
+                                            '<option value="NH"' + (valueT == "NH" ? 'selected = selected' : '') + '>NH</option>' +
+                                            '<option value="NJ"' + (valueT == "NJ" ? 'selected = selected' : '') + '>NJ</option>' +
+                                            '<option value="NM"' + (valueT == "NM" ? 'selected = selected' : '') + '>NM</option>' +
+                                            '<option value="NY"' + (valueT == "NY" ? 'selected = selected' : '') + '>NY</option>' +
+                                            '<option value="NC"' + (valueT == "NC" ? 'selected = selected' : '') + '>NC</option>' +
+                                            '<option value="ND"' + (valueT == "ND" ? 'selected = selected' : '') + '>ND</option>' +
+                                            '<option value="OH"' + (valueT == "OH" ? 'selected = selected' : '') + '>OH</option>' +
+                                            '<option value="OK"' + (valueT == "OK" ? 'selected = selected' : '') + '>OK</option>' +
+                                            '<option value="OR"' + (valueT == "OR" ? 'selected = selected' : '') + '>OR</option>' +
+                                            '<option value="PA"' + (valueT == "PA" ? 'selected = selected' : '') + '>PA</option>' +
+                                            '<option value="RI"' + (valueT == "RI" ? 'selected = selected' : '') + '>RI</option>' +
+                                            '<option value="SC"' + (valueT == "SC" ? 'selected = selected' : '') + '>SC</option>' +
+                                            '<option value="SD"' + (valueT == "SD" ? 'selected = selected' : '') + '>SD</option>' +
+                                            '<option value="TN"' + (valueT == "TN" ? 'selected = selected' : '') + '>TN</option>' +
+                                            '<option value="TX"' + (valueT == "TX" ? 'selected = selected' : '') + '>TX</option>' +
+                                            '<option value="UT"' + (valueT == "UT" ? 'selected = selected' : '') + '>UT</option>' +
+                                            '<option value="VT"' + (valueT == "VT" ? 'selected = selected' : '') + '>VT</option>' +
+                                            '<option value="VA"' + (valueT == "VA" ? 'selected = selected' : '') + '>VA</option>' +
+                                            '<option value="WA"' + (valueT == "WA" ? 'selected = selected' : '') + '>WA</option>' +
+                                            '<option value="WV"' + (valueT == "WV" ? 'selected = selected' : '') + '>WV</option>' +
+                                            '<option value="WI"' + (valueT == "WI" ? 'selected = selected' : '') + '>WI</option>' +
+                                            '<option value="WY"' + (valueT == "WY" ? 'selected = selected' : '') + '>WY</option>' +
+                                            '<option value="Afganistan">Afghanistan</option>' + 
+                                            '<option value="Albania">Albania</option>' +
+                                            '<option value="Algeria">Algeria</option>' +
+                                            '<option value="American Samoa">American Samoa</option>' +
+                                            '<option value="Andorra">Andorra</option>' +
+                                            '<option value="Angola">Angola</option>' +
+                                            '<option value="Anguilla">Anguilla</option>' +
+                                            '<option value="Antigua &amp; Barbuda">Antigua &amp; Barbuda</option>' +
+                                            '<option value="Argentina">Argentina</option>' +
+                                            '<option value="Armenia">Armenia</option>' +
+                                            '<option value="Aruba">Aruba</option>' +
+                                            '<option value="Australia">Australia</option>' +
+                                            '<option value="Austria">Austria</option>' +
+                                            '<option value="Azerbaijan">Azerbaijan</option>' +
+                                            '<option value="Bahamas">Bahamas</option>' +
+                                            '<option value="Bahrain">Bahrain</option>' +
+                                            '<option value="Bangladesh">Bangladesh</option>' +
+                                            '<option value="Barbados">Barbados</option>' +
+                                            '<option value="Belarus">Belarus</option>' +
+                                            '<option value="Belgium">Belgium</option>' +
+                                            '<option value="Belize">Belize</option>' +
+                                            '<option value="Benin">Benin</option>' +
+                                            '<option value="Bermuda">Bermuda</option>' +
+                                            '<option value="Bhutan">Bhutan</option>' +
+                                            '<option value="Bolivia">Bolivia</option>' +
+                                            '<option value="Bonaire">Bonaire</option>' +
+                                            '<option value="Bosnia &amp; Herzegovina">Bosnia &amp; Herzegovina</option>' +
+                                            '<option value="Botswana">Botswana</option>' +
+                                            '<option value="Brazil">Brazil</option>' +
+                                            '<option value="British Indian Ocean Ter">British Indian Ocean Ter</option>' +
+                                            '<option value="Brunei">Brunei</option>' +
+                                            '<option value="Bulgaria">Bulgaria</option>' +
+                                            '<option value="Burkina Faso">Burkina Faso</option>' +
+                                            '<option value="Burundi">Burundi</option>' +
+                                            '<option value="Cambodia">Cambodia</option>' +
+                                            '<option value="Cameroon">Cameroon</option>' +
+                                            '<option value="Canada">Canada</option>' +
+                                            '<option value="Canary Islands">Canary Islands</option>' +
+                                            '<option value="Cape Verde">Cape Verde</option>' +
+                                            '<option value="Cayman Islands">Cayman Islands</option>' +
+                                            '<option value="Central African Republic">Central African Republic</option>' +
+                                            '<option value="Chad">Chad</option>' +
+                                            '<option value="Channel Islands">Channel Islands</option>' +
+                                            '<option value="Chile">Chile</option>' +
+                                            '<option value="China">China</option>' +
+                                            '<option value="Christmas Island">Christmas Island</option>' +
+                                            '<option value="Cocos Island">Cocos Island</option>' +
+                                            '<option value="Colombia">Colombia</option>' +
+                                            '<option value="Comoros">Comoros</option>' +
+                                            '<option value="Congo">Congo</option>' +
+                                            '<option value="Cook Islands">Cook Islands</option>' +
+                                            '<option value="Costa Rica">Costa Rica</option>' +
+                                            '<option value="Cote DIvoire">Cote D\'Ivoire</option>' +
+                                            '<option value="Croatia">Croatia</option>' +
+                                            '<option value="Cuba">Cuba</option>' +
+                                            '<option value="Curaco">Curacao</option>' +
+                                            '<option value="Cyprus">Cyprus</option>' +
+                                            '<option value="Czech Republic">Czech Republic</option>' +
+                                            '<option value="Denmark">Denmark</option>' +
+                                            '<option value="Djibouti">Djibouti</option>' +
+                                            '<option value="Dominica">Dominica</option>' +
+                                            '<option value="Dominican Republic">Dominican Republic</option>' +
+                                            '<option value="East Timor">East Timor</option>' +
+                                            '<option value="Ecuador">Ecuador</option>' +
+                                            '<option value="Egypt">Egypt</option>' +
+                                            '<option value="El Salvador">El Salvador</option>' +
+                                            '<option value="Equatorial Guinea">Equatorial Guinea</option>' +
+                                            '<option value="Eritrea">Eritrea</option>' +
+                                            '<option value="Estonia">Estonia</option>' +
+                                            '<option value="Ethiopia">Ethiopia</option>' +
+                                            '<option value="Falkland Islands">Falkland Islands</option>' +
+                                            '<option value="Faroe Islands">Faroe Islands</option>' +
+                                            '<option value="Fiji">Fiji</option>' +
+                                            '<option value="Finland">Finland</option>' +
+                                            '<option value="France">France</option>' +
+                                            '<option value="French Guiana">French Guiana</option>' +
+                                            '<option value="French Polynesia">French Polynesia</option>' +
+                                            '<option value="French Southern Ter">French Southern Ter</option>' +
+                                            '<option value="Gabon">Gabon</option>' +
+                                            '<option value="Gambia">Gambia</option>' +
+                                            '<option value="Georgia">Georgia</option>' +
+                                            '<option value="Germany">Germany</option>' +
+                                            '<option value="Ghana">Ghana</option>' +
+                                            '<option value="Gibraltar">Gibraltar</option>' +
+                                            '<option value="Great Britain">Great Britain</option>' +
+                                            '<option value="Greece">Greece</option>' +
+                                            '<option value="Greenland">Greenland</option>' +
+                                            '<option value="Grenada">Grenada</option>' +
+                                            '<option value="Guadeloupe">Guadeloupe</option>' +
+                                            '<option value="Guam">Guam</option>' +
+                                            '<option value="Guatemala">Guatemala</option>' +
+                                            '<option value="Guinea">Guinea</option>' +
+                                            '<option value="Guyana">Guyana</option>' +
+                                            '<option value="Haiti">Haiti</option>' +
+                                            '<option value="Hawaii">Hawaii</option>' +
+                                            '<option value="Honduras">Honduras</option>' +
+                                            '<option value="Hong Kong">Hong Kong</option>' +
+                                            '<option value="Hungary">Hungary</option>' +
+                                            '<option value="Iceland">Iceland</option>' +
+                                            '<option value="India">India</option>' +
+                                            '<option value="Indonesia">Indonesia</option>' +
+                                            '<option value="Iran">Iran</option>' +
+                                            '<option value="Iraq">Iraq</option>' +
+                                            '<option value="Ireland">Ireland</option>' +
+                                            '<option value="Isle of Man">Isle of Man</option>' +
+                                            '<option value="Israel">Israel</option>' +
+                                            '<option value="Italy">Italy</option>' +
+                                            '<option value="Jamaica">Jamaica</option>' +
+                                            '<option value="Japan">Japan</option>' +
+                                            '<option value="Jordan">Jordan</option>' +
+                                            '<option value="Kazakhstan">Kazakhstan</option>' +
+                                            '<option value="Kenya">Kenya</option>' +
+                                            '<option value="Kiribati">Kiribati</option>' +
+                                            '<option value="Korea North">Korea North</option>' +
+                                            '<option value="Korea Sout">Korea South</option>' +
+                                            '<option value="Kuwait">Kuwait</option>' +
+                                            '<option value="Kyrgyzstan">Kyrgyzstan</option>' +
+                                            '<option value="Laos">Laos</option>' +
+                                            '<option value="Latvia">Latvia</option>' +
+                                            '<option value="Lebanon">Lebanon</option>' +
+                                            '<option value="Lesotho">Lesotho</option>' +
+                                            '<option value="Liberia">Liberia</option>' +
+                                            '<option value="Libya">Libya</option>' +
+                                            '<option value="Liechtenstein">Liechtenstein</option>' +
+                                            '<option value="Lithuania">Lithuania</option>' +
+                                            '<option value="Luxembourg">Luxembourg</option>' +
+                                            '<option value="Macau">Macau</option>' +
+                                            '<option value="Macedonia">Macedonia</option>' +
+                                            '<option value="Madagascar">Madagascar</option>' +
+                                            '<option value="Malaysia">Malaysia</option>' +
+                                            '<option value="Malawi">Malawi</option>' +
+                                            '<option value="Maldives">Maldives</option>' +
+                                            '<option value="Mali">Mali</option>' +
+                                            '<option value="Malta">Malta</option>' +
+                                            '<option value="Marshall Islands">Marshall Islands</option>' +
+                                            '<option value="Martinique">Martinique</option>' +
+                                            '<option value="Mauritania">Mauritania</option>' +
+                                            '<option value="Mauritius">Mauritius</option>' +
+                                            '<option value="Mayotte">Mayotte</option>' +
+                                            '<option value="Mexico">Mexico</option>' +
+                                            '<option value="Midway Islands">Midway Islands</option>' +
+                                            '<option value="Moldova">Moldova</option>' +
+                                            '<option value="Monaco">Monaco</option>' +
+                                            '<option value="Mongolia">Mongolia</option>' +
+                                            '<option value="Montserrat">Montserrat</option>' +
+                                            '<option value="Morocco">Morocco</option>' +
+                                            '<option value="Mozambique">Mozambique</option>' +
+                                            '<option value="Myanmar">Myanmar</option>' +
+                                            '<option value="Nambia">Nambia</option>' +
+                                            '<option value="Nauru">Nauru</option>' +
+                                            '<option value="Nepal">Nepal</option>' +
+                                            '<option value="Netherland Antilles">Netherland Antilles</option>' +
+                                            '<option value="Netherlands">Netherlands (Holland, Europe)</option>' +
+                                            '<option value="Nevis">Nevis</option>' +
+                                            '<option value="New Caledonia">New Caledonia</option>' +
+                                            '<option value="New Zealand">New Zealand</option>' +
+                                            '<option value="Nicaragua">Nicaragua</option>' +
+                                            '<option value="Niger">Niger</option>' +
+                                            '<option value="Nigeria">Nigeria</option>' +
+                                            '<option value="Niue">Niue</option>' +
+                                            '<option value="Norfolk Island">Norfolk Island</option>' +
+                                            '<option value="Norway">Norway</option>' +
+                                            '<option value="Oman">Oman</option>' +
+                                            '<option value="Pakistan">Pakistan</option>' +
+                                            '<option value="Palau Island">Palau Island</option>' +
+                                            '<option value="Palestine">Palestine</option>' +
+                                            '<option value="Panama">Panama</option>' +
+                                            '<option value="Papua New Guinea">Papua New Guinea</option>' +
+                                            '<option value="Paraguay">Paraguay</option>' +
+                                            '<option value="Peru">Peru</option>' +
+                                            '<option value="Phillipines">Philippines</option>' +
+                                            '<option value="Pitcairn Island">Pitcairn Island</option>' +
+                                            '<option value="Poland">Poland</option>' +
+                                            '<option value="Portugal">Portugal</option>' +
+                                            '<option value="Puerto Rico">Puerto Rico</option>' +
+                                            '<option value="Qatar">Qatar</option>' +
+                                            '<option value="Republic of Montenegro">Republic of Montenegro</option>' +
+                                            '<option value="Republic of Serbia">Republic of Serbia</option>' +
+                                            '<option value="Reunion">Reunion</option>' +
+                                            '<option value="Romania">Romania</option>' +
+                                            '<option value="Russia">Russia</option>' +
+                                            '<option value="Rwanda">Rwanda</option>' +
+                                            '<option value="St Barthelemy">St Barthelemy</option>' +
+                                            '<option value="St Eustatius">St Eustatius</option>' +
+                                            '<option value="St Helena">St Helena</option>' +
+                                            '<option value="St Kitts-Nevis">St Kitts-Nevis</option>' +
+                                            '<option value="St Lucia">St Lucia</option>' +
+                                            '<option value="St Maarten">St Maarten</option>' +
+                                            '<option value="St Pierre &amp; Miquelon">St Pierre &amp; Miquelon</option>' +
+                                            '<option value="St Vincent &amp; Grenadines">St Vincent &amp; Grenadines</option>' +
+                                            '<option value="Saipan">Saipan</option>' +
+                                            '<option value="Samoa">Samoa</option>' +
+                                            '<option value="Samoa American">Samoa American</option>' +
+                                            '<option value="San Marino">San Marino</option>' +
+                                            '<option value="Sao Tome &amp; Principe">Sao Tome &amp; Principe</option>' +
+                                            '<option value="Saudi Arabia">Saudi Arabia</option>' +
+                                            '<option value="Senegal">Senegal</option>' +
+                                            '<option value="Serbia">Serbia</option>' +
+                                            '<option value="Seychelles">Seychelles</option>' +
+                                            '<option value="Sierra Leone">Sierra Leone</option>' +
+                                            '<option value="Singapore">Singapore</option>' +
+                                            '<option value="Slovakia">Slovakia</option>' +
+                                            '<option value="Slovenia">Slovenia</option>' +
+                                            '<option value="Solomon Islands">Solomon Islands</option>' +
+                                            '<option value="Somalia">Somalia</option>' +
+                                            '<option value="South Africa">South Africa</option>' +
+                                            '<option value="Spain">Spain</option>' +
+                                            '<option value="Sri Lanka">Sri Lanka</option>' +
+                                            '<option value="Sudan">Sudan</option>' +
+                                            '<option value="Suriname">Suriname</option>' +
+                                            '<option value="Swaziland">Swaziland</option>' +
+                                            '<option value="Sweden">Sweden</option>' +
+                                            '<option value="Switzerland">Switzerland</option>' +
+                                            '<option value="Syria">Syria</option>' +
+                                            '<option value="Tahiti">Tahiti</option>' +
+                                            '<option value="Taiwan">Taiwan</option>' +
+                                            '<option value="Tajikistan">Tajikistan</option>' +
+                                            '<option value="Tanzania">Tanzania</option>' +
+                                            '<option value="Thailand">Thailand</option>' +
+                                            '<option value="Togo">Togo</option>' +
+                                            '<option value="Tokelau">Tokelau</option>' +
+                                            '<option value="Tonga">Tonga</option>' +
+                                            '<option value="Trinidad &amp; Tobago">Trinidad &amp; Tobago</option>' +
+                                            '<option value="Tunisia">Tunisia</option>' +
+                                            '<option value="Turkey">Turkey</option>' +
+                                            '<option value="Turkmenistan">Turkmenistan</option>' +
+                                            '<option value="Turks &amp; Caicos Is">Turks &amp; Caicos Is</option>' +
+                                            '<option value="Tuvalu">Tuvalu</option>' +
+                                            '<option value="Uganda">Uganda</option>' +
+                                            '<option value="Ukraine">Ukraine</option>' +
+                                            '<option value="United Arab Erimates">United Arab Emirates</option>' +
+                                            '<option value="United Kingdom">United Kingdom</option>' +
+                                            '<option value="United States of America">United States of America</option>' +
+                                            '<option value="Uraguay">Uruguay</option>' +
+                                            '<option value="Uzbekistan">Uzbekistan</option>' +
+                                            '<option value="Vanuatu">Vanuatu</option>' +
+                                            '<option value="Vatican City State">Vatican City State</option>' +
+                                            '<option value="Venezuela">Venezuela</option>' +
+                                            '<option value="Vietnam">Vietnam</option>' +
+                                            '<option value="Virgin Islands (Brit)">Virgin Islands (Brit)</option>' +
+                                            '<option value="Virgin Islands (USA)">Virgin Islands (USA)</option>' +
+                                            '<option value="Wake Island">Wake Island</option>' +
+                                            '<option value="Wallis &amp; Futana Is">Wallis &amp; Futana Is</option>' +
+                                            '<option value="Yemen">Yemen</option>' +
+                                            '<option value="Zaire">Zaire</option>' +
+                                            '<option value="Zambia">Zambia</option>' +
+                                            '<option value="Zimbabwe">Zimbabwe</option>' +
+                                        '</select>';
+            local.innerHTML = '<input type="text" id="localInput" value="' + local.innerHTML + '">';
+            valueT = ahana.innerHTML;
+            ahana.innerHTML = '<select id="ahanaInput" class="thVal">' +
+                                            '<option value="Yes"' + (valueT == "Yes" ? 'selected = selected' : '') + '>Yes</option>' +
+                                            '<option value="No"' + (valueT == "No" ? 'selected = selected' : '') + '>No</option>' +
+                                        '</select>';
+            valueT = international.innerHTML;
+            international.innerHTML = '<select id="internationalInput" class="thVal">' +
+                                            '<option value="Yes"' + (valueT == "Yes" ? 'selected = selected' : '') + '>Yes</option>' +
+                                            '<option value="No"' + (valueT == "No" ? 'selected = selected' : '') + '>No</option>' +
+                                        '</select>';
+            valueT = transfer.innerHTML;
+            transfer.innerHTML = '<select id="transferInput" class="thVal">' +
+                                            '<option value="Yes"' + (valueT == "Yes" ? 'selected = selected' : '') + '>Yes</option>' +
+                                            '<option value="No"' + (valueT == "No" ? 'selected = selected' : '') + '>No</option>' +
+                                        '</select>';
+            valueT = status.innerHTML;
+            status.innerHTML = '<select id="statusInput" class="thVal">' +
+                                            '<option value="Active"' + (valueT == "Active" ? 'selected = selected' : '') + '>Active</option>' +
+                                            '<option value="Inactive"' + (valueT == "Inactive" ? 'selected = selected' : '') + '>Inactive</option>' +
+                                            '<option value="Abroad/Prac/Clinical"' + (valueT == "Abroad/Prac/Clinical" ? 'selected = selected' : '') + '>Abroad/Prac/Clinical</option>' +
+                                            '<option value="Graduated"' + (valueT == "Graduated" ? 'selected = selected' : '') + '>Graduated</option>' +
+                                            '<option value="Staff"' + (valueT == "Staff" ? 'selected = selected' : '') + '>Staff</option>' +
+                                        '</select>';
+            toursApp.innerHTML = '<input type="text" id="toursInput" value="' + toursApp.innerHTML + '">';
+            panelsApp.innerHTML = '<input type="text" id="panelsInput" value="' + panelsApp.innerHTML + '">';
+            councilApp.innerHTML = '<input type="text" id="councilInput" value="' + councilApp.innerHTML + '">';
+            summerApp.innerHTML = '<input type="text" id="summerInput" value="' + summerApp.innerHTML + '">';
 
-                $(currentEle).html(valueT);
-            });
-            $(currentEle).on("dblclick", function() {
-                $(currentEle).html(valueT);
-            });  
-        });
-        $('#table-attendance tbody').on('dblclick', 'td', function(e) {
-            var currentEle = $(this);
-            var value = $(this).html();
-            var row = tableAttn.cell($(this)).index().row;
-            var column = tableAttn.cell($(this)).index().column;
-            if(column != 2 && column != 3 && column != 4 && column != 5) { //can't update User table
-                return;
-            }
-            var data = tableAttn.row(row).data();
-            var updateField = ['first_name', 'last_name', 'shift_day', 'shift_time', 'present', 'note'];
-            setTimeout(function(){
-            $(currentEle).html('<input id="newvalue" class="thVal" type="text" value="' + value + '" />');
-            $(".thVal").focus();
-            $(".thVal").keyup(function (event) {
-            if (event.keyCode == 13) {
-               
-                data[column] =  document.getElementById("newvalue").value.trim();
-                tableAttn.row(row).remove();
-                $.post("../include/inlineUpdateTable.php",
-                {
-                    id : data[7],
-                    field : updateField[column],
-                    table : 'Attendance',
-                    newValue : data[column],
-                    whereField : 'attendance_id'
-                },
-              function(data){
-                if(data) {
-                  
-                }
-                });
 
-                setTimeout( function(){
-                tableAttn.row.add([
-                    data[0],
-                    data[1],
-                    data[2],
-                    data[3],
-                    data[4],
-                    data[5],
-                    data[6],
-                    data[7]
+            $('#updateInfoButton').hide();
+            $('#submitInfoButton').show();
+            $('#cancelButton').show();
+        });
 
-                ]).draw();
-            }, 100);
-            }
-        });
-        },50);
-            $('tbody td').not(currentEle).on('click', function() {
+        $('#cancelButton').on('click', function() {
+            $('#updateInfoButton').show();
+            $('#submitInfoButton').hide();
+            $('#cancelButton').hide();
+            var fnn = document.getElementById("fnInput").value;
+            var lnn = document.getElementById("lnInput").value;
+            var eagleidn = document.getElementById("eagleidInput").value;
+            var a = document.getElementById("sexInput");
+            var sexn = a.options[a.selectedIndex].value;
+            var phonen = document.getElementById("phoneInput").value;
+            var yearn = document.getElementById("yearInput").value;
+            a = document.getElementById("schoolInput");
+            var schooln = a.options[a.selectedIndex].value;
+            var majorn = document.getElementById("majorInput").value;
+            var minorn = document.getElementById("minorInput").value;
+            var hometownn = document.getElementById("hometownInput").value;
+            a = document.getElementById("stateInput");
+            var staten = a.options[a.selectedIndex].value;
+            var localn = document.getElementById("localInput").value;
+            a = document.getElementById("ahanaInput");
+            var ahanan = a.options[a.selectedIndex].value;
+            a = document.getElementById("internationalInput");
+            var internationaln = a.options[a.selectedIndex].value;
+            a = document.getElementById("transferInput");
+            var transfern = a.options[a.selectedIndex].value;
+            a = document.getElementById("statusInput");
+            var statusn = a.options[a.selectedIndex].value;
+            var toursn = document.getElementById("toursInput").value;
+            var panelsn = document.getElementById("panelsInput").value;
+            var counciln = document.getElementById("councilInput").value;
+            var summern = document.getElementById("summerInput").value;
 
-                $(currentEle).html(value);
-            });
-            $(currentEle).on("dblclick", function() {
-                $(currentEle).html(value);
-            });  
+            fn.innerHTML = fnn;
+            ln.innerHTML = lnn;
+            eagleid.innerHTML = eagleidn;
+            sex.innerHTML = sexn;
+            phone.innerHTML = phonen;
+            year.innerHTML = yearn;
+            school.innerHTML = schooln;
+            major.innerHTML = majorn;
+            minor.innerHTML = minorn;
+            hometown.innerHTML = hometownn;
+            state.innerHTML = staten;
+            local.innerHTML = localn;
+            ahana.innerHTML = ahanan;
+            international.innerHTML = internationaln;
+            transfer.innerHTML = transfern;
+            toursApp.innerHTML = toursn;
+            panelsApp.innerHTML = panelsn;
+            councilApp.innerHTML = counciln;
+            summerApp.innerHTML = summern;
+            status.innerHTML = statusn;
         });
+
+        $('#submitInfoButton').on('click', function() {
+            var fnn = document.getElementById("fnInput").value;
+            var lnn = document.getElementById("lnInput").value;
+            var eagleidn = document.getElementById("eagleidInput").value;
+            var a = document.getElementById("sexInput");
+            var sexn = a.options[a.selectedIndex].value;
+            var phonen = document.getElementById("phoneInput").value;
+            var yearn = document.getElementById("yearInput").value;
+            a = document.getElementById("schoolInput");
+            var schooln = a.options[a.selectedIndex].value;
+            var majorn = document.getElementById("majorInput").value;
+            var minorn = document.getElementById("minorInput").value;
+            var hometownn = document.getElementById("hometownInput").value;
+            a = document.getElementById("stateInput");
+            var staten = a.options[a.selectedIndex].value;
+            var localn = document.getElementById("localInput").value;
+            a = document.getElementById("ahanaInput");
+            var ahanan = a.options[a.selectedIndex].value;
+            a = document.getElementById("internationalInput");
+            var internationaln = a.options[a.selectedIndex].value;
+            a = document.getElementById("transferInput");
+            var transfern = a.options[a.selectedIndex].value;
+            a = document.getElementById("statusInput");
+            var statusn = a.options[a.selectedIndex].value;
+            var toursn = document.getElementById("toursInput").value;
+            var panelsn = document.getElementById("panelsInput").value;
+            var counciln = document.getElementById("councilInput").value;
+            var summern = document.getElementById("summerInput").value;
+
+            updateUserProfile(function() {
+                location.reload();
+            }, email, fnn, lnn, eagleidn, sexn, phonen, yearn, schooln, majorn, minorn, hometownn, staten, localn, ahanan, internationaln, transfern, toursn, panelsn, counciln, summern, statusn);
         });
-        $("#attendance-tab").on("click", function() {
-            showSelects();
-        });
-        $("#volunteers-tab").on("click", function() {
-            hideSelects();
+
+        $('.preventButton').on('click', function(e) {
+            e.preventDefault();
         });
     });
-    function hideSelects(){
-        var weekSelect = document.getElementById("table-week");
-        var daySelect = document.getElementById("table-day");
-        //var newAttnButton = document.getElementById("newAttendance");
-        //weekSelect.style.visibility = 'hidden';
-        //daySelect.style.visibility = 'hidden';
-        $('#table-week').attr('disabled', true);
-        $('#table-day').attr('disabled', true);
-        //newAttendance.style.visibility = 'hidden';
-    }
-
-    function showSelects(){
-        var weekSelect = document.getElementById("table-week");
-        var daySelect = document.getElementById("table-day");
-        //var newAttnButton = document.getElementById("newAttendance");
-        //weekSelect.style.visibility = 'visible';
-        //daySelect.style.visibility = 'visible';
-        $('#table-week').attr('disabled', false);
-        $('#table-day').attr('disabled', false);
-        //newAttendance.style.visibility = 'visible';
-    }
     </script>
 
 </body>
