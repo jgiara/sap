@@ -639,10 +639,10 @@ class TableFunctions {
 		}
 	}
 
-	public function changePassword($email, $password) {
+	public function changePassword($email, $password, $fn, $ln) {
 		$encryptpass =  sha1($password);
 
-		$message = "Hello User,\r\n\r\nYour new password is ".$password."."."\r\n\r\nIf you did not request this new password, please email sap@bc.edu.";
+		$message = "Hello ".$fn." ".$ln.",\r\n\r\nYour new password is ".$password."."."\r\n\r\nIf you did not request this new password, please email sap@bc.edu.";
 		$headers = 'From: passwordreset@bcsap.org' . "\r\n" .
 					'Reply-To: sap@bc.edu' ."\r\n".
 	          'X-Mailer: PHP/' . phpversion();

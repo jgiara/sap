@@ -269,7 +269,8 @@ require '../include/helpers/highestPageProtect.php'
                 "orderable": false
                 
             }], 
-            order: [[0, "asc"]]
+            order: [[0, "asc"]],
+            paging: false
             
         });
         var s = document.getElementById("table-semester");

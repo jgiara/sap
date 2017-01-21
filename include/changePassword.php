@@ -9,7 +9,8 @@
 	$password = $_POST['password'];
 
 	foreach($emails as $email) {
-		$fns->changePassword($email, $password);
+		$name = $fns->getName($email);
+		$fns->changePassword($email, $password, $name[0], $name[1]);
 	}
 	
 	$db = null;

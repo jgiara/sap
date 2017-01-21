@@ -146,7 +146,7 @@ require '../include/helpers/highestPageProtect.php'
                   </div>
                   <div class="modal-body">
                         <form method="POST" id="newRolesForm" name="newRolesForm">
-                            <table style='margin-left:150px;'>
+                            <table style='margin-left:100px;'>
                                 <tr>
                                     <td>
                                         <b>Users:</b><br/>
@@ -197,7 +197,7 @@ require '../include/helpers/highestPageProtect.php'
                   </div>
                   <div class="modal-body">
                         <form method="POST" id="deleteRolesForm" name="deleteRolesForm">
-                            <table style='margin-left:150px;'>
+                            <table style='margin-left:0px;'>
                                 <tr>
                                     <td>
                                         <b>Roles:</b><br/>
@@ -269,7 +269,8 @@ require '../include/helpers/highestPageProtect.php'
                 "orderable": false
                 
             }],
-            order: [[1, "asc"]]            
+            order: [[1, "asc"]],
+            pageLength: 50         
         });
 
         getRoles(function(newTable) {
