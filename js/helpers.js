@@ -13,7 +13,7 @@ function showSelects(){
 }
 
 function getVolunteerData(callback, programName, selectedSemester, selectedYear, tableVols) {
-    $.getJSON("../include/getProgramVolunteers.php",  {
+    $.post("../include/getProgramVolunteers.php",  {
             program: programName,
             semester: selectedSemester,
             year: selectedYear
@@ -59,11 +59,11 @@ function getVolunteerData(callback, programName, selectedSemester, selectedYear,
                
               }); 
             callback(tableVols);
-          });
+          }, 'json');
 }
 
 function getAttendanceData(callback, programName, selectedSemester, selectedYear, selectedWeek, selectedDay, tableAttn) {
-    $.getJSON("../include/getProgramAttendance.php", 
+    $.post("../include/getProgramAttendance.php", 
         {
             program: programName,
             semester: selectedSemester,
@@ -96,11 +96,11 @@ function getAttendanceData(callback, programName, selectedSemester, selectedYear
                 ]);
             });
             callback(tableAttn);
-        });
+        }, 'json');
 }
 
 function getVolunteerDataGreeting(callback, programName, selectedSemester, selectedYear, tableVols) {
-    $.getJSON("../include/getProgramVolunteers.php",  {
+    $.post("../include/getProgramVolunteers.php",  {
             program: programName,
             semester: selectedSemester,
             year: selectedYear
@@ -147,11 +147,11 @@ function getVolunteerDataGreeting(callback, programName, selectedSemester, selec
                
               }); 
             callback(tableVols);
-          });
+          }, 'json');
 }
 
 function getAttendanceDataGreeting(callback, programName, selectedSemester, selectedYear, selectedWeek, selectedDay, tableAttn) {
-    $.getJSON("../include/getProgramAttendance.php", 
+    $.post("../include/getProgramAttendance.php", 
         {
             program: programName,
             semester: selectedSemester,
@@ -185,11 +185,11 @@ function getAttendanceDataGreeting(callback, programName, selectedSemester, sele
                 ]);
             });
             callback(tableAttn);
-        });
+        }, 'json');
 }
 
 function getInvolvementDataHistory(callback, email, tableInvolv) {
-    $.getJSON("../include/getInvolvementData.php",  {
+    $.post("../include/getInvolvementData.php",  {
             email: email
           }, 
           function(data) {
@@ -231,20 +231,20 @@ function getInvolvementDataHistory(callback, email, tableInvolv) {
                
               }); 
             callback(tableInvolv);
-          });
+          }, 'json');
 }
 
 function getName(callback, email) {
-    $.getJSON("../include/getName.php", 
+    $.post("../include/getName.php", 
         {
             email: email
         }, function(data) {
             callback(data);
-        });
+        }, 'json');
 }
 
 function getWeekData(callback, selectedSemester, selectedYear) {
-    $.getJSON("../include/getWeeks.php", 
+    $.post("../include/getWeeks.php", 
         {
             semester: selectedSemester,
             year: selectedYear
@@ -259,11 +259,11 @@ function getWeekData(callback, selectedSemester, selectedYear) {
                  }
             });
             callback();
-        });
+        }, 'json');
 }
 
 function searchUsers(callback, searchVals, tableVols) {
-    $.getJSON("../include/searchUsers.php",  {
+    $.post("../include/searchUsers.php",  {
             searchVals: searchVals
           }, 
           function(data) {
@@ -284,11 +284,11 @@ function searchUsers(callback, searchVals, tableVols) {
                
               }); 
             callback(tableVols);
-          });
+          }, 'json');
 }
 
 function getAllUsers(callback, selectedStatus, tableVols) {
-    $.getJSON("../include/getAllUsers.php", 
+    $.post("../include/getAllUsers.php", 
     {
         status: selectedStatus
     }, function(data) {
@@ -320,11 +320,11 @@ function getAllUsers(callback, selectedStatus, tableVols) {
             ]);
         });
         callback(tableVols);
-    });
+    }, 'json');
 }
 
 function getWeeks(callback, selectedSemester, selectedYear, tableWeek) {
-    $.getJSON("../include/getWeeks.php", 
+    $.post("../include/getWeeks.php", 
     {
         semester: selectedSemester,
         year: selectedYear
@@ -344,7 +344,7 @@ function getWeeks(callback, selectedSemester, selectedYear, tableWeek) {
             ]);
         });
         callback(tableWeek);
-    });
+    }, 'json');
 }
 
 function insertProgrammingWeek(callback, week, year, semester, sun, mon, tues, wed, thurs, fri, sat) {
@@ -387,7 +387,7 @@ function toggleColumns(table, index) {
 }
 
 function getUsersStatus(callback, status) {
-    $.getJSON("../include/getUsersStatus.php", 
+    $.post("../include/getUsersStatus.php", 
         {
             status: status
         }, function(data) {
@@ -401,11 +401,11 @@ function getUsersStatus(callback, status) {
                 vols[2][i] = item.last_name;
             });
             callback(vols);
-        });
+        }, 'json');
 }
 
 function getUsersNotInProgram(callback, programName, selectedSemester, selectedYear) {
-    $.getJSON("../include/getUsersNotInProgram.php", 
+    $.post("../include/getUsersNotInProgram.php", 
         {
             program: programName,
             semester: selectedSemester,
@@ -421,11 +421,11 @@ function getUsersNotInProgram(callback, programName, selectedSemester, selectedY
                 vols[2][i] = item.last_name;
             });
             callback(vols);
-        });
+        }, 'json');
 }
 
 function getUsersInProgram(callback, programName, selectedSemester, selectedYear) {
-    $.getJSON("../include/getUsersInProgram.php", 
+    $.post("../include/getUsersInProgram.php", 
         {
             program: programName,
             semester: selectedSemester,
@@ -441,11 +441,11 @@ function getUsersInProgram(callback, programName, selectedSemester, selectedYear
                 vols[2][i] = item.last_name;
             });
             callback(vols);
-        });
+        }, 'json');
 }
 
 function getUsersInProgramForShifts(callback, programName, selectedSemester, selectedYear) {
-    $.getJSON("../include/getUsersInProgramForShifts.php", 
+    $.post("../include/getUsersInProgramForShifts.php", 
         {
             program: programName,
             semester: selectedSemester,
@@ -461,11 +461,11 @@ function getUsersInProgramForShifts(callback, programName, selectedSemester, sel
                 vols[2][i] = item.last_name;
             });
             callback(vols);
-        });
+        }, 'json');
 }
 
 function getShiftsForWeek(callback, programName, selectedSemester, selectedYear, selectedWeek, selectedDay) {
-    $.getJSON("../include/getShiftsForWeek.php", 
+    $.post("../include/getShiftsForWeek.php", 
         {
             program: programName,
             semester: selectedSemester,
@@ -483,7 +483,7 @@ function getShiftsForWeek(callback, programName, selectedSemester, selectedYear,
                 shifts[2][i] = item.last_name;
             });
             callback(shifts);
-        });
+        }, 'json');
 }
 
 function insertProgramMembersManualShift(callback, emails, program, semester, year, day, time) {
@@ -579,7 +579,7 @@ function editShifts(callback, ids, field, newValue) {
 }
 
 function getAllUsersForRoles(callback) {
-    $.getJSON("../include/getAllUsersForRoles.php", 
+    $.post("../include/getAllUsersForRoles.php", 
         {
             
 
@@ -594,11 +594,11 @@ function getAllUsersForRoles(callback) {
                 users[2][i] = item.last_name;
             });
             callback(users);
-        });
+        }, 'json');
 }
 
 function getRoles(callback, tableRoles) {
-    $.getJSON("../include/getRoles.php", 
+    $.post("../include/getRoles.php", 
         {
             
 
@@ -613,11 +613,11 @@ function getRoles(callback, tableRoles) {
                 ]);
             });
             callback(tableRoles);
-        });
+        }, 'json');
 }
 
 function getAllRoles(callback) {
-    $.getJSON("../include/getAllRoles.php", 
+    $.post("../include/getAllRoles.php", 
         { 
             
 
@@ -634,17 +634,17 @@ function getAllRoles(callback) {
                 roles[3][i] = item.group_name;
             });
             callback(roles);
-        });
+        }, 'json');
 }
 
 function getUserData(callback, email) {
-    $.getJSON("../include/getUserData.php", 
+    $.post("../include/getUserData.php", 
         { 
             email: email
 
         }, function(data) {
             callback(data);
-        });
+        }, 'json');
 }
 
 function insertRoles(callback, emails, role) {
@@ -715,7 +715,7 @@ function changePassword(callback, emails, password) {
 }
 
 function getPrograms(callback, selectedSemester, selectedYear, tableProgram) {
-    $.getJSON("../include/getPrograms.php",  {
+    $.post("../include/getPrograms.php",  {
             semester: selectedSemester,
             year: selectedYear
           }, 
@@ -739,7 +739,7 @@ function getPrograms(callback, selectedSemester, selectedYear, tableProgram) {
                
               }); 
             callback(tableProgram);
-          });
+          }, 'json');
 }
 
 function insertProgram(callback, programName, year, semester, coordinator) {
@@ -755,7 +755,7 @@ function insertProgram(callback, programName, year, semester, coordinator) {
 }
 
 function getCoordinatorsForYear(callback, year, semester) {
-    $.getJSON("../include/getCoordinatorsForYear.php", 
+    $.post("../include/getCoordinatorsForYear.php", 
         {
             year: year,
             semester: semester
@@ -771,11 +771,11 @@ function getCoordinatorsForYear(callback, year, semester) {
                 users[2][i] = item.last_name;
             });
             callback(users);
-        });
+        }, 'json');
 }
 
 function getAllCouncilMembers(callback, selectedYear, selectedSemester, tableVols) {
-    $.getJSON("../include/getAllCouncilMembers.php",  {
+    $.post("../include/getAllCouncilMembers.php",  {
             year: selectedYear,
             semester: selectedSemester
           }, 
@@ -798,7 +798,7 @@ function getAllCouncilMembers(callback, selectedYear, selectedSemester, tableVol
                
               }); 
             callback(tableVols);
-          });
+          }, 'json');
 }
 
 function insertCouncilMember(callback, emails, selectedYear, selectedSemester, position) {
@@ -823,7 +823,7 @@ function deleteCouncilMember(callback, id) {
 }
 
 function getAllPossibleUsers(callback) {
-    $.getJSON("../include/getAllPossibleUsers.php", 
+    $.post("../include/getAllPossibleUsers.php", 
         {
 
         }, function(data) {
@@ -837,11 +837,11 @@ function getAllPossibleUsers(callback) {
                 users[2][i] = item.last_name;
             });
             callback(users);
-        });
+        }, 'json');
 }
 
 function getExistingProgramsForSemester(callback, year, semester) {
-    $.getJSON("../include/getExistingProgramsForSemester.php", 
+    $.post("../include/getExistingProgramsForSemester.php", 
         {
             year: year,
             semester: semester
@@ -852,7 +852,7 @@ function getExistingProgramsForSemester(callback, year, semester) {
                 users[i] = item.program_name;
             });
             callback(users);
-        });
+        }, 'json');
 }
 
 function markGraduated(callback, year) {
@@ -875,13 +875,13 @@ function markInactive(callback, year, semester) {
 }
 
 function getInvolvementData(callback, user, year) {
-    $.getJSON("../include/getHistoryCreditForProgram.php", 
+    $.post("../include/getHistoryCreditForProgram.php", 
     {
         user: user,
         year: year
     }, function(data) {
         callback(data);
-    });
+    }, 'json');
 }
 
 function updateProfile(callback, email, fnn, lnn, eagleidn, sexn, phonen, yearn, schooln, majorn, minorn, hometownn, staten, localn, ahanan, internationaln, transfern) {

@@ -1,8 +1,12 @@
 <?php
 
-	require_once '../resources/initTableFunctions.php';
+	ob_start();
+	session_start();
 
-	$status = $_GET['status'];
+	require_once '../resources/initTableFunctions.php';
+	require './helpers/pageProtectInclude.php';
+
+	$status = $_POST['status'];
 		
 	$items = $fns->getAllUsers($status);
 	

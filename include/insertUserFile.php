@@ -1,6 +1,10 @@
 <?php
-	ini_set("auto_detect_line_endings", "1");
+	ob_start();
+	session_start();
+
 	require_once '../resources/initTableFunctions.php';
+	require './helpers/pageProtectInclude.php';
+	ini_set("auto_detect_line_endings", "1");
 
 	//echo "<script type='text/javascript'>alert('$program');</script>"
 

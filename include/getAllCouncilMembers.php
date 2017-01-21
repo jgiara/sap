@@ -1,9 +1,12 @@
 <?php
 
+	ob_start();
+	session_start();
+
 	require_once '../resources/initTableFunctions.php';
 	
-	$year = $_GET['year'];
-	$semester = $_GET['semester'];
+	$year = $_POST['year'];
+	$semester = $_POST['semester'];
 
 	$items = $fns->getCoordinatorsForYear($year, $semester);
 	

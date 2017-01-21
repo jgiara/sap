@@ -1,9 +1,12 @@
 <?php
 
+	ob_start();
+	session_start();
+
 	require_once '../resources/initTableFunctions.php';
 	
-	$user = $_GET['user'];
-	$year = $_GET['year'];
+	$user = $_POST['user'];
+	$year = $_POST['year'];
 
 	$data = [[ 0,0,0 ],[ 0,0,0 ],[ 0,0,0 ],[ 0,0,0 ],[ 0,0,0 ],[ 0,0,0 ],[ 0,0,0 ],[ 0,0,0 ],[ 0,0,0 ],[ 0,0,0 ],[ 0,0,0 ],[ 0,0,0 ]];
 	$programs = ['Panels', 'Tours', 'Greeting', 'Office Management', 'Eagle for a Day', 'Admitted Eagle Day', 'Outreach', 'High School Visits', 'AHANA Outreach', 'International Outreach', 'Transfer Outreach', 'Media'];

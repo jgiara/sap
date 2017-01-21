@@ -1,6 +1,10 @@
 <?php
 
-	require_once '../resources/initTableFunctions.php';
+	ob_start();
+    session_start();
+
+    require_once '../resources/initTableFunctions.php';
+    require './helpers/pageProtectInclude.php';
 
 	$fn = $_POST['fn']; 
     $ln = $_POST['ln']; 

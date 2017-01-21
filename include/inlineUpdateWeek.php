@@ -1,5 +1,9 @@
 <?php
-		require_once '../resources/initTableFunctions.php';
+		ob_start();
+	session_start();
+
+	require_once '../resources/initTableFunctions.php';
+	require './helpers/pageProtectInclude.php';
 
 		$week_id = $_POST['id'];
 		$field = $_POST['field'];

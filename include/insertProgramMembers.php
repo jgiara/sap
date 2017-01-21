@@ -1,6 +1,10 @@
 <?php
+	
+	ob_start();
+	session_start();
 	ini_set("auto_detect_line_endings", "1");
 	require_once '../resources/initTableFunctions.php';
+	require './helpers/pageProtectInclude.php';
 
 	$program = $_POST['program-form-members-file'];
 	$semester = $_POST['semester-form-members-file'];

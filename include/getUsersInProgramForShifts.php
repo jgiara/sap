@@ -1,10 +1,14 @@
 <?php
 
-	require_once '../resources/initTableFunctions.php';
+	ob_start();
+	session_start();
 
-	$programName = $_GET['program'];
-	$semester = $_GET['semester'];
-	$year = $_GET['year'];
+	require_once '../resources/initTableFunctions.php';
+	require './helpers/pageProtectInclude.php';
+
+	$programName = $_POST['program'];
+	$semester = $_POST['semester'];
+	$year = $_POST['year'];
 		
 	$items = $fns->getUsersInProgramForShifts($programName, $semester, $year);
 	

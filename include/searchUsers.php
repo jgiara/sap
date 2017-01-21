@@ -1,8 +1,12 @@
 <?php
 
-	require_once '../resources/initTableFunctions.php';
+	ob_start();
+	session_start();
 
-	$search = $_GET['searchVals'];
+	require_once '../resources/initTableFunctions.php';
+	require './helpers/pageProtectInclude.php';
+
+	$search = $_POST['searchVals'];
 	
 	$results = [];
 	foreach ($search as $val) {
