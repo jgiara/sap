@@ -195,6 +195,25 @@ class TableFunctions {
 		}
 	}
 
+	public function insertProgramMemberShiftGreeting($email, $program, $semester, $year, $day, $time, $weekColor) {
+		$query = $this->db->prepare("INSERT INTO Program_Members (user, program, shift_day, shift_time, credit_status, week_color) values (?, (SELECT program_id from Programs where program_name=? and semester=? and year=?), ?, ?, 'Pending', ?)");
+		$query->bindValue(1, $email);
+		$query->bindValue(2, $program);
+		$query->bindValue(3, $semester);
+		$query->bindValue(4, $year);
+		$query->bindValue(5, $day);
+		$query->bindValue(6, $time);
+		$query->bindValue(7, $weekColor);
+
+		try {
+			$query->execute();
+			return true;
+
+		}catch(PDOException $e){
+			die($e->getMessage());
+		}
+	}
+
 	public function insertProgramMember($email, $program, $semester, $year) {
 		$query = $this->db->prepare("INSERT INTO Program_Members (user, program, credit_status) values (?, (SELECT program_id from Programs where program_name=? and semester=? and year=?), 'Pending')");
 		$query->bindValue(1, $email);
@@ -263,6 +282,23 @@ class TableFunctions {
 		}
 	}
 
+	public function getAssignedShiftsForProgramGreeting($program, $semester, $year, $weekColor) {
+		$query = $this->db->prepare("SELECT user, shift_day, shift_time from Program_Members where program=(SELECT program_id from Programs where program_name=? and semester=? and year=?) and week_color=?");
+		$query->bindValue(1, $program);
+		$query->bindValue(2, $semester);
+		$query->bindValue(3, $year);
+		$query->bindValue(4, $weekColor);
+
+		try {
+			$query->execute();
+			$data = $query->fetchAll();
+			return $data;
+
+		}catch(PDOException $e){
+			die($e->getMessage());
+		}
+	}
+
 	public function insertAutoShifts($email, $program, $semester, $year, $week, $day, $time) {
 		$query = $this->db->prepare("INSERT INTO Attendance (user, program, week, note, shift_day, shift_time) values (?, (SELECT program_id from Programs where program_name=? and semester=? and year=?), ?, ?, ?, ?)");
 		$query->bindValue(1, $email);
@@ -273,6 +309,27 @@ class TableFunctions {
 		$query->bindValue(6, $notes);
 		$query->bindValue(7, $day);
 		$query->bindValue(8, $time);
+
+		try {
+			$query->execute();
+			return true;
+
+		}catch(PDOException $e){
+			die($e->getMessage());
+		}
+	}
+
+	public function insertAutoShiftsGreeting($email, $program, $semester, $year, $week, $day, $time, $weekColor) {
+		$query = $this->db->prepare("INSERT INTO Attendance (user, program, week, note, shift_day, shift_time, week_color) values (?, (SELECT program_id from Programs where program_name=? and semester=? and year=?), ?, ?, ?, ?, ?)");
+		$query->bindValue(1, $email);
+		$query->bindValue(2, $program);
+		$query->bindValue(3, $semester);
+		$query->bindValue(4, $year);
+		$query->bindValue(5, $week);
+		$query->bindValue(6, $notes);
+		$query->bindValue(7, $day);
+		$query->bindValue(8, $time);
+		$query->bindValue(9, $weekColor);
 
 		try {
 			$query->execute();

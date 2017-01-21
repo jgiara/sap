@@ -99,6 +99,95 @@ function getAttendanceData(callback, programName, selectedSemester, selectedYear
         });
 }
 
+function getVolunteerDataGreeting(callback, programName, selectedSemester, selectedYear, tableVols) {
+    $.getJSON("../include/getProgramVolunteers.php",  {
+            program: programName,
+            semester: selectedSemester,
+            year: selectedYear
+          }, 
+          function(data) {
+            $.each( data, function( i, item ) {
+                var req = item.requirements_status;
+                if(req != null) {
+                    for (var i = 0; i < req.length; i++) {
+                        if(req.charAt(i) == '\n') {
+                            req = req.substr(0, i).concat('<br>', req.substr(i+1));
+                        }
+                    }
+                }
+                var com = item.comments;
+                if(com != null) {
+                    for (var i = 0; i < com.length; i++) {
+                        if(com.charAt(i) == '\n') {
+                            com = com.substr(0, i).concat('<br>', com.substr(i+1));
+                        }
+                    }
+                }
+                tableVols.row.add([
+                    "<a id='test' href='./profile.php?userEmail=" + item.email + "'>"+ item.first_name + "</a>",
+                    "<a id='test' href='./profile.php?userEmail=" + item.email + "'>"+ item.last_name + "</a>",
+                    item.email,
+                    item.class,
+                    item.school,
+                    item.major,
+                    item.minor,
+                    item.hometown,
+                    item.state_country,
+                    item.ahana,
+                    item.transfer,
+                    item.week_color,
+                    item.shift_day,
+                    item.shift_time,
+                    req,
+                    item.credit_status,
+                    com,
+                    item.eagle_id,
+                    item.member_id
+                ]);
+               
+              }); 
+            callback(tableVols);
+          });
+}
+
+function getAttendanceDataGreeting(callback, programName, selectedSemester, selectedYear, selectedWeek, selectedDay, tableAttn) {
+    $.getJSON("../include/getProgramAttendance.php", 
+        {
+            program: programName,
+            semester: selectedSemester,
+            year: selectedYear, 
+            week: selectedWeek,
+            day: selectedDay
+        }, function(data) {
+            $.each(data, function(i, item) {
+                tableAttn.row.add([
+                    "<a id='test' href='./profile.php?userEmail=" + item.email + "'>"+ item.first_name + "</a>",
+                    "<a id='test' href='./profile.php?userEmail=" + item.email + "'>"+ item.last_name + "</a>",
+                    item.email,
+                    item.class,
+                    item.school,
+                    item.major,
+                    item.minor,
+                    item.hometown,
+                    item.state_country,
+                    item.ahana,
+                    item.transfer,
+                    item.week_color,
+                    item.shift_day,
+                    item.shift_time,
+                    item.alternate_number,
+                    item.present,
+                    item.gave_panel_tour,
+                    item.note,
+                    item.week_number,
+                    item.eagle_id,
+                    item.attendance_id
+                ]);
+            });
+            callback(tableAttn);
+        });
+}
+
 function getInvolvementDataHistory(callback, email, tableInvolv) {
     $.getJSON("../include/getInvolvementData.php",  {
             email: email
@@ -411,6 +500,21 @@ function insertProgramMembersManualShift(callback, emails, program, semester, ye
             });
 }
 
+function insertProgramMembersManualShiftGreeting(callback, emails, program, semester, year, day, time, weekColor) {
+    $.post("../include/insertProgramMembersManualShiftGreeting.php",
+            {
+                emails: emails,
+                program: program,
+                semester: semester, 
+                year: year,
+                day: day,
+                time: time,
+                weekColor: weekColor
+            }, function() {
+                callback();
+            });
+}
+
 function insertManualShifts(callback, emails, program, semester, year, week, day, time, notes) {
     $.post("../include/insertManualShifts.php",
             {
@@ -434,6 +538,19 @@ function insertAutoShifts(callback, program, semester, year, week) {
                 semester: semester, 
                 year: year,
                 week: week
+            }, function() {
+                callback();
+            });
+}
+
+function insertAutoShiftsGreeting(callback, program, semester, year, week, weekColor) {
+    $.post("../include/insertAutoShiftsGreeting.php",
+            {
+                program: program,
+                semester: semester, 
+                year: year,
+                week: week,
+                weekColor: weekColor
             }, function() {
                 callback();
             });

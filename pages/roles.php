@@ -378,7 +378,7 @@ require '../include/helpers/highestPageProtect.php'
                 var my_options = $("#tonewroleslstBox option");
 
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#tonewroleslstBox").empty().append(my_options);
             }
@@ -394,7 +394,7 @@ require '../include/helpers/highestPageProtect.php'
                 var my_options = $("#newroleslstBox option");
 
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#newroleslstBox").empty().append(my_options);
             }
@@ -410,7 +410,7 @@ require '../include/helpers/highestPageProtect.php'
                 var my_options = $("#todeleteroleslstBox option");
 
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#todeleteroleslstBox").empty().append(my_options);
             }
@@ -426,7 +426,7 @@ require '../include/helpers/highestPageProtect.php'
                 var my_options = $("#deleteroleslstBox option");
 
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#deleteroleslstBox").empty().append(my_options);
             }
@@ -447,7 +447,7 @@ require '../include/helpers/highestPageProtect.php'
                 }
                 var my_options = $("#newroleslstBox option");
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#newroleslstBox").empty().append(my_options);
             });
@@ -468,7 +468,7 @@ require '../include/helpers/highestPageProtect.php'
                 }
                 var my_options = $("#deleteroleslstBox option");
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#deleteroleslstBox").empty().append(my_options);
             });

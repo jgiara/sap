@@ -471,7 +471,7 @@ echo '<input type="hidden" id="programName" value="Council">';
                 }
                 var my_options = $("#councillstBox option");
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#councillstBox").empty().append(my_options);
             });

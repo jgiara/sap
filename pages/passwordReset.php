@@ -178,7 +178,7 @@ require '../include/helpers/higherPageProtect.php'
             }
             var my_options = $("#newpasswordlstBox option");
             my_options.sort(function(a,b) {
-                return a.id > b.id;
+                return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
             });
             $("#newpasswordlstBox").empty().append(my_options);
         });
@@ -197,7 +197,7 @@ require '../include/helpers/higherPageProtect.php'
                 var my_options = $("#tonewpasswordlstBox option");
 
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#tonewpasswordlstBox").empty().append(my_options);
             }
@@ -213,7 +213,7 @@ require '../include/helpers/higherPageProtect.php'
                 var my_options = $("#newpasswordlstBox option");
 
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#newpasswordlstBox").empty().append(my_options);
             }

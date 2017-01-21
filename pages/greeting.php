@@ -191,6 +191,7 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                                                     <th>State</th>
                                                     <th>AHANA</th>
                                                     <th>Transfer</th>
+                                                    <th>Week</th>
                                                     <th>Shift Day</th>
                                                     <th>Shift Time</th>
                                                     <th>Requirements</th>
@@ -211,6 +212,7 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                                                     <td>State</td>
                                                     <td>AHANA</td>
                                                     <td>Transfer</td>
+                                                    <td>Week</td>
                                                     <td>Shift Day</td>
                                                     <td>Shift Time</td>
                                                     <td>Requirements</td>
@@ -249,6 +251,7 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                                                     <th>State</th>
                                                     <th>AHANA</th>
                                                     <th>Transfer</th>
+                                                    <th>Week</th>
                                                     <th>Shift Day</th>
                                                     <th>Shift Time</th>
                                                     <th>Alternate</th>
@@ -271,6 +274,7 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                                                     <td>State</td>
                                                     <td>AHANA</td>
                                                     <td>Transfer</td>
+                                                    <td>Week</td>
                                                     <td>Shift Day</td>
                                                     <td>Shift Time</td>
                                                     <td>Alternate</td>
@@ -320,9 +324,10 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                                   <option value="1">Last Name</option>
                                   <option value="3">Class</option>
                                   <option value="4">School</option>
-                                  <option value="11">Shift Day</option>
-                                  <option value="12">Shift Time</option>
-                                  <option value="13">Requirements</option>
+                                  <option value="11">Week</option>
+                                  <option value="12">Shift Day</option>
+                                  <option value="13">Shift Time</option>
+                                  <option value="14">Requirements</option>
                             </select>
                         </td>
                         <td style='text-align:center;vertical-align:middle;'>
@@ -339,10 +344,10 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                                 <option value="8">State</option>
                                 <option value="9">AHANA</option>
                                 <option value="10">Transfer</option>
-                                <option value="14">Credit</option>
-                                <option value="15">Comments</option>
-                                <option value="16">Eagle ID</option>
-                                <option value="17">Member ID</option>
+                                <option value="15">Credit</option>
+                                <option value="16">Comments</option>
+                                <option value="17">Eagle ID</option>
+                                <option value="18">Member ID</option>
                             </select>
                         </td>
                     </tr>
@@ -369,10 +374,10 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                                <select multiple="multiple" size='10' id='attnlstBox1'>
                                   <option value="0">First Name</option>
                                   <option value="1">Last Name</option>
-                                  <option value="11">Shift Day</option>
-                                  <option value="12">Shift Time</option>
-                                  <option value="14">Present</option>
-                                  <option value="16">Notes</option> 
+                                  <option value="12">Shift Day</option>
+                                  <option value="13">Shift Time</option>
+                                  <option value="15">Present</option>
+                                  <option value="17">Notes</option> 
                             </select>
                         </td>
                         <td style='text-align:center;vertical-align:middle;'>
@@ -391,9 +396,10 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                                 <option value="8">State</option>
                                 <option value="9">AHANA</option>
                                 <option value="10">Transfer</option>
-                                <option value="17">Week Number</option>
-                                <option value="18">Eagle ID</option>
-                                <option value="19">Attendance ID</option>
+                                <option value="11">Week</option>
+                                <option value="18">Week Number</option>
+                                <option value="19">Eagle ID</option>
+                                <option value="20">Attendance ID</option>
                             </select>
                         </td>
                     </tr>
@@ -419,7 +425,7 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                     <button class="btn btn-primary btn-xs" id="fileMethodButton">File Upload</button>
                     <button class="btn btn-primary btn-xs" id="manualMethodButton">Manual Entry</button>
                     <div id="fileMethod">
-                        <form method="post" id="addMembersFormFile" name="addMembersFormFile" enctype="multipart/form-data" action="../include/insertProgramMembersShiftFile.php">
+                        <form method="post" id="addMembersFormFile" name="addMembersFormFile" enctype="multipart/form-data" action="../include/insertProgramMembersShiftFileGreeting.php">
                             <div class="form-group">
                                 <label for="program-form-members-file">Program:</label>
                                 <input type="text" name="program-form-members-file" class="form-control" id="program-form-members-file" readonly required>
@@ -436,7 +442,7 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                                 <strong>Upload file (only .csv):</strong>
                                 <input type="file" name="file-form" id="file-form" accept=".csv" required>
                                 </br><Strong>Note: </strong>File must have the following column format with the header included:
-                                </br>Email - Shift Day - Shift Time (XX:XX AM/PM; i.e. "10:00 AM" or "2:30 PM")
+                                </br>Email - Week (Maroon or Gold) - Shift Day - Shift Time (XX:XX AM/PM; i.e. "10:00 AM" or "2:30 PM")
                             </div>
                             <div>
                                 <p>&nbsp</p>
@@ -478,6 +484,14 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                             </tr>
                             </table>   
                         </br>
+                             <div class="form-group">
+                                <label for="week-form-members">Week:</label>
+                                <select name="week-form-members" class="form-control" id="week-form-members" required>
+                                    <option disabled selected value> -- Select a week -- </option>
+                                    <option value="Maroon">Maroon</option>
+                                    <option value="Gold">Gold</option>
+                                </select>
+                            </div>    
                              <div class="form-group">
                                 <label for="day-form-members">Shift Day:</label>
                                 <select name="day-form-members" class="form-control" id="day-form-members" required>
@@ -656,6 +670,14 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                                 <label for="week-form-shifts-auto">Week:</label>
                                 <input type="text" name="week-form-shifts-auto" class="form-control" id="week-form-shifts-auto" readonly required>
                             </div> 
+                            <div class="form-group">
+                                <label for="week-color-form-shifts-auto">Week Color:</label>
+                                <select name="week-color-form-shifts-auto" class="form-control" id="week-color-form-shifts-auto" required>
+                                    <option disabled selected value> -- Select a week color -- </option>
+                                    <option value="Maroon">Maroon</option>
+                                    <option value="Gold">Gold</option>
+                                </select>
+                            </div>
                             <div id="editConfirmationAutoShifts">
                                 <strong>Are you sure you want to proceed? If any shifts already exist for this week, they will be deleted.</strong> </br>
                                 <input type="radio" name="confirmation-shifts-auto" value="yes" id="confirmation-yes-shifts-auto">
@@ -935,11 +957,11 @@ echo '<input type="hidden" id="programName" value="Greeting">';
             orderCellsTop: true,
             columnDefs: [
             {
-                targets: [2,5,6,7,8,9,10,14,15,16, 17],
+                targets: [2,5,6,7,8,9,10,15,16,17,18],
                 visible: false,
             },
             {
-                targets: [11],
+                targets: [12],
                 render: function(data, type, row) {
                     if(type === 'sort') {
                         switch(data) {
@@ -998,7 +1020,7 @@ echo '<input type="hidden" id="programName" value="Greeting">';
             }
         });
         
-        getVolunteerData(function(newTable) {
+        getVolunteerDataGreeting(function(newTable) {
                   newTable.draw();
             }, programName, selectedSemester, selectedYear, tableVols);
      
@@ -1024,12 +1046,12 @@ echo '<input type="hidden" id="programName" value="Greeting">';
             orderCellsTop: true,
             columnDefs: [
             {
-                targets: [2,3,4,5,6,7,8,9,10,13,15,17,18,19],
+                targets: [2,3,4,5,6,7,8,9,10,11,14,16,18,19,20],
                 visible: false
                 
             },
             {
-                targets: [11],
+                targets: [12],
                 render: function(data, type, row) {
                     if(type === 'sort') {
                         switch(data) {
@@ -1046,7 +1068,7 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                     return data;
                 }
             }],
-            order: [[11, "asc"], [12, "asc"], [1, "asc"]],
+            order: [[12, "asc"], [13, "asc"], [1, "asc"]],
             paging: false
         });
         var w;
@@ -1058,7 +1080,7 @@ echo '<input type="hidden" id="programName" value="Greeting">';
             selectedWeek = w.options[w.selectedIndex].value; //sometimes has an undefined value
             d = document.getElementById("table-day");
             selectedDay = d.options[d.selectedIndex].value;
-            getAttendanceData(function(newTable) {
+            getAttendanceDataGreeting(function(newTable) {
                 newTable.draw();
             }, programName, selectedSemester, selectedYear, selectedWeek, selectedDay, tableAttn);
         }, selectedSemester, selectedYear);
@@ -1120,7 +1142,7 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                 var my_options = $("#memberlstBox option");
 
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#memberlstBox").empty().append(my_options);
             }
@@ -1136,7 +1158,7 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                 var my_options = $("#userlstBox option");
 
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#userlstBox").empty().append(my_options);
             }
@@ -1152,7 +1174,7 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                 var my_options = $("#toeditmemberlstBox option");
 
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#toeditmemberlstBox").empty().append(my_options);
             }
@@ -1168,7 +1190,7 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                 var my_options = $("#editmemberlstBox option");
 
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#editmemberlstBox").empty().append(my_options);
             }
@@ -1184,7 +1206,7 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                 var my_options = $("#toeditshiftslstBox option");
 
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#toeditshiftslstBox").empty().append(my_options);
             }
@@ -1200,7 +1222,7 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                 var my_options = $("#editshiftslstBox option");
 
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#editshiftslstBox").empty().append(my_options);
             }
@@ -1216,7 +1238,7 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                 var my_options = $("#tomanualshiftslstBox option");
 
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#tomanualshiftslstBox").empty().append(my_options);
             }
@@ -1232,7 +1254,7 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                 var my_options = $("#manualshiftslstBox option");
 
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#manualshiftslstBox").empty().append(my_options);
             }
@@ -1285,11 +1307,11 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                     selectedYear = nselectedYear;
             }
 
-            getVolunteerData(function(newTable) {
+            getVolunteerDataGreeting(function(newTable) {
                   newTable.draw();
             }, programName, selectedSemester, selectedYear, tableVols);
 
-            getAttendanceData(function(newTable) {
+            getAttendanceDataGreeting(function(newTable) {
                   newTable.draw();
             }, programName, selectedSemester, selectedYear, selectedWeek, selectedDay, tableAttn);
         });
@@ -1309,16 +1331,22 @@ echo '<input type="hidden" id="programName" value="Greeting">';
             var valueT = $(this).html();
             var row = tableVols.cell($(this)).index().row;
             var column = tableVols.cell($(this)).index().column;
-            var alterable = [11,12,13,14,15];
-            var selectable = [11,14];
-            var textAreaCols = [13,15];
+            var alterable = [11,12,13,14,15,16];
+            var selectable = [11,12,15];
+            var textAreaCols = [14,16];
             if(alterable.indexOf(column) == -1) { //can't the other columns
                 return;
             }
             var data = tableVols.row(row).data();
-            var updateField = ['first_name','last_name','email','class','school','major','minor','hometown','state_country','ahana','transfer','shift_day','shift_time','requirements_status','credit_status','comments','eagle_id', 'program_id'];
+            var updateField = ['first_name','last_name','email','class','school','major','minor','hometown','state_country','ahana','transfer', 'week_color', 'shift_day','shift_time','requirements_status','credit_status','comments','eagle_id', 'program_id'];
             setTimeout(function() {
                 if(column == 11) {
+                    $(currentEle).html('<select id="newvalue" class="thVal">' +
+                                            '<option value="Maroon"' + (valueT == "Maroon" ? 'selected = selected' : '') + '>Maroon</option>' +
+                                            '<option value="Gold"' + (valueT == "Gold" ? 'selected = selected' : '') + '>Gold</option>' +
+                                            '</select>');
+                }
+                else if(column == 12) {
                     $(currentEle).html('<select id="newvalue" class="thVal">' +
                                             '<option value="Sunday"' + (valueT == "Sunday" ? 'selected = selected' : '') + '>Sunday</option>' +
                                             '<option value="Monday"' + (valueT == "Monday" ? 'selected = selected' : '') + '>Monday</option>' +
@@ -1329,7 +1357,7 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                                             '<option value="Saturday"' + (valueT == "Saturday" ? 'selected = selected' : '') + '>Saturday</option>' +
                                         '</select>');
                 }
-                else if(column == 14) {
+                else if(column == 15) {
                     $(currentEle).html('<select id="newvalue" class="thVal">' +
                                             '<option value="Pending"' + (valueT == "Pending" ? 'selected = selected' : '') + '>Pending</option>' +
                                             '<option value="Complete"' + (valueT == "Complete" ? 'selected = selected' : '') + '>Complete</option>' +
@@ -1389,9 +1417,10 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                                 data[14],
                                 data[15],
                                 data[16],
-                                data[17]
+                                data[17],
+                                data[18]
                             ]).draw()
-                        }, data[17], updateField[column], 'Program_Members', data[column], 'member_id');
+                        }, data[18], updateField[column], 'Program_Members', data[column], 'member_id');
                     }
                 });
             },150);
@@ -1418,15 +1447,15 @@ echo '<input type="hidden" id="programName" value="Greeting">';
             var valueT = $(this).html();
             var row = tableAttn.cell($(this)).index().row;
             var column = tableAttn.cell($(this)).index().column;
-            var alterable = [11,12,14,16];
-            var selectable = [11,13,14,15];
+            var alterable = [12,13,15,17];
+            var selectable = [12,14,15,16];
             if(alterable.indexOf(column) == -1) { //can't update the other columns
                 return;
             }
             var data = tableAttn.row(row).data();
-            var updateField = ['first_name','last_name','email','class','school','major','minor','hometown','state_country','ahana','transfer','shift_day','shift_time','alternate_number','present','gave_panel_tour','note', 'week_number', 'eagle_id','attendance_id'];
+            var updateField = ['first_name','last_name','email','class','school','major','minor','hometown','state_country','ahana','transfer', 'week_color', 'shift_day','shift_time','alternate_number','present','gave_panel_tour','note', 'week_number', 'eagle_id','attendance_id'];
             setTimeout(function() {
-                if(column == 11) {
+                if(column == 12) {
                     $(currentEle).html('<select id="newvalue" class="thVal">' +
                                             '<option value="Sunday"' + (valueT == "Sunday" ? 'selected = selected' : '') + '>Sunday</option>' +
                                             '<option value="Monday"' + (valueT == "Monday" ? 'selected = selected' : '') + '>Monday</option>' +
@@ -1437,7 +1466,7 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                                             '<option value="Saturday"' + (valueT == "Saturday" ? 'selected = selected' : '') + '>Saturday</option>' +
                                         '</select>');
                 }
-                else if(column == 14) {
+                else if(column == 15) {
                     $(currentEle).html('<select id="newvalue" class="thVal">' +
                                             '<option value=""' + (valueT == "" ? 'selected = selected' : '') + '>(Blank)</option>' +
                                             '<option value="Present"' + (valueT == "Present" ? 'selected = selected' : '') + '>Present</option>' +
@@ -1489,9 +1518,10 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                                 data[16],
                                 data[17],
                                 data[18],
-                                data[19]
+                                data[19],
+                                data[20]
                             ]).draw()
-                        }, data[19], updateField[column], 'Attendance', data[column], 'attendance_id');
+                        }, data[20], updateField[column], 'Attendance', data[column], 'attendance_id');
                     }
                 });
             },150);
@@ -1537,7 +1567,7 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                     }
                 var my_options = $("#userlstBox option");
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#userlstBox").empty().append(my_options);
             }, programName, selectedSemester, selectedYear);
@@ -1560,9 +1590,11 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                     var year = document.getElementById("year-form-members").value;
                     var day = document.getElementById("day-form-members").value;
                     var time = document.getElementById("time-form-members").value;
-                    insertProgramMembersManualShift(function() {
+                    var wc = document.getElementById("week-form-members");
+                    var weekColor = wc.options[wc.selectedIndex].value;
+                    insertProgramMembersManualShiftGreeting(function() {
                         location.reload();
-                    }, emails, program, semester, year, day, time);
+                    }, emails, program, semester, year, day, time, weekColor);
                     e.preventDefault();
                 }
             }
@@ -1593,7 +1625,7 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                 }
                 var my_options = $("#editmemberlstBox option");
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#editmemberlstBox").empty().append(my_options);
             }, programName, selectedSemester, selectedYear);
@@ -1630,7 +1662,7 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                 }
                 var my_options = $("#editshiftslstBox option");
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#editshiftslstBox").empty().append(my_options);
             }, programName, selectedSemester, selectedYear, selectedWeekValue, selectedDayValue);
@@ -1670,7 +1702,7 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                 }
                 var my_options = $("#manualshiftslstBox option");
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#manualshiftslstBox").empty().append(my_options);
             }, programName, selectedSemester, selectedYear);
@@ -1696,9 +1728,11 @@ echo '<input type="hidden" id="programName" value="Greeting">';
             var semester = document.getElementById("semester-form-shifts-manual").value;
             var year = document.getElementById("year-form-shifts-manual").value;
             var week = selectedWeek;
-            insertAutoShifts(function() {
+            var wc = document.getElementById("week-color-form-shifts-auto");
+            var weekColor = wc.options[wc.selectedIndex].value;
+            insertAutoShiftsGreeting(function() {
                 location.reload();
-            }, program, semester, year, week);
+            }, program, semester, year, week, weekColor);
             e.preventDefault();
         });
 

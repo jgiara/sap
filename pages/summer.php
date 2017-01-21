@@ -572,7 +572,7 @@ echo '<input type="hidden" id="programName" value="Summer">';
                 var my_options = $("#memberlstBox option");
 
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#memberlstBox").empty().append(my_options);
             }
@@ -588,7 +588,7 @@ echo '<input type="hidden" id="programName" value="Summer">';
                 var my_options = $("#userlstBox option");
 
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#userlstBox").empty().append(my_options);
             }
@@ -604,7 +604,7 @@ echo '<input type="hidden" id="programName" value="Summer">';
                 var my_options = $("#toeditmemberlstBox option");
 
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#toeditmemberlstBox").empty().append(my_options);
             }
@@ -620,7 +620,7 @@ echo '<input type="hidden" id="programName" value="Summer">';
                 var my_options = $("#editmemberlstBox option");
 
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#editmemberlstBox").empty().append(my_options);
             }
@@ -776,7 +776,7 @@ echo '<input type="hidden" id="programName" value="Summer">';
                     }
                 var my_options = $("#userlstBox option");
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#userlstBox").empty().append(my_options);
             }, programName, selectedSemester, selectedYear);
@@ -825,7 +825,7 @@ echo '<input type="hidden" id="programName" value="Summer">';
                 }
                 var my_options = $("#editmemberlstBox option");
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#editmemberlstBox").empty().append(my_options);
             }, programName, selectedSemester, selectedYear);

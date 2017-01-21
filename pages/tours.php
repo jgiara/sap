@@ -1120,7 +1120,7 @@ echo '<input type="hidden" id="programName" value="Tours">';
                 var my_options = $("#memberlstBox option");
 
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#memberlstBox").empty().append(my_options);
             }
@@ -1136,7 +1136,7 @@ echo '<input type="hidden" id="programName" value="Tours">';
                 var my_options = $("#userlstBox option");
 
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#userlstBox").empty().append(my_options);
             }
@@ -1152,7 +1152,7 @@ echo '<input type="hidden" id="programName" value="Tours">';
                 var my_options = $("#toeditmemberlstBox option");
 
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#toeditmemberlstBox").empty().append(my_options);
             }
@@ -1168,7 +1168,7 @@ echo '<input type="hidden" id="programName" value="Tours">';
                 var my_options = $("#editmemberlstBox option");
 
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#editmemberlstBox").empty().append(my_options);
             }
@@ -1184,7 +1184,7 @@ echo '<input type="hidden" id="programName" value="Tours">';
                 var my_options = $("#toeditshiftslstBox option");
 
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#toeditshiftslstBox").empty().append(my_options);
             }
@@ -1200,7 +1200,7 @@ echo '<input type="hidden" id="programName" value="Tours">';
                 var my_options = $("#editshiftslstBox option");
 
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#editshiftslstBox").empty().append(my_options);
             }
@@ -1216,7 +1216,7 @@ echo '<input type="hidden" id="programName" value="Tours">';
                 var my_options = $("#tomanualshiftslstBox option");
 
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#tomanualshiftslstBox").empty().append(my_options);
             }
@@ -1232,7 +1232,7 @@ echo '<input type="hidden" id="programName" value="Tours">';
                 var my_options = $("#manualshiftslstBox option");
 
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#manualshiftslstBox").empty().append(my_options);
             }
@@ -1544,7 +1544,7 @@ echo '<input type="hidden" id="programName" value="Tours">';
                     }
                 var my_options = $("#userlstBox option");
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#userlstBox").empty().append(my_options);
             }, programName, selectedSemester, selectedYear);
@@ -1600,7 +1600,7 @@ echo '<input type="hidden" id="programName" value="Tours">';
                 }
                 var my_options = $("#editmemberlstBox option");
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#editmemberlstBox").empty().append(my_options);
             }, programName, selectedSemester, selectedYear);
@@ -1637,7 +1637,7 @@ echo '<input type="hidden" id="programName" value="Tours">';
                 }
                 var my_options = $("#editshiftslstBox option");
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#editshiftslstBox").empty().append(my_options);
             }, programName, selectedSemester, selectedYear, selectedWeekValue, selectedDayValue);
@@ -1677,7 +1677,7 @@ echo '<input type="hidden" id="programName" value="Tours">';
                 }
                 var my_options = $("#manualshiftslstBox option");
                 my_options.sort(function(a,b) {
-                    return a.id > b.id;
+                    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
                 });
                 $("#manualshiftslstBox").empty().append(my_options);
             }, programName, selectedSemester, selectedYear);
