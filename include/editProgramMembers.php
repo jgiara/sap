@@ -13,11 +13,13 @@
 	if($field == 'delete') {
 		foreach($ids as $id) {
 				$fns->deleteProgramMembers($id);
+				//$fns->insertAudit('Program_Members', $field, 'DELETED', $_SESSION['Email'], $id);
 			}
 	}
 	else {
 		foreach($ids as $id) {
 				$fns->editProgramMembers($id, $field, $newValue);
+				//$fns->insertAudit('Program_Members', $field, $newValue, $_SESSION['Email'], $id);
 			}
 	}
 

@@ -968,6 +968,23 @@ class TableFunctions {
 		}
 	}
 
+	public function insertAudit($table, $field, $newValue, $user, $tableid) {
+		$query = $this->db->prepare("INSERT INTO Audit (table_value, field_value, new_value, updated, updated_by, table_id) values(?, ?, ?, now(), ?, ?)");
+		$query->bindValue(1, $table);
+		$query->bindValue(2, $field);
+		$query->bindValue(3, $newValue);
+		$query->bindValue(4, $user);
+		$query->bindValue(5, $tableid);
+
+		try {
+			$query->execute();
+			return true;
+
+		}catch(PDOException $e){
+			die($e->getMessage());
+		}
+	}
+
 } //close class
 ?>
 
