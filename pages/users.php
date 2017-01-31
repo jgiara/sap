@@ -715,6 +715,7 @@ echo '<input type="hidden" id="programName" value="All Users">';
             columnDefs: [
             {
                 targets: [3,11,12,13,14,15,16,17,18,19,20,21,22],
+                searchable: true,
                 visible: false,
             }],
             order: [[1, "asc"], [0, "asc"]],
@@ -729,6 +730,13 @@ echo '<input type="hidden" id="programName" value="All Users">';
                 for(var i=0; i < selectedOpts.length; i++) {
                     toggleColumns(tableVols, selectedOpts[i].value);
                 }
+                tableVols.columns().every(function (index) {
+                $('#table-volunteers thead tr:eq(1) td:eq(' + index + ') input').on('keyup change', function () {
+                    tableVols.column($(this).parent().index() + ':visible')
+                        .search(this.value)
+                        .draw();
+                    } );
+                } );
                 $('#volslstBox2').append($(selectedOpts).clone());
                 $(selectedOpts).remove();
                 var my_options = $("#volslstBox2 option");
@@ -748,6 +756,13 @@ echo '<input type="hidden" id="programName" value="All Users">';
                 for(var i=0; i < selectedOpts.length; i++) {
                     toggleColumns(tableVols, selectedOpts[i].value);
                 }
+                tableVols.columns().every(function (index) {
+                $('#table-volunteers thead tr:eq(1) td:eq(' + index + ') input').on('keyup change', function () {
+                    tableVols.column($(this).parent().index() + ':visible')
+                        .search(this.value)
+                        .draw();
+                    } );
+                } );
                 $('#volslstBox1').append($(selectedOpts).clone());
                 $(selectedOpts).remove();
                 var my_options = $("#volslstBox1 option");
@@ -802,6 +817,7 @@ echo '<input type="hidden" id="programName" value="All Users">';
             }
             var currentEle = $(this);
             var valueT = $(this).html();
+            var orig = valueT;
             var row = tableVols.cell($(this)).index().row;
             var column = tableVols.cell($(this)).index().column;
             var alterable = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,21,22];
@@ -822,6 +838,7 @@ echo '<input type="hidden" id="programName" value="All Users">';
                 return;
             }
             var data = tableVols.row(row).data();
+            var emailID = data[2];
             var updateField = ['first_name', 'last_name', 'email', 'phone', 'sex', 'class', 'school', 'major', 'minor', 'hometown', 'state_country', 'ahana', 'international', 'transfer', 'local_address', 'applied_tours', 'applied_panels', 'applied_council', 'applied_summer', 'status', 'last_login', 'eagle_id'];
             setTimeout(function() {
                 if(column == 4) {
@@ -830,9 +847,10 @@ echo '<input type="hidden" id="programName" value="All Users">';
                                             '<option value="Female"' + (valueT == "Female" ? 'selected = selected' : '') + '>Female</option>' +
                                         '</select>');
                 }
-                else if(column == 0 || column == 2) {
-                    valueT.replace(/<a id='[a-zA-Z]*' href='.\/profile.php?userEmail=[a-zA-Z]*@bc.edu'>/, '');
-                    valueT.replace(/<\/a>/, '');
+                else if(column == 0 || column == 1) {
+                    
+                    valueT = valueT.match(/>[a-z, \s, A-Z, -]*</).toString();
+                    valueT = valueT.substring(1, valueT.length-1);
                     $(currentEle).html('<input id="newvalue" class="thVal" type="text" value="' + valueT + '" />');
                 }
                 else if(column == 6) {
@@ -1224,15 +1242,20 @@ echo '<input type="hidden" id="programName" value="All Users">';
                                 data[21],
                                 data[22]
                             ]).draw()
-                        }, data[2], updateField[column], 'Users', data[column], 'email');
+                        }, emailID, updateField[column], 'Users', data[column], 'email');
                     }
                 });
             },150);
             $('tbody td').not(currentEle).on('click', function() {
-
+                if(column == 0 || column == 1) {
+                    valueT = orig;
+                }
                 $(currentEle).html(valueT);
             });
             $(currentEle).on("dblclick", function() {
+                if(column == 0 || column == 1) {
+                    valueT = orig;
+                }
                 $(currentEle).html(valueT);
             });  
         });

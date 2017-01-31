@@ -44,7 +44,7 @@
 	    	}
 			while(!($end = feof($file))) {
 				$a = fgetcsv($file);
-				$email = (string) $a[0];
+				$email = (string) trim($a[0]);
 				$email = strtolower($email);
 				if(!in_array($email, $emails)) {
 					array_push($errors['email'], $a[0]);

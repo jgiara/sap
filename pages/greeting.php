@@ -990,6 +990,13 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                 for(var i=0; i < selectedOpts.length; i++) {
                     toggleColumns(tableVols, selectedOpts[i].value);
                 }
+                tableVols.columns().every(function (index) {
+                $('#table-volunteers thead tr:eq(1) td:eq(' + index + ') input').on('keyup change', function () {
+                    tableVols.column($(this).parent().index() + ':visible')
+                        .search(this.value)
+                        .draw();
+                    } );
+                } );
                 $('#volslstBox2').append($(selectedOpts).clone());
                 $(selectedOpts).remove();
                 var my_options = $("#volslstBox2 option");
@@ -1009,6 +1016,13 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                 for(var i=0; i < selectedOpts.length; i++) {
                     toggleColumns(tableVols, selectedOpts[i].value);
                 }
+                tableVols.columns().every(function (index) {
+                $('#table-volunteers thead tr:eq(1) td:eq(' + index + ') input').on('keyup change', function () {
+                    tableVols.column($(this).parent().index() + ':visible')
+                        .search(this.value)
+                        .draw();
+                    } );
+                } );
                 $('#volslstBox1').append($(selectedOpts).clone());
                 $(selectedOpts).remove();
                 var my_options = $("#volslstBox1 option");
@@ -1102,6 +1116,13 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                 for(var i=0; i < selectedOpts.length; i++) {
                     toggleColumns(tableAttn, selectedOpts[i].value);
                 }
+                tableAttn.columns().every(function (index) {
+                $('#table-attendance thead tr:eq(1) td:eq(' + index + ') input').on('keyup change', function () {
+                    tableAttn.column($(this).parent().index() + ':visible')
+                        .search(this.value)
+                        .draw();
+                    } );
+                } );
                 $('#attnlstBox2').append($(selectedOpts).clone());
                 $(selectedOpts).remove();
                 var my_options = $("#attnlstBox2 option");
@@ -1121,6 +1142,13 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                 for(var i=0; i < selectedOpts.length; i++) {
                     toggleColumns(tableAttn, selectedOpts[i].value);
                 }
+                tableAttn.columns().every(function (index) {
+                $('#table-attendance thead tr:eq(1) td:eq(' + index + ') input').on('keyup change', function () {
+                    tableAttn.column($(this).parent().index() + ':visible')
+                        .search(this.value)
+                        .draw();
+                    } );
+                } );
                 $('#attnlstBox1').append($(selectedOpts).clone());
                 $(selectedOpts).remove();
                 var my_options = $("#attnlstBox1 option");
