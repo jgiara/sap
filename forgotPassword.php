@@ -9,10 +9,15 @@ require './resources/init.php';
 if (empty($_POST) === false) {
  
   $Email = strip_tags(trim($_POST['Email']));
+  $EagleID = strip_tags(trim($_POST['EagleID']));
 
   if ($users->email_exists($Email) === false) {
     $errors[] = 'Sorry that email doesn\'t exist.';
-  } else {
+  } 
+  else if($users->email_eagleid_match($Email, $EagleID) === false) {
+    $errors[] = 'Sorry the Eagle ID doesn\'t match the email.';
+  }
+  else {
     $recover = $users->recover($Email);
     echo '<script language="javascript">';
     echo 'alert("Password successfully resest, please check your email.")';
@@ -84,6 +89,9 @@ if (empty($_POST) === false) {
                           <form class="form col-md-12 center-block" action="forgotPassword.php" method="post">
                             <div class="form-group">
                               <input type="email" name="Email" class="form-control input-md" placeholder="Email " value="" required>
+                            </div>
+                            <div class="form-group">
+                              <input type="text" name="EagleID" class="form-control input-md" placeholder="Eagle ID " value="" required>
                             </div>
                             <div class="form-group">
                            

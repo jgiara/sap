@@ -31,6 +31,27 @@ class Users{
 
 	}
 
+public function email_eagleid_match($Email, $EagleID) {
+	$query = $this->db->prepare("SELECT COUNT(eagle_id) FROM Users WHERE email=? and eagle_id=? and status != 'Graduated'");
+	$query->bindValue(1, $Email);
+	$query->bindValue(2, $EagleID);
+
+	try{
+
+		$query->execute();
+		$rows = $query->fetchColumn();
+
+		if($rows == 1){
+			return true;
+		}else{
+			return false;
+		}
+
+	} catch (PDOException $e){
+		die($e->getMessage());
+	}
+}
+
 public function register( $Password, $Email, $First_Name, $Last_Name, $Eagle_Id, $Address, $Phone, $Type){
 		
 		
