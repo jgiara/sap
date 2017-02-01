@@ -194,7 +194,7 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                                                     <th>Week</th>
                                                     <th>Shift Day</th>
                                                     <th>Shift Time</th>
-                                                    <th>Requirements</th>
+                                                    <th>Requirements Status</th>
                                                     <th>Credit</th>
                                                     <th>Comments</th>
                                                     <th>Eagle ID</th>
@@ -215,7 +215,7 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                                                     <td>Week</td>
                                                     <td>Shift Day</td>
                                                     <td>Shift Time</td>
-                                                    <td>Requirements</td>
+                                                    <td>Requirements Status</td>
                                                     <td>Credit</td>
                                                     <td>Comments</td>
                                                     <td>Eagle ID</td>
@@ -327,7 +327,8 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                                   <option value="11">Week</option>
                                   <option value="12">Shift Day</option>
                                   <option value="13">Shift Time</option>
-                                  <option value="14">Requirements</option>
+                                  <option value="14">Requirements Status</option>
+                                  <option value="16">Comments</option>
                             </select>
                         </td>
                         <td style='text-align:center;vertical-align:middle;'>
@@ -345,7 +346,6 @@ echo '<input type="hidden" id="programName" value="Greeting">';
                                 <option value="9">AHANA</option>
                                 <option value="10">Transfer</option>
                                 <option value="15">Credit</option>
-                                <option value="16">Comments</option>
                                 <option value="17">Eagle ID</option>
                                 <option value="18">Member ID</option>
                             </select>
@@ -957,7 +957,7 @@ echo '<input type="hidden" id="programName" value="Greeting">';
             orderCellsTop: true,
             columnDefs: [
             {
-                targets: [2,5,6,7,8,9,10,15,16,17,18],
+                targets: [2,5,6,7,8,9,10,15,17,18],
                 visible: false,
             },
             {

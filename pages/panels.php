@@ -193,7 +193,7 @@ echo '<input type="hidden" id="programName" value="Panels">';
                                                     <th>Transfer</th>
                                                     <th>Shift Day</th>
                                                     <th>Shift Time</th>
-                                                    <th>Requirements</th>
+                                                    <th>Requirements Status</th>
                                                     <th>Credit</th>
                                                     <th>Comments</th>
                                                     <th>Eagle ID</th>
@@ -213,7 +213,7 @@ echo '<input type="hidden" id="programName" value="Panels">';
                                                     <td>Transfer</td>
                                                     <td>Shift Day</td>
                                                     <td>Shift Time</td>
-                                                    <td>Requirements</td>
+                                                    <td>Requirements Status</td>
                                                     <td>Credit</td>
                                                     <td>Comments</td>
                                                     <td>Eagle ID</td>
@@ -322,7 +322,8 @@ echo '<input type="hidden" id="programName" value="Panels">';
                                   <option value="4">School</option>
                                   <option value="11">Shift Day</option>
                                   <option value="12">Shift Time</option>
-                                  <option value="13">Requirements</option>
+                                  <option value="13">Requirements Status</option>
+                                  <option value="15">Comments</option>
                             </select>
                         </td>
                         <td style='text-align:center;vertical-align:middle;'>
@@ -340,7 +341,6 @@ echo '<input type="hidden" id="programName" value="Panels">';
                                 <option value="9">AHANA</option>
                                 <option value="10">Transfer</option>
                                 <option value="14">Credit</option>
-                                <option value="15">Comments</option>
                                 <option value="16">Eagle ID</option>
                                 <option value="17">Member ID</option>
                             </select>
@@ -939,7 +939,7 @@ echo '<input type="hidden" id="programName" value="Panels">';
             orderCellsTop: true,
             columnDefs: [
             {
-                targets: [2,5,6,7,8,9,10,14,15,16, 17],
+                targets: [2,5,6,7,8,9,10,14,16, 17],
                 visible: false,
             },
             {
