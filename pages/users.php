@@ -1194,7 +1194,13 @@ echo '<input type="hidden" id="programName" value="All Users">';
 
                 $("#delete-user").on("click", function() {
                     deleteUser(function() {
-                        alert(data[0] + " " + data[1] + " has been deleted");
+                        var nameDisplayFN = "";
+                        var nameDisplayLN = "";
+                        nameDisplayFN = data[0].match(/>[a-z, \s, A-Z, -]*</).toString();
+                        nameDisplayFN = nameDisplayFN.substring(1, nameDisplayFN.length-1);
+                        nameDisplayLN = data[1].match(/>[a-z, \s, A-Z, -]*</).toString();
+                        nameDisplayLN = nameDisplayLN.substring(1, nameDisplayLN.length-1);
+                        alert(nameDisplayFN + " " + nameDisplayLN + " has been deleted");
                         location.reload();
                     }, data[2]);
                 });

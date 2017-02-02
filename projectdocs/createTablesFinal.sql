@@ -136,3 +136,12 @@ create table Credit_History (
 	transfer int(1) not null,
 	media int(1) not null
 );
+
+create table Numbers_Location (
+	numbers_location_id int(10) not null auto_increment primary key, 
+	week int(10) not null references Programming_Weeks(week_id),
+	day varchar(10) not null, 
+	time varchar(8) not null, 
+	numbers int(3) not null,
+	location varchar(25) 
+);
