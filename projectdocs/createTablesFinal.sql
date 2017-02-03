@@ -143,5 +143,6 @@ create table Numbers_Location (
 	day varchar(10) not null, 
 	time varchar(8) not null, 
 	numbers int(3) not null,
-	location varchar(25) 
+	location varchar(25),
+	session varchar(25) not null
 );
