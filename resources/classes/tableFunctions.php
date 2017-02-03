@@ -266,6 +266,49 @@ class TableFunctions {
 		}
 	}
 
+	public function deleteNumbersForWeek($week) {
+		$query = $this->db->prepare("DELETE from Numbers_Location where week=?");
+		$query->bindValue(1, $week);
+
+		try {
+			$query->execute();
+			return true;
+
+		}catch(PDOException $e){
+			die($e->getMessage());
+		}
+	}
+
+	public function insertNewNumbersDefault($week, $day, $time, $session) {
+		$query = $this->db->prepare("INSERT INTO Numbers_Location (week, day, time, session) values (?, ?, ?, ?)");
+		$query->bindValue(1, $week);
+		$query->bindValue(2, $day);
+		$query->bindValue(3, $time);
+		$query->bindValue(4, $session);
+
+		try {
+			$query->execute();
+			return true;
+
+		}catch(PDOException $e){
+			die($e->getMessage());
+		}
+	}
+
+	public function getNumbersData($week) {
+		$query = $this->db->prepare("SELECT * from Numbers_Location where week=?");
+		$query->bindValue(1, $week);
+
+		try {
+			$query->execute();
+			$data = $query->fetchAll();
+			return $data;
+
+		}catch(PDOException $e){
+			die($e->getMessage());
+		}
+	}
+
 	public function getAssignedShiftsForProgram($program, $semester, $year) {
 		$query = $this->db->prepare("SELECT user, shift_day, shift_time from Program_Members where program=(SELECT program_id from Programs where program_name=? and semester=? and year=?)");
 		$query->bindValue(1, $program);

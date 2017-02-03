@@ -935,6 +935,105 @@ function updateUserProfile(callback, email, fnn, lnn, eagleidn, sexn, phonen, ye
             });
 }
 
+function addNewNumbersDefault(callback, selectedWeek) {
+    $.post("../include/insertNewNumbersDefault.php",
+        {
+            week: selectedWeek
+        }, function() {
+            callback();
+        });
+}
+
+function getNumbersData(callback, selectedWeek, tableSun, tableMon, tableTues, tableWed, tableThurs, tableFri, tableSat) {
+    $.post("../include/getNumbersData.php", 
+        {
+            week: selectedWeek,
+        }, function(data) {
+            $.each(data, function(i, item) {
+                switch(item.day) {
+                    case 'Sunday' : {
+                        tableSun.row.add([
+                            item.time, 
+                            item.session,
+                            item.numbers,
+                            item.location,
+                            item.notes,
+                            'Delete',
+                            item.numbers_location_id
+                        ]);
+                    } break;
+                    case 'Monday' : {
+                        tableMon.row.add([
+                            item.time, 
+                            item.session,
+                            item.numbers,
+                            item.location,
+                            item.notes,
+                            'Delete',
+                            item.numbers_location_id
+                        ]);
+                    } break;
+                    case 'Tuesday' : {
+                        tableTues.row.add([
+                            item.time, 
+                            item.session,
+                            item.numbers,
+                            item.location,
+                            item.notes,
+                            'Delete',
+                            item.numbers_location_id
+                        ]);
+                    } break;
+                    case 'Wednesday' : {
+                        tableWed.row.add([
+                            item.time, 
+                            item.session,
+                            item.numbers,
+                            item.location,
+                            item.notes,
+                            'Delete',
+                            item.numbers_location_id
+                        ]);
+                    } break;
+                    case 'Thursday' : {
+                        tableThurs.row.add([
+                            item.time, 
+                            item.session,
+                            item.numbers,
+                            item.location,
+                            item.notes,
+                            'Delete',
+                            item.numbers_location_id
+                        ]);
+                    } break;
+                    case 'Friday' : {
+                        tableFri.row.add([
+                            item.time, 
+                            item.session,
+                            item.numbers,
+                            item.location,
+                            item.notes,
+                            'Delete',
+                            item.numbers_location_id
+                        ]);
+                    } break;
+                    case 'Saturday' : {
+                        tableSat.row.add([
+                            item.time, 
+                            item.session,
+                            item.numbers,
+                            item.location,
+                            item.notes,
+                            'Delete',
+                            item.numbers_location_id
+                        ]);
+                    } break;
+                }
+            });
+            callback(tableSun, tableMon, tableTues, tableWed, tableThurs, tableFri, tableSat);
+        }, 'json');
+}
+
 function verifyData(field, value) {
     switch(field) {
         case 'shift_time': {

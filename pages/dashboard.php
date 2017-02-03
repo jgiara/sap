@@ -167,12 +167,9 @@ if($_SESSION['New_Session']) {
                                                     <th>Session</th>
                                                     <th>Numbers</th>
                                                     <th>Location</th>
-                                                </tr>
-                                                <tr>
-                                                    <td>Time</td>
-                                                    <td>Session</td>
-                                                    <td>Numbers</td>
-                                                    <td>Location</td>
+                                                    <th>Notes</th>
+                                                    <th>Delete</th>
+                                                    <th>Numbers ID</th>
                                                 </tr>
                                             </thead>
                                             
@@ -190,12 +187,9 @@ if($_SESSION['New_Session']) {
                                                     <th>Session</th>
                                                     <th>Numbers</th>
                                                     <th>Location</th>
-                                                </tr>
-                                                <tr>
-                                                    <td>Time</td>
-                                                    <td>Session</td>
-                                                    <td>Numbers</td>
-                                                    <td>Location</td>
+                                                    <th>Notes</th>
+                                                    <th>Delete</th>
+                                                    <th>Numbers ID</th>
                                                 </tr>
                                             </thead>
                                             
@@ -213,12 +207,9 @@ if($_SESSION['New_Session']) {
                                                     <th>Session</th>
                                                     <th>Numbers</th>
                                                     <th>Location</th>
-                                                </tr>
-                                                <tr>
-                                                    <td>Time</td>
-                                                    <td>Session</td>
-                                                    <td>Numbers</td>
-                                                    <td>Location</td>
+                                                    <th>Notes</th>
+                                                    <th>Delete</th>
+                                                    <th>Numbers ID</th>
                                                 </tr>
                                             </thead>
                                             
@@ -236,12 +227,9 @@ if($_SESSION['New_Session']) {
                                                     <th>Session</th>
                                                     <th>Numbers</th>
                                                     <th>Location</th>
-                                                </tr>
-                                                <tr>
-                                                    <td>Time</td>
-                                                    <td>Session</td>
-                                                    <td>Numbers</td>
-                                                    <td>Location</td>
+                                                    <th>Notes</th>
+                                                    <th>Delete</th>
+                                                    <th>Numbers ID</th>
                                                 </tr>
                                             </thead>
                                             
@@ -259,12 +247,9 @@ if($_SESSION['New_Session']) {
                                                     <th>Session</th>
                                                     <th>Numbers</th>
                                                     <th>Location</th>
-                                                </tr>
-                                                <tr>
-                                                    <td>Time</td>
-                                                    <td>Session</td>
-                                                    <td>Numbers</td>
-                                                    <td>Location</td>
+                                                    <th>Notes</th>
+                                                    <th>Delete</th>
+                                                    <th>Numbers ID</th>
                                                 </tr>
                                             </thead>
                                             
@@ -282,12 +267,9 @@ if($_SESSION['New_Session']) {
                                                     <th>Session</th>
                                                     <th>Numbers</th>
                                                     <th>Location</th>
-                                                </tr>
-                                                <tr>
-                                                    <td>Time</td>
-                                                    <td>Session</td>
-                                                    <td>Numbers</td>
-                                                    <td>Location</td>
+                                                    <th>Notes</th>
+                                                    <th>Delete</th>
+                                                    <th>Numbers ID</th>
                                                 </tr>
                                             </thead>
                                             
@@ -305,12 +287,9 @@ if($_SESSION['New_Session']) {
                                                     <th>Session</th>
                                                     <th>Numbers</th>
                                                     <th>Location</th>
-                                                </tr>
-                                                <tr>
-                                                    <td>Time</td>
-                                                    <td>Session</td>
-                                                    <td>Numbers</td>
-                                                    <td>Location</td>
+                                                    <th>Notes</th>
+                                                    <th>Delete</th>
+                                                    <th>Numbers ID</th>
                                                 </tr>
                                             </thead>
                                             
@@ -342,7 +321,7 @@ if($_SESSION['New_Session']) {
                 </div>
                 <div class="modal-body">
                     <h5>Fill in the following information.</h5>
-                    <form method="post" id="addNewNumbers" name="addNewNumbers">  
+                     
                         <div class="form-group">
                             <label for="semester-form">Semester:</label>
                             <input type="text" name="semester-form" class="form-control" id="semester-form" readonly required>
@@ -363,7 +342,7 @@ if($_SESSION['New_Session']) {
                             <strong>Warning: If any numbers data exists for this week, it will be deleted.</strong>
                             </br>
                             </br>   
-                            <input type="button" name="addNewNumbers" id="addNewNumbers" value="Add New Numbers" class="btn btn-danger"></input>
+                            <button name="addNewNumbers" id="addNewNumbers" value="Add New Numbers" class="btn btn-danger">Add New Numbers</button>
                         </div>
                         <div id="extra-form-div">
                             <div class="form-group">
@@ -379,9 +358,9 @@ if($_SESSION['New_Session']) {
                                 <label for="extra-time-form">Time:</label>
                                 <input type="text" name="extra-time-form" class="form-control" id="extra-time-form" required>
                             </div>    
-                            <input type="button" name="addExtraNumbers" id="addExtraNumbers" value="Add Extra Numbers" class="btn btn-danger"></input>
+                            <button name="addExtraNumbers" id="addExtraNumbers" value="Add Extra Numbers" class="btn btn-danger">Add Extra Numbers</button>
                         </div>
-                    </form>
+                    
                 </div>
                 </br>
                 <div class="modal-footer">
@@ -427,49 +406,84 @@ if($_SESSION['New_Session']) {
             orderCellsTop: true,
             paging: false,
             searching: false,
-            info: false
+            info: false,
+            columnDefs: [
+            {
+                targets: [5,6],
+                visible: false,
+            }]
         });
         var tableMon = $('#table-monday').DataTable({
             responsive: true,
             orderCellsTop: true,
             paging: false,
             searching: false,
-            info: false
+            info: false,
+            columnDefs: [
+            {
+                targets: [5,6],
+                visible: false,
+            }]
         });
         var tableTues = $('#table-tuesday').DataTable({
             responsive: true,
             orderCellsTop: true,
             paging: false,
             searching: false,
-            info: false
+            info: false,
+            columnDefs: [
+            {
+                targets: [5,6],
+                visible: false,
+            }]
         });
         var tableWed = $('#table-wednesday').DataTable({
             responsive: true,
             orderCellsTop: true,
             paging: false,
             searching: false,
-            info: false
+            info: false,
+            columnDefs: [
+            {
+                targets: [5,6],
+                visible: false,
+            }]
         });
         var tableThurs = $('#table-thursday').DataTable({
             responsive: true,
             orderCellsTop: true,
             paging: false,
             searching: false,
-            info: false
+            info: false,
+            columnDefs: [
+            {
+                targets: [5,6],
+                visible: false,
+            }]
         });
         var tableFri = $('#table-friday').DataTable({
             responsive: true,
             orderCellsTop: true,
             paging: false,
             searching: false,
-            info: false
+            info: false,
+            columnDefs: [
+            {
+                targets: [5,6],
+                visible: false,
+            }]
         });
         var tableSat = $('#table-saturday').DataTable({
             responsive: true,
             orderCellsTop: true,
             paging: false,
             searching: false,
-            info: false
+            info: false,
+            columnDefs: [
+            {
+                targets: [5,6],
+                visible: false,
+            }]
         });
 
         var w;
@@ -489,9 +503,15 @@ if($_SESSION['New_Session']) {
             w = document.getElementById("table-week");
             selectedWeek = w.options[w.selectedIndex].value;
              
-            getNumbersData(function(newTable) {
-                  newTable.draw();
-            }, programName, selectedSemester, selectedYear, tableWed);
+            getNumbersData(function(newSun, newMon, newTues, newWed, newThurs, newFri, newSat) {
+                  newSun.draw();
+                  newMon.draw();
+                  newTues.draw();
+                  newWed.draw();
+                  newThurs.draw();
+                  newFri.draw();
+                  newSat.draw();
+            }, selectedWeek, tableSun, tableMon, tableTues, tableWed, tableThurs, tableFri, tableSat);
         }, selectedSemester, selectedYear);
 
         $('#semester-submit').on("click", function() {
@@ -508,6 +528,32 @@ if($_SESSION['New_Session']) {
 
             if(nselectedSemester != selectedSemester || nselectedYear != selectedYear) {
                 document.getElementById("table-week").innerHTML = "";
+                getWeekData(function() {
+                    w = document.getElementById("table-week");
+                    selectedWeek = w.options[w.selectedIndex].value;
+                    tableSun.clear();
+                    tableMon.clear();
+                    tableTues.clear();
+                    tableWed.clear();
+                    tableThurs.clear();
+                    tableFri.clear();
+                    tableSat.clear();
+                    getNumbersData(function(newSun, newMon, newTues, newWed, newThurs, newFri, newSat) {
+                          newSun.draw();
+                          newMon.draw();
+                          newTues.draw();
+                          newWed.draw();
+                          newThurs.draw();
+                          newFri.draw();
+                          newSat.draw();
+                    }, selectedWeek, tableSun, tableMon, tableTues, tableWed, tableThurs, tableFri, tableSat);    
+                }, nselectedSemester, nselectedYear);
+                selectedSemester = nselectedSemester;
+                selectedYear = nselectedYear; 
+            }
+
+            else if(selectedWeek != nselectedWeek) {
+                selectedWeek = nselectedWeek;
                 tableSun.clear();
                 tableMon.clear();
                 tableTues.clear();
@@ -515,15 +561,15 @@ if($_SESSION['New_Session']) {
                 tableThurs.clear();
                 tableFri.clear();
                 tableSat.clear();
-                getWeekData(function() {
-                      ;
-                }, nselectedSemester, nselectedYear);
-                selectedSemester = nselectedSemester;
-                selectedYear = nselectedYear;
-                
-            }
-            else if(selectedWeek != nselectedWeek) {
-                //getNumbersdata
+                getNumbersData(function(newSun, newMon, newTues, newWed, newThurs, newFri, newSat) {
+                      newSun.draw();
+                      newMon.draw();
+                      newTues.draw();
+                      newWed.draw();
+                      newThurs.draw();
+                      newFri.draw();
+                      newSat.draw();
+                }, selectedWeek, tableSun, tableMon, tableTues, tableWed, tableThurs, tableFri, tableSat);    
             }
 
             if(selectedDay == 'day') {
@@ -573,6 +619,15 @@ if($_SESSION['New_Session']) {
 
         $('#addNewNumbers').on('click', function(e) {
             e.preventDefault();
+            var s = document.getElementById("table-semester");
+            var selectedSemester = s.options[s.selectedIndex].value;
+            var y = document.getElementById("table-year");
+            var selectedYear = y.options[y.selectedIndex].value;
+            var w = document.getElementById("table-week");
+            var selectedWeek = w.options[w.selectedIndex].value;
+            addNewNumbersDefault(function() {
+                location.reload();
+            }, selectedWeek);
         });
 
         $('#addExtraNumbers').on('click', function(e) {
