@@ -834,7 +834,7 @@ class TableFunctions {
 	}
 
 	public function markInactive($year, $semester) {
-		$query = $this->db->prepare("UPDATE Users set status='Inactive' where email not in (SELECT user from Programs, Program_Members where program_id=program and year=? and semester=?) and status!='Graduated' and status!='Staff' and status!='Abroad/Prac/Clinical'");
+		$query = $this->db->prepare("UPDATE Users set status='Inactive' where email not in (SELECT user from Programs, Program_Members where program_id=program and year=? and semester=?) and status!='Graduated' and status!='Staff' and status!='Abroad/Prac/Clinical' and status!='Admin'");
 		$query->bindValue(1, $year);
 		$query->bindValue(2, $semester);
 
