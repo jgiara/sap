@@ -157,7 +157,7 @@ if($_SESSION['New_Session']) {
 
                                 </div>
                                 <button class="btn btn-primary" id="semester-submit">Go</button>
-                                 <button class="btn btn-danger " id="new-numbers-modal-button" data-toggle="modal" data-target="#newNumbersModal">New Numbers</button>
+                                 <button class="btn btn-danger " id="new-numbers-modal-button" data-toggle="modal" data-target="#newNumbersModal">New Sessions</button>
                                     <div id="div-sunday" class="div-day">
                                         <h4>Sunday</h4>               
                                         <table class="table table-striped table-bordered table-hover" id="table-sunday" style="font-size: 13px; width: 100%;">
@@ -177,6 +177,7 @@ if($_SESSION['New_Session']) {
                                                 
                                             </tbody>
                                         </table>
+                                    </br>
                                     </div>
                                     <div id="div-monday" class="div-day">
                                         <h4>Monday</h4>               
@@ -197,6 +198,7 @@ if($_SESSION['New_Session']) {
                                                 
                                             </tbody>
                                         </table>
+                                    </br>
                                     </div>
                                     <div id="div-tuesday" class="div-day">
                                         <h4>Tuesday</h4>               
@@ -217,6 +219,7 @@ if($_SESSION['New_Session']) {
                                                 
                                             </tbody>
                                         </table>
+                                    </br>
                                     </div>
                                     <div id="div-wednesday" class="div-day">
                                         <h4>Wednesday</h4>               
@@ -237,6 +240,7 @@ if($_SESSION['New_Session']) {
                                                 
                                             </tbody>
                                         </table>
+                                    </br>
                                     </div>
                                     <div id="div-thursday" class="div-day">
                                         <h4>Thursday</h4>               
@@ -257,6 +261,7 @@ if($_SESSION['New_Session']) {
                                                 
                                             </tbody>
                                         </table>
+                                    </br>
                                     </div>
                                     <div id="div-friday" class="div-day">
                                         <h4>Friday</h4>               
@@ -277,6 +282,7 @@ if($_SESSION['New_Session']) {
                                                 
                                             </tbody>
                                         </table>
+                                    </br>
                                     </div>
                                     <div id="div-saturday" class="div-day">
                                         <h4>Saturday</h4>               
@@ -317,7 +323,7 @@ if($_SESSION['New_Session']) {
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Add New Numbers</h4>
+                    <h4 class="modal-title">Add New Sessions</h4>
                 </div>
                 <div class="modal-body">
                     <h5>Fill in the following information.</h5>
@@ -339,10 +345,10 @@ if($_SESSION['New_Session']) {
                         <button class="btn btn-primary btn-xs" id="extraButton">Extra</button>
                         <div id="default-form-div"> 
                             </br>
-                            <strong>Warning: If any numbers data exists for this week, it will be deleted.</strong>
+                            <strong>Warning: If any session data exists for this week, it will be deleted.</strong>
                             </br>
                             </br>   
-                            <button name="addNewNumbers" id="addNewNumbers" value="Add New Numbers" class="btn btn-danger">Add New Numbers</button>
+                            <button name="addNewNumbers" id="addNewNumbers" value="Add New Numbers" class="btn btn-danger">Add New Sessions</button>
                         </div>
                         <div id="extra-form-div">
                             <div class="form-group">
@@ -358,7 +364,19 @@ if($_SESSION['New_Session']) {
                                 <label for="extra-time-form">Time:</label>
                                 <input type="text" name="extra-time-form" class="form-control" id="extra-time-form" required>
                             </div>    
-                            <button name="addExtraNumbers" id="addExtraNumbers" value="Add Extra Numbers" class="btn btn-danger">Add Extra Numbers</button>
+                            <div class="form-group">
+                                <label for="extra-location-form">Location: **Optional**</label>
+                                <input type="text" name="extra-location-form" class="form-control" id="extra-location-form" required>
+                            </div>    
+                            <div class="form-group">
+                                <label for="extra-numbers-form">Numbers: **Optional**</label>
+                                <input type="text" name="extra-numbers-form" class="form-control" id="extra-numbers-form" required>
+                            </div>    
+                            <div class="form-group">
+                                <label for="extra-notes-form">Notes: **Optional**</label>
+                                <input type="text" name="extra-notes-form" class="form-control" id="extra-notes-form" required>
+                            </div>    
+                            <button name="addExtraNumbers" id="addExtraNumbers" value="Add Extra Numbers" class="btn btn-danger">Add Extra Sessions</button>
                         </div>
                     
                 </div>
@@ -399,6 +417,32 @@ if($_SESSION['New_Session']) {
         $('.div-day').hide();
         $('#extra-form-div').hide();
         $('#default-form-div').hide();
+
+        var targs;
+        if(<?php 
+            if((in_array('Admin', $roles)) || (in_array('Advisor', $roles)) || (in_array('Numbers', $roles))) {
+                echo "true";
+            }
+            else {
+                echo "false";
+            } 
+            ?>) {
+            targs = [6];
+        } 
+        else {
+            targs = [5,6];
+        }
+
+        if(!<?php 
+            if((in_array('Admin', $roles)) || (in_array('Advisor', $roles)) || (in_array('Numbers', $roles)) || (in_array('Staff', $roles)) || (in_array('Council', $roles))) {
+                echo "true";
+            }
+            else {
+                echo "false";
+            } 
+            ?>) {
+            targs.push(4);
+        } 
      
         // DataTable
         var tableSun = $('#table-sunday').DataTable({
@@ -409,7 +453,8 @@ if($_SESSION['New_Session']) {
             info: false,
             columnDefs: [
             {
-                targets: [5,6],
+
+                targets: targs,
                 visible: false,
             }]
         });
@@ -421,7 +466,7 @@ if($_SESSION['New_Session']) {
             info: false,
             columnDefs: [
             {
-                targets: [5,6],
+                targets: targs,
                 visible: false,
             }]
         });
@@ -433,7 +478,7 @@ if($_SESSION['New_Session']) {
             info: false,
             columnDefs: [
             {
-                targets: [5,6],
+                targets: targs,
                 visible: false,
             }]
         });
@@ -445,7 +490,7 @@ if($_SESSION['New_Session']) {
             info: false,
             columnDefs: [
             {
-                targets: [5,6],
+                targets: targs,
                 visible: false,
             }]
         });
@@ -457,7 +502,7 @@ if($_SESSION['New_Session']) {
             info: false,
             columnDefs: [
             {
-                targets: [5,6],
+                targets: targs,
                 visible: false,
             }]
         });
@@ -469,7 +514,7 @@ if($_SESSION['New_Session']) {
             info: false,
             columnDefs: [
             {
-                targets: [5,6],
+                targets: targs,
                 visible: false,
             }]
         });
@@ -481,7 +526,7 @@ if($_SESSION['New_Session']) {
             info: false,
             columnDefs: [
             {
-                targets: [5,6],
+                targets: targs,
                 visible: false,
             }]
         });
@@ -502,6 +547,7 @@ if($_SESSION['New_Session']) {
         getWeekData(function() {
             w = document.getElementById("table-week");
             selectedWeek = w.options[w.selectedIndex].value;
+
              
             getNumbersData(function(newSun, newMon, newTues, newWed, newThurs, newFri, newSat) {
                   newSun.draw();
@@ -582,6 +628,545 @@ if($_SESSION['New_Session']) {
 
         });
 
+        $('#table-sunday tbody').on('dblclick', 'td', function(e) {
+            if(!<?php 
+                if((in_array('Admin', $roles)) || (in_array('Council', $roles)) || (in_array('Advisor', $roles)) || (in_array('Staff', $roles)) || (in_array('Numbers', $roles))) {
+                    echo "true";
+                }
+                else {
+                    echo "false";
+                } 
+                ?>) {
+                return;
+            }
+            var currentEle = $(this);
+            var valueT = $(this).html();
+            var orig = valueT;
+            var row = tableSun.cell($(this)).index().row;
+            var column = tableSun.cell($(this)).index().column;
+            var alterable = [0,1,2,3,4,5];
+            if(alterable.indexOf(column) == -1) { //can't the other columns
+                return;
+            }
+            var data = tableSun.row(row).data();
+            var updateField = ['time', 'session', 'numbers', 'location', 'notes', 'delete', 'numbers_location_id'];
+            setTimeout(function() {
+                if(column == 5) {
+                    $(currentEle).html('<button class="btn btn-primary btn-xs" id="delete-numbers">Delete Session</button>');
+                }
+                else {
+                    $(currentEle).html('<input id="newvalue" class="thVal" type="text" value="' + valueT + '" />');
+                }
+                $(".thVal").focus();
+                if(column != 5) {
+                    var tmp = document.getElementById("newvalue").value;
+                    document.getElementById("newvalue").value = '';
+                    document.getElementById("newvalue").value = tmp;
+                }
+
+                $("#delete-numbers").on("click", function() {
+                    deleteNumbersLocationID(function() {
+                        location.reload();
+                    }, data[6]);
+                });
+
+                $(".thVal").keydown(function (event) {
+                    if(column == 5) {
+                        return ;
+                    }
+                    if (event.keyCode == 13) {
+                        data[column] =  document.getElementById("newvalue").value.trim();  
+                        tableSun.row(row).remove();
+                        inLineUpdatePostData(function() {
+                            tableSun.row.add([
+                                data[0],
+                                data[1],
+                                data[2],
+                                data[3],
+                                data[4],
+                                data[5],
+                                data[6]
+                            ]).draw()
+                        }, data[6], updateField[column], 'Numbers_Location', data[column], 'numbers_location_id');
+                    }
+                });
+            },150);
+            $('tbody td').not(currentEle).on('click', function() {
+                if(column == 0 || column == 1) {
+                    valueT = orig;
+                }
+                $(currentEle).html(valueT);
+            });
+            $(currentEle).on("dblclick", function() {
+                if(column == 0 || column == 1) {
+                    valueT = orig;
+                }
+                $(currentEle).html(valueT);
+            });  
+        });
+
+        $('#table-monday tbody').on('dblclick', 'td', function(e) {
+            if(!<?php 
+                if((in_array('Admin', $roles)) || (in_array('Council', $roles)) || (in_array('Advisor', $roles)) || (in_array('Staff', $roles)) || (in_array('Numbers', $roles))) {
+                    echo "true";
+                }
+                else {
+                    echo "false";
+                } 
+                ?>) {
+                return;
+            }
+            var currentEle = $(this);
+            var valueT = $(this).html();
+            var orig = valueT;
+            var row = tableMon.cell($(this)).index().row;
+            var column = tableMon.cell($(this)).index().column;
+            var alterable = [0,1,2,3,4,5];
+            if(alterable.indexOf(column) == -1) { //can't the other columns
+                return;
+            }
+            var data = tableMon.row(row).data();
+            var updateField = ['time', 'session', 'numbers', 'location', 'notes', 'delete', 'numbers_location_id'];
+            setTimeout(function() {
+                if(column == 5) {
+                    $(currentEle).html('<button class="btn btn-primary btn-xs" id="delete-numbers">Delete Session</button>');
+                }
+                else {
+                    $(currentEle).html('<input id="newvalue" class="thVal" type="text" value="' + valueT + '" />');
+                }
+                $(".thVal").focus();
+                if(column != 5) {
+                    var tmp = document.getElementById("newvalue").value;
+                    document.getElementById("newvalue").value = '';
+                    document.getElementById("newvalue").value = tmp;
+                }
+
+                $("#delete-numbers").on("click", function() {
+                    deleteNumbersLocationID(function() {
+                        location.reload();
+                    }, data[6]);
+                });
+
+                $(".thVal").keydown(function (event) {
+                    if(column == 5) {
+                        return ;
+                    }
+                    if (event.keyCode == 13) {
+                        data[column] =  document.getElementById("newvalue").value.trim();  
+                        tableMon.row(row).remove();
+                        inLineUpdatePostData(function() {
+                            tableMon.row.add([
+                                data[0],
+                                data[1],
+                                data[2],
+                                data[3],
+                                data[4],
+                                data[5],
+                                data[6]
+                            ]).draw()
+                        }, data[6], updateField[column], 'Numbers_Location', data[column], 'numbers_location_id');
+                    }
+                });
+            },150);
+            $('tbody td').not(currentEle).on('click', function() {
+                if(column == 0 || column == 1) {
+                    valueT = orig;
+                }
+                $(currentEle).html(valueT);
+            });
+            $(currentEle).on("dblclick", function() {
+                if(column == 0 || column == 1) {
+                    valueT = orig;
+                }
+                $(currentEle).html(valueT);
+            });  
+        });
+
+        $('#table-tuesday tbody').on('dblclick', 'td', function(e) {
+            if(!<?php 
+                if((in_array('Admin', $roles)) || (in_array('Council', $roles)) || (in_array('Advisor', $roles)) || (in_array('Staff', $roles)) || (in_array('Numbers', $roles))) {
+                    echo "true";
+                }
+                else {
+                    echo "false";
+                } 
+                ?>) {
+                return;
+            }
+            var currentEle = $(this);
+            var valueT = $(this).html();
+            var orig = valueT;
+            var row = tableTues.cell($(this)).index().row;
+            var column = tableTues.cell($(this)).index().column;
+            var alterable = [0,1,2,3,4,5];
+            if(alterable.indexOf(column) == -1) { //can't the other columns
+                return;
+            }
+            var data = tableTues.row(row).data();
+            var updateField = ['time', 'session', 'numbers', 'location', 'notes', 'delete', 'numbers_location_id'];
+            setTimeout(function() {
+                if(column == 5) {
+                    $(currentEle).html('<button class="btn btn-primary btn-xs" id="delete-numbers">Delete Session</button>');
+                }
+                else {
+                    $(currentEle).html('<input id="newvalue" class="thVal" type="text" value="' + valueT + '" />');
+                }
+                $(".thVal").focus();
+                if(column != 5) {
+                    var tmp = document.getElementById("newvalue").value;
+                    document.getElementById("newvalue").value = '';
+                    document.getElementById("newvalue").value = tmp;
+                }
+
+                $("#delete-numbers").on("click", function() {
+                    deleteNumbersLocationID(function() {
+                        location.reload();
+                    }, data[6]);
+                });
+
+                $(".thVal").keydown(function (event) {
+                    if(column == 5) {
+                        return ;
+                    }
+                    if (event.keyCode == 13) {
+                        data[column] =  document.getElementById("newvalue").value.trim();  
+                        tableTues.row(row).remove();
+                        inLineUpdatePostData(function() {
+                            tableTues.row.add([
+                                data[0],
+                                data[1],
+                                data[2],
+                                data[3],
+                                data[4],
+                                data[5],
+                                data[6]
+                            ]).draw()
+                        }, data[6], updateField[column], 'Numbers_Location', data[column], 'numbers_location_id');
+                    }
+                });
+            },150);
+            $('tbody td').not(currentEle).on('click', function() {
+                if(column == 0 || column == 1) {
+                    valueT = orig;
+                }
+                $(currentEle).html(valueT);
+            });
+            $(currentEle).on("dblclick", function() {
+                if(column == 0 || column == 1) {
+                    valueT = orig;
+                }
+                $(currentEle).html(valueT);
+            });  
+        });
+
+        $('#table-wednesday tbody').on('dblclick', 'td', function(e) {
+            if(!<?php 
+                if((in_array('Admin', $roles)) || (in_array('Council', $roles)) || (in_array('Advisor', $roles)) || (in_array('Staff', $roles)) || (in_array('Numbers', $roles))) {
+                    echo "true";
+                }
+                else {
+                    echo "false";
+                } 
+                ?>) {
+                return;
+            }
+            var currentEle = $(this);
+            var valueT = $(this).html();
+            var orig = valueT;
+            var row = tableWed.cell($(this)).index().row;
+            var column = tableWed.cell($(this)).index().column;
+            var alterable = [0,1,2,3,4,5];
+            if(alterable.indexOf(column) == -1) { //can't the other columns
+                return;
+            }
+            var data = tableWed.row(row).data();
+            var updateField = ['time', 'session', 'numbers', 'location', 'notes', 'delete', 'numbers_location_id'];
+            setTimeout(function() {
+                if(column == 5) {
+                    $(currentEle).html('<button class="btn btn-primary btn-xs" id="delete-numbers">Delete Session</button>');
+                }
+                else {
+                    $(currentEle).html('<input id="newvalue" class="thVal" type="text" value="' + valueT + '" />');
+                }
+                $(".thVal").focus();
+                if(column != 5) {
+                    var tmp = document.getElementById("newvalue").value;
+                    document.getElementById("newvalue").value = '';
+                    document.getElementById("newvalue").value = tmp;
+                }
+
+                $("#delete-numbers").on("click", function() {
+                    deleteNumbersLocationID(function() {
+                        location.reload();
+                    }, data[6]);
+                });
+
+                $(".thVal").keydown(function (event) {
+                    if(column == 5) {
+                        return ;
+                    }
+                    if (event.keyCode == 13) {
+                        data[column] =  document.getElementById("newvalue").value.trim();  
+                        tableWed.row(row).remove();
+                        inLineUpdatePostData(function() {
+                            tableWed.row.add([
+                                data[0],
+                                data[1],
+                                data[2],
+                                data[3],
+                                data[4],
+                                data[5],
+                                data[6]
+                            ]).draw()
+                        }, data[6], updateField[column], 'Numbers_Location', data[column], 'numbers_location_id');
+                    }
+                });
+            },150);
+            $('tbody td').not(currentEle).on('click', function() {
+                if(column == 0 || column == 1) {
+                    valueT = orig;
+                }
+                $(currentEle).html(valueT);
+            });
+            $(currentEle).on("dblclick", function() {
+                if(column == 0 || column == 1) {
+                    valueT = orig;
+                }
+                $(currentEle).html(valueT);
+            });  
+        });
+    
+        $('#table-thursday tbody').on('dblclick', 'td', function(e) {
+            if(!<?php 
+                if((in_array('Admin', $roles)) || (in_array('Council', $roles)) || (in_array('Advisor', $roles)) || (in_array('Staff', $roles)) || (in_array('Numbers', $roles))) {
+                    echo "true";
+                }
+                else {
+                    echo "false";
+                } 
+                ?>) {
+                return;
+            }
+            var currentEle = $(this);
+            var valueT = $(this).html();
+            var orig = valueT;
+            var row = tableThurs.cell($(this)).index().row;
+            var column = tableThurs.cell($(this)).index().column;
+            var alterable = [0,1,2,3,4,5];
+            if(alterable.indexOf(column) == -1) { //can't the other columns
+                return;
+            }
+            var data = tableThurs.row(row).data();
+            var updateField = ['time', 'session', 'numbers', 'location', 'notes', 'delete', 'numbers_location_id'];
+            setTimeout(function() {
+                if(column == 5) {
+                    $(currentEle).html('<button class="btn btn-primary btn-xs" id="delete-numbers">Delete Session</button>');
+                }
+                else {
+                    $(currentEle).html('<input id="newvalue" class="thVal" type="text" value="' + valueT + '" />');
+                }
+                $(".thVal").focus();
+                if(column != 5) {
+                    var tmp = document.getElementById("newvalue").value;
+                    document.getElementById("newvalue").value = '';
+                    document.getElementById("newvalue").value = tmp;
+                }
+
+                $("#delete-numbers").on("click", function() {
+                    deleteNumbersLocationID(function() {
+                        location.reload();
+                    }, data[6]);
+                });
+
+                $(".thVal").keydown(function (event) {
+                    if(column == 5) {
+                        return ;
+                    }
+                    if (event.keyCode == 13) {
+                        data[column] =  document.getElementById("newvalue").value.trim();  
+                        tableThurs.row(row).remove();
+                        inLineUpdatePostData(function() {
+                            tableThurs.row.add([
+                                data[0],
+                                data[1],
+                                data[2],
+                                data[3],
+                                data[4],
+                                data[5],
+                                data[6]
+                            ]).draw()
+                        }, data[6], updateField[column], 'Numbers_Location', data[column], 'numbers_location_id');
+                    }
+                });
+            },150);
+            $('tbody td').not(currentEle).on('click', function() {
+                if(column == 0 || column == 1) {
+                    valueT = orig;
+                }
+                $(currentEle).html(valueT);
+            });
+            $(currentEle).on("dblclick", function() {
+                if(column == 0 || column == 1) {
+                    valueT = orig;
+                }
+                $(currentEle).html(valueT);
+            });  
+        });
+
+        $('#table-friday tbody').on('dblclick', 'td', function(e) {
+            if(!<?php 
+                if((in_array('Admin', $roles)) || (in_array('Council', $roles)) || (in_array('Advisor', $roles)) || (in_array('Staff', $roles)) || (in_array('Numbers', $roles))) {
+                    echo "true";
+                }
+                else {
+                    echo "false";
+                } 
+                ?>) {
+                return;
+            }
+            var currentEle = $(this);
+            var valueT = $(this).html();
+            var orig = valueT;
+            var row = tableFri.cell($(this)).index().row;
+            var column = tableFri.cell($(this)).index().column;
+            var alterable = [0,1,2,3,4,5];
+            if(alterable.indexOf(column) == -1) { //can't the other columns
+                return;
+            }
+            var data = tableFri.row(row).data();
+            var updateField = ['time', 'session', 'numbers', 'location', 'notes', 'delete', 'numbers_location_id'];
+            setTimeout(function() {
+                if(column == 5) {
+                    $(currentEle).html('<button class="btn btn-primary btn-xs" id="delete-numbers">Delete Session</button>');
+                }
+                else {
+                    $(currentEle).html('<input id="newvalue" class="thVal" type="text" value="' + valueT + '" />');
+                }
+                $(".thVal").focus();
+                if(column != 5) {
+                    var tmp = document.getElementById("newvalue").value;
+                    document.getElementById("newvalue").value = '';
+                    document.getElementById("newvalue").value = tmp;
+                }
+
+                $("#delete-numbers").on("click", function() {
+                    deleteNumbersLocationID(function() {
+                        location.reload();
+                    }, data[6]);
+                });
+
+                $(".thVal").keydown(function (event) {
+                    if(column == 5) {
+                        return ;
+                    }
+                    if (event.keyCode == 13) {
+                        data[column] =  document.getElementById("newvalue").value.trim();  
+                        tableFri.row(row).remove();
+                        inLineUpdatePostData(function() {
+                            tableFri.row.add([
+                                data[0],
+                                data[1],
+                                data[2],
+                                data[3],
+                                data[4],
+                                data[5],
+                                data[6]
+                            ]).draw()
+                        }, data[6], updateField[column], 'Numbers_Location', data[column], 'numbers_location_id');
+                    }
+                });
+            },150);
+            $('tbody td').not(currentEle).on('click', function() {
+                if(column == 0 || column == 1) {
+                    valueT = orig;
+                }
+                $(currentEle).html(valueT);
+            });
+            $(currentEle).on("dblclick", function() {
+                if(column == 0 || column == 1) {
+                    valueT = orig;
+                }
+                $(currentEle).html(valueT);
+            });  
+        });
+
+        $('#table-saturday tbody').on('dblclick', 'td', function(e) {
+            if(!<?php 
+                if((in_array('Admin', $roles)) || (in_array('Council', $roles)) || (in_array('Advisor', $roles)) || (in_array('Staff', $roles)) || (in_array('Numbers', $roles))) {
+                    echo "true";
+                }
+                else {
+                    echo "false";
+                } 
+                ?>) {
+                return;
+            }
+            var currentEle = $(this);
+            var valueT = $(this).html();
+            var orig = valueT;
+            var row = tableSat.cell($(this)).index().row;
+            var column = tableSat.cell($(this)).index().column;
+            var alterable = [0,1,2,3,4,5];
+            if(alterable.indexOf(column) == -1) { //can't the other columns
+                return;
+            }
+            var data = tableSat.row(row).data();
+            var updateField = ['time', 'session', 'numbers', 'location', 'notes', 'delete', 'numbers_location_id'];
+            setTimeout(function() {
+                if(column == 5) {
+                    $(currentEle).html('<button class="btn btn-primary btn-xs" id="delete-numbers">Delete Session</button>');
+                }
+                else {
+                    $(currentEle).html('<input id="newvalue" class="thVal" type="text" value="' + valueT + '" />');
+                }
+                $(".thVal").focus();
+                if(column != 5) {
+                    var tmp = document.getElementById("newvalue").value;
+                    document.getElementById("newvalue").value = '';
+                    document.getElementById("newvalue").value = tmp;
+                }
+
+                $("#delete-numbers").on("click", function() {
+                    deleteNumbersLocationID(function() {
+                        location.reload();
+                    }, data[6]);
+                });
+
+                $(".thVal").keydown(function (event) {
+                    if(column == 5) {
+                        return ;
+                    }
+                    if (event.keyCode == 13) {
+                        data[column] =  document.getElementById("newvalue").value.trim();  
+                        tableSat.row(row).remove();
+                        inLineUpdatePostData(function() {
+                            tableSat.row.add([
+                                data[0],
+                                data[1],
+                                data[2],
+                                data[3],
+                                data[4],
+                                data[5],
+                                data[6]
+                            ]).draw()
+                        }, data[6], updateField[column], 'Numbers_Location', data[column], 'numbers_location_id');
+                    }
+                });
+            },150);
+            $('tbody td').not(currentEle).on('click', function() {
+                if(column == 0 || column == 1) {
+                    valueT = orig;
+                }
+                $(currentEle).html(valueT);
+            });
+            $(currentEle).on("dblclick", function() {
+                if(column == 0 || column == 1) {
+                    valueT = orig;
+                }
+                $(currentEle).html(valueT);
+            });  
+        });
+
         $('#new-numbers-modal-button').on('click', function(e) {
             e.preventDefault();
             var s = document.getElementById("table-semester");
@@ -632,10 +1217,30 @@ if($_SESSION['New_Session']) {
 
         $('#addExtraNumbers').on('click', function(e) {
             e.preventDefault();
+            var w = document.getElementById("table-week");
+            var selectedWeek = w.options[w.selectedIndex].value;
+            var d = document.getElementById("table-day");
+            var selectedDay = d.options[d.selectedIndex].value;
+            var session = document.getElementById("extra-session-form").value.trim();
+            var time = document.getElementById("extra-time-form").value.trim();
+            var locationn = document.getElementById("extra-location-form").value.trim();
+            var notes = document.getElementById("extra-notes-form").value.trim();
+            var numbers = document.getElementById("extra-numbers-form").value.trim();
+            if(selectedDay == 'day') {
+                alert('Extra sessions cannot be added to all days');
+                return;
+            }
+            if(session == '' || time == '') {
+                alert('Please fill out all fields');
+                return;
+            }
+            addNewNumbersExtra(function() {
+                location.reload();
+            }, selectedWeek, selectedDay, session, time, locationn, notes, numbers)
         });
         
         if(!<?php 
-                if((in_array('Admin', $roles)) || (in_array('Staff', $roles)) || (in_array('Advisor', $roles))) {
+                if((in_array('Admin', $roles)) || (in_array('Advisor', $roles)) || (in_array('Numbers', $roles))) {
                     echo "true";
                 }
                 else {

@@ -944,6 +944,30 @@ function addNewNumbersDefault(callback, selectedWeek) {
         });
 }
 
+function addNewNumbersExtra(callback, selectedWeek, selectedDay, session, time, location, notes, numbers) {
+    $.post("../include/insertNewNumbersExtra.php",
+        {
+            week: selectedWeek,
+            day: selectedDay,
+            session: session,
+            time: time,
+            location: location,
+            notes: notes,
+            numbers: numbers
+        }, function() {
+            callback();
+        });
+}
+
+function deleteNumbersLocationID(callback, id) {
+    $.post("../include/deleteNumbersLocationID.php",
+        {
+            id: id
+        }, function() {
+            callback();
+        });
+}
+
 function getNumbersData(callback, selectedWeek, tableSun, tableMon, tableTues, tableWed, tableThurs, tableFri, tableSat) {
     $.post("../include/getNumbersData.php", 
         {

@@ -4,7 +4,6 @@
 	session_start();
 
 	require_once '../resources/initTableFunctions.php';
-	require './helpers/pageProtectInclude.php';
 
 	$week = $_POST['week'];
 		

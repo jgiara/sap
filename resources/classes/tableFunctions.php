@@ -279,12 +279,44 @@ class TableFunctions {
 		}
 	}
 
+	public function deleteNumbersLocationID($id) {
+		$query = $this->db->prepare("DELETE from Numbers_Location where numbers_location_id=?");
+		$query->bindValue(1, $id);
+
+		try {
+			$query->execute();
+			return true;
+
+		}catch(PDOException $e){
+			die($e->getMessage());
+		}
+	}
+
 	public function insertNewNumbersDefault($week, $day, $time, $session) {
 		$query = $this->db->prepare("INSERT INTO Numbers_Location (week, day, time, session) values (?, ?, ?, ?)");
 		$query->bindValue(1, $week);
 		$query->bindValue(2, $day);
 		$query->bindValue(3, $time);
 		$query->bindValue(4, $session);
+
+		try {
+			$query->execute();
+			return true;
+
+		}catch(PDOException $e){
+			die($e->getMessage());
+		}
+	}
+
+	public function insertNewNumbersExtra($week, $day, $session, $time, $location, $notes, $numbers) {
+		$query = $this->db->prepare("INSERT INTO Numbers_Location (week, day, session, time, location, notes, numbers) values (?, ?, ?, ?, ?, ?, ?)");
+		$query->bindValue(1, $week);
+		$query->bindValue(2, $day);
+		$query->bindValue(3, $session);
+		$query->bindValue(4, $time);
+		$query->bindValue(5, $location);
+		$query->bindValue(6, $notes);
+		$query->bindValue(7, $numbers);
 
 		try {
 			$query->execute();

@@ -173,6 +173,7 @@ require '../include/helpers/highestPageProtect.php'
                                     <option value="2">Staff</option>
                                     <option value="3">Advisor</option>
                                     <option value="4">Council</option>
+                                    <option value="6">Numbers</option>
                                     <option value="5">Admin</option>
                                 </select>
                             </div>      
@@ -305,6 +306,7 @@ require '../include/helpers/highestPageProtect.php'
                                             '<option value="2"' + (valueT == "Staff" ? 'selected = selected' : '') + '>Staff</option>' +
                                             '<option value="3"' + (valueT == "Advisor" ? 'selected = selected' : '') + '>Advisor</option>' +
                                             '<option value="4"' + (valueT == "Council" ? 'selected = selected' : '') + '>Council</option>' +
+                                            '<option value="6"' + (valueT == "Numbers" ? 'selected = selected' : '') + '>Numbers</option>' +
                                             '<option value="5"' + (valueT == "Admin" ? 'selected = selected' : '') + '>Admin</option>' +
                                         '</select>');
                 }
@@ -339,6 +341,9 @@ require '../include/helpers/highestPageProtect.php'
                             } break;
                             case '4': {
                                 newRole = 'Council';
+                            } break;
+                            case '6': {
+                                newRole = 'Numbers';
                             } break;
                             case '5': {
                                 newRole = 'Admin';
