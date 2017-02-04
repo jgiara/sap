@@ -956,8 +956,8 @@ class TableFunctions {
 		}
 	}
 
-	public function updateProfile($fn, $ln, $id, $sex, $year, $school, $major, $minor, $hometown, $state, $local, $ahana, $international, $transfer, $email) {
-		$query = $this->db->prepare("UPDATE Users set eagle_id=?, first_name=?, last_name=?, sex=?, class=?, school=?, major=?, minor=?, hometown=?, state_country=?, international=?, ahana=?, transfer=?, local_address=? where email=?");
+	public function updateProfile($fn, $ln, $id, $sex, $year, $school, $major, $minor, $hometown, $state, $local, $ahana, $international, $transfer, $email, $phone) {
+		$query = $this->db->prepare("UPDATE Users set eagle_id=?, first_name=?, last_name=?, sex=?, class=?, school=?, major=?, minor=?, hometown=?, state_country=?, international=?, ahana=?, transfer=?, local_address=?, phone=? where email=?");
 		$query->bindValue(1, $id);
 		$query->bindValue(2, $fn);
 		$query->bindValue(3, $ln);
@@ -973,6 +973,7 @@ class TableFunctions {
 		$query->bindValue(13, $transfer);
 		$query->bindValue(14, $local);
 		$query->bindValue(15, $email);
+		$query->bindValue(16, $phone);
 
 		try {
 			$query->execute();
@@ -983,8 +984,8 @@ class TableFunctions {
 		}
 	}
 
-	public function updateUserProfile($fn, $ln, $id, $sex, $year, $school, $major, $minor, $hometown, $state, $local, $ahana, $international, $transfer, $tours, $panels, $council, $summer, $status, $email) {
-		$query = $this->db->prepare("UPDATE Users set eagle_id=?, first_name=?, last_name=?, sex=?, class=?, school=?, major=?, minor=?, hometown=?, state_country=?, international=?, ahana=?, transfer=?, local_address=?, applied_tours=?, applied_panels=?, applied_council=?, applied_summer=?, status=? where email=?");
+	public function updateUserProfile($fn, $ln, $id, $sex, $year, $school, $major, $minor, $hometown, $state, $local, $ahana, $international, $transfer, $tours, $panels, $council, $summer, $status, $email, $phone) {
+		$query = $this->db->prepare("UPDATE Users set eagle_id=?, first_name=?, last_name=?, sex=?, class=?, school=?, major=?, minor=?, hometown=?, state_country=?, international=?, ahana=?, transfer=?, local_address=?, applied_tours=?, applied_panels=?, applied_council=?, applied_summer=?, status=?, phone=? where email=?");
 		$query->bindValue(1, $id);
 		$query->bindValue(2, $fn);
 		$query->bindValue(3, $ln);
@@ -1005,6 +1006,7 @@ class TableFunctions {
 		$query->bindValue(18, $summer);
 		$query->bindValue(19, $status);
 		$query->bindValue(20, $email);
+		$query->bindValue(21, $phone);
 
 		try {
 			$query->execute();

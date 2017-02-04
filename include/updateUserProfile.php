@@ -11,6 +11,7 @@
     $eagleid = $_POST['eagleid'];
     $sex = $_POST['sex'];
     $year = $_POST['year'];
+    $phone = $_POST['phone'];
     $school = $_POST['school']; 
     $major = $_POST['major'];
     $minor = $_POST['minor'];
@@ -27,7 +28,7 @@
     $status = $_POST['status'];
     $email = $_POST['email'];
 
-	$fns->updateUserProfile($fn, $ln, $eagleid, $sex, $year, $school, $major, $minor, $hometown, $state, $local, $ahana, $international, $transfer, $tours, $panels, $council, $summer, $status, $email);
+	$fns->updateUserProfile($fn, $ln, $eagleid, $sex, $year, $school, $major, $minor, $hometown, $state, $local, $ahana, $international, $transfer, $tours, $panels, $council, $summer, $status, $email, $phone);
 
 	$db = null;
 ?>
