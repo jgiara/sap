@@ -822,7 +822,7 @@ echo '<input type="hidden" id="programName" value="All Users">';
             var column = tableVols.cell($(this)).index().column;
             var alterable = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,21,22];
             var selectable = [4,6,10,11,12,13,19];
-            if(column == 2 || column == 15 || column == 16 || column == 17 || column == 18 || column == 19 || column == 22) {
+            if(column == 2 || column == 22) {
                     if(!<?php 
                         if((in_array('Admin', $roles)) || (in_array('Advisor', $roles))) {
                             echo "true";

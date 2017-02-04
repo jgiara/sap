@@ -402,16 +402,16 @@ echo '<input type="hidden" id="programName" value="User Profile">';
         
         $('#updateInfoButton').on('click', function(e) {
             var valueT;
-            fn.innerHTML = '<input type="text" id="fnInput" value="' + fn.innerHTML + '">';
-            ln.innerHTML = '<input type="text" id="lnInput" value="' + ln.innerHTML + '">';
-            eagleid.innerHTML = '<input type="text" id="eagleidInput" value="' + eagleid.innerHTML + '">';
+            fn.innerHTML = '<input type="text" id="fnInput" class="thVal" value="' + fn.innerHTML + '">';
+            ln.innerHTML = '<input type="text" id="lnInput" class="thVal" value="' + ln.innerHTML + '">';
+            eagleid.innerHTML = '<input type="text" id="eagleidInput" class="thVal" value="' + eagleid.innerHTML + '">';
             valueT = sex.innerHTML;
             sex.innerHTML = '<select id="sexInput" class="thVal">' +
                                             '<option value="Male"' + (valueT == "Male" ? 'selected = selected' : '') + '>Male</option>' +
                                             '<option value="Female"' + (valueT == "Female" ? 'selected = selected' : '') + '>Female</option>' +
                                         '</select>';
-            phone.innerHTML = '<input type="text" id="phoneInput" value="' + phone.innerHTML + '">';
-            year.innerHTML = '<input type="text" id="yearInput" value="' + year.innerHTML + '">';
+            phone.innerHTML = '<input type="text" id="phoneInput" class="thVal" value="' + phone.innerHTML + '">';
+            year.innerHTML = '<input type="text" id="yearInput" class="thVal" value="' + year.innerHTML + '">';
             valueT = school.innerHTML;
             school.innerHTML = '<select id="schoolInput" class="thVal">' +
                                             '<option value="MCAS"' + (valueT == "MCAS" ? 'selected = selected' : '') + '>MCAS</option>' +
@@ -419,11 +419,11 @@ echo '<input type="hidden" id="programName" value="User Profile">';
                                             '<option value="LSOE"' + (valueT == "LSOE" ? 'selected = selected' : '') + '>LSOE</option>' +
                                             '<option value="CSON"' + (valueT == "CSON" ? 'selected = selected' : '') + '>CSON</option>' +
                                         '</select>';
-            major.innerHTML = '<input type="text" id="majorInput" value="' + major.innerHTML + '">';
-            minor.innerHTML = '<input type="text" id="minorInput" value="' + minor.innerHTML + '">';
-            hometown.innerHTML = '<input type="text" id="hometownInput" value="' + hometown.innerHTML + '">';
+            major.innerHTML = '<input type="text" id="majorInput" class="thVal" value="' + major.innerHTML + '">';
+            minor.innerHTML = '<input type="text" id="minorInput" class="thVal" value="' + minor.innerHTML + '">';
+            hometown.innerHTML = '<input type="text" id="hometownInput" class="thVal" value="' + hometown.innerHTML + '">';
             valueT = state.innerHTML;
-            state.innerHTML = '<select id="stateInput" class="thVal" name="state" class="stateSelect">' +
+            state.innerHTML = '<select id="stateInput" name="state" class="stateSelect thVal">' +
                                             '<option value="AL"' + (valueT == "AL" ? 'selected = selected' : '') + '>AL</option>' +
                                             '<option value="AK"' + (valueT == "AK" ? 'selected = selected' : '') + '>AK</option>' +
                                             '<option value="AZ"' + (valueT == "AZ" ? 'selected = selected' : '') + '>AZ</option>' +
@@ -723,7 +723,7 @@ echo '<input type="hidden" id="programName" value="User Profile">';
                                             '<option value="Zambia">Zambia</option>' +
                                             '<option value="Zimbabwe">Zimbabwe</option>' +
                                         '</select>';
-            local.innerHTML = '<input type="text" id="localInput" value="' + local.innerHTML + '">';
+            local.innerHTML = '<input type="text" id="localInput" class="thVal" value="' + local.innerHTML + '">';
             valueT = ahana.innerHTML;
             ahana.innerHTML = '<select id="ahanaInput" class="thVal">' +
                                             '<option value="Yes"' + (valueT == "Yes" ? 'selected = selected' : '') + '>Yes</option>' +
@@ -747,15 +747,23 @@ echo '<input type="hidden" id="programName" value="User Profile">';
                                             '<option value="Graduated"' + (valueT == "Graduated" ? 'selected = selected' : '') + '>Graduated</option>' +
                                             '<option value="Staff"' + (valueT == "Staff" ? 'selected = selected' : '') + '>Staff</option>' +
                                         '</select>';
-            toursApp.innerHTML = '<input type="text" id="toursInput" value="' + toursApp.innerHTML + '">';
-            panelsApp.innerHTML = '<input type="text" id="panelsInput" value="' + panelsApp.innerHTML + '">';
-            councilApp.innerHTML = '<input type="text" id="councilInput" value="' + councilApp.innerHTML + '">';
-            summerApp.innerHTML = '<input type="text" id="summerInput" value="' + summerApp.innerHTML + '">';
+            toursApp.innerHTML = '<input type="text" id="toursInput" class="thVal" value="' + toursApp.innerHTML + '">';
+            panelsApp.innerHTML = '<input type="text" id="panelsInput" class="thVal" value="' + panelsApp.innerHTML + '">';
+            councilApp.innerHTML = '<input type="text" id="councilInput" class="thVal" value="' + councilApp.innerHTML + '">';
+            summerApp.innerHTML = '<input type="text" id="summerInput" class="thVal" value="' + summerApp.innerHTML + '">';
 
 
             $('#updateInfoButton').hide();
             $('#submitInfoButton').show();
             $('#cancelButton').show();
+
+            $(".thVal").keydown(function (event) {
+                if (event.keyCode == 13) { 
+                    event.preventDefault();
+                    $('#cancelButton').trigger('click');
+                     alert("Your changes did not submit. Please refresh the page and be sure to click on the \"Submit Changes\" button");
+                }
+            });
         });
 
         $('#cancelButton').on('click', function() {
