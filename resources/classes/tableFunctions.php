@@ -972,8 +972,8 @@ class TableFunctions {
 		$query->bindValue(12, $ahana);
 		$query->bindValue(13, $transfer);
 		$query->bindValue(14, $local);
-		$query->bindValue(15, $email);
-		$query->bindValue(16, $phone);
+		$query->bindValue(15, $phone);
+		$query->bindValue(16, $email);
 
 		try {
 			$query->execute();
@@ -1005,8 +1005,8 @@ class TableFunctions {
 		$query->bindValue(17, $council);
 		$query->bindValue(18, $summer);
 		$query->bindValue(19, $status);
-		$query->bindValue(20, $email);
-		$query->bindValue(21, $phone);
+		$query->bindValue(20, $phone);
+		$query->bindValue(21, $email);
 
 		try {
 			$query->execute();
