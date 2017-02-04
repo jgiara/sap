@@ -807,7 +807,7 @@ class TableFunctions {
 	}
 
 	public function updateUserStatus($email, $status) {
-		$query = $this->db->prepare("UPDATE Users set status=? where email=?");
+		$query = $this->db->prepare("UPDATE Users set status=? where email=? and status!='Staff'");
 		$query->bindValue(1, $status);
 		$query->bindValue(2, $email);
 
