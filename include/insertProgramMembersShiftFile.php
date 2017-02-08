@@ -46,19 +46,19 @@
 				$email = (string) trim($a[0]);
 				$email = strtolower($email);
 				if(!in_array($email, $emails)) {
-					array_push($errors['email'], $a[0]);
+					array_push($errors['email'], $email);
 				}
 				else if(in_array($email, $currentMembers) || in_array($email, $added)) {
 					array_push($errors['exist'], $email);
 				}
-				else if(!in_array($a[1], $days)) {
+				else if(!in_array(trim($a[1]), $days)) {
 					array_push($errors['day'], $a[0]);
 				}
-				else if(!preg_match($timePattern, $a[2])) {
+				else if(!preg_match(trim($timePattern), $a[2])) {
 					array_push($errors['time'], $a[0]);
 				}
 				else {
-					$fns->insertProgramMemberShift($email, $program, $semester, $year, $a[1], $a[2]);
+					$fns->insertProgramMemberShift($email, $program, $semester, $year, trim($a[1]), trim($a[2]));
 					$fns->updateUserStatus($email, 'Active');
 					$added[$index] = $email;
 					$index++;

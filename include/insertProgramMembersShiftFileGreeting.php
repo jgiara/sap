@@ -47,22 +47,22 @@
 				$email = (string) trim($a[0]);
 				$email = strtolower($email);
 				if(!in_array($email, $emails)) {
-					array_push($errors['email'], $a[0]);
+					array_push($errors['email'], $email);
 				}
 				else if(in_array($email, $currentMembers) || in_array($email, $added)) {
 					array_push($errors['exist'], $email);
 				}
-				else if(!in_array($a[1], $colors)) {
+				else if(!in_array(trim($a[1]), $colors)) {
 					array_push($errors['color'], $a[0]);
 				}
-				else if(!in_array($a[2], $days)) {
+				else if(!in_array(trim($a[2]), $days)) {
 					array_push($errors['day'], $a[0]);
 				}
-				else if(!preg_match($timePattern, $a[3])) {
+				else if(!preg_match($timePattern, trim($a[3]))) {
 					array_push($errors['time'], $a[0]);
 				}
 				else {
-					$fns->insertProgramMemberShiftGreeting($email, $program, $semester, $year, $a[2], $a[3], $a[1]);
+					$fns->insertProgramMemberShiftGreeting($email, $program, $semester, $year, trim($a[2]), trim($a[3]), trim($a[1]));
 					$fns->updateUserStatus($email, 'Active');
 					$added[$index] = $email;
 					$index++;
