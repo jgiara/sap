@@ -111,7 +111,12 @@ echo '<input type="hidden" id="programName" value="All Users">';
                                 <button class="btn btn-primary btn-xs" id="export-csv-all">CSV</button>
                                 <button class="btn btn-primary btn-xs" id="export-pdf-all">PDF</button>
                                 <button class="btn btn-success btn-xs" id="openModalButton" data-toggle="modal" data-target="#toggleVolsColumnsModal">Toggle Columns</button>
-                                <button class="btn btn-danger btn-xs" id="new-members-modal-button" data-toggle="modal" data-target="#newMembersModal">New Users</button>
+                                <?php if(in_array('Admin', $roles) || in_array('Council', $roles) || in_array('Advisor', $roles)) {
+
+                                    echo 
+                                    '<button class="btn btn-danger btn-xs" id="new-members-modal-button" data-toggle="modal" data-target="#newMembersModal">New Users</button>';
+                                }?>
+                                
                             </div>
                             </br>
                             <table class="table table-striped table-bordered table-hover" id="table-volunteers" style="font-size: 13px; width: 100%;">
