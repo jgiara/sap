@@ -141,9 +141,9 @@ create table Numbers_Location (
 	numbers_location_id int(10) not null auto_increment primary key, 
 	week int(10) not null references Programming_Weeks(week_id),
 	day varchar(10) not null, 
-	time varchar(8) not null, 
+	time varchar(15) not null, 
 	numbers int(3) not null,
-	location varchar(25),
-	session varchar(25) not null,
+	location varchar(50),
+	session varchar(50) not null,
 	notes varchar(100)
 );
